@@ -1,0 +1,42 @@
+@import '../../Login/components/Login.scss';
+
+.register{
+  @extend .log
+};
+
+.regbox{
+  @extend .loginbox ;
+  width: 600px;
+  height: 800px;
+  .inp{   
+    width: 70%;
+    height: 30px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid white;
+    color: white;
+    font-size: 18px;
+  }
+  .inp:focus{
+    outline: none;
+  }
+  .inpbox{
+    width: 65%;
+    float: right;
+    margin-left: 50px;
+    margin-top: 30px;
+    p{
+      color: white;
+      padding-top: 10px;
+      line-height: 0;
+      margin-bottom: -10px;
+      margin-left: -85px;
+      letter-spacing: 2px;
+      font-weight: 500;
+    }
+  }
+  .regbtn{
+    @extend .logbtn;
+    margin-left:230px;
+  }
+}

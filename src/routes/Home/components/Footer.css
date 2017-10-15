@@ -1,0 +1,13 @@
+.copy{
+  text-align: center;
+  height: 200px;
+  color:white;
+  background: #0f0e12;
+}
+
+.copy p{
+  letter-spacing: 1px;
+  font-size: 18px;
+  padding-top: 100px;
+}
+

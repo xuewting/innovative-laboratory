@@ -1,0 +1,51 @@
+.item{
+  text-align: center;
+  letter-spacing: 2px;
+  color: gray;
+}
+
+.hr{
+  height: 2px;
+  background: gray;
+  width: 90%;
+  margin: 30px auto;
+}
+
+.newItem{
+  width: 85%;  
+  background: rgba(0,0,0, 0.1);
+  padding: 18px;
+  // border: 2px solid gray;
+  border-radius: 3px;
+  margin: 10px auto;
+  transition: 0.9s;
+}
+
+.newItem:hover{
+  background: #474b51;
+  color: white;
+  a{
+    color: white;
+  }
+}
+
+.newItem p{
+  line-height: 23px;
+  letter-spacing: 1px;
+}
+
+.Iname{
+  margin-left: 20px;
+  font-size: 23px;
+}
+
+.newItem a{
+  margin: 0 0 0 5px;
+  color: gray;
+  transition: 0.9s;
+  
+}
+
+.newItem a:hover{
+  color: #6090ea;
+}

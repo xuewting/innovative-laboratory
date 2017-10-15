@@ -1,0 +1,95 @@
+.log {
+  background: radial-gradient(ellipse at 69% 50%, #1d1d2d 15%,#0f0e12 70%);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 900px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.loginbox{
+  background: rgba(255,255,255,0.6);
+  width: 400px;
+  height: 600px;
+  margin: 100px auto 0 auto;
+  padding: 10px;
+  border-radius: 7px;
+  border: 4px solid #4ab2b4; 
+  .title{
+    padding: 15px;
+    width: 50%;
+    margin: 50px auto 0 auto;
+    text-align: center;
+    border-bottom: 2px solid #8c9198;
+    color: #eee;
+    padding-left: 35px;
+    letter-spacing: 45px;
+  }
+  .account{
+    margin: 50px 10px;
+    width: 250px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+    border-radius: 0;
+    color: white;
+    font-size: 18px;
+  }
+  .account:focus{
+    box-shadow: none;
+    border-color: #4ab2b4;
+  }
+  .passwd{
+    @extend .account;
+    margin-top: 0;
+  }
+  .logbtn{
+    margin: 70px 122px 20px 122px;
+    background: #4ab2b4;
+    color: white;
+    width: 150px;
+    height: 50px;
+    border: none;
+    border-radius: 3px;
+    border-right: 2px solid #13918a;
+    border-bottom: 3px solid #13918a;
+    letter-spacing: 30px;
+    font-weight: 600;
+    font-size: 20px;
+    padding-left: 35px;
+  }
+  .logbtn:hover{
+    cursor: pointer;
+    background: #13918a;
+    border-color: #106b65; 
+  }
+  .logbtn:focus{
+    outline: none; 
+  }
+  .usri{
+    margin-top: 55px;
+    padding-left: 20px;
+    color: white ;
+  }
+  .pasi{
+    margin-top: 10px;
+    padding-left: 21px;
+    color: white;
+  }
+  .reg{
+    margin: 0 0 0 134px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #2a80c8
+  }
+  .reg:hover{
+    color: #f74f4f;
+  }
+}
