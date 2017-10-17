@@ -10,9 +10,7 @@ class Register extends Component {
       phone:12345678,
       mail:'1111',
       passwd:'12345',
-      confirm:'12345',
-      
-     
+      confirm:'12345',    
     }
   }
 
