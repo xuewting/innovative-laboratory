@@ -12,8 +12,8 @@ export const Header = () => (
 
       <img src="wallhaven-7835.png" alt="" className="head" />
       <div className="login">
-        <Link>登录</Link>
-        /<Link>注册</Link>
+        <Link to='/login' style={{color:'white'}}>登录</Link>
+        /<Link to='/register' style={{color:'white'}}>注册</Link>
       </div>
     </div>
   </div>

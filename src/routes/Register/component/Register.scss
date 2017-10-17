@@ -15,7 +15,7 @@
     border: none;
     border-bottom: 3px solid white;
     color: white;
-    font-size: 18px;
+    font-size: 15px;
   }
   .inp:focus{
     outline: none;
@@ -38,5 +38,8 @@
   .regbtn{
     @extend .logbtn;
     margin-left:230px;
+  }
+  .reg{
+    margin-left: 247px;
   }
 }
