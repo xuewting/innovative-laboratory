@@ -1,0 +1,38 @@
+.reset{
+  width: 500px;
+  height: 700px;
+  margin:250px auto;
+  .retitle{
+    text-align: center;
+    color: #4b1373;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #afa2ba;
+    letter-spacing: 3px;
+  }
+  input{
+    width: 300px;
+    background: transparent;
+    height: 30px;
+    border:none;
+    border-bottom: 2px solid gray;
+    margin: 30px 10px 20px 20px;
+    color: gray;
+    font-size: 18px;
+  }
+  input:focus{
+    outline: none;
+  }
+  button{
+    display: block;
+    margin: 30px auto 20px auto;
+  }
+  p{
+    padding-top: 30px;
+    letter-spacing: 1px;
+    color: gray;
+    font-weight: 600;
+  }
+  i{
+    padding-top: 30px;
+  }
+}

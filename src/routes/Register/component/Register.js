@@ -47,8 +47,13 @@ class Register extends Component {
         }
         case 4:
         {
-          this.setState({passwd:value});
-          break;
+          if(len<6||len>10){
+            this.refs.pass.style.display='inline'
+          }else{
+            this.setState({passwd:value});
+             this.refs.pass.style.display='none'
+            break;
+          }
         }
         case 5:
         {
@@ -108,9 +113,9 @@ class Register extends Component {
 
         <div className='inpbox'>
         <p>密码：</p>
-        <input type="text" 
+        <input type="password" 
         className="inp" 
-        placeholder='请输入您的密码（小于10位数）' 
+        placeholder='请输入您的密码（6-10位数）' 
         onBlur={(e)=>this.changeValue(e.target.value,4)}/>
         <i className='fa fa-times fa-1x' style={style1} ref='pass'></i>
         </div>
@@ -118,7 +123,7 @@ class Register extends Component {
         <div className='inpbox'>
         <p>确认密码：</p>
         <input 
-        type="text" 
+        type="password" 
         className="inp" 
         placeholder='请确认您输入的密码' 
         onBlur={(e)=>this.changeValue(e.target.value,5)}/>

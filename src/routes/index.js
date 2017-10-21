@@ -8,8 +8,8 @@ import RouteRoute from './Route'
 import PageNotFound from './PageNotFound'
 import Redirect from './PageNotFound/redirect'
 import LoginRoute from './Login'
-import RegisterRoute from './Register'
 import PinfoRoute from './Pinfo'
+import RegisterRoute from './Register'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -24,8 +24,8 @@ export const createRoutes = (store) => ({
     ElapseRoute(store),
     RouteRoute(store),
     LoginRoute(store),
-    RegisterRoute(store),
     PinfoRoute(store),
+    RegisterRoute(store),
     PageNotFound(),
     Redirect
   ]

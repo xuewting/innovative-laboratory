@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Item.scss'
 import {Row,Col} from 'antd'
+import POST1 from '../../../components/commonModules/POST'
 
 class Item extends Component {
   constructor(props){

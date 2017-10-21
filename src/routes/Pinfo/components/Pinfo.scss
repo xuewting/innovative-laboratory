@@ -1,0 +1,77 @@
+.Pinfo{
+  background: radial-gradient(ellipse at 69% 50%, #c2dbde  15%,#b7b9b9  70%);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 900px;
+  z-index: -1;
+  min-width: 1600px;
+  button{
+    // margin-left: 937px;
+    margin-top: 50px;
+    height: 40px;
+    width: 150px;
+    background: #4ab2b4;
+    border: none;
+    border-bottom: 2px solid #13918a;
+    color: white;
+    letter-spacing: 2px;
+  }
+  button:focus{
+    outline: none;
+  }
+  button:hover{
+    cursor: pointer;
+    background: #13918a;
+    border-color: #106b65; 
+  }
+}
+.pintitle{
+  margin-top: 250px;
+  border: none;
+  border-bottom: 2px solid #afa2ba;
+  width: 70%;
+  float: right;
+  padding: 8px;
+  letter-spacing: 2px;
+  color: #4b1373;
+}
+.inbox{
+  width: 40%;
+  margin-top: 30px;
+  margin-left: 750px;
+  .in{
+    background: transparent;
+    border: none;
+    padding: none;
+    color: #686363;
+    font-size: 16px;
+    padding-top: 5px;
+  }
+  .in::-moz-placeholder{
+    color: #686363;
+  }
+  .in:-ms-input-placeholder{
+    color: #686363;
+  }
+  .in::-webkit-input-placeholder{
+    color: #686363;
+  }
+  .in:focus{
+    outline: none;
+    border-radius: none;
+    box-shadow: none;
+  }
+  .in2{
+    @extend .in;
+    border-bottom:2px solid #686363;
+  }
+  p{
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #686363;
+    
+  }
+}
