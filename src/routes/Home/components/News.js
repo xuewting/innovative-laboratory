@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Carousel, Row, Col } from 'antd'
 import './News.css'
+// import '../../skrollr'
 
 class News extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class News extends Component {
             <Col span={5}><h1>最新消息</h1></Col>
             <Col span={3} offset={16} style={{marginTop:40}}><a href="/news" className='more'>更多</a></Col>
           </Row>
-          <div className="list">
+          <div className="list" >
             <Carousel autoplay vertical>
             {this.state.new.map((item,i)=>{
               return(

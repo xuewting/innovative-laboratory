@@ -17,7 +17,7 @@ class Pinfo extends Component {
       mail: '541006240@qq.com',
       disabled2:false,
       imageUrl:'',
-      resetPass:1,
+      resetPass:0,
     }
   }
 
@@ -178,8 +178,8 @@ class Pinfo extends Component {
           {disabled == true ? '修改信息' : '保存'}
         </button>
         </Col>
-        <Col>
-        <button span={12} onClick={this.changeState.bind(this,2)}>
+        <Col span={12}>
+        <button  onClick={this.changeState.bind(this,2)}>
           修改密码
         </button>
         </Col>

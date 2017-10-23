@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Item.scss'
 import {Row,Col} from 'antd'
 import POST1 from '../../../components/commonModules/POST'
+import '../../skrollr.min'
 
 class Item extends Component {
   constructor(props){
@@ -34,6 +35,10 @@ class Item extends Component {
       }]
     }
   }
+   componentDidMount() {
+    //  skrollr.init()
+   }
+   
   render() {
     return (
       <div style={{width:'50%',marginLeft:'auto',marginRight:'auto',marginBottom:400}}>
@@ -42,7 +47,7 @@ class Item extends Component {
         <Row>
         {this.state.iList.map((item,i)=>{return(
           <Col span={12}>
-        <div className="newItem">
+        <div className="newItem" >
           <h3 className="Iname">{item.name}</h3>
           <div className="hr"></div>
           <p><b>简介</b>：<br />{item.intr}</p>
