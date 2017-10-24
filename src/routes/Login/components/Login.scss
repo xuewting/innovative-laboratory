@@ -22,6 +22,31 @@
   padding: 10px;
   border-radius: 7px;
   border: 4px solid #4ab2b4; 
+  text-align: center;
+  .logbtn{
+    margin: 70px auto 20px auto;
+    background: #4ab2b4;
+    color: white;
+    width: 150px;
+    height: 50px;
+    border: none;
+    border-radius: 3px;
+    border-right: 2px solid #13918a;
+    border-bottom: 3px solid #13918a;
+    letter-spacing: 30px;
+    font-weight: 600;
+    font-size: 20px;
+    padding-left: 35px;
+    &:hover{
+      cursor: pointer;
+    background: #13918a;
+    border-color: #106b65; 
+    }
+    &:focus{
+    outline: none; 
+    }
+  }
+  
   .title{
     padding: 15px;
     width: 50%;
@@ -50,29 +75,7 @@
     @extend .account;
     margin-top: 0;
   }
-  .logbtn{
-    margin: 70px 122px 20px 122px;
-    background: #4ab2b4;
-    color: white;
-    width: 150px;
-    height: 50px;
-    border: none;
-    border-radius: 3px;
-    border-right: 2px solid #13918a;
-    border-bottom: 3px solid #13918a;
-    letter-spacing: 30px;
-    font-weight: 600;
-    font-size: 20px;
-    padding-left: 35px;
-  }
-  .logbtn:hover{
-    cursor: pointer;
-    background: #13918a;
-    border-color: #106b65; 
-  }
-  .logbtn:focus{
-    outline: none; 
-  }
+  
   .usri{
     margin-top: 55px;
     padding-left: 20px;
@@ -84,7 +87,7 @@
     color: white;
   }
   .reg{
-    margin-left: 134px;
+    display: block;
     letter-spacing: 2px;
     font-weight: 700;
     color: #2a80c8

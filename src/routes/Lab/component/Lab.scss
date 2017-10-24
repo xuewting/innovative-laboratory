@@ -3,7 +3,7 @@ $bg_second: #171e27;
 $font_color: #171e27;
 
 .labhead {
-  background-color: $bg_base;
+  background-color: $bg_second;
   text-align: center;
   padding-top: 200px;
 
@@ -34,35 +34,83 @@ $font_color: #171e27;
 }
 
 .labintr {
-  background: $bg_second;
+  background: $bg_base;
   text-decoration: none;
   padding-top: 50px;
   padding-bottom: 50px;
+  text-align: center;
   h2{
     margin: 0 auto;
     width: 50%;
     padding: 40px;
     color: gray;
     text-align: center;
-    border-radius: 10px;
+  }
+  img{
+  //  margin-left: 500px;
   }
 }
 
 .labitem{
-  background: $bg_base;
-  
+  background: $bg_second;
+  padding-top: 100px;
   h2{
     margin: 0;
   }
   .imain{
     background: white;
-    width: 300px;
-    border-radius: 7px;
+    width: 400px;
+    height: 400px;
+    border-radius: 2px;
     color :$font_color;
-    padding: 5px;
+    padding: 8px;
+    margin-bottom: 20px;
+    &:hover{
+      background: #dfe1e5;
+    }
+    // margin-left: auto;
+    // margin-right: auto;
     .intr{
       font-weight: bold;
       letter-spacing: 1px;
+    }
+    .start{
+      margin-left: 300px;
+    }
+    .leader{
+      margin-left: 300px;
+    }
+    img{
+      width: 150px;
+      height: 150px;
+      margin-left: 125px;
+    }
+  }
+  .i{
+    background: white;
+    border-radius: 2px;
+    
+    // width: 700px;
+    div{
+      &:hover{
+      background: #dfe1e5;
+    }
+    }
+    .leader{
+      padding: 0 8px;
+      margin-bottom: 0;
+      padding-bottom: 5px;
+      // border-bottom: 1px solid lightgray;
+    }
+    .Name{
+      padding:  8px;  
+      border-top: 1px solid lightgray;
+    }
+    .intr{
+      padding: 0 8px;
+    }
+    .start{
+      padding: 0 8px;
     }
   }
 }
@@ -72,7 +120,7 @@ $font_color: #171e27;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 735px;
   z-index: 1;
   padding-left: 0;
   margin: 0;
@@ -85,7 +133,7 @@ $font_color: #171e27;
   width: 40px;
   height: 40px;
   background-color: rgba(255, 255, 255, 0.15);
-  bottom:-160px;
+  bottom:-200px;
   -webkit-animation: square 25s infinite;
   animation: square 26s infinite;
   -webkit-transition-timing-function: linear;

@@ -8,7 +8,7 @@ class Login extends Component {
       <div className='log'>
         <div className="loginbox">
           <h1 className="title">登录</h1>
-            <Row>
+            <Row style={{marginLeft:'auto',marginRight:'auto'}}>
               <Col span={4}><i className='fa fa-user-o fa-2x usri'></i></Col>
               <Col span={20}><Input className='account' ></Input></Col>
             </Row>
