@@ -61,7 +61,7 @@ $font_color: #171e27;
     background: white;
     width: 400px;
     height: 400px;
-    border-radius: 2px;
+    border-radius: 6px;
     color :$font_color;
     padding: 8px;
     margin-bottom: 20px;
@@ -112,6 +112,25 @@ $font_color: #171e27;
     .start{
       padding: 0 8px;
     }
+  }
+}
+
+.labfooter{
+  background: $bg_second;
+  height: 400px;
+  margin-top: 150px;
+  text-align: center;
+  p{
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  img{
+    padding-top: 150px;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
   }
 }
 

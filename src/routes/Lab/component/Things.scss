@@ -1,0 +1,43 @@
+$beas_color:#63768d;
+
+.things{
+  width: 50%;
+  max-height: 800px;
+  color:$beas_color;
+  margin: 0 auto;
+  margin-top: 200px;
+  border-radius: 8px;
+  border-top: 1px solid #bfbfbf;
+  border-left: 1px solid #bfbfbf;
+  border-bottom: 3px solid $beas_color;
+  border-right: 2px solid $beas_color;
+  .search{
+    margin-top: 50px;
+    padding: 10px;
+    text-align: center;
+    padding-bottom: 50px;
+    border-bottom: 1px solid lightgray;
+    Input{
+      width: 70%;
+      padding: 6px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 16px;
+      border-radius: 30px;
+    }
+    img{
+      vertical-align: bottom;
+    }
+   
+  }
+   .title{
+     padding: 25px 0;
+     font-weight: bolder;
+     font-size: 18px;
+     border-bottom: 2px dashed lightgray;
+    }
+    .tlist{
+      padding: 20px 0;
+      border-bottom: 2px dashed lightgray;
+    }
+}
