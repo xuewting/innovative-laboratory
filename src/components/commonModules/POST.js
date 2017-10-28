@@ -1,5 +1,5 @@
 import Fetch from './Fetch.js'
-export const BASE_URL ='http://112.74.203.143'
+export const BASE_URL ='http://192.168.1.108:3002'
 // const BASE_URL1 = 'http://112.74.203.143'
 const BASE_URL1 =BASE_URL
 const BASE_URL2 = BASE_URL
@@ -10,12 +10,16 @@ export var POST = (Url, data = {}, trueF, errorF = e => { }, timeout = 5000) => 
       mode: 'cors',
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        Authorization: sessionStorage.getItem('token'),
       },
       body: data
     })
       .then(req => req.json())
       .then(re => {
+        if(re.token){
+         sessionStorage.setItem('token',re.token);
+      }
         if (re.status === 24) {
           alert('服务器错误')
         } else if (re.status === 25) {
@@ -43,12 +47,16 @@ export var POST1 = (
       method: 'POST',
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        Authorization:sessionStorage.getItem('token'),
       },
       body: data
     })
       .then(req => req.json())
       .then(re => {
+        if(re.token){
+         sessionStorage.setItem('token',re.token);
+      }
         if (re.status === 0) {
           alert('服务器错误')
         }  else {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Lablist.css'
-import { Row, Col } from 'antd'
+import {POST1} from '../../../components/commonModules/POST'
+import { Row, Col, message } from 'antd'
 
 class Lablist extends Component {
   constructor(props) {
@@ -31,9 +32,42 @@ class Lablist extends Component {
         labname: 'labname',
         leader: 'leader',
         intr: 'intr'
-      }, ]
+      }, ],
+      page:1
     }
   }
+
+  componentDidMount() {
+    let data=`pageCount=6&currentPage=1`
+    POST1('/getLab',data,(re) => {
+      console.log(re)
+      if(re.state==0){
+        message.error('服务器错误')
+      }
+    })
+  }
+
+  changePage(type){
+    switch(type){
+      case 1:
+      let page=this.state.page+1
+      var data=`pageCount=6&currentPage=${page}`
+      this.setState({page:page})
+      break;
+      case 2:
+      let Page=this.state.page-1
+      var data=`pageCount=6&currentPage=${Page}`
+      this.setState({page:Page})
+      break;
+    }
+    POST1('/getLab',data,(re) => {
+      console.log(re)
+      if(re.state==0){
+        message.error('服务器错误')
+      }
+    })
+  }
+  
   render() {
     return (
       <div>
@@ -53,6 +87,20 @@ class Lablist extends Component {
               </Col>
             )
           })}
+        </Row>
+
+        <Row style={{width:'30%',marginLeft:'auto',marginRight:'auto',textAlign:'center'}}>
+        <Col span={8}>
+        <div style={{cursor:'pointer'}} onClick={this.changePage.bind(this,2)}>
+        <i className='fa fa-angle-left fa-2x' style={{marginLeft:'auto',marginRight:'auto'}}/>
+        </div>
+        </Col>
+        <Col span={8} style={{textAlign:'center'}}>{this.state.page}</Col>
+        <Col span={8}>
+        <div style={{cursor:'pointer'}} onClick={this.changePage.bind(this,1)}>
+        <i className='fa fa-angle-right fa-2x' style={{marginLeft:'auto',marginRight:'auto'}}/>
+        </div>
+        </Col>
         </Row>
       </div>
     )

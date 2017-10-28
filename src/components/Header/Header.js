@@ -2,8 +2,11 @@ import React from 'react'
 import { IndexLink, Link } from 'react-router'
 import './Header.scss'
 import { Row, Col } from 'antd'
+import {POST1} from '../commonModules/POST'
 
 export const Header = () => (
+
+  
   <div className="nav">
     <div style={{width:1400,margin:'auto'}}>
       <IndexLink to='/' activeClassName='route--active'>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './Register.scss'
+import {POST1} from '../../../components/commonModules/POST'
+import {message} from 'antd'
 
 class Register extends Component {
 
@@ -68,6 +70,32 @@ class Register extends Component {
         }
     }
   }
+
+  onSubmit(){
+    let {name,phone,mail,passwd}=this.state
+    let data=`name=${name}&email=${mail}&phone=${phone}&password=${passwd}`
+
+    POST1('/register',data,(re) => {
+      switch(re.State){
+        case 1:
+        message.success('注册成功')
+        break;
+        case 0:
+        message.error('服务器错误')
+        break;
+        case -2:
+        message.error('邮箱已注册，请更换邮箱')
+        break;
+        case -1:
+        message.error('用户名已被占用，请重新设置用户名')
+        break;
+        case -3:
+        message.error('手机已注册')
+      }
+        
+    })
+  }
+
   render() {
    const style1={
       color:'#f74f4f',
@@ -130,7 +158,7 @@ class Register extends Component {
         <i className='fa fa-times fa-1x' style={style1} ref='pass2'></i>
         </div>
 
-        <button className='regbtn'>注册</button>
+        <button className='regbtn' onClick={this.onSubmit.bind(this)}>注册</button>
         <a href="/login" className='reg'>已注册？登录</a>
         </div>
       </div>

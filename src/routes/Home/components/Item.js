@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Item.scss'
-import {Row,Col} from 'antd'
-import POST1 from '../../../components/commonModules/POST'
+import {Row,Col,message} from 'antd'
+import {POST1} from '../../../components/commonModules/POST'
 import '../../skrollr.min'
 
 class Item extends Component {
@@ -32,12 +32,42 @@ class Item extends Component {
         charge:'teacher',
         stime:'2017-1-1',
         lab:'d506'
-      }]
+      }],
+      page:1
     }
   }
+  
    componentDidMount() {
-    //  skrollr.init()
-   }
+    let data=`pageCount=4&currentPage=1`
+    POST1('/getProject',data,(re) => {
+      console.log(re)
+      if(re.state==0){
+        message.error('服务器错误')
+      }
+    })
+  }
+
+  changePage(type){
+    switch(type){
+      case 1:
+      let page=this.state.page+1
+      var data=`pageCount=6&currentPage=${page}`
+      this.setState({page:page})
+      break;
+      case 2:
+      let Page=this.state.page-1
+      var data=`pageCount=4&currentPage=${Page}`
+      this.setState({page:Page})
+      break;
+    }
+    POST1('/getProject',data,(re) => {
+      console.log(re)
+      if(re.state==0){
+        message.error('服务器错误')
+      }
+    })
+  }
+  
    
   render() {
     return (
@@ -57,6 +87,21 @@ class Item extends Component {
         </Col>
         )})}
         </Row>
+
+        <Row style={{width:'30%',marginLeft:'auto',marginRight:'auto',textAlign:'center'}}>
+        <Col span={8}>
+        <div style={{cursor:'pointer'}} onClick={this.changePage.bind(this,2)}>
+        <i className='fa fa-angle-left fa-2x' style={{marginLeft:'auto',marginRight:'auto'}}/>
+        </div>
+        </Col>
+        <Col span={8} style={{textAlign:'center'}}>{this.state.page}</Col>
+        <Col span={8}>
+        <div style={{cursor:'pointer'}} onClick={this.changePage.bind(this,1)}>
+        <i className='fa fa-angle-right fa-2x' style={{marginLeft:'auto',marginRight:'auto'}}/>
+        </div>
+        </Col>
+        </Row>
+
       </div>
     );
   }
