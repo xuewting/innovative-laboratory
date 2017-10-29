@@ -12,6 +12,7 @@ import PinfoRoute from './Pinfo'
 import RegisterRoute from './Register'
 import LabRoute from './Lab'
 import ItemRoute from './Item'
+import PersonalRoute from './Personal'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -29,6 +30,7 @@ export const createRoutes = (store) => ({
     LoginRoute(store),
     PinfoRoute(store),
     RegisterRoute(store),
+    PersonalRoute(store),
     LabRoute(store),
     PageNotFound(),
     Redirect

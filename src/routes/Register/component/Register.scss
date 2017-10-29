@@ -8,6 +8,7 @@
   @extend .loginbox ;
   width: 600px;
   height: 800px;
+  text-align: center;
   .inp{   
     width: 70%;
     height: 30px;
@@ -37,5 +38,8 @@
   }
   .regbtn{
     @extend .logbtn;
+    width: 200px;
+    letter-spacing: 2px;
+    text-align: center;
   }
 }

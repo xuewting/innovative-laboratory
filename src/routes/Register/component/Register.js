@@ -12,7 +12,8 @@ class Register extends Component {
       phone:12345678,
       mail:'1111',
       passwd:'12345',
-      confirm:'12345',    
+      confirm:'12345',
+      idcode:0    
     }
   }
 
@@ -68,14 +69,28 @@ class Register extends Component {
           }
           break;
         }
+        case 6:
+        POST1('/mailSure',`identifyCode=${value}`,(re) => {
+          if(re.state==0){
+            message.error('服务器错误')
+          }else if(re.state==-1){
+            this.refs.idcode.style.display='inline'
+            message.error('验证码错误')
+          }else{
+            this.refs.idcode.style.display='none'
+            this.setState({idcode:1})
+          }
+        })
     }
   }
 
-  onSubmit(){
+  onSubmit(type){
     let {name,phone,mail,passwd}=this.state
     let data=`name=${name}&email=${mail}&phone=${phone}&password=${passwd}`
 
+    if(type==1){
     POST1('/register',data,(re) => {
+      console.log(re)
       switch(re.State){
         case 1:
         message.success('注册成功')
@@ -93,7 +108,16 @@ class Register extends Component {
         message.error('手机已注册')
       }
         
-    })
+    })}else if(type==0){
+      POST1('/mailRegister',`email=${mail}`,(re) => {
+        this.setState({idcode:re.state})
+        if(!re.state){
+          message.error('服务器错误')
+        }
+      })
+    }else{
+
+    }
   }
 
   render() {
@@ -158,7 +182,20 @@ class Register extends Component {
         <i className='fa fa-times fa-1x' style={style1} ref='pass2'></i>
         </div>
 
-        <button className='regbtn' onClick={this.onSubmit.bind(this)}>注册</button>
+        {this.state.idcode==1?
+        <div className='inpbox'>
+        <p>输入验证码：</p>
+        <input 
+        type="text" 
+        className="inp" 
+        placeholder='请输入您常用的邮箱' 
+        onBlur={(e)=>this.changeValue(e.target.value,6)}/>
+        <i className='fa fa-times fa-1x' style={style1} ref='idcode'></i>
+        </div>:null}
+
+        <button className='regbtn' onClick={this.onSubmit.bind(this,this.state.idcode)}>
+        {this.state.idcode==0?'发送验证码':this.state.idcode==-1?'重新发送':'注册'}
+        </button>
         <a href="/login" className='reg'>已注册？登录</a>
         </div>
       </div>
