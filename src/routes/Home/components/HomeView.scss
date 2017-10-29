@@ -1,11 +1,12 @@
-*{
-  transition: 1s;
-}
+
 
 .home_head{
   text-align: center;
   background: radial-gradient(ellipse at 69% 50%, #1d1d2d 15%,#0f0e12 70%);
   color: white;
+  *{
+  transition: 1s;
+}
 }
 
 .home_head h1{
@@ -16,12 +17,18 @@
   font-size: 60px;
   line-height: 22px;
   letter-spacing: 6px;
+  *{
+  transition: 1s;
+}
 }
 
 .home_head h2{
   max-width: 800px;
   margin: 90px auto 130px auto;
   font-weight: normal;
+  *{
+  transition: 1s;
+}
 }
 
 .home_head .btn{
@@ -36,6 +43,9 @@
   border-radius: 3px;
   border-color: #c02f2f;
   text-decoration: none;
+  *{
+  transition: 1s;
+}
 }
 
 .home_head .btn:hover{
