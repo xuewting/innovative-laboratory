@@ -1,77 +1,66 @@
-.Pinfo{
-  background: radial-gradient(ellipse at 69% 50%, #c2dbde  15%,#b7b9b9  70%);
-  position: absolute;
-  left: 0;
+.Pinfo {
+  font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+  background: url('./bg_num1.jpg') left top repeat-x #082648;
+  position: relative;
   top: 0;
-  width: 100%;
+  left: 0;
   height: 100%;
   min-height: 900px;
-  z-index: -1;
-  min-width: 1600px;
-  button{
-    // margin-left: 937px;
-    margin-top: 50px;
-    height: 40px;
-    width: 150px;
-    background: #4ab2b4;
-    border: none;
-    border-bottom: 2px solid #13918a;
-    color: white;
-    letter-spacing: 2px;
-  }
-  button:focus{
-    outline: none;
-  }
-  button:hover{
-    cursor: pointer;
-    background: #13918a;
-    border-color: #106b65; 
-  }
-}
-.pintitle{
-  margin-top: 250px;
-  border: none;
-  border-bottom: 2px solid #afa2ba;
-  width: 70%;
-  float: right;
-  padding: 8px;
-  letter-spacing: 2px;
-  color: #4b1373;
-}
-.inbox{
-  width: 40%;
-  margin-top: 30px;
-  margin-left: 750px;
-  .in{
-    background: transparent;
-    border: none;
-    padding: none;
-    color: #686363;
-    font-size: 16px;
-    padding-top: 5px;
-  }
-  .in::-moz-placeholder{
-    color: #686363;
-  }
-  .in:-ms-input-placeholder{
-    color: #686363;
-  }
-  .in::-webkit-input-placeholder{
-    color: #686363;
-  }
-  .in:focus{
-    outline: none;
-    border-radius: none;
-    box-shadow: none;
-  }
-  .in2{
-    @extend .in;
-    border-bottom:2px solid #686363;
-  }
-  p{
-    letter-spacing: 1px;
-    font-weight: 600;
-    color: #686363;
-    
+  width: 100%;
+
+  .con {
+    position: relative;
+    top: 80px;
+    left: 0;
+    color: #fff;
+    .lef {
+      //  width: 95%;
+      padding: 0 10px;
+      margin: 0 auto;
+
+      .sidebar {
+        min-width: 250px;
+        border-radius: 3px;
+        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.2);
+
+        .touxiang {
+          padding: 10px;
+          text-align: center;
+          background: url('./blight_rtl.png');
+          background-position: right top;
+          background-repeat: no-repeat;
+
+          .img {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            border-radius: 50%;
+            border: 4px solid #6c92a7;
+          }
+        }
+        .select{
+          height: 40px;
+          font-size: 15px;
+          line-height: 17px;
+          border-bottom: #444 1px solid;
+          padding-top: 20px;
+          padding-left: 15px;
+          transition: 0.4s;
+          &:hover{
+            background: rgba(0, 0, 0, 0.15);
+          }
+          span{
+            letter-spacing: 1px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+          }
+          .i{
+            float: right;
+            margin-right: 20px;
+            font-size: 15px;
+          }
+        }
+      }
+    }
   }
 }
