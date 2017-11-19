@@ -3,6 +3,7 @@ import './Pinfo.scss'
 import ResetPass from './ResetPass'
 import head from './0824ab18972bd40790e0d4b571899e510fb30956.jpg'
 import { Input, Row, Col, Radio, Upload, Icon, message } from 'antd'
+import Basic from './Basic'
 
 const RadioGroup = Radio.Group;
 
@@ -127,7 +128,9 @@ class Pinfo extends Component {
               </div>
             </div>
           </Col>
-          <Col span={18} offset={1}>111</Col>
+          <Col span={18} offset={1}>
+            <Basic></Basic>
+          </Col>
         </Row>
       </div>
     );
