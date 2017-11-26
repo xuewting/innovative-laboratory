@@ -1,71 +1,60 @@
 import React from 'react'
 import { IndexLink, Link } from 'react-router'
 import './Header.scss'
-import { Row, Col, message } from 'antd'
-import {POST1,BASE_URL} from '../commonModules/POST'
+import logo from './海鲜.png'
+import home from './home-big.png'
+import lab from './实验室编号.png'
+import item from './item.png'
+import goods from './物品管理.png'
+// import {Row, Col} from 'antd'
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state={
-    state:0,
-    headImg:'',
-    id:0,
-    sex:0,
-    name:'',
-    sid:0,
-    power:0
-    }
-  }
-  
-
-  componentDidMount() {
-    let data=''
-    POST1('/user/getUserInfo',data,(re) => {
-      console.log(re)
-      this.setState({state:re.state})
-      if(re.state==1){
-        this.setState({headImg:re.data.headImg})
-        this.setState({id:re.data.id})
-        this.setState({sex:re.data.sex})
-        this.setState({sid:re.data.sid})
-        this.setState({power:re.data.power})
-        this.setState({name:re.data.name})
-      }else if(re.state==0){
-        message.error('服务器错误')
-      }else{
-        message.error('未登录')
-      }
-    })
-  }
-  
   render() {
     return (
-      <div>
-         <div className="nav">
-    <div style={{width:1400,margin:'auto'}}>
-      <IndexLink to='/' activeClassName='route--active'>
-        <div className="list">Home</div>
-      </IndexLink>
+      <div className='head'>
+        <div className="navbar">
+          <div className="nav_con">
+            <span className="nav_logo">
+              <a href="">
+                <img src={logo} alt="" />
+              </a>
+            </span>
+            <IndexLink to='/' activeClassName='active'>
+              <span className="nav_item">
+                <img src={home} alt="" />
+                主页
+            </span>
+            </IndexLink>
+            <Link activeClassName='active'>
+              <span className="nav_item">
+                <img src={lab} alt="" />
+                实验室
+            </span>
+            </Link>
+            <Link activeClassName='active'>
+              <span className="nav_item">
+                <img src={item} alt="" />
+                项目
+            </span>
+            </Link>
+            <Link activeClassName='active'>
+              <span className="nav_item">
+                <img src={goods} alt="" />
+                物品
+            </span>
+            </Link>
+          </div>
 
-      <img src={`${BASE_URL}${this.state.headImg}`} alt="" className="head" />
-      <div className="login">
-      {this.state.state==1?this.state.name:<div>
-        <Link to='/login' style={{color:'white'}}>登录</Link>
-        /<Link to='/register' style={{color:'white'}}>注册</Link>
+        {/*search*/}
+        <div className="search">
+        <input type="text" placeholder='search...'/>
         </div>
-        }
-      </div>
-    </div>
-  </div>
+        </div>
       </div>
     );
   }
 }
 
 export default Header;
-  
-  
- 
 
 

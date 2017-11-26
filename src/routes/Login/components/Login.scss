@@ -1,96 +1,139 @@
-.log {
-  background: url('./bg_num1.jpg') left top repeat-x #082648;//radial-gradient(ellipse at 69% 50%, #1d1d2d 15%,#0f0e12 70%);
-  // position: absolute;
-  // left: 0;
-  // top: 0;
+.login{
+  background: url('./bg_num1.jpg') left top repeat-x #082648;
   width: 100%;
   height: 100%;
-  min-height: 900px;
-  overflow: hidden;
-  font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
-  z-index: -1;
-}
+  position: absolute;
 
-.loginbox{
-  background: rgba(0,0,0,0.2);
-  width: 400px;
-  height: 600px;
-  margin: 100px auto 0 auto;
-  border-right: 2px rgba(0,0,0,0.3) solid;
-  border-bottom: 3px rgba(0,0,0,0.4) solid;
-  padding: 10px;
-  border-radius: 7px;
-  text-align: center;
-  .logbtn{
-    margin: 70px auto 20px auto;
-    background: #4ab2b4;
-    color: white;
-    width: 150px;
-    height: 50px;
-    border: none;
-    border-radius: 3px;
-    border-right: 2px solid #13918a;
-    border-bottom: 3px solid #13918a;
-    letter-spacing: 2px;
-    font-weight: 600;
-    font-size: 20px;
-    text-align: center;
-    &:hover{
-      cursor: pointer;
-    background: #13918a;
-    border-color: #106b65; 
-    }
-    &:focus{
-    outline: none; 
-    }
-  }
-  
-  .title{
+  .login_box{
+    // margin-top: 150px;
+    width: 230px;
+    margin: 0 auto;
     padding: 15px;
-    width: 50%;
-    margin: 50px auto 0 auto;
-    text-align: center;
-    border-bottom: 2px solid #8c9198;
-    color: #eee;
-    padding-left: 35px;
-    letter-spacing: 45px;
+    position: relative;
+    margin-bottom: 20px;
+    .user{
+      padding: 15px;
+      width: 100%;
+      position: relative;
+      text-align: center;
+      
+      &:hover{
+        .change{
+          z-index: 10;
+        }
+      }
+      .head{
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        margin: 0 auto;
+        border: 4px solid #4a718e;
+      }
+      .change{
+        width: 96px;
+        height: 96px;
+        margin: 0 auto;
+        position: relative;
+        top: -98px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.4);
+        z-index: -1;
+        
+      }
+    }
   }
-  .account{
-    margin: 50px 10px;
-    width: 250px;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid white;
-    border-radius: 0;
-    color: white;
-    font-size: 15px;
+
+  .content{
+    position: relative;
+    top: -96px;
+    width: 280px;
+    margin: 0 auto;
+    padding: 0 5px 15px 5px;
+    .account{
+      margin-top: 10px;
+      width: 100%;
+      height: 36px;
+      margin-bottom: 10px;
+      line-height: 30px;
+      border-radius: 3px;
+      .icon{
+        height: 100%;
+        background: rgba(0,0,0,0.4);
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+        text-align: center;
+        .i{
+          width: 50%;
+          margin: 0 auto;
+          padding-top: 5px;
+        }
+      }
+      .inp{
+        height: 100%;
+        .text{
+          width: 100%;
+          height: 100%;
+          padding: 3px 5px;
+          border-top-right-radius: 3px;
+          border-bottom-right-radius: 3px;
+          border: none;
+          background: rgba(0,0,0,0.2);
+          color: white;
+          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+          &:focus{
+            outline: none;  
+          }
+        }
+      }
+    }
+    .passwd{
+      @extend.account;
+    }
+    .login_but{
+      line-height: 30px;
+      margin-bottom: 30px;
+      width: 100%;
+      .but{
+        border-radius: 4px;
+        border: 1px solid white;
+        background: transparent;
+        color: #fff;
+        height: 36px;
+        text-align: center;
+        letter-spacing: 2px;
+        position: relative;
+        transition: 0.3s;
+        font-size: 15px;
+        cursor: pointer;
+        &:hover{
+          background: rgba(0,0,0,0.2);
+        }
+      }
+    }
+
+    .forget{
+      text-align: center;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      &:hover{
+        p{
+          text-decoration-line: underline;
+        }
+      }
+    }
   }
-  .account:focus{
-    box-shadow: none;
-    border-color: #4ab2b4;
-  }
-  .passwd{
-    @extend .account;
-    margin-top: 0;
-  }
-  
-  .usri{
-    margin-top: 55px;
-    padding-left: 20px;
-    color: white ;
-  }
-  .pasi{
-    margin-top: 10px;
-    padding-left: 21px;
-    color: white;
-  }
-  .reg{
-    display: block;
-    letter-spacing: 2px;
-    font-weight: 700;
-    color: #15446b
-  }
-  .reg:hover{
-    color: #ca1111;
-  }
+
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #ccc7c7;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #ccc7c7;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #ccc7c7;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #ccc7c7;
 }
