@@ -1,0 +1,208 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.set_head {
+  border-radius: 3px;
+  margin-bottom: 20px;
+  float: left;
+  width: 100%;
+  position: relative;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+
+  .set_hh {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 10px 15px;
+    width: 100%;
+    position: relative;
+
+    h2 {
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .set_himg {
+    float: left;
+    width: 100%;
+    padding: 0;
+    text-align: center;
+
+    img {
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      width: 96px;
+      height: 96px;
+      margin: 0 auto;
+    }
+  }
+
+  .set_select {
+    padding: 0px 15px 15px 15px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    float: left;
+    width: 100%;
+
+    .choise {
+      margin-top: 10px;
+      float: left;
+      width: 100%;
+      margin-bottom: 10px;
+      line-height: 30px;
+
+      .set_inp {
+        line-height: 28px;
+        position: relative;
+        display: table;
+        border-collapse: separate;
+
+        .from_con {
+          display: table-cell;
+          position: relative;
+          z-index: 2;
+          float: left;
+          width: 100%;
+          background: rgba(0, 0, 0, 0.2);
+          border-color: transparent;
+          color: white;
+          padding: 10px 10px;
+          font-size: 13px;
+          height: 36px;
+          border-radius: 4px;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+
+        .set_change_file {
+          position: relative;
+          font-size: 0;
+          white-space: nowrap;
+          display: table-cell;
+          width: 1%;
+          vertical-align: middle;
+          line-height: 28px;
+
+          button {
+            z-index: 2;
+            margin-left: -1px;
+            position: relative;
+            border-color: transparent;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            color: white;
+            transition: all 200ms linear;
+            font-size: 12px;
+            padding: 7px 15px 7px;
+            line-height: 19px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+
+        input {
+          vertical-align: middle;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        input[type='file'] {
+          display: none;
+        }
+      }
+    }
+
+    .commit {
+      margin-bottom: 0;
+      float: left;
+      width: 100%;
+
+      button {
+        line-height: 30px;
+        padding: 10px 15px;
+        line-height: 19px;
+        border-radius: 4px;
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid white;
+        font-size: 16px;
+        color: white;
+        font-weight: 700;
+        width: 100%;
+        float: left;
+        text-align: center;
+        margin-top: 5px;
+        transition: background 200ms linear;
+
+        &:focus {
+          outline: none;
+        }
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.3);
+        }
+      }
+    }
+  }
+}
+
+.set_con {
+  border-radius: 3px;
+  margin-bottom: 20px;
+  float: left;
+  width: 100%;
+  position: relative;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+
+  .con_head {
+    width: 100%;
+    float: left;
+    line-height: 30px;
+    padding: 10px 15px;
+    font-weight: 600;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  }
+
+  .con_item {
+    padding: 0 5px 15px 5px;
+    float: left;
+    width: 100%;
+    .from_row{
+      margin-top: 15px;
+      float: left;
+      width: 100%;
+      line-height: 30px;
+      .con_inp{
+        float: left;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
+        border: none;
+        height: 36px;
+        color: white;
+        font-size: 14px;
+        padding: 10px 10px;
+        &:focus{
+          outline: none;
+        }
+      }
+    }
+  }
+}
