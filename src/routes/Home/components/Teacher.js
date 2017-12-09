@@ -3,6 +3,7 @@ import './HomeView.scss'
 import img1 from '../assets/wallhaven-113384.png'
 import img2 from '../assets/wallhaven-590356.jpg'
 import img3 from '../assets/wallhaven-590711.jpg'
+import FreeScrollBar from 'react-free-scrollbar';
 
 class Teacher extends Component {
   constructor(props) {
@@ -47,6 +48,7 @@ class Teacher extends Component {
           <h2>常驻老师</h2>
         </div>
         <div className="tea_con">
+        <FreeScrollBar style={{height:700}}>
           {this.state.list.map((item, i) => {
             return (
               <div className="tea_list" key={i}>
@@ -58,6 +60,7 @@ class Teacher extends Component {
               </div>
             )
           })}
+          </FreeScrollBar>
         </div>
         <div className="tea_foot">
           <div className='more'>

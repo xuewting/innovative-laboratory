@@ -14,26 +14,42 @@ class LabList extends Component {
     this.state = {
       lablist: [{
         name: '实验室',
-        img:img1
+        img:img1,
+        pos:'D505',
+        per:12
       }, {
         name: '实验室',
-        img:img2
+        img:img2,
+        pos:'D504',
+        per:12
       }, {
         name: '实验室',
-        img:img3
+        img:img3,
+        pos:'D509',
+        per:12
       }, {
         name: '实验室',
-        img:img2
+        img:img2,
+        pos:'D508',
+        per:12
       }, {
         name: '实验室',
-        img:img1
+        img:img1,
+        pos:'D507',
+        per:12
       }],
-      Img:img1
+      Img:img1,
+      Pos:'D506',
+      Per:13,
+      name:'Lab' 
     }
   }
 
   changeImg(i){
     this.setState({Img:this.state.lablist[i].img})
+    this.setState({Per:this.state.lablist[i].per})
+    this.setState({Pos:this.state.lablist[i].pos})
+    this.setState({name:this.state.lablist[i].name})
   }
 
   render() {
@@ -41,7 +57,7 @@ class LabList extends Component {
       <div className='lablist'>
 
         <div className="display">
-          <h2>Lab Name</h2>
+          <h2>{this.state.name}</h2>
 
           <div className="panel">
             <a href="">
@@ -52,12 +68,12 @@ class LabList extends Component {
           <div className="text">
             <div className="pos_box">
               <img src={pos} alt="" className="icon" />
-              <span className='num'>D0506</span>
+              <span className='num'>{this.state.Pos}</span>
               <span className="what">position</span>
             </div>
             <div className="peo_box">
               <img src={people} alt="" className="icon" />
-              <span className='num'>12</span>
+              <span className='num'>{this.state.Per}</span>
               <span className="what">people</span>
             </div>
           </div>

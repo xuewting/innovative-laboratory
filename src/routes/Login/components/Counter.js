@@ -5,8 +5,15 @@ import off from './off.png'
 import { Row, Col } from 'antd'
 import user from './e用户.png'
 import pass from './钥匙.png'
+import {browserHistory} from 'React-router'
 
 class Login extends Component {
+
+  toRegister(){
+    browserHistory.push({
+      pathname:'/register'
+    })
+  }
   render() {
     return (
       <div className='login'>
@@ -45,7 +52,7 @@ class Login extends Component {
           {/*button*/}
           <Row className="login_but">
             <Col span={12} style={{paddingLeft:10,paddingRight:10}}>
-              <div className="but">
+              <div className="but" onClick={this.toRegister.bind(this)} style={{display:'block',height:36}}>
                 <span>注册</span>
               </div>
             </Col>

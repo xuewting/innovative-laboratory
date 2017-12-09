@@ -6,7 +6,7 @@ class Side extends Component {
   render() {
     return (
       <div>
-        <Info></Info>
+        <Info state={this.props.state}></Info>
       </div>
     );
   }

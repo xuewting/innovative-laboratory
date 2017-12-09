@@ -9,6 +9,7 @@ import pass from './钥匙.png'
 import check from './确认.png'
 import college from './学校 (2).png'
 import account from './e用户.png'
+import {browserHistory} from 'React-router'
 
 class Register extends Component {
   constructor(props) {
@@ -41,6 +42,7 @@ class Register extends Component {
       }]
     }
   }
+
 
   render() {
     return (
