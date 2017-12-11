@@ -132,7 +132,6 @@
       margin-bottom: 0;
       float: left;
       width: 100%;
-
       button {
         line-height: 30px;
         padding: 10px 15px;
@@ -202,6 +201,31 @@
         &:focus{
           outline: none;
         }
+      }
+    }
+  }
+  .Commit{
+    width: 100%;
+    float: left;
+    padding: 10px 10px;
+    line-height: 30px;
+    button{
+      float: right;
+      height: 36px;
+      line-height: 28px;
+      font-size: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid #FFF;
+      border-radius: 4px;
+      color: white;
+      padding: 0 10px;
+      transition: background 200ms linear;
+      cursor: pointer;
+      &:hover{
+        background: rgba(0, 0, 0, 0.5);
+      }
+      &:focus{
+        outline: none;
       }
     }
   }

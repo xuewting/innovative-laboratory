@@ -84,6 +84,9 @@ class Content extends Component {
             </Col>
           </Row>
         </div>
+        <div className="Commit">
+        <button>提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+        </div>
       </div>
     );
   }

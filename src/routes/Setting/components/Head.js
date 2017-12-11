@@ -36,7 +36,7 @@ class Head extends Component {
             </div>
           </div>
           <div className="commit">
-          <button>保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存</button>
+          <button style={{cursor:'pointer'}}>保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存</button>
           </div>
         </div>
       </div>
