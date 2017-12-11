@@ -20,7 +20,7 @@ class Head extends Component {
     return (
       <div className='set_head'>
         <div className='set_hh'>
-          <h2>修改头像</h2>
+          <h2>修&nbsp;&nbsp;改&nbsp;&nbsp;头&nbsp;&nbsp;像</h2>
         </div>
         <div className='set_himg'>
           <img src={Default} alt=""/>

@@ -31,7 +31,7 @@ class Header extends React.Component {
                 实验室
             </span>
             </Link>
-            <Link activeClassName='active'>
+            <Link activeClassName='active' to='/ItemPage'>
               <span className="nav_item">
                 <img src={item} alt="" />
                 项目

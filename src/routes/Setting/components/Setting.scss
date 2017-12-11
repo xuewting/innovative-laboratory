@@ -23,8 +23,6 @@
       margin: 0;
       padding: 0;
       font-size: 16px;
-      font-weight: 600;
-      letter-spacing: 1px;
       text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
     }
   }
@@ -108,6 +106,7 @@
             line-height: 19px;
             letter-spacing: 2px;
             cursor: pointer;
+
             &:focus {
               outline: none;
             }
@@ -132,6 +131,7 @@
       margin-bottom: 0;
       float: left;
       width: 100%;
+
       button {
         line-height: 30px;
         padding: 10px 15px;
@@ -183,12 +183,14 @@
     padding: 0 5px 15px 5px;
     float: left;
     width: 100%;
-    .from_row{
+
+    .from_row {
       margin-top: 15px;
       float: left;
       width: 100%;
       line-height: 30px;
-      .con_inp{
+
+      .con_inp {
         float: left;
         width: 100%;
         background: rgba(0, 0, 0, 0.3);
@@ -198,35 +200,123 @@
         color: white;
         font-size: 14px;
         padding: 10px 10px;
-        &:focus{
+
+        &:focus {
           outline: none;
         }
       }
     }
   }
-  .Commit{
+
+  .Commit {
     width: 100%;
     float: left;
     padding: 10px 10px;
     line-height: 30px;
-    button{
+
+    button {
       float: right;
       height: 36px;
       line-height: 28px;
       font-size: 15px;
       background: rgba(0, 0, 0, 0.3);
-      border: 1px solid #FFF;
+      border: 1px solid #fff;
       border-radius: 4px;
       color: white;
       padding: 0 10px;
       transition: background 200ms linear;
       cursor: pointer;
-      &:hover{
+
+      &:hover {
         background: rgba(0, 0, 0, 0.5);
       }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+.passwd {
+  width: 100%;
+  float: left;
+  border-radius: 3px;
+  // padding: 10px 10px;
+  margin-bottom: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+  .pas_hh {
+    width: 100%;
+    float: left;
+    padding: 10px 15px;
+
+    h2 {
+      padding: 0;
+      margin: 0;
+      color: white;
+      font-size: 16px;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .pas_con {
+    padding: 10px 15px;
+    width: 100%;
+    float: left;
+
+    input {
+      height: 36px;
+      padding: 5px;
+      width: 100%;
+      float: left;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+      border: none;
+      color: white;
+      line-height: 28px;
+      font-size: 14px;
+      margin-bottom: 10px;
       &:focus{
         outline: none;
       }
     }
   }
+  .confirm{
+    width: 100%;
+    float: left;
+    padding: 10px 15px;
+    button {
+      float: right;
+      height: 36px;
+      line-height: 28px;
+      font-size: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid #fff;
+      border-radius: 4px;
+      color: white;
+      padding: 0 10px;
+      transition: background 200ms linear;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+.labcharge{
+  background: url('./wallhaven-582025.jpg');
+  background-size: cover;
+  width: 100%;
+  height: 200px;
+  float: left;
+  border-radius: 3px;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
 }

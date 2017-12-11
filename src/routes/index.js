@@ -8,6 +8,7 @@ import LabRoute from './Lab'
 import PageNotFound from './PageNotFound'
 import Redirect from './PageNotFound/redirect'
 import SettingRoute from './Setting'
+import ItemPageRoute from './ItemPage'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -22,6 +23,7 @@ export const createRoutes = (store) => ({
     RegisterRoute(store),
     LabRoute(store),
     SettingRoute(store),
+    ItemPageRoute(store),
     PageNotFound(),
     Redirect
   ]
