@@ -9,14 +9,14 @@ import LabCharge from './LabCharge'
 class Setting extends Component {
   render() {
     return (
-      <Row>
-        <Col span={4} offset={2} style={{paddingLeft:5,paddingRight:5}}>
+      <Row style={{width:'80%',minWidth:1500,marginLeft:'auto',marginRight:'auto'}}>
+        <Col span={5}  style={{paddingLeft:5,paddingRight:5}}>
           <Head></Head>
           <LabCharge></LabCharge>
           <Passwd></Passwd>
           
         </Col>
-        <Col span={16} style={{paddingLeft:5,paddingRight:5}}>
+        <Col span={19} style={{paddingLeft:5,paddingRight:5}}>
           <Content></Content>
         </Col>
       </Row>

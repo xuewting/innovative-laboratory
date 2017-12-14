@@ -17,7 +17,8 @@ const webpackConfig = {
   devtool: config.compiler_devtool,
   resolve: {
     root: paths.client(),
-    extensions: ['', '.js', '.jsx', '.json']
+    extensions: ['', '.js', '.jsx', '.json'],
+    modulesDirectories: ['node_modules']
   },
   module: {}
 }
@@ -57,7 +58,11 @@ webpackConfig.plugins = [
     minify: {
       collapseWhitespace: true
     }
-  })
+  }),
+   new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    })
 ]
 
 if (__DEV__) {
@@ -156,6 +161,15 @@ webpackConfig.postcss = [
 // File loaders
 /* eslint-disable */
 webpackConfig.module.loaders.push(
+  {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          cacheDirectory: true,
+          presets: ['react','es2015', 'stage-2']
+        },
+      },
   { test: /\.woff(\?.*)?$/,  loader: 'url?prefix=fonts/&name=[hash:base64:20].[ext]&limit=10000&mimetype=application/font-woff' },
   { test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[hash:base64:20].[ext]&limit=10000&mimetype=application/font-woff2' },
   { test: /\.otf(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[hash:base64:20].[ext]&limit=10000&mimetype=font/opentype' },

@@ -58,7 +58,7 @@ class Item extends Component {
     return (
       <div className='item'>
         <div className="item_head">
-          <h2>最近完成项目</h2>
+          <h2>最近成果展示</h2>
         </div>
         <div className="item_list">
         <FreeScrollBar className='scroll' style={{height:250}} >
