@@ -39,7 +39,7 @@ class ItemPage extends Component {
         fontSizeSelection: true,
         paragraphFormatSelection: true
       },
-      
+    list:0,
     };
   }
   handleModelChange(model) {
@@ -57,6 +57,15 @@ class ItemPage extends Component {
     console.log(date, dateString)
   }
 
+  changeStyle(value){
+    if(value.target.value=='grid'){
+    this.setState({list:0})
+    }else{
+      this.setState({list:1})
+    }
+
+  }
+
   render() {
     return (
       <div>
@@ -65,7 +74,7 @@ class ItemPage extends Component {
         <div className="sea_con">
           <Row style={{marginBottom:0,marginTop:10,width:'100%',float:'left'}}>
             <Col span={6} style={{position:'relative',paddingLeft:10,paddingRight:10}}>
-              <select name="" id="" className="list_control">
+              <select name="" id="" className="list_control" onChange={this.changeStyle.bind(this)}>
                 <option value="grid">Grid</option>
                 <option value="list">List</option>
               </select>
@@ -112,6 +121,7 @@ class ItemPage extends Component {
       </div>
       {/*list_content*/}
       <div className="list_con">
+      { this.state.list==0?
         <div className="list_item_box">
           <div className="list_item_con">
             <div className="list_item_head">Lorem ipsum dolor sit amet</div>
@@ -130,31 +140,26 @@ class ItemPage extends Component {
             </div>
           </div>
         </div>
+        :
+      <div className="style_list">
+        <div className="task_list">
+          <div className="task_con">
+            <div className="task_head">Lorem ipsum dolor sit amet</div>
+            <div className="task_date">
+              <Tooltip title='开始时间'>
+             <img src={rili} alt=""/>
+               &nbsp;15 oct 2013 &nbsp;
+            </Tooltip>
+            <Tooltip title='结束时间'>
+             <img src={time} alt=""/>
+              &nbsp;oct 2014 &nbsp;
+            </Tooltip>
+            </div>
+          </div>
+          
+        </div>
+      </div>}
       </div>
-       {/*<Timeline style={{background:'white'}}>
-            <TimelineEvent title="John Doe sent a SMS"
-                           createdAt="2016-09-12 10:06 PM"
-                           icon={<i className="material-icons md-18">textsms</i>}
-            >
-                I received the payment for $543. Should be shipping the item within a couple of hours.
-            </TimelineEvent>
-            <TimelineEvent
-                title="You sent an email to John Doe"
-                createdAt="2016-09-11 09:06 AM"
-                icon={<i className="material-icons md-18">email</i>}
-            >
-                Like we talked, you said that you would share the shipment details? This is an urgent order and so I
-                    am losing patience. Can you expedite the process and pls do share the details asap. Consider this a
-                    gentle reminder if you are on track already!
-            </TimelineEvent>
-    </Timeline>*/}
-        {/*<FroalaEditor
-          tag='textarea'
-          model={this.state.model}
-          onModelChange={this.handleModelChange}
-          config={this.state.config}
-        />
-        <FroalaEditorView model={this.state.model} />*/}
       </div>
     );
   }
