@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import {Row,Col, DatePicker,Icon} from 'antd'
 import '../css/ItemPage.scss'
+import sea from '../img/search.png'
 // Require Editor JS files.
 import 'froala-editor/js/froala_editor.pkgd.min.js';
 // Require Editor CSS files.
@@ -47,11 +49,45 @@ class ItemPage extends Component {
     console.log('1')
   }
   
+  onChange(date, dateString){
+    console.log(date, dateString)
+  }
 
   render() {
     return (
       <div>
-       <Timeline style={{background:'white'}}>
+      <div className="item_search">
+        <div className="sea_con">
+          <Row style={{marginBottom:0,marginTop:10,width:'100%',float:'left'}}>
+            <Col span={6} style={{position:'relative',paddingLeft:10,paddingRight:10}}>
+              <select name="" id="" className="list_control">
+                <option value="grid">Grid</option>
+                <option value="list">List</option>
+              </select>
+            </Col>
+            <Col span={12} style={{paddingLeft:10,paddingRight:10}}>
+              <div className="sea_group">
+                <div className="sea_icon">
+                  <img src={sea} alt=""/>
+                </div>
+                <input className="sea_input"></input>
+              </div>
+            </Col>
+            <Col span={6} style={{paddingLeft:10,paddingRight:10}}>
+            <div style={{display:'table',width:'100%',position:'relative'}}>
+            <div className="date_icon">
+              <img src="" alt=""/>
+            </div>
+              <DatePicker
+              className="sea_date" 
+              onChange={this.onChange.bind(this)}
+              />
+            </div>
+            </Col>
+          </Row>
+        </div>
+      </div>
+       {/*<Timeline style={{background:'white'}}>
             <TimelineEvent title="John Doe sent a SMS"
                            createdAt="2016-09-12 10:06 PM"
                            icon={<i className="material-icons md-18">textsms</i>}
@@ -67,7 +103,7 @@ class ItemPage extends Component {
                     am losing patience. Can you expedite the process and pls do share the details asap. Consider this a
                     gentle reminder if you are on track already!
             </TimelineEvent>
-    </Timeline>
+    </Timeline>*/}
         {/*<FroalaEditor
           tag='textarea'
           model={this.state.model}
