@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import {Row,Col, DatePicker,Icon} from 'antd'
+import {Row,Col, DatePicker, Tooltip } from 'antd'
 import '../css/ItemPage.scss'
 import sea from '../img/search.png'
+import rili from '../img/日历.png'
+import up from '../img/升序 (1).png'
+import down from '../img/降序.png'
+import time from '../img/im-time.png'
 // Require Editor JS files.
 import 'froala-editor/js/froala_editor.pkgd.min.js';
 // Require Editor CSS files.
@@ -56,6 +60,7 @@ class ItemPage extends Component {
   render() {
     return (
       <div>
+      {/*search_group*/}
       <div className="item_search">
         <div className="sea_con">
           <Row style={{marginBottom:0,marginTop:10,width:'100%',float:'left'}}>
@@ -76,7 +81,7 @@ class ItemPage extends Component {
             <Col span={6} style={{paddingLeft:10,paddingRight:10}}>
             <div style={{display:'table',width:'100%',position:'relative'}}>
             <div className="date_icon">
-              <img src="" alt=""/>
+              <img src={rili} alt=""/>
             </div>
               <DatePicker
               className="sea_date" 
@@ -85,6 +90,45 @@ class ItemPage extends Component {
             </div>
             </Col>
           </Row>
+        </div>   
+      </div>
+      {/*head*/}
+      <div className="item_head">
+        <h2>项目列表</h2>
+        <div className="head_right">
+          <div className="but_ul">
+          <Tooltip title='升序'>
+            <div className="sort">
+              <img src={up} alt=""/>
+            </div>
+          </Tooltip>
+          <Tooltip title='降序'>
+            <div className="sort">
+              <img src={down} alt=""/>
+            </div>
+          </Tooltip>
+          </div>
+        </div>
+      </div>
+      {/*list_content*/}
+      <div className="list_con">
+        <div className="list_item_box">
+          <div className="list_item_con">
+            <div className="list_item_head">Lorem ipsum dolor sit amet</div>
+            <div className="list_item_subhead">指导老师：</div>
+            <div className="list_item_subhead">发起人：</div>
+            <div className="list_item_subhead">实验室：</div>
+            <div className="list_item_date">
+            <Tooltip title='开始时间'>
+             <img src={rili} alt=""/>
+               &nbsp;15 oct 2013 &nbsp;
+            </Tooltip>
+            <Tooltip title='结束时间'>
+             <img src={time} alt=""/>
+              &nbsp;oct 2014 &nbsp;
+            </Tooltip>
+            </div>
+          </div>
         </div>
       </div>
        {/*<Timeline style={{background:'white'}}>

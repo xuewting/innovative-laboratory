@@ -102,10 +102,14 @@
    
   }
 }
+  .ant-calendar-picker{
+        width: 100%;
+      }
  .ant-calendar{
       background: rgba(0,0,0,0.4);
       color: white;
       border: 3px solid #FFF;
+      
       .ant-calendar-input{
         background: transparent;
         color: white
@@ -128,4 +132,97 @@
           background: rgba(0,0,0,0.4);
         }
       }
+      .ant-calendar-footer{
+        .ant-calendar-footer-btn{
+          .ant-calendar-today-btn {
+            color: #7aabce;
+            font-weight: 600;
+          }
+        }
+      }
     }
+  .item_head{
+    width: 100%;
+    float: left;
+    position: relative;
+    line-height: 30px;
+    padding: 10px 15px;
+    background: transparent;
+    h2{
+      margin: 0;
+      padding: 0;
+      float: left;
+      font-size: 16px;
+      text-align: 1px 1px 2px rgba(0,0,0,0.5);
+      color: white;
+      letter-spacing: 1px;
+    }
+    .head_right{
+      float: right;
+      // display: table;
+      .but_ul{
+        display: table;
+        padding: 0;
+        margin: 0;
+        padding-top: 2px;
+        float: left;
+        .sort{
+          display: table-cell;
+          padding-left: 10px;
+          text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+          img{
+            cursor:pointer;
+          }
+        }
+      }
+    }
+  }
+
+  .list_con{
+    margin-bottom: 20px;
+    width: 100%;
+    float: left;
+    position: relative;
+    padding: 10px;
+    .list_item_box{
+      float: left;
+      width: 33.333333%;
+      padding: 0 10px;
+      margin-bottom: 10px;
+      .list_item_con{
+        float: left;
+        widows: 100%;
+        position: relative;
+        border-radius: 3px;
+        background: rgba(0,0,0,0.2);
+        margin-bottom: 10px;
+        .list_item_head{
+          float: left;
+          widows: 100%;
+          line-height: 30px;
+          padding: 5px 10px 0px;
+          font-weight: bold;
+          color: white;
+          margin-bottom: 10px;
+        }
+        .list_item_subhead{
+          float: left;
+          width: 100%;
+          font-size: 12px;
+          padding: 0 15px;
+          margin-bottom: 20px;
+          color: white;
+        }
+        .list_item_date{
+          background: rgba(204,0,0,0.2);
+          float: left;
+          width: 100%;
+          padding: 10px;
+          line-height: 20px;
+          color: white;
+          font-size: 11px;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
