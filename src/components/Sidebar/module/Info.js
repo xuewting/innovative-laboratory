@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import {message} from 'antd';
 import '../Side.scss'
 import head from '../../../routes/Login/components/0824ab18972bd40790e0d4b571899e510fb30956.jpg'
 import message from '../img/message.png'
@@ -8,12 +9,14 @@ import arrow from '../img/htb－Arrow right02.png'
 import item from '../img/item13.png'
 import login from '../img/登录.png'
 import {browserHistory} from 'React-router'
+import {BASE_URL, POST} from '../../commonModules/POST'
 
 class Info extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      state: this.props.state
+      state: this.props.state,
+      img:''
     }
   }
 
@@ -22,6 +25,17 @@ class Info extends Component {
       pathname:`/login`
     })
   }
+
+  componentWillMount() {
+    POST('/QueryIMG',`param=''`,(re)=>{
+      if(re.state==1){
+        this.setState({img:re.data.headImg})
+      }else{
+        alert('服务器错误')
+      }
+    })    
+  }
+  
 
   toSet(e){
     e.preventDefault()
@@ -34,7 +48,7 @@ class Info extends Component {
     return (
       <div className='info'>
         <div className="user">
-          <img src={head} alt="" />
+          <img src={this.state.img?`${BASE_URL}${this.state.img}`:head} alt="" />
         </div>
         <div className="con_list">
           <a href="" className="list_item">
@@ -47,11 +61,11 @@ class Info extends Component {
             <span className='txt'>Setting</span>
             <img src={arrow} alt="" className='arrow' />
           </a>
-          <a href="" className="list_item">
+          {/*<a href="" className="list_item">
             <img src={item} alt="" className='icon' />
             <span className='txt'>Item</span>
             <img src={arrow} alt="" className='arrow' />
-          </a>
+          </a>*/}
           <a href="" className="list_item">
             {this.state.state == 1 ?
               <div>

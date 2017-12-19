@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FreeScrollBar from 'react-free-scrollbar';
+import {POST} from '../../../components/commonModules/POST'
 
 class Item extends Component {
   constructor(props) {

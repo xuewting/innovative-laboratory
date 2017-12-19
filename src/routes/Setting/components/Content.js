@@ -15,6 +15,7 @@ class Content extends Component {
     }
   }
 
+  //change value
   changeValue(e,type){
     switch(type){
       case 1:
@@ -36,6 +37,8 @@ class Content extends Component {
       this.setState({intor:e.target.value})
     }
   }
+
+  
   
   render() {
     return (
