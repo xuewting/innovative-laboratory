@@ -43,7 +43,7 @@ export var POST1 = (
       method: 'POST',
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        // 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
       },
       body: data
     })

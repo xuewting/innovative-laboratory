@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import Default from './0824ab18972bd40790e0d4b571899e510fb30956.jpg'
-import { BASE_URL, POST } from '../../../components/commonModules/POST'
+import { BASE_URL, POST,POST1 } from '../../../components/commonModules/POST'
 import { message } from 'antd'
 
 class Head extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      src: ''
+      src: '',
+      img:''
     }
   }
 
@@ -33,6 +34,7 @@ class Head extends Component {
     var file = e.target.files[0]
     var reader = new FileReader()
     var imgFile
+    this.setState({img:file})
 
     reader.onload = (e) => {
       imgFile = e.target.result
@@ -44,7 +46,8 @@ class Head extends Component {
   //save head
   save() {
     var data = this.state.src
-    POST('/user/uploadHeadImg', data, (re) => {
+    console.log(data)
+    POST1('/user/uploadHeadImg', data, (re) => {
       if (re.state == 1) {
         message.success('上传成功')
       } else if (re.state == -2) {
