@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Default from './0824ab18972bd40790e0d4b571899e510fb30956.jpg'
-import { BASE_URL, POST,POST1 } from '../../../components/commonModules/POST'
+import { BASE_URL, POST,POSTFile } from '../../../components/commonModules/POST'
 import { message } from 'antd'
 
 class Head extends Component {
@@ -45,9 +45,11 @@ class Head extends Component {
 
   //save head
   save() {
-    var data = this.state.src
-    console.log(data)
-    POST1('/user/uploadHeadImg', data, (re) => {
+    var file = this.state.src
+    var formdata = new FormData()
+    formdata.append('file',this.state.img)
+    formdata.append('type','application/octet-stream')
+    POSTFile('/user/uploadHeadImg', formdata, (re) => {
       if (re.state == 1) {
         message.success('上传成功')
       } else if (re.state == -2) {
