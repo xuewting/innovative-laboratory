@@ -6,6 +6,7 @@ import home from './home-big.png'
 import lab from './实验室编号.png'
 import item from './item.png'
 import goods from './物品管理.png'
+import teacher from './teacher.png'
 // import {Row, Col} from 'antd'
 
 class Header extends React.Component {
@@ -41,6 +42,12 @@ class Header extends React.Component {
               <span className="nav_item">
                 <img src={goods} alt="" />
                 物品
+            </span>
+            </Link>
+             <Link activeClassName='active'>
+              <span className="nav_item">
+                <img src={teacher} alt="" />
+                教师
             </span>
             </Link>
           </div>
