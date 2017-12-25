@@ -1,0 +1,102 @@
+.infofooter {
+  width: 100%;
+  padding: 0 ;
+  margin-top: 30px;
+  .set {
+    background: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    padding: 15px;
+    border-radius: 4px;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: background 200ms linear;
+    font-weight: 600;
+    &:hover{
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+
+.edit{
+  width: 100%;
+  float: left;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background 200ms linear;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+  .edithead{
+    width: 100%;
+    float: left;
+    padding: 10px 15px;
+    h2{
+      padding: 0;
+      margin: 0;
+      color: #fff;
+    }
+  }
+  .editcontent{
+    padding: 10px 10px;
+    width: 100%;
+    float: left;
+    .editconinp{
+      width: 100%;
+      float: left;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-size: 14px;
+      max-width: 100%;
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+  .confoot{
+    width: 100%;
+    float: left;
+    padding: 10px;
+    .footleft{
+      float: left;
+      button{
+        background: transparent;
+        border: 1px solid #fff;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor:pointer;
+        transition: background 200ms linear;
+        &:hover{
+          background: rgba(0, 0, 0, 0.3);
+        }
+        &:focus{
+          outline: none;
+        }
+      }
+    }
+    .footright{
+      float: right;
+      button{
+        background: transparent;
+        border: 1px solid #fff;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor:pointer;
+        transition: background 200ms linear;
+        &:hover{
+          background: rgba(0, 0, 0, 0.3);
+        }
+        &:focus{
+          outline: none;
+        }
+      }
+    }
+  }
+}
