@@ -43,7 +43,7 @@ class Goods extends Component {
         <div className="item_search">
           <div className="sea_con">
             <Row style={{ marginBottom: 0, marginTop: 10, width: '100%', float: 'left' }}>
-              <Col span={6} style={{ position: 'relative', paddingLeft: 10, paddingRight: 10 }}>
+              <Col span={6} offset={3} style={{ position: 'relative', paddingLeft: 10, paddingRight: 10 }}>
                 <select name="" id="" className="list_control" onChange={this.changeStyle.bind(this)}>
                   <option value="grid">Grid</option>
                   <option value="list">List</option>
@@ -55,17 +55,6 @@ class Goods extends Component {
                     <img src={sea} alt="" />
                   </div>
                   <input className="sea_input"></input>
-                </div>
-              </Col>
-              <Col span={6} style={{ paddingLeft: 10, paddingRight: 10 }}>
-                <div style={{ display: 'table', width: '100%', position: 'relative' }}>
-                  <div className="date_icon">
-                    <img src={rili} alt="" />
-                  </div>
-                  <DatePicker
-                    className="sea_date"
-                    onChange={this.onChange.bind(this)}
-                  />
                 </div>
               </Col>
             </Row>
@@ -100,37 +89,23 @@ class Goods extends Component {
                 <div className="list_item_subhead">状态：</div>
                 <div className="list_item_subhead">实验室：</div>
                 <div className="list_item_date">
-                  <Tooltip title='开始时间'>
-                    <img src={rili} alt="" />
-                    &nbsp;15 oct 2013 &nbsp;
-            </Tooltip>
-                  <Tooltip title='结束时间'>
-                    <img src={time} alt="" />
-                    &nbsp;oct 2014 &nbsp;
-            </Tooltip>
+                 
                 </div>
               </div>
             </div>
             :
-            <Tooltip placement="topLeft" title="状态：,型号：，实验室：">
+            
               <div className="style_list" onClick={this.toDetail.bind(this)} style={{ cursor: 'pointer' }}>
                 <div className="goos_list">
                   <div className="goos_con">
                     <div className="goos_head">Lorem ipsum dolor sit amet</div>
                     <div className="goos_date">
-                      <Tooltip title='开始时间'>
-                        <img src={rili} alt="" />
-                        &nbsp;15 oct 2013 &nbsp;
-            </Tooltip>
-                      <Tooltip title='结束时间'>
-                        <img src={time} alt="" />
-                        &nbsp;oct 2014 &nbsp;
-            </Tooltip>
+                    <span><i className='fa fa-flash'></i> 状态： <i className='fa fa-star'></i> 型号： <i className='fa fa-home'></i> 实验室：</span>
                     </div>
                   </div>
 
                 </div>
-              </div></Tooltip>}
+              </div>}
         </div>
       </div>
     );

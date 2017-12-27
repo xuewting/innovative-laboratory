@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Timeline, TimelineEvent } from 'react-event-timeline'
 import img1 from '../../Home/assets/wallhaven-113384.png'
 import '../css/info.scss'
-import HorizontalTimeline from 'react-horizontal-timeline'
 import EditInfo from './EditInfo'
 
 
@@ -12,6 +11,10 @@ class ItemInfo extends Component {
     this.state={
       start:'lorem'
     }
+  }
+
+  goBack(){
+    history.back()
   }
   
   render() {
@@ -69,8 +72,8 @@ class ItemInfo extends Component {
             </TimelineEvent>
         </Timeline>
         <div className="infofooter">
-          <div className="set">
-            <i className='fa fa-cog'></i> Setting
+          <div className="set" onClick={this.goBack.bind(this)}>
+            <i className='fa fa-sign-out'></i> 返回
           </div>
         </div>
         </div>

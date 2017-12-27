@@ -26,7 +26,7 @@ class Header extends React.Component {
                 主页
             </span>
             </IndexLink>
-            <Link activeClassName='active'>
+            <Link activeClassName='active' to='/Lab'>
               <span className="nav_item">
                 <img src={lab} alt="" />
                 实验室
@@ -44,7 +44,7 @@ class Header extends React.Component {
                 物品
             </span>
             </Link>
-             <Link activeClassName='active'>
+             <Link activeClassName='active' to='/Teacher'>
               <span className="nav_item">
                 <img src={teacher} alt="" />
                 教师

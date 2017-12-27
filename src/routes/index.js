@@ -12,7 +12,7 @@ import ItemPageRoute from './ItemPage'
 import ItemInfo from './ItemInfo'
 import GoodsRoute from './Goods'
 import GoodInfo from './GoodInfo'
-
+import Teacher from './Teacher'
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
@@ -30,6 +30,7 @@ export const createRoutes = (store) => ({
     ItemPageRoute(store),
     ItemInfo(store),
     GoodsRoute(store),
+    Teacher(store),
     PageNotFound(),
     Redirect
   ]
