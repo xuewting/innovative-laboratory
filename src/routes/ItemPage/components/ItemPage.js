@@ -6,52 +6,16 @@ import rili from '../img/日历.png'
 import up from '../img/升序 (1).png'
 import down from '../img/降序.png'
 import time from '../img/im-time.png'
-// Require Editor JS files.
-import 'froala-editor/js/froala_editor.pkgd.min.js';
-// Require Editor CSS files.
-import 'froala-editor/css/froala_style.min.css';
-import 'froala-editor/css/froala_editor.pkgd.min.css';
-
-// Require Font Awesome.
-import 'font-awesome/css/font-awesome.css';
-
-import FroalaEditor from 'react-froala-wysiwyg';
-import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView'
-import FroalaEditorInput from 'react-froala-wysiwyg/FroalaEditorInput'
-import {Timeline, TimelineEvent} from 'react-event-timeline'
+import {browserHistory} from 'React-router'
 
 class ItemPage extends Component {
   constructor() {
     super();
-    console.log('2')
-    this.handleModelChange = this.handleModelChange.bind(this);
-
-    this.state = {
-      model: '',
-      config: {
-        placeholderText: 'Edit Your Content Here!',
-        charCounterCount: true,
-        dragInline: true,
-        toolbarVisibleWithoutSelection: true,
-        height: 300,
-        width: 850,
-        fontFamilySelection: true,
-        fontSizeSelection: true,
-        paragraphFormatSelection: true
-      },
+    this.state = {   
     list:0,
     };
   }
-  handleModelChange(model) {
-    this.setState({
-      model: model
-    });
-    console.log(model)
-  }
-  
-  componentWillMount() {
-    console.log('1')
-  }
+ 
   
   onChange(date, dateString){
     console.log(date, dateString)
@@ -64,6 +28,12 @@ class ItemPage extends Component {
       this.setState({list:1})
     }
 
+  }
+
+  toDetail(){
+    browserHistory.push({
+      pathname:`/iteminfo`
+    })
   }
 
   render() {
@@ -122,7 +92,7 @@ class ItemPage extends Component {
       {/*list_content*/}
       <div className="list_con">
       { this.state.list==0?
-        <div className="list_item_box">
+        <div className="list_item_box" onClick={this.toDetail.bind(this)} style={{cursor:'pointer'}}>
           <div className="list_item_con">
             <div className="list_item_head">Lorem ipsum dolor sit amet</div>
             <div className="list_item_subhead">指导老师：</div>
@@ -141,7 +111,7 @@ class ItemPage extends Component {
           </div>
         </div>
         :
-      <div className="style_list">
+      <div className="style_list" onClick={this.toDetail.bind(this)} style={{cursor:'pointer'}}>
         <div className="task_list">
           <div className="task_con">
             <div className="task_head">Lorem ipsum dolor sit amet</div>

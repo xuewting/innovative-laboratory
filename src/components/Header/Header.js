@@ -38,7 +38,7 @@ class Header extends React.Component {
                 项目
             </span>
             </Link>
-            <Link activeClassName='active'>
+            <Link activeClassName='active' to='/Goods'>
               <span className="nav_item">
                 <img src={goods} alt="" />
                 物品

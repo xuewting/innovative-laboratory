@@ -98,5 +98,32 @@
         }
       }
     }
+    .imgbox{
+      width: 165px;
+      float: left;
+      .imgedit{
+        width: 150px;
+        height: 115px;
+        margin-top: -115px;
+        float: left;
+        div{
+          width: 30px;
+          float: left;
+          border: 3px solid #333;
+          border-radius: 50%;
+          height: 30px;
+          text-align: center;
+          cursor: pointer;
+          padding: 5px;
+          transition: 400ms linear;
+          &:hover{
+            color: #555;
+            border-color: #555;
+          }
+        }
+        // display: none; 
+      }
+
+    }
   }
 }
