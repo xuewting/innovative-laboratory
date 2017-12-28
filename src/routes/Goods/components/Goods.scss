@@ -192,12 +192,14 @@
       margin-bottom: 10px;
       .list_item_head {
         float: left;
-        widows: 100%;
+        width: 100%;
+        font-size: 15px;
         line-height: 30px;
         padding: 5px 10px 0px;
         font-weight: bold;
         color: white;
         margin-bottom: 10px;
+        
       }
       .list_item_subhead {
         float: left;

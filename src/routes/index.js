@@ -2,7 +2,6 @@
 import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
 import LoginRoute from './Login'
-import ItemRoute from './Item'
 import RegisterRoute from './Register'
 import LabRoute from './Lab'
 import PageNotFound from './PageNotFound'
@@ -13,6 +12,7 @@ import ItemInfo from './ItemInfo'
 import GoodsRoute from './Goods'
 import GoodInfo from './GoodInfo'
 import Teacher from './Teacher'
+import TeacherInfo from './TeacherInfo'
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
@@ -22,8 +22,8 @@ export const createRoutes = (store) => ({
   indexRoute: Home,
   childRoutes: [
     LoginRoute(store),
-    ItemRoute(store),
     RegisterRoute(store),
+    TeacherInfo(store),
     GoodInfo(store),
     LabRoute(store),
     SettingRoute(store),

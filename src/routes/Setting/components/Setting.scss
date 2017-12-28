@@ -24,6 +24,8 @@
       padding: 0;
       font-size: 16px;
       text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+      color: white;
+      font-weight: 600;
     }
   }
 
@@ -177,6 +179,10 @@
     padding: 10px 15px;
     font-weight: 600;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    h2{
+      color: white;
+      font-weight: 600;
+    }
   }
 
   .con_item {
@@ -257,6 +263,7 @@
       color: white;
       font-size: 16px;
       text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+      font-weight: 600;
     }
   }
 
