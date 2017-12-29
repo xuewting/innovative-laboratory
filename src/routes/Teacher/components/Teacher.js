@@ -61,8 +61,8 @@ class Teacher extends Component {
             </p>
             </div>
           </Panel>
-
         </Collapse>
+        
       </div>
     );
   }

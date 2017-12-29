@@ -7,7 +7,20 @@ import lab from './实验室编号.png'
 import item from './item.png'
 import goods from './物品管理.png'
 import teacher from './teacher.png'
+import { Menu, Dropdown, Icon } from 'antd';
 // import {Row, Col} from 'antd'
+
+const menuitem = (
+  <Menu>
+    <Menu.Item style={{background:'#333',fontSize:14}}>
+      <Link to='/ItemPage' style={{color:'#fff',fontWeight:600,textAlign:'center'}}>项目列表</Link>
+    </Menu.Item>
+    <Menu.Item style={{background:'#333',fontSize:14}}>
+      <Link to='/ProjectResult' style={{color:'#fff',fontWeight:600,textAlign:'center'}}>成果列表</Link>
+    </Menu.Item>
+
+  </Menu>
+);
 
 class Header extends React.Component {
   render() {
@@ -32,12 +45,14 @@ class Header extends React.Component {
                 实验室
             </span>
             </Link>
-            <Link activeClassName='active' to='/ItemPage'>
+            <Dropdown overlay={menuitem} placement="bottomCenter">
+            {/*<Link activeClassName='active' to='/ItemPage'>*/}
               <span className="nav_item">
                 <img src={item} alt="" />
                 项目
             </span>
-            </Link>
+            {/*</Link>*/}
+            </Dropdown>
             <Link activeClassName='active' to='/Goods'>
               <span className="nav_item">
                 <img src={goods} alt="" />

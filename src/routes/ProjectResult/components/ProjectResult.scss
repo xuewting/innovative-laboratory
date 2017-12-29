@@ -1,0 +1,39 @@
+.custom-filter-dropdown {
+  padding: 8px;
+  border-radius: 6px;
+  background: #fff; 
+  box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+}
+
+.custom-filter-dropdown input {
+  width: 130px;
+  margin-right: 8px;
+}
+
+.highlight {
+  color: #f50;
+}
+
+.com_head{
+  width: 100%;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+}
+
+.ant-table-tbody{
+  background: rgba(255, 255, 255, .7);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ant-table-thead{
+  font-size: 15px;
+}
+.i_name{
+  cursor:pointer;
+  
+}
