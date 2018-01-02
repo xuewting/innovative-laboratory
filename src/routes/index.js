@@ -15,6 +15,7 @@ import Teacher from './Teacher'
 import TeacherInfo from './TeacherInfo'
 import LabCharge from './LabCharge'
 import ProjectResult from './ProjectResult'
+import Message from './Message'
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
@@ -25,6 +26,7 @@ export const createRoutes = (store) => ({
   childRoutes: [
     LoginRoute(store),
     ProjectResult(store),
+    Message(store),
     LabCharge(store),
     RegisterRoute(store),
     TeacherInfo(store),

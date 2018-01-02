@@ -1,0 +1,51 @@
+.message{
+  width: 100%;
+  padding: 10px;
+  .mes_list{
+    width: 80%;
+    margin: auto;
+    .mes_box{
+      width: 100%;
+      padding: 10px 15px;
+      margin-bottom: 15px;
+      background: transparent;
+      transition: background 250ms linear;
+      border-radius: 3px;
+      &:hover{
+        background: rgba(255,255,255,0.3);
+        box-shadow: 1px 2px 3px rgba(0,0,0,0.5);
+      }
+      .img{
+        width: 100%;
+        height: 240px;
+        img{
+          width: 100%;
+          height: 240px;
+          border-radius: 3px;
+        }
+      }
+      .mes_con{
+        padding: 0 15px;
+        width: 100%;
+        h2{
+          margin: 0;
+          padding: 0;
+          color: #fff;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #ddd;
+          font-size: 22px;
+          font-weight: 600;
+        }
+        .contain{
+          padding: 10px 0;
+          color: #c8ccce;
+          font-size: 16px;
+          line-height: 22px;
+          font-weight: 500;
+          height: 200px;
+        }
+
+      }
+    }
+  }
+}

@@ -12,6 +12,7 @@ class Paper extends Component {
         journal: '院级',
         teacher: '王老师',
         report:'banana',
+        lab:'d0506',
         time: '2016-1-2'
       }, {
         key: '2',
@@ -19,6 +20,7 @@ class Paper extends Component {
         journal: '校级',
         teacher: '一等奖',
         report:'banana',
+        lab:'d0506',
         time: '2016-1-2'
       }, {
         key: '3',
@@ -26,6 +28,7 @@ class Paper extends Component {
         journal: '省级',
         teacher: '一等奖',
         report:'banana',
+        lab:'d0506',
         time: '2016-1-2'
       }, {
         key: '4',
@@ -33,6 +36,7 @@ class Paper extends Component {
         journal: '国家级',
         teacher: '一等奖',
         report:'banana',
+        lab:'d0506',
         time: '2016-1-2'
       },],
       filterDropdownVisible: false,
@@ -90,7 +94,7 @@ class Paper extends Component {
       title: '期刊',
       dataIndex: 'journal',
       key: 'journal',
-      width: '20%',
+      width: '15%',
        filterDropdown: (
         <div className="custom-filter-dropdown">
           <Input
@@ -135,10 +139,15 @@ class Paper extends Component {
       key: 'report',
       width: '15%',
     }, {
+      title: '实验室',
+      dataIndex: 'lab',
+      key: 'lab',
+      width: '10%',
+    }, {
       title: '时间',
       dataIndex: 'time',
       key: 'time',
-      width: '20%',
+      width: '15%',
     }];
     return (
       <div>

@@ -8,6 +8,7 @@ import item from './item.png'
 import goods from './物品管理.png'
 import teacher from './teacher.png'
 import { Menu, Dropdown, Icon } from 'antd';
+import search from './search.png'
 // import {Row, Col} from 'antd'
 
 const menuitem = (
@@ -70,6 +71,9 @@ class Header extends React.Component {
         {/*search*/}
         <div className="search">
         <input type="text" placeholder='search...'/>
+        <div className="sea_icon">
+          <img src={search} alt=""/>
+        </div>
         </div>
         </div>
       </div>

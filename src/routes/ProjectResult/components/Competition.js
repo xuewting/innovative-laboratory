@@ -11,24 +11,36 @@ class Competition extends Component {
         Iname: 'Lorem ipsum dolor sit amet',
         class: '院级',
         result: '一等奖',
+        lab:'d0506',
+        tea:'lorem',
+        student:'Bob',
         time: '2016-1-2'
       }, {
         key: '2',
         Iname: 'Lorem ipsum dolor sit amet',
         class: '校级',
         result: '一等奖',
+        lab:'d0506',
+        tea:'lorem',
+        student:'Bob',
         time: '2016-1-2'
       }, {
         key: '3',
         Iname: 'Lorem ipsum dolor sit amet',
         class: '省级',
         result: '一等奖',
+        lab:'d0506',
+        tea:'lorem',
+        student:'Bob',
         time: '2016-1-2'
       }, {
         key: '4',
         Iname: 'Lorem ipsum dolor sit amet',
         class: '国奖级',
         result: '一等奖',
+        lab:'d0506',
+        tea:'lorem',
+        student:'Bob',
         time: '2016-1-2'
       },],
       filterDropdownVisible: false,
@@ -74,7 +86,7 @@ class Competition extends Component {
       title: '名称',
       dataIndex: 'Iname',
       key: 'Iname',
-      width:'40%',
+      width:'30%',
       render:(text,record,index)=>{
         return(
           <div className='i_name' onClick={this.toDetail.bind(this,record,index)}>
@@ -105,7 +117,7 @@ class Competition extends Component {
       title: '类别',
       dataIndex: 'class',
       key: 'class',
-      width:'20%',
+      width:' 10%',
        filters: [{
         text: '院级',
         value: '院级',
@@ -124,12 +136,27 @@ class Competition extends Component {
       title: '获得成果',
       dataIndex: 'result',
       key: 'result',
-      width:'20%',
+      width:'10%',
+    },  {
+      title: '参与学生',
+      dataIndex: 'student',
+      key: 'student',
+      width:'10%',
+    }, {
+      title: '指导老师',
+      dataIndex: 'tea',
+      key: 'tea',
+      width:'10%',
+    },{
+      title: '实验室',
+      dataIndex: 'lab',
+      key: 'lab',
+      width:'10%',
     }, {
       title: '时间',
       dataIndex: 'time',
       key: 'time',
-      width:'20%',
+      width:'10%',
     }];
     return (
       <div>
