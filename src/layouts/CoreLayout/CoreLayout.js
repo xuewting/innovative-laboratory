@@ -9,11 +9,11 @@ class CoreLayout extends React.Component {
   render() {
     var path = this.props.location.pathname;
     var isShow = true
-    if(path=='/login'||path=='/register'){
+    if(path=='/login'||path=='/register'||path=='/labcharge'){
       isShow = false
     }
     return (
-      <div className='body'>
+      <div className={path=='/labcharge'?'body2':'body'}>
         {isShow?<Header />:''}
         <div>
         {this.props.children}

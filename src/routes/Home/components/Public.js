@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './HomeView.scss'
 import shuaxin from '../assets/刷新.png'
+import {browserHistory} from 'react-router'
 
 class Public extends Component {
   constructor(props) {
@@ -30,6 +31,13 @@ class Public extends Component {
     }
   }
 
+  toMessage(e){
+    e.preventDefault()
+    browserHistory.push({
+      pathname:`/message`
+    })
+  }
+
   render() {
     return (
       <div className='public'>
@@ -51,7 +59,7 @@ class Public extends Component {
         })}
 
         <div className="foot">
-        <a href="">More...</a>
+        <a href="" onClick={this.toMessage.bind(this)}>More...</a>
         </div>
       </div>
     );

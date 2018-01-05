@@ -1,0 +1,120 @@
+.chargeside {
+  width: 100%;
+  padding: 20px 15px;
+  .choise_list {
+    width: 100%;
+    padding: 10px;
+    border-radius: 3px;
+    background: rgba(12, 81, 109, 0.8);
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+    .choise_item {
+      width: 100%;
+      padding: 5px 10px;
+      height: 55px;
+      border-radius: 3px;
+      transition: 250ms linear;
+      &:hover {
+        background: rgba(83, 167, 222, 0.59);
+      }
+      .choise_box {
+        width: 100%;
+        line-height: 30px;
+        vertical-align: middle;
+        font-size: 17px;
+        color: white;
+        font-weight: 600;
+        img {
+          height: 22px;
+          vertical-align: middle;
+        }
+        span {
+          line-height: 30px;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}
+
+//基本信息
+.detail {
+  width: 100%;
+  background: rgba(12, 81, 109, 0.8);
+  border-radius: 3px;
+  padding: 15px 10px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+  .head_detail {
+    width: 100%;
+    padding: 10px 10px;
+    border-bottom: 2px dashed white;
+    h2 {
+      padding: 0;
+      margin: 0;
+      color: white;
+      font-weight: 600;
+      letter-spacing: 2px;
+      font-size: 25px;
+    }
+  }
+  .detail_con {
+    padding: 15px 10px;
+    width: 100%;
+    .upload {
+      width: 100%;
+      padding: 10px;
+      h2{
+        color: white;
+        padding: 10px 0;
+        letter-spacing: 1px;
+      }
+      .show_img {
+        width: 100%;
+        border-radius: 3px;
+        .img {
+          width: 100%;
+          min-width: 100%;
+          border: 2px solid white;
+          height: 350px;
+          min-height: 350px;
+          border-radius: 3px;
+        }
+      }
+      .change_img {
+        width: 100%;
+        padding: 10px 0px;
+        .change_show {
+          width: 100%;
+          padding: 10px;          
+          border: 1px solid white;
+          background: transparent;
+          border-radius: 3px;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          color: #fff;
+          font-size: 15px;
+          &:focus {
+            outline: none;
+          }
+        }
+        .change_but{
+          width: 100%;
+          padding: 5px 20px;
+          border-radius: 3px;
+          border-bottom-left-radius: 0;
+          border-top-left-radius: 0;
+          border: 1px solid white;
+          cursor: pointer;
+          span{
+            width: 100%;
+            color: white;
+            text-align: center;
+            letter-spacing: 1px;
+            line-height: 28px;
+            font-size: 16px;
+            
+          }
+        }
+      }
+    }
+  }
+}
