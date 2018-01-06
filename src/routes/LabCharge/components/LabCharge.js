@@ -9,6 +9,7 @@ import Detail from '../module/Detail'
 import munber from '../img/-_成员.png'
 import achieve from '../img/成就.png'
 import gonggao from '../img/公告.png'
+import back from '../img/返回.png'
 
 class LabCharge extends Component {
   constructor(props) {
@@ -36,7 +37,10 @@ class LabCharge extends Component {
       },{
         name: '通知公告',
         icon: gonggao
-      },],
+      },{
+        name: '返回',
+        icon: back
+      }],
     }
   }
 
@@ -57,7 +61,7 @@ class LabCharge extends Component {
               <div className="choise_list">
                 {this.state.choise.map((item, i) => {
                   return (
-                    <div className="choise_item">
+                    <div className="choise_item" key={i}>
                       <div className="choise_box">
                         <span><img src={item.icon} alt="" /></span>
                         <span style={{marginLeft:10}}>{item.name}</span>
@@ -65,6 +69,7 @@ class LabCharge extends Component {
                     </div>
                   )
                 })}
+                
               </div>
             </div>
           </Col>

@@ -13,6 +13,8 @@
       height: 55px;
       border-radius: 3px;
       transition: 250ms linear;
+      display: block;
+      cursor: pointer;
       &:hover {
         background: rgba(83, 167, 222, 0.59);
       }
@@ -43,6 +45,7 @@
   border-radius: 3px;
   padding: 15px 10px;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
   .head_detail {
     width: 100%;
     padding: 10px 10px;
@@ -62,6 +65,8 @@
     .upload {
       width: 100%;
       padding: 10px;
+      padding-bottom: 20px;
+      border-bottom: 2px dashed white;
       h2{
         color: white;
         padding: 10px 0;
@@ -113,6 +118,87 @@
             font-size: 16px;
             
           }
+        }
+      }
+      .detail_info{
+        width: 100%;
+        padding: 25px 10px 0px 10px;
+        .detail_box{
+          width: 100%;
+          padding: 20px;
+          // border-bottom: 1px solid white;
+          .det_box_in{
+            width: 100%;
+            line-height: 30px;
+            span{
+              color: #fff;
+              font-size: 16px;
+              font-weight: 500;
+              letter-spacing: 1px;
+              vertical-align: middle;
+              input{
+                border: 1px solid white;
+                background: transparent;
+                color: white;
+                padding: 10px;
+                border-radius: 4px;
+                width: 80%;
+                font-size: 14px;
+                &:focus{
+                  outline: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .edit_detail{
+      width: 100%;
+      padding: 10px;
+      h2{
+        padding: 10px 0;
+        color: white;
+        font-size: 20px;
+        letter-spacing: 1px;
+      }
+      textarea{
+        width: 100%;
+        padding: 10px;
+        border-radius: 4px;
+        background: transparent;
+        color: white;
+        font-size: 15px;
+        border: 1px solid white;
+        max-width: 100%;
+        min-width: 100%;
+        &:focus{
+          outline: none;
+        }
+      }
+    }
+    
+    .detail_foot{
+      padding: 10px 10px 0px 10px;
+      width: 100%;
+      .foot_but{
+        display: block;
+        padding: 10px 10px;
+        width: 100%;
+        border: 1px solid white;
+        border-radius: 4px;
+        line-height: 30px;
+        // vertical-align: middle;
+        font-size: 17px;
+        color: white;
+        text-align: center;
+        transition: 200ms linear;
+        cursor: pointer;
+        font-weight: 600;
+        &:hover{
+          background: rgba(83, 167, 222, 0.59);
+
         }
       }
     }

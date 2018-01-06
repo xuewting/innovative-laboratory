@@ -8,7 +8,7 @@ class Detail extends Component {
     this.state = {
       img: '',
       src: '',
-      srcname:''
+      srcname: ''
     }
   }
 
@@ -22,7 +22,7 @@ class Detail extends Component {
     var reader = new FileReader()
     var imgFile
     this.setState({ img: file })
-    this.setState({srcname:e.target.value})
+    this.setState({ srcname: e.target.value })
 
     reader.onload = (e) => {
       imgFile = e.target.result
@@ -41,13 +41,14 @@ class Detail extends Component {
             <div className="upload">
               <Row>
                 <Col span={12} style={{ paddingRight: 5 }}>
-                  <h2>展示照片:</h2>
+                  {/*show photo*/}
+                  <h2>展示照片：</h2>
                   <div className="show_img">
                     <img src={this.state.src} alt="" className='img' />
                     <div className="change_img" onClick={this.changeFile.bind(this)}>
                       <Row>
                         <Col span={20}>
-                          <input type="text" className='change_show' value={this.state.srcname}/>
+                          <input type="text" className='change_show' value={this.state.srcname} />
                         </Col>
                         <Col span={4}>
                           <div className='change_but'>
@@ -55,17 +56,76 @@ class Detail extends Component {
                           </div>
                         </Col>
                       </Row>
-                      <input type="file" style={{ display: 'none' }} ref='file' onChange={(e)=>this.changeSrc(e)}/>
+                      <input type="file" style={{ display: 'none' }} ref='file' onChange={(e) => this.changeSrc(e)} />
                     </div>
                   </div>
                 </Col>
                 <Col span={12} style={{ paddingLeft: 5 }}>
+                  {/*detail  info*/}
                   <div className="detail_info">
-                    div.
+                    <div className="detail_box">
+                      <div className="det_box_in">
+                        <Row><Col span={4}>
+                          <span>实验室名称：</span>
+                        </Col><Col span={20}>
+                            <span><input type="text" /></span>
+                          </Col></Row>
+                      </div>
+                    </div>
+                    <div className="detail_box">
+                      <div className="det_box_in">
+                        <Row><Col span={4}>
+                          <span>所在位置：</span>
+                        </Col><Col span={20}>
+                            <span><input type="text" /></span>
+                          </Col></Row>
+                      </div>
+                    </div>
+                    <div className="detail_box">
+                      <div className="det_box_in">
+                        <Row><Col span={4}>
+                          <span>管理老师：</span>
+                        </Col><Col span={20}>
+                            <span><input type="text" /></span>
+                          </Col></Row>
+                      </div>
+                    </div>
+                    <div className="detail_box">
+                      <div className="det_box_in">
+                        <Row><Col span={4}>
+                          <span>院系：</span>
+                        </Col><Col span={20}>
+                            <span><input type="text" /></span>
+                          </Col></Row>
+                      </div>
+                    </div>
                   </div>
                 </Col>
               </Row>
             </div>
+
+            {/*edit introduce*/}
+            <div className="edit_detail">
+              <h2>实验室简介：</h2>
+              <textarea name="" id="" cols="30" rows="15" placeholder='请输入实验室的简介'>
+              </textarea>
+            </div>
+
+          {/*footer*/}
+          <div className="detail_foot">
+          <Row>
+            <Col span={12} style={{paddingRight:10}}>
+              <div className="foot_but">
+              清&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;空
+              </div>
+            </Col>
+            <Col span={12} style={{paddingLeft:10}}>
+            <div className="foot_but">
+              保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存
+              </div>
+            </Col>
+          </Row>
+          </div>
           </div>
         </div>
       </div>
