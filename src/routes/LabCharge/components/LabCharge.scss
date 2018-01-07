@@ -109,6 +109,10 @@
           border-top-left-radius: 0;
           border: 1px solid white;
           cursor: pointer;
+          transition: 250ms linear;
+              &:hover{
+                background: rgba(83, 167, 222, 0.59);
+              }
           span{
             width: 100%;
             color: white;
@@ -147,6 +151,21 @@
                 &:focus{
                   outline: none;
                 }
+              }
+            }
+            .show_but{
+              width: 80%;
+              padding: 5px;
+              text-align: center;
+              border-radius: 4px;
+              border: 1px solid white;
+              color: white;
+              letter-spacing: 1px;
+              font-size: 15px;
+              cursor: pointer;
+              transition: 250ms linear;
+              &:hover{
+                background: rgba(83, 167, 222, 0.59);
               }
             }
           }

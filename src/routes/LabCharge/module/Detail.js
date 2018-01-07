@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../components/LabCharge.scss'
 import { Row, Col } from 'antd'
+import ReactDOM from 'react-dom'
 
 class Detail extends Component {
   constructor(props) {
@@ -8,7 +9,8 @@ class Detail extends Component {
     this.state = {
       img: '',
       src: '',
-      srcname: ''
+      srcname: '',
+      showfile: '',
     }
   }
 
@@ -30,6 +32,25 @@ class Detail extends Component {
     }
     reader.readAsDataURL(file);
   }
+
+  //change showfile
+  changShowFile(e) {
+    console.log(e.target.files)
+    this.setState({ showfile: e.target.value })
+  }
+
+  showFile() {
+    this.refs.showfile.click()
+  }
+
+  componentDidMount() {
+    var input = ReactDOM.findDOMNode(this.refs.showfile)
+    input.setAttribute('webkitdirectory', '')
+    input.setAttribute('directory', '')
+    input.setAttribute('multiple', '')
+  }
+
+
   render() {
     return (
       <div style={{ paddingTop: 20, paddingRight: 15 }}>
@@ -56,7 +77,7 @@ class Detail extends Component {
                           </div>
                         </Col>
                       </Row>
-                      <input type="file" style={{ display: 'none' }} ref='file' onChange={(e) => this.changeSrc(e)} />
+                      <input type="file" style={{ display: 'none' }} ref='file' accept="image/*" onChange={(e) => this.changeSrc(e)} />
                     </div>
                   </div>
                 </Col>
@@ -99,6 +120,18 @@ class Detail extends Component {
                           </Col></Row>
                       </div>
                     </div>
+                    <div className="detail_box">
+                      <div className="det_box_in">
+                        <Row><Col span={4}>
+                          <span>展示页面：</span>
+                        </Col><Col span={20}>
+                            <span>上传属于本实验室的展示页面文件夹</span>
+                            <div className="show_but" onClick={this.showFile.bind(this)}>选择要上传的文件夹
+                            <input type="file" style={{ display: 'none' }} ref='showfile' onChange={(e) => this.changShowFile(e)} /></div>
+                            <span>{this.state.showfile}</span>
+                          </Col></Row>
+                      </div>
+                    </div>
                   </div>
                 </Col>
               </Row>
@@ -111,21 +144,21 @@ class Detail extends Component {
               </textarea>
             </div>
 
-          {/*footer*/}
-          <div className="detail_foot">
-          <Row>
-            <Col span={12} style={{paddingRight:10}}>
-              <div className="foot_but">
-              清&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;空
+            {/*footer*/}
+            <div className="detail_foot">
+              <Row>
+                <Col span={12} style={{ paddingRight: 10 }}>
+                  <div className="foot_but">
+                    清&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;空
               </div>
-            </Col>
-            <Col span={12} style={{paddingLeft:10}}>
-            <div className="foot_but">
-              保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存
+                </Col>
+                <Col span={12} style={{ paddingLeft: 10 }}>
+                  <div className="foot_but">
+                    保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存
               </div>
-            </Col>
-          </Row>
-          </div>
+                </Col>
+              </Row>
+            </div>
           </div>
         </div>
       </div>
