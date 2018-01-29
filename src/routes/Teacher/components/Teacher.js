@@ -7,14 +7,14 @@ import {
 import img1 from '../img/wallhaven-566551.jpg'
 import img2 from '../img/wallhaven-581929.jpg'
 import './Teacher.scss'
-import {browserHistory} from 'react-router'
+import { browserHistory } from 'react-router'
 const Panel = Collapse.Panel
 
 class Teacher extends Component {
 
-  toInfo(){
+  toInfo() {
     browserHistory.push({
-      pathname:`/teacherinfo`
+      pathname: `/teacherinfo`
     })
   }
   render() {
@@ -34,35 +34,69 @@ class Teacher extends Component {
   it can be found as a welcome guest in many households across the world.
 `;
     return (
-      <div style={{paddingTop:10}}>
-        <Collapse bordered={false} style={{ background: 'transparent' }} >
-          <Panel header={
-            <div className='tea_head'>
-              <Row>
-                <Col span={5}>
-                  <img src={img1} alt="" className="tea_pic" />
-                </Col>
-                <Col span={18} offset={1}>
-                  <span>name</span>
-                  <span>zhicheng</span>
-                  <span>所在实验室</span>
-                </Col>
-              </Row>
-            </div>} key="1" style={style}>
-            <div style={{cursor:'pointer'}} onClick={this.toInfo.bind(this)}>
-              <h2 className='title'>简介：</h2>
-              <p className='intr'>{text}</p>
-              <h2 className='title'>荣誉：</h2>
-              <p className='honor'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      <div style={{ paddingTop: 10 }}>
+        <Row>
+          <Col span={12} style={{ paddingRight: 5 }}>
+            <Collapse bordered={false} style={{ background: 'transparent' }} >
+              <Panel header={
+                <div className='tea_head'>
+                  <Row>
+                    <Col span={8}>
+                      <img src={img1} alt="" className="tea_pic" />
+                    </Col>
+                    <Col span={15} offset={1}>
+                      <span>姓名：</span>
+                      <span>职称：</span>
+                      <span>联系方式：</span>
+                      <span>所在实验室：</span>
+                    </Col>
+                  </Row>
+                </div>} key="1" style={style}>
+                <div style={{ cursor: 'pointer' }} onClick={this.toInfo.bind(this)}>
+                  <h2 className='title'>简介：</h2>
+                  <p className='intr'>{text}</p>
+                  <h2 className='title'>荣誉：</h2>
+                  <p className='honor'>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Nemo incidunt, eaque repudiandae autem cupiditate facere
             sequi quasi quae, doloribus praesentium suscipit. Sed,
              maiores aut asperiores dicta quod, quo incidunt fuga.
             </p>
-            </div>
-          </Panel>
-        </Collapse>
-        
+                </div>
+              </Panel>
+            </Collapse>
+          </Col>
+          <Col span={12} style={{ paddingLeft: 5 }}>
+            <Collapse bordered={false} style={{ background: 'transparent' }} >
+              <Panel header={
+                <div className='tea_head'>
+                  <Row>
+                    <Col span={8}>
+                      <img src={img1} alt="" className="tea_pic" />
+                    </Col>
+                    <Col span={15} offset={1}>
+                      <span>姓名：</span>
+                      <span>职称：</span>
+                      <span>联系方式：</span>
+                      <span>所在实验室：</span>
+                    </Col>
+                  </Row>
+                </div>} key="1" style={style}>
+                <div style={{ cursor: 'pointer' }} onClick={this.toInfo.bind(this)}>
+                  <h2 className='title'>简介：</h2>
+                  <p className='intr'>{text}</p>
+                  <h2 className='title'>荣誉：</h2>
+                  <p className='honor'>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Nemo incidunt, eaque repudiandae autem cupiditate facere
+            sequi quasi quae, doloribus praesentium suscipit. Sed,
+             maiores aut asperiores dicta quod, quo incidunt fuga.
+            </p>
+                </div>
+              </Panel>
+            </Collapse>
+          </Col>
+        </Row>
       </div>
     );
   }

@@ -103,7 +103,7 @@
         }
         .change_but{
           width: 100%;
-          padding: 5px 20px;
+          padding: 5px 10px;
           border-radius: 3px;
           border-bottom-left-radius: 0;
           border-top-left-radius: 0;
@@ -222,4 +222,14 @@
       }
     }
   }
+}
+
+//member
+.member{
+  width: 100%;
+  background: rgba(12, 81, 109, 0.8);
+  border-radius: 3px;
+  padding: 15px 10px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
 }

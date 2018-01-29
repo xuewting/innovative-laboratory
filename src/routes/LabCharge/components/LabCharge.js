@@ -6,7 +6,7 @@ import item from '../img/item.png'
 import goods from '../img/物品管理.png'
 import teacher from '../img/teacher.png'
 import Detail from '../module/Detail'
-import munber from '../img/-_成员.png'
+import member from '../img/-_成员.png'
 import achieve from '../img/成就.png'
 import gonggao from '../img/公告.png'
 import back from '../img/返回.png'
@@ -21,8 +21,8 @@ class LabCharge extends Component {
         name: '基本信息',
         icon: info
       }, {
-        name: '人员管理',
-        icon: munber
+        name: '成员管理',
+        icon: member
       },{
         name: '项目管理',
         icon: item

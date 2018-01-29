@@ -9,24 +9,20 @@ class Lab extends Component {
       <div className='Lab'>
         <div className="list_box">
         <Row>
-        <Col span={5}>
+        <Col span={5} >
           <div className="img">
             <img src={img1} alt="" />
           </div>
           </Col>
           <Col span={18} offset={1}>
           <div className="contain">
-            <span>name</span>
-            <span>position</span>
-            <span>introduce : 
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            <span>名称：</span>
+            <span>位置：</span>
+            <span>介绍： 
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, consectetur adipisicing elit.
              At rerum consequuntur obcaecati et dolore eligendi. Dolorum,
               officiis! Deserunt voluptate voluptatum perspiciatis doloremque 
-              unde, dolorem pariatur aspernatur consequatur corrupti saepe ad.
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-             At rerum consequuntur obcaecati et dolore eligendi. Dolorum,
-              officiis! Deserunt voluptate voluptatum perspiciatis doloremque 
-              unde, dolorem pariatur aspernatur consequatur corrupti saepe ad.</p></span>
+              </p></span>
           </div>
           </Col>
           </Row>
