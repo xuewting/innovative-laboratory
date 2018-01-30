@@ -11,7 +11,7 @@ class LabShow extends Component {
     return (
       <div className='labshow'>
       <div className="labhead">
-        <h2>实验室名称</h2>
+        <h2>实验室环境</h2>
       </div>
             <div className="showright">
               <div className="carousel">
