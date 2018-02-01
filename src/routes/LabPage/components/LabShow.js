@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Carousel } from 'antd'
-import img1 from '../img/wallhaven-581933.jpg'
+import img1 from '../img/wallhaven-553316.jpg'
 import img2 from '../img/wallhaven-582013.jpg'
 import img3 from '../img/wallhaven-582025.jpg'
 import img4 from '../img/wallhaven-590711.jpg'

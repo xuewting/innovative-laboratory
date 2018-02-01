@@ -48,7 +48,7 @@ class Teacher extends Component {
           <h2>常驻老师</h2>
         </div>
         <div className="tea_con">
-        <FreeScrollBar style={{height:700}}>
+        <FreeScrollBar className='scroll' style={{height:450}}>
           {this.state.list.map((item, i) => {
             return (
               <div className="tea_list" key={i}>

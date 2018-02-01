@@ -1,66 +1,86 @@
 import React, { Component } from 'react';
+import FreeScrollBar from 'react-free-scrollbar';
 import '../css/LabItem.scss'
-import shuaxin from '../../Home/assets/刷新.png'
-import { Row, Col, Tooltip } from 'antd'
 
 class LabItem extends Component {
-  constructor(props) {
+   constructor(props) {
     super(props);
-    this.state = {
-      list: [{
-        tit: 'lorem',
-        con: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        time: '17-12-1'
-      }, {
-        tit: 'lorem',
-        con: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        time: '17-12-1'
-      }, {
-        tit: 'lorem',
-        con: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        time: '17-12-1'
-      }, {
-        tit: 'lorem',
-        con: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        time: '17-12-1'
-      }, {
-        tit: 'lorem',
-        con: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        time: '17-12-1'
-      },]
+    this.state={
+      list:[{
+        name:'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        time:'12-1',
+        belong:'D0506',
+        teacher:'lorem'
+      },{
+        name:'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        time:'12-1',
+        belong:'D0506',
+        teacher:'lorem'
+      },{
+        name:'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        time:'12-1',
+        belong:'D0506',
+        teacher:'lorem'
+      },{
+        name:'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        time:'12-1',
+        belong:'D0506',
+        teacher:'lorem'
+      },{
+        name:'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        time:'12-1',
+        belong:'D0506',
+        teacher:'lorem'
+      },{
+        name:'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        time:'12-1',
+        belong:'D0506',
+        teacher:'lorem'
+      },{
+        name:'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        time:'12-1',
+        belong:'D0506',
+        teacher:'lorem'
+      },{
+        name:'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        time:'12-1',
+        belong:'D0506',
+        teacher:'lorem'
+      },{
+        name:'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        time:'12-1',
+        belong:'D0506',
+        teacher:'lorem'
+      }]
     }
   }
 
   render() {
     return (
       <div className='labitem'>
-        <div className="pub_head">
-          <Row>
-            <Col span={20}>
-              <h2>最新公告</h2>
-            </Col>
-            <Col span={4}>
-              <div className="head_panel">
-                <Tooltip title='刷新'>
-                  <img src={shuaxin} alt="" />
-                </Tooltip>
-              </div>
-            </Col>
-          </Row>
+        <div className="item_head">
+          <h2>最近成果展示</h2>
         </div>
-
-        {this.state.list.map((item, i) => {
-          return (
-            <div className="pub_item" key={i}>
-              <div className="time">{item.time}</div>
-              <a href="">{item.tit}</a>
-              <p>{item.con}</p>
-            </div>
-          )
-        })}
-
-        <div className="foot">
-          <a href="" >More...</a>
+        <div className="item_list">
+        <FreeScrollBar className='scroll' style={{height:250}} >
+          {this.state.list.map((item,i)=>{
+            return(
+              <div key={i} style={{textDecoration:'none',}}>
+              <div className="list_box">
+                <p>{item.name}</p>
+              </div>
+              <div className="list_time">
+              <span>{item.time}&nbsp;&nbsp;&nbsp;&nbsp;{item.teacher}&nbsp;&nbsp;&nbsp;&nbsp;{item.belong}</span>
+              </div>
+              </div>
+            )
+          })}
+        </FreeScrollBar>
+        </div>
+        <div className="item_foot">
+          <div className="more">
+            
+          </div>
         </div>
       </div>
     );

@@ -1,0 +1,98 @@
+.labteacher {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  width: 100%;
+  float: left;
+  position: relative;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+  
+  .tea_head {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    float: left;
+    color: #fff;
+
+    h2 {
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+      letter-spacing: 1px;
+      font-size: 16px;
+      margin: 0;
+      font-weight: 700;
+    }
+  }
+
+  .tea_con {
+    width: 100%;
+    float: left;
+    position: relative;
+    // box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.3);
+
+    .tea_list {
+      width: 100%;
+      position: relative;
+      box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      float: left;
+      border-radius: 3px;
+      margin-bottom: 20px;
+      cursor: pointer;
+
+      img {
+        float: left;
+        border-radius: 3px;
+        width: 72px;
+        height: 72px;
+        position: relative;
+      }
+
+      .txt {
+        padding-left: 82px;
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+
+        h3 {
+          text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+          margin: 0;
+          color: white;
+          font-size: 15px;
+        }
+
+        p {
+          overflow: hidden;
+          max-height: 32px;
+        }
+      }
+    }
+  }
+
+  .tea_foot {
+    background: rgba(0, 0, 0, 0.3);
+    position: relative;
+    width: 100%;
+    float: left;
+
+    .more {
+      border-radius: 3px;
+      text-align: center;
+      line-height: 30px;
+      color: white;
+      background: rgba(0, 0, 0, 0.3);
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+      font-size: 16px;
+      padding: 10px 15px;
+      width: 100%;
+      position: relative;
+      float: left;
+      cursor: pointer;
+    }
+  }
+}

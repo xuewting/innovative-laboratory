@@ -6,6 +6,7 @@ import LabTeacher from './LabTeacher'
 import LabNews from './LabNews'
 import LabItem from './LabItem'
 import Detail from './Detail'
+import Honor from './Labhonor'
 import '../css/LabPage.scss'
 
 class LabPage extends Component {
@@ -14,14 +15,16 @@ class LabPage extends Component {
       <div>
         <div className="labpage">
           <Row>
-            <Col span={14} style={{ paddingRight: 5 }}>
-              <LabShow></LabShow>
-            </Col>
-            <Col span={10} style={{ paddingLeft: 5 }}>
+            <Col span={12} style={{ paddingRight: 5 }}>
               <Detail></Detail>
-            </Col>
-            <Col span={12} style={{paddingRight:5}}>
+              <LabGoods></LabGoods>
               <LabItem></LabItem>
+            </Col>
+            <Col span={12} style={{ paddingLeft: 5 }}>
+              <LabShow></LabShow>     
+              <LabNews></LabNews>
+              <LabTeacher></LabTeacher>
+              
             </Col>
           </Row>
         </div>
