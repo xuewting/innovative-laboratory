@@ -18,7 +18,9 @@ class LabPage extends Component {
             <Col span={12} style={{ paddingRight: 5 }}>
               <Detail></Detail>
               <LabGoods></LabGoods>
+              <Honor></Honor>
               <LabItem></LabItem>
+              
             </Col>
             <Col span={12} style={{ paddingLeft: 5 }}>
               <LabShow></LabShow>     

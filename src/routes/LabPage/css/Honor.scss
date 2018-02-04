@@ -1,0 +1,48 @@
+.labhonor{
+  width: 100%;
+  margin-bottom: 20px;
+  // background: #133959;
+  // border-radius: 3px;
+  // box-shadow: 1px 2px 3px rgba(0,0,0,0.5);
+  padding: 10px;
+  position: relative;
+  .change{
+    width: 100%;
+    text-align: center;
+    .imgbox{
+      padding: 50px;
+      text-align: center;
+      transition: background 200ms linear;
+      cursor: pointer;
+      border-radius: 3px;   
+      &:hover{
+        background: rgba(255,255,255,0.3);
+      }
+      img{
+      width: 100%;
+      max-width: 100px;
+      margin: 0 auto;
+      
+    }
+    }    
+  }
+  .honor_con{
+    width: 100%;
+    border-radius: 3px;
+    .honor_item{
+      padding: 10px 15px;
+      border-radius: 3px;
+      color: #fff;
+      margin-bottom: 10px;
+      background: #063674;
+      font-weight: 600;
+      transition: background 200ms linear;
+      &:nth-child(2n+1){
+        background: #2b4174;
+      }
+      &:hover{
+        background: #4f638f;
+      }
+    }
+  }
+}
