@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import { Row, Col } from 'antd'
 import './Lab.scss'
 import img1 from '../img/wallhaven-566551.jpg'
+import {browserHistory} from 'react-router'
 
 class Lab extends Component {
+  toDetail(){
+    browserHistory.push({
+      pathname:`/labpage`
+    })
+  }
   render() {
     return (
       <div className='Lab'>
-        <div className="list_box">
+        <div className="list_box" onClick={this.toDetail.bind(this)}>
         <Row>
         <Col span={5} >
           <div className="img">

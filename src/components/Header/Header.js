@@ -9,21 +9,28 @@ import goods from './物品管理.png'
 import teacher from './teacher.png'
 import { Menu, Dropdown, Icon } from 'antd';
 import search from './search.png'
+import { browserHistory } from 'react-router'
 // import {Row, Col} from 'antd'
 
 const menuitem = (
   <Menu>
-    <Menu.Item style={{background:'#333',fontSize:14}}>
-      <Link to='/ItemPage' style={{color:'#fff',fontWeight:600,textAlign:'center'}}>项目列表</Link>
+    <Menu.Item style={{ background: '#333', fontSize: 14 }}>
+      <Link to='/ItemPage' style={{ color: '#fff', fontWeight: 600, textAlign: 'center' }}>项目列表</Link>
     </Menu.Item>
-    <Menu.Item style={{background:'#333',fontSize:14}}>
-      <Link to='/ProjectResult' style={{color:'#fff',fontWeight:600,textAlign:'center'}}>成果列表</Link>
+    <Menu.Item style={{ background: '#333', fontSize: 14 }}>
+      <Link to='/ProjectResult' style={{ color: '#fff', fontWeight: 600, textAlign: 'center' }}>成果列表</Link>
     </Menu.Item>
 
   </Menu>
 );
 
 class Header extends React.Component {
+  toSearch() {
+    // e.preventDefault()
+    browserHistory.push({
+      pathname: `/search`
+    })
+  }
   render() {
     return (
       <div className='head'>
@@ -47,12 +54,12 @@ class Header extends React.Component {
             </span>
             </Link>
             <Dropdown overlay={menuitem} placement="bottomCenter">
-            {/*<Link activeClassName='active' to='/ItemPage'>*/}
+              {/*<Link activeClassName='active' to='/ItemPage'>*/}
               <span className="nav_item">
                 <img src={item} alt="" />
                 项目
             </span>
-            {/*</Link>*/}
+              {/*</Link>*/}
             </Dropdown>
             <Link activeClassName='active' to='/Goods'>
               <span className="nav_item">
@@ -60,7 +67,7 @@ class Header extends React.Component {
                 物品
             </span>
             </Link>
-             <Link activeClassName='active' to='/Teacher'>
+            <Link activeClassName='active' to='/Teacher'>
               <span className="nav_item">
                 <img src={teacher} alt="" />
                 教师
@@ -68,13 +75,13 @@ class Header extends React.Component {
             </Link>
           </div>
 
-        {/*search*/}
-        <div className="search">
-        <input type="text" placeholder='search...'/>
-        <div className="sea_icon">
-          <img src={search} alt=""/>
-        </div>
-        </div>
+          {/*search*/}
+          <div className="search">
+            <input type="text" placeholder='search...' />
+            <div className="sea_icon" onClick={this.toSearch.bind(this)}>
+              <img src={search} alt="" />
+            </div>
+          </div>
         </div>
       </div>
     );
