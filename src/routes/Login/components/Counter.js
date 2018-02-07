@@ -24,6 +24,8 @@ class Login extends Component {
     })
   }
 
+  toForget=()=>browserHistory.push({pathname:'/Forget'})
+
   changeValue(value, type) {
     if (type == 1) {
       this.setState({ user: value })
@@ -111,7 +113,7 @@ class Login extends Component {
           </Row>
 
           {/*foreget*/}
-          <div className="forget">
+          <div className="forget" onClick={this.toForget.bind(this)}>
             <p>忘记密码？</p>
           </div>
         </div>

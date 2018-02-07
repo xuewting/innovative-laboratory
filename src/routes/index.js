@@ -18,6 +18,11 @@ import ProjectResult from './ProjectResult'
 import Message from './Message'
 import LabPage from './LabPage'
 import Search from './Seach'
+import NewItem from './NewItem'
+import Personal from './Personal'
+import Forget from './Forget'
+import Information from './Information'
+import Mail from './Mail'
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
@@ -29,10 +34,15 @@ export const createRoutes = (store) => ({
     LoginRoute(store),
     ProjectResult(store),
     Message(store),
+    Mail(store),
     LabPage(store),
+    Forget(store),
+    Information(store),
     Search(store),
     LabCharge(store),
+    Personal(store),
     RegisterRoute(store),
+    NewItem(store),
     TeacherInfo(store),
     GoodInfo(store),
     LabRoute(store),

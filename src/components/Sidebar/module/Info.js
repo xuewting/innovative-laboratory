@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import {message} from 'antd';
+import {Tooltip} from 'antd';
 import '../Side.scss'
 import head from '../../../routes/Login/components/0824ab18972bd40790e0d4b571899e510fb30956.jpg'
 import message from '../img/message.png'
@@ -44,14 +44,25 @@ class Info extends Component {
     })
   }
 
+  toMail=(e)=>{
+    e.preventDefault()
+    browserHistory.push({
+      pathname:'/mail'
+    })
+  }
+
+  toPersonal=()=>browserHistory.push({pathname:'/Personal'})
+
   render() {
     return (
       <div className='info'>
-        <div className="user">
+        <div className="user" onClick={this.toPersonal.bind(this)}>
+        <Tooltip title='点击进入个人中心'>
           <img src={this.state.img?`${BASE_URL}${this.state.img}`:head} alt="" />
+          </Tooltip>
         </div>
         <div className="con_list">
-          <a href="" className="list_item">
+          <a href="" className="list_item" onClick={this.toMail.bind(this)}>
             <img src={message} alt="" className='icon' />
             <span className='txt'>Message</span>
             <img src={arrow} alt="" className='arrow' />

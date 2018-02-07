@@ -6,7 +6,7 @@ class LabCharge extends Component {
 
   toCharge(){
     browserHistory.push({
-      pathname:`/labcharge`
+      pathname:`/labcharge/detail`
     })
   }
   render() {
