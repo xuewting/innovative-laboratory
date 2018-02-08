@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import '../components/LabCharge.scss'
-import { Row, Col } from 'antd'
+import { Row, Col, Radio } from 'antd'
 import ReactDOM from 'react-dom'
+
+const RadioGroup = Radio.Group;
 
 class Detail extends Component {
   constructor(props) {
@@ -11,11 +13,19 @@ class Detail extends Component {
       src: '',
       srcname: '',
       showfile: '',
+      isopen: ''
     }
   }
 
   changeFile() {
     this.refs.file.click()
+  }
+
+  onChange = (e) => {
+    console.log('radio checked', e.target.value);
+    this.setState({
+      isopen: e.target.value,
+    });
   }
 
   //change img
@@ -44,10 +54,10 @@ class Detail extends Component {
   }
 
   componentDidMount() {
-    var input = ReactDOM.findDOMNode(this.refs.showfile)
-    input.setAttribute('webkitdirectory', '')
-    input.setAttribute('directory', '')
-    input.setAttribute('multiple', '')
+    // var input = ReactDOM.findDOMNode(this.refs.showfile)
+    // input.setAttribute('webkitdirectory', '')
+    // input.setAttribute('directory', '')
+    // input.setAttribute('multiple', '')
   }
 
 
@@ -86,47 +96,59 @@ class Detail extends Component {
                   <div className="detail_info">
                     <div className="detail_box">
                       <div className="det_box_in">
-                        <Row><Col span={4}>
+                        <Row><Col span={6}>
                           <span>实验室名称：</span>
-                        </Col><Col span={20}>
+                        </Col><Col span={18}>
                             <span><input type="text" /></span>
                           </Col></Row>
                       </div>
                     </div>
                     <div className="detail_box">
                       <div className="det_box_in">
-                        <Row><Col span={4}>
+                        <Row><Col span={6}>
                           <span>所在位置：</span>
-                        </Col><Col span={20}>
+                        </Col><Col span={18}>
                             <span><input type="text" /></span>
                           </Col></Row>
                       </div>
                     </div>
                     <div className="detail_box">
                       <div className="det_box_in">
-                        <Row><Col span={4}>
+                        <Row><Col span={6}>
                           <span>管理老师：</span>
-                        </Col><Col span={20}>
+                        </Col><Col span={18}>
                             <span><input type="text" /></span>
                           </Col></Row>
                       </div>
                     </div>
                     <div className="detail_box">
                       <div className="det_box_in">
-                        <Row><Col span={4}>
+                        <Row><Col span={6}>
                           <span>院系：</span>
-                        </Col><Col span={20}>
+                        </Col><Col span={18}>
                             <span><input type="text" /></span>
                           </Col></Row>
                       </div>
+                    </div><div className="detail_box">
+                      <div className="det_box_in">
+                        <Row><Col span={6}>
+                          <span>是否开放：</span>
+                        </Col><Col span={18}>
+                            <span> <RadioGroup onChange={this.onChange.bind(this)} value={this.state.isopen}>
+                              <Radio value={1}>是</Radio>
+                              <Radio value={2}>否</Radio>
+                            </RadioGroup></span>
+                          </Col></Row>
+                      </div>
                     </div>
+
                     <div className="detail_box">
                       <div className="det_box_in">
-                        <Row><Col span={4}>
+                        <Row><Col span={6}>
                           <span>展示页面：</span>
-                        </Col><Col span={20}>
-                            <span>上传属于本实验室的展示页面文件夹</span>
-                            <div className="show_but" onClick={this.showFile.bind(this)}>选择要上传的文件夹
+                        </Col><Col span={18}>
+                            <span>上传属于本实验室的展示页面html文件</span>
+                            <div className="show_but" onClick={this.showFile.bind(this)}>选择要上传的文件
                             <input type="file" style={{ display: 'none' }} ref='showfile' onChange={(e) => this.changShowFile(e)} /></div>
                             <span>{this.state.showfile}</span>
                           </Col></Row>

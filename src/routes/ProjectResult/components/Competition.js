@@ -114,7 +114,7 @@ class Competition extends Component {
         }, () => this.searchInput && this.searchInput.focus());
       },
     }, {
-      title: '类别',
+      title: '级别',
       dataIndex: 'class',
       key: 'class',
       width:' 10%',

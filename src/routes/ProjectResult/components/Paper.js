@@ -129,15 +129,10 @@ class Paper extends Component {
       // }],
       // onFilter: (value, record) => record.journal.indexOf(value) == 0,
     }, {
-      title: '指导老师',
-      dataIndex: 'teacher',
-      key: 'teacher',
-      width: '15%',
-    }, {
-      title: '发表人',
+      title: '作者',
       dataIndex: 'report',
       key: 'report',
-      width: '15%',
+      width: '25%',
     }, {
       title: '实验室',
       dataIndex: 'lab',

@@ -11,6 +11,8 @@ import achieve from '../img/成就.png'
 import gonggao from '../img/公告.png'
 import back from '../img/返回.png'
 import Member from '../module/Member'
+import Item from '../module/Item'
+import Honor from '../module/Honor'
 import { browserHistory } from 'react-router'
 
 class LabCharge extends Component {
@@ -46,6 +48,7 @@ class LabCharge extends Component {
     }
   }
 
+//切换管理界面
   changePage(type) {
     console.log(type)
     switch (type) {
@@ -117,7 +120,9 @@ class LabCharge extends Component {
           <Col span={19} style={{ paddingLeft: 5 }}>
             {chargepage == '/labcharge/detail' ?
               <Detail></Detail> : chargepage == '/labcharge/staff' ?
-                <Member></Member> : ''
+                <Member></Member> : chargepage == '/labcharge/item' ?
+                <Item></Item> :chargepage == '/labcharge/honor'?
+                <Honor></Honor>:''
             }
           </Col>
         </Row>

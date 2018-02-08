@@ -205,7 +205,7 @@ class Member extends Component {
               </Modal>
             </Col>
             <Col span={5}>
-              <Button onClick={this.deletPosen.bind(this, record.id)}>删除</Button>
+              <Button onClick={this.deletPosen.bind(this, record.id)} type='danger'>删除</Button>
             </Col>
           </Row>
         </div>
@@ -218,7 +218,7 @@ class Member extends Component {
       <div style={{ paddingTop: 20, paddingRight: 15 }}>
         <div className="member" >
           <div className="mem_head">
-            <h2>实验室成员管理：</h2>
+            <h2>实验室成员管理</h2>
           </div>
           <div className="mem_list">
             <Table columns={columns} dataSource={this.state.data} />
