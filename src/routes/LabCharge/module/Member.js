@@ -216,7 +216,7 @@ class Member extends Component {
 
     return (
       <div style={{ paddingTop: 20, paddingRight: 15 }}>
-        <div className="member" >
+        <div className="membercharge" >
           <div className="mem_head">
             <h2>实验室成员管理</h2>
           </div>

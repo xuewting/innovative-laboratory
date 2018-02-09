@@ -1,0 +1,57 @@
+.goodscharge {
+  width: 100%;
+  background: rgba(12, 81, 109, 0.8);
+  border-radius: 3px;
+  padding: 15px 10px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+
+  .go_hea {
+    padding: 10px 10px;
+    width: 100%;
+    border-bottom: 2px dashed white;
+
+    h2 {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 2px;
+      font-size: 25;
+    }
+  }
+
+  .go_con {
+    width: 100%;
+    padding: 20px 0;
+    margin-bottom: 20px;
+
+    .go_item {
+      width: 100%;
+      padding: 10px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.7);
+      transition: 200ms linear;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      .go_img {
+        padding: 10px;
+        width: 100%;
+        border-radius: 3px;
+      }
+
+      .go_item_con {
+        width: 100%;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  
+  
+}

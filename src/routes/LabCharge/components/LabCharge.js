@@ -5,14 +5,18 @@ import info from '../img/信息.png'
 import item from '../img/item.png'
 import goods from '../img/物品管理.png'
 import teacher from '../img/teacher.png'
-import Detail from '../module/Detail'
 import member from '../img/-_成员.png'
 import achieve from '../img/成就.png'
 import gonggao from '../img/公告.png'
 import back from '../img/返回.png'
+import news from '../img/最新项目.png'
 import Member from '../module/Member'
 import Item from '../module/Item'
 import Honor from '../module/Honor'
+import Detail from '../module/Detail'
+import NewItem from '../module/News'
+import Goods from '../module/Goods'
+
 import { browserHistory } from 'react-router'
 
 class LabCharge extends Component {
@@ -41,6 +45,10 @@ class LabCharge extends Component {
       }, {
         name: '通知公告',
         icon: gonggao
+      },
+      {
+        name: '最新待审核项目',
+        icon: news
       }, {
         name: '返回',
         icon: back
@@ -48,7 +56,7 @@ class LabCharge extends Component {
     }
   }
 
-//切换管理界面
+  //切换管理界面
   changePage(type) {
     console.log(type)
     switch (type) {
@@ -89,6 +97,11 @@ class LabCharge extends Component {
         this.setState({ chargepage: '/labcharge/notice' }); break;
       case 7:
         browserHistory.push({
+          pathname: `/labcharge/news`
+        })
+        this.setState({ chargepage: '/labcharge/news' }); break;
+      case 8:
+        browserHistory.push({
           pathname: `/setting`
         }); break;
     }
@@ -121,8 +134,10 @@ class LabCharge extends Component {
             {chargepage == '/labcharge/detail' ?
               <Detail></Detail> : chargepage == '/labcharge/staff' ?
                 <Member></Member> : chargepage == '/labcharge/item' ?
-                <Item></Item> :chargepage == '/labcharge/honor'?
-                <Honor></Honor>:''
+                  <Item></Item> : chargepage == '/labcharge/honor' ?
+                    <Honor></Honor> : chargepage == '/labcharge/news' ?
+                    <NewItem></NewItem>:chargepage == '/labcharge/goods' ?
+                    <Goods></Goods>:''
             }
           </Col>
         </Row>

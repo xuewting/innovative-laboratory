@@ -105,7 +105,7 @@ class Item extends Component {
   render() {
     return (
       <div style={{ paddingTop: 20, paddingRight: 15 }}>
-        <div className="item">
+        <div className="itemcharge">
           <div className="item_hea">
             <h2>实验室项目管理</h2>
           </div>

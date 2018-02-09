@@ -56,7 +56,7 @@ class Teacher extends Component {
                   <h2 className='title'>简介：</h2>
                   <p className='intr'>{text}</p>
                   <h2 className='title'>荣誉：</h2>
-                  <p className='honor'>
+                  <p className='thelabhonor'>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Nemo incidunt, eaque repudiandae autem cupiditate facere
             sequi quasi quae, doloribus praesentium suscipit. Sed,
@@ -86,7 +86,7 @@ class Teacher extends Component {
                   <h2 className='title'>简介：</h2>
                   <p className='intr'>{text}</p>
                   <h2 className='title'>荣誉：</h2>
-                  <p className='honor'>
+                  <p className='thelabhonor'>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Nemo incidunt, eaque repudiandae autem cupiditate facere
             sequi quasi quae, doloribus praesentium suscipit. Sed,

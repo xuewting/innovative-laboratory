@@ -83,7 +83,7 @@ class Detail extends Component {
                         </Col>
                         <Col span={4}>
                           <div className='change_but'>
-                            <span>编辑图片</span>
+                            <span>上传图片</span>
                           </div>
                         </Col>
                       </Row>
