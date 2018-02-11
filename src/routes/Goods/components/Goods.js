@@ -83,11 +83,18 @@ class Goods extends Component {
           {this.state.list == 0 ?
             <div className="list_item_box" onClick={this.toDetail.bind(this)} style={{ cursor: 'pointer' }}>
               <div className="list_item_con">
+              <Row>
+                <Col span={6}>
+                  <img src="" alt="" style={{width:'90%'}}/>
+                </Col>
+                <Col span={17} offset={1}>
                 <div className="list_item_head">Lorem ipsum dolor sit amet</div>
                 <div className="list_item_subhead">编号：</div>
                 <div className="list_item_subhead">型号：</div>
                 <div className="list_item_subhead">状态：</div>
                 <div className="list_item_subhead">实验室：</div>
+                  </Col>
+                </Row>
                 <div className="list_item_date">
                  
                 </div>
