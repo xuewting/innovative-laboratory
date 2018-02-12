@@ -11,6 +11,7 @@ class Teacher extends Component {
         name: 'lorem',
         zc: '讲师',
         mail: '',
+        id:'1'
       }],
     }
   }
@@ -20,7 +21,7 @@ class Teacher extends Component {
     browserHistory.push({
       pathname:'/labcharge/teacher/edit',
       query:{
-        data:record
+        data:record.id
       }
     })
   }
