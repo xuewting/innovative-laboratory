@@ -1,0 +1,86 @@
+.per_content{
+  width: 100%;
+  .per_but{
+    width: 100%;
+    padding: 10px 0;
+    .per_but_i{
+      border-radius: 3px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid #fff;
+      color: #fff;
+      font-size: 1.4em;
+      font-weight: 500;
+      letter-spacing: 1px;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: 200ms linear;
+      &:hover{
+        background: rgba(0,0,0,0.5);
+      }
+    }
+  }
+  .per_con_intor{
+    padding: 15px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 3px;
+    box-shadow: 1px 2px 3px rgba(0,0,0,0.5);
+    margin-bottom: 15px;
+    h2{
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+      font-size: 1.5em;
+      font-weight: 600;
+    }
+    span{
+      color: #fff;
+      padding: 10px;
+      font-size: 1.2em;
+      
+    }
+  }
+  .per_con_item{
+    padding: 15px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    .per_noitem{
+      text-align: center;
+      font-size: 2em;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+    .per_ii_hea{
+      h2{
+      color: #fff;
+      font-size: 1.5em;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+      font-weight: 600;  
+      }
+      
+    }
+    .per_ii{
+      padding: 10px 0 10px 0 ;
+      border-bottom: 1px dashed #fff;
+      h3{
+        color: #fff;
+        font-size: 1.4em;
+        font-size: 600;
+        margin: 0;
+        padding: 0;
+        padding-bottom: 10px;
+      }
+      span{
+        color: #ddd;
+        font-size: 1em;
+      }
+      .ii_con{
+        color: #fff;
+        font-size: 1.2em;
+      }
+    }
+  }
+}

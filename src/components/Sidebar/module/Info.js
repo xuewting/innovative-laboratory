@@ -47,7 +47,7 @@ class Info extends Component {
   toMail=(e)=>{
     e.preventDefault()
     browserHistory.push({
-      pathname:'/mail'
+      pathname:'/message'
     })
   }
 
