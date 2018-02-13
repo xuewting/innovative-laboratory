@@ -24,6 +24,7 @@ import Forget from './Forget'
 import Information from './Information'
 import Mail from './Mail'
 import TEdit from './LabChargeTEdit'
+import IEdit from "./LabChargeIEdit";
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
@@ -40,6 +41,7 @@ export const createRoutes = (store) => ({
     Forget(store),
     Information(store),
     TEdit(store),
+    IEdit(store),
     Search(store),
     LabCharge(store),
     Personal(store),

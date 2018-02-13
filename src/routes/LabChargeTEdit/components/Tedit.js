@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Side from '../../LabCharge/components/Side'
 import { Row, Col, Button, Upload, Icon, Modal, Input } from 'antd'
 import './Tedit.scss'
-import { browserHistory } from 'react-router';
+import { browserHistory } from 'react-router'
 
 const { TextArea } = Input
 
@@ -29,7 +29,7 @@ class Tedit extends Component {
     console.log(this.state.id)
   }
 
-  //上传图片
+  // 上传图片
   handleCancel = () => this.setState({ previewVisible: false })
 
   handlePreview = (file) => {
@@ -41,7 +41,7 @@ class Tedit extends Component {
 
   handleChange = ({ fileList }) => this.setState({ fileList })
 
-  //边框页面跳转
+  // 边框页面跳转
   chargepage (value) {
     switch (value) {
       case 0:
@@ -99,26 +99,26 @@ class Tedit extends Component {
     }
   }
 
-  //返回
+  // 返回
   goBack = () => history.go(-1)
 
-  //修改值
-  changeValue(type,value){
+  // 修改值
+  changeValue (type, value) {
     switch (type) {
       case 1:
-        this.setState({name:value});break;
+        this.setState({ name:value }); break
       case 2:
-        this.setState({zc:value});break;
+        this.setState({ zc:value }); break
       case 3:
-        this.setState({mail:value});break;
+        this.setState({ mail:value }); break
       case 4:
-        this.setState({honor:value});break;
+        this.setState({ honor:value }); break
       case 5:
-        this.setState({shortintor:value});break;
+        this.setState({ shortintor:value }); break
       case 6:
-        this.setState({intor:value});break;
+        this.setState({ intor:value }); break
       default:
-        break;
+        break
     }
   }
 
@@ -162,7 +162,7 @@ class Tedit extends Component {
                   <Col span={17} offset={1}>
                     <Row style={{ marginBottom: 15 }}>
                       <Col span={4} style={{ fontSize: 16, color: '#fff' }}>姓名 : </Col>
-                      <Col span={15}> <Input value={name} onChange={(e)=>this.changeValue(1,e.target.value)} placeholder='请输入教师姓名' style={{ fontSize:15 }} /></Col>
+                      <Col span={15}> <Input value={name} onChange={(e) => this.changeValue(1, e.target.value)} placeholder='请输入教师姓名' style={{ fontSize:15 }} /></Col>
                     </Row>
                     <Row style={{ marginBottom: 15 }}>
                       <Col span={4} style={{ fontSize: 16, color: '#fff' }}>教师职称 : </Col>
