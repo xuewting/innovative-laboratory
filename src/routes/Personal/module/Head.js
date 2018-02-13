@@ -19,7 +19,7 @@ class PerHead extends Component {
             <img src={src ? src : Default} alt='' />
           </div>
           <div className='per_detail'>姓名：</div>
-          <div className='per_detail'>学号：</div>
+          <div className='per_detail'>学号(教工号)：</div>
           <div className='per_detail'>性别：</div>
           <div className='per_detail'>联系电话：</div>
           <div className='per_detail'>email：</div>
