@@ -15,7 +15,6 @@ class TeacherInfo extends Component {
             </div>
             <div className="good_info_con">
               <h2>good name</h2>
-              <span className="info_con">型号：</span>
               <span className="info_con">职称：</span>
               <span className="info_con">邮箱：</span>
               <span className="info_con">所属实验室：</span>

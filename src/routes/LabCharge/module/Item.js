@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Button, Pagination, Popconfirm, message, Modal, Input, DatePicker } from 'antd'
 import '../css/Item.scss'
+import { browserHistory } from 'react-router';
 
 class Item extends Component {
   constructor(props) {
@@ -8,18 +9,21 @@ class Item extends Component {
     this.state = {
       list: [{
         title: 'Lorem ipsum dolor sit amet',
+        id: '1',
         time: '18-1-1',
         origin: '麦兜',
         teacher: '可达鸭',
         endTime: '18-12-12'
       }, {
         title: 'Lorem ipsum dolor sit amet',
+        id: '1',
         time: '18-1-1',
         origin: '麦兜',
         teacher: '可达鸭',
         endTime: '18-12-12'
       }, {
         title: 'Lorem ipsum dolor sit amet',
+        id: '1',
         time: '18-1-1',
         origin: '麦兜',
         teacher: '可达鸭',
@@ -32,17 +36,17 @@ class Item extends Component {
       originXh: '',
       teacher: '',
       endTime: '',
-      date:''
+      date: ''
     }
   }
 
-  
+
   componentWillMount() {
     let newDate = new Date()
-    this.setState({date:newDate.toLocaleDateString()})
+    this.setState({ date: newDate.toLocaleDateString() })
     console.log(newDate.toLocaleDateString())
   }
-  
+
   //添加新项目
   showModal = () => {
     this.setState({
@@ -51,7 +55,7 @@ class Item extends Component {
   }
   //确认添加
   handleOk = (e) => {
-    
+
     console.log(e);
     this.setState({
       visible: false,
@@ -71,22 +75,22 @@ class Item extends Component {
       current: page,
     });
   }
- //确认结束项目
+  //确认结束项目
   confirmEnd = (e) => {
     console.log(e);
     message.success('Click on Yes');
   }
-// 确认删除项目
+  // 确认删除项目
   confirmDelete = (e) => {
     console.log(e);
     message.success('Click on Yes');
   }
-//取消
+  //取消
   cancel = (e) => {
     console.log(e);
     message.error('Click on No');
   }
-//新项目输入
+  //新项目输入
   changeValue = (type, value) => {
     switch (type) {
       case 1: this.setState({ title: value }); break;
@@ -96,10 +100,20 @@ class Item extends Component {
 
     }
   }
-//新项目预期结束时间
+  //新项目预期结束时间
   changeTime = (date, dateString) => {
     console.log(date, dateString)
     this.setState({ endTime: dateString })
+  }
+
+  //编辑页面
+  toEdit(num) {
+    browserHistory.push({
+      pathname: '/labcharge/item/edit',
+      qurey: {
+        id:num
+      }
+    })
   }
 
   render() {
@@ -139,13 +153,16 @@ class Item extends Component {
                           </Row>
                         </div>
                         <Row>
-                          <Col span={14}></Col>
-                          <Col span={5}>
+                          <Col span={12}></Col>
+                          <Col span={4}>
+                            <Button onClick={this.toEdit.bind(this,item.id)}>修改</Button>
+                          </Col>
+                          <Col span={4}>
                             <Popconfirm title="确定此项目结束吗?结束后成员将不能再提交或修改项目进度" onConfirm={this.confirmEnd.bind(this)} onCancel={this.cancel.bind(this)} okText="Yes" cancelText="No">
                               <Button>结束项目</Button>
                             </Popconfirm>
                           </Col>
-                          <Col span={5}>
+                          <Col span={4}>
                             <Popconfirm title="确定删除此项目结束吗?删除后将无法找回" onConfirm={this.confirmDelete.bind(this)} onCancel={this.cancel.bind(this)} okText="Yes" cancelText="No">
                               <Button type="danger">删除</Button>
                             </Popconfirm>
