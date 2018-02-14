@@ -1,0 +1,119 @@
+.newitem{
+  width:100%;
+  padding:10px;
+  border-radius: 3px;
+  background: rgba(0,0,0,0.3);
+  .new_head{
+    width: 100%;
+    padding: 10px;
+    h2{
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 1px;
+      font-size: 2em;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+      margin: 0;
+      padding: 0;
+      padding-bottom: 15px;
+      border-bottom: 2px dashed #fff;
+    }        
+  }
+  .new_con{
+    width: 100%;
+    padding: 10px;
+    span {
+      color: #fff;
+      font-size: 1.2em;
+      letter-spacing: 1px;
+    }
+   
+    .new_title{
+      width: 100%;
+      margin-bottom: 20px;  
+       input {
+         width: 40%;
+         padding: 10px;
+         line-height: 1.2em;
+         border: 1px solid #fff;
+         border-radius: 3px;
+         background: rgba(0, 0, 0, 0.3);
+         color: #fff;
+         font-size: 1.1em;
+         &:focus {
+           outline: none;
+         }
+       }
+
+    }
+    .new_origin{
+      padding: 10px 0;
+      margin-bottom: 20px;
+         input {
+           width: 70%;
+           padding: 10px;
+           line-height: 1.2em;
+           border: 1px solid #fff;
+           border-radius: 3px;
+           background: rgba(0, 0, 0, 0.3);
+           color: #fff;
+           font-size: 1.1em;
+           &:focus {
+             outline: none;
+           }
+
+      }
+    }
+    .new_detail{
+      @extend .new_origin;
+    }
+    .new_mem{
+      @extend .new_origin;      
+    }     
+    .new_but{
+      padding: 10px;
+      vertical-align: center;
+      .ant-btn{
+        height: 100%;
+        padding: 10px;
+      }
+    }
+    .mem_list{
+      width: 100%;
+      margin-bottom: 10px;      
+    }
+    .end_time{
+      margin-bottom: 20px;
+      input{
+        background: rgba(0, 0, 0, 0.3);
+        padding: 10px;
+        color: white;
+      }
+    }
+    .new_intor{
+      width: 50%;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      .txt{
+        background: rgba(0, 0, 0, 0.3);
+        color: #fff;
+        font-size: 1em;
+      }
+    }
+    .new_file{
+      input {
+        width: 35%;
+        padding: 10px;
+        line-height: 1.2em;
+        border: 1px solid #fff;
+        border-radius: 3px;
+        background: rgba(0, 0, 0, 0.3);
+        color: #fff;
+        font-size: 1.1em;
+        &:focus {
+          outline: none;
+        }
+      }
+
+    }
+  }
+}
