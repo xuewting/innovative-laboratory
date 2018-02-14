@@ -40,3 +40,9 @@
 .ant-collapse>.ant-collapse-item:not(.ant-collapse-item-disabled)>.ant-collapse-header:active{
   background: rgba(0,0,0,0.45);
 }
+.pagination{
+    display:flex;/*Flex布局*/
+    display: -webkit-flex; /* Safari */
+    align-items:center;/*指定垂直居中*/
+    align-self: flex-end;
+}
