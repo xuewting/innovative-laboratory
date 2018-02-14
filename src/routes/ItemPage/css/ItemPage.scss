@@ -180,12 +180,11 @@
   padding: 10px;
   .list_item_box {
     float: left;
-    width: 33.333333%;
     padding: 0 10px;
     margin-bottom: 10px;
     .list_item_con {
       float: left;
-      widows: 100%;
+      width: 100%;
       position: relative;
       border-radius: 3px;
       background: rgba(0, 0, 0, 0.2);
@@ -217,6 +216,11 @@
         color: white;
         font-size: 11px;
         vertical-align: middle;
+        img{
+          display: inline-block;
+          margin-left: 9px;
+          margin-right: 7px;
+        }
       }
     }
   }

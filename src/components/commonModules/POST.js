@@ -1,9 +1,9 @@
 import Fetch from './Fetch.js'
-export const BASE_URL ='http://192.168.1.110:3000'
-// const BASE_URL1 = 'http://112.74.203.143'
-const BASE_URL1 =BASE_URL
+export const BASE_URL = 'http://localhost:3001'
+// const BASE_URL1 = 'http://119.29.150.141'
+const BASE_URL1 = BASE_URL
 const BASE_URL2 = BASE_URL
-// 112.74.203.143
+// 服务器IP：119.29.150.141
 export var POST = (Url, data = {}, trueF, errorF = e => { }, timeout = 5000) => {
   Fetch(
     fetch(BASE_URL1 + Url, {
@@ -43,7 +43,7 @@ export var POST1 = (
       method: 'POST',
       credentials: 'include',
       headers: {
-         'Content-Type': 'application/form-data;charset=UTF-8'
+        'Content-Type': 'application/form-data;charset=UTF-8'
       },
       body: data
     })
