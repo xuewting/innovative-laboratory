@@ -24,7 +24,8 @@ class Tedit extends Component {
       mail:'',
       honor:'',
       shortintor:'',
-      intor:''
+      intor:'',
+      tid:''
     }
     console.log(this.state.id)
   }
@@ -117,6 +118,8 @@ class Tedit extends Component {
         this.setState({ shortintor:value }); break
       case 6:
         this.setState({ intor:value }); break
+      case 7:
+        this.setState({ tid:value }); break
       default:
         break
     }
@@ -167,6 +170,10 @@ class Tedit extends Component {
                     <Row style={{ marginBottom: 15 }}>
                       <Col span={4} style={{ fontSize: 16, color: '#fff' }}>教师职称 : </Col>
                       <Col span={15}> <Input value={zc} onChange={(e) => this.changeValue(2, e.target.value)} placeholder='请输入教师的职称' style={{ fontSize:15 }} /></Col>
+                    </Row>
+                    <Row style={{ marginBottom: 15 }}>
+                      <Col span={4} style={{ fontSize: 16, color: '#fff' }}>教工号 : </Col>
+                      <Col span={15}> <Input value={zc} onChange={(e) => this.changeValue(7, e.target.value)} placeholder='请输入教师的教工号' style={{ fontSize: 15 }} /></Col>
                     </Row>
                     <Row style={{ marginBottom: 15 }}>
                       <Col span={4} style={{ fontSize: 16, color: '#fff' }}>邮箱 : </Col>
