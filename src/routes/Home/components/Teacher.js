@@ -3,7 +3,7 @@ import './HomeView.scss'
 import img1 from '../assets/wallhaven-113384.png'
 import img2 from '../assets/wallhaven-590356.jpg'
 import img3 from '../assets/wallhaven-590711.jpg'
-import FreeScrollBar from 'react-free-scrollbar';
+import FreeScrollBar from 'react-free-scrollbar'
 
 class Teacher extends Component {
   constructor(props) {

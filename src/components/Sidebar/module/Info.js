@@ -40,14 +40,14 @@ class Info extends Component {
   toSet (e) {
     e.preventDefault()
     browserHistory.push({
-      pathname:'/setting'
+      pathname:'/personal'
     })
   }
 
   toMail=(e) => {
     e.preventDefault()
     browserHistory.push({
-      pathname:'/message'
+      pathname:'/mail'
     })
   }
 
@@ -64,12 +64,12 @@ class Info extends Component {
         <div className='con_list'>
           <a href='' className='list_item' onClick={this.toMail.bind(this)}>
             <img src={message} alt='' className='icon' />
-            <span className='txt'>Message</span>
+            <span className='txt'>消息</span>
             <img src={arrow} alt='' className='arrow' />
           </a>
           <a href='' className='list_item' onClick={(e) => this.toSet(e)}>
             <img src={setting} alt='' className='icon' />
-            <span className='txt'>Setting</span>
+            <span className='txt'>个人中心</span>
             <img src={arrow} alt='' className='arrow' />
           </a>
           {/* <a href="" className="list_item">
