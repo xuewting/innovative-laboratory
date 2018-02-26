@@ -59,10 +59,10 @@ webpackConfig.plugins = [
       collapseWhitespace: true
     }
   }),
-   new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
-    })
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery'
+  })
 ]
 
 if (__DEV__) {

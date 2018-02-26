@@ -19,7 +19,7 @@ class Forget extends Component {
   render () {
     return (
       <div className='forget'>
-        {this.state.success == 0 ? <Reset />
+        {this.state.success == 1 ? <Reset />
       :<div>
         <div className='for_hea'>
           <h2>忘 记 密 码</h2>

@@ -124,6 +124,15 @@ class Detail extends Component {
                     <div className="detail_box">
                       <div className="det_box_in">
                         <Row><Col span={6}>
+                          <span>教工号：</span>
+                        </Col><Col span={18}>
+                            <span><input type="text" /></span>
+                          </Col></Row>
+                      </div>
+                    </div>
+                    <div className="detail_box">
+                      <div className="det_box_in">
+                        <Row><Col span={6}>
                           <span>院系：</span>
                         </Col><Col span={18}>
                             <span><input type="text" /></span>

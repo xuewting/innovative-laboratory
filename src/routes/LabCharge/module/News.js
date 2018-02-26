@@ -4,7 +4,7 @@ class NewItem extends Component {
   render() {
     return (
       <div>
-        
+          
       </div>
     );
   }

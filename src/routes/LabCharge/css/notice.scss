@@ -1,0 +1,92 @@
+.noticecharge{
+  width: 100%;
+  background: rgba(12, 81, 109, 0.8);
+  border-radius: 3px;
+  padding: 15px 10px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+  .notice_head{
+    padding: 10px 10px;
+    width: 100%;
+    border-bottom: 2px dashed white;
+
+    h2 {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 2px;
+      font-size: 25;
+    }
+  }
+  .notice_con{
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    color: #fff;
+        font-size: 16px;
+    .notice_to{
+      width: 100%;
+      padding: 10px 0;
+      margin-bottom: 20px;
+      
+      span{
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      input{
+        border-radius: 3px;
+        padding: 5px;
+        font-size: 15px;
+        color: #fff;
+        background: transparent;
+        border: 1px solid #fff;
+        &:focus{
+          outline: none;
+        }
+      }
+    }
+  }
+  .notice_contain{
+    padding: 10px 0;
+    width: 100%;
+    .cantain_inp{
+      width: 70%;
+      min-width: 70%;
+      max-width: 70%;
+      max-height: 300px;
+      border: 1px solid #fff;
+      border-radius: 3px;
+      background: transparent;
+      font-size: 15px;
+      color: #fff;
+      padding: 10px;
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+  .notice_commit{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    .commit_btu{
+      width: 30%;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 3px;
+      background: transparent;
+      border: 1px solid #fff;
+      font-size: 17px;
+      padding: 10px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: 200ms linear;
+      &:hover{
+        background: rgba(255, 255, 255, 0.2)
+      }
+    }
+  }
+}

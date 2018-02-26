@@ -9,6 +9,7 @@ import NewItem from '../module/News'
 import Goods from '../module/Goods'
 import Teacher from '../module/Teacher'
 import Side from './Side'
+import Notice from '../module/Notice'
 
 import { browserHistory } from 'react-router'
 
@@ -27,50 +28,50 @@ class LabCharge extends Component {
         browserHistory.push({
           pathname: `/labcharge/detail`
         })
-        this.setState({ chargepage: '/labcharge/detail' }) 
-        break;
+        this.setState({ chargepage: '/labcharge/detail' })
+        break
       case 1:
         browserHistory.push({
           pathname: `/labcharge/staff`
         })
-        this.setState({ chargepage: '/labcharge/staff' }) 
-        break;
+        this.setState({ chargepage: '/labcharge/staff' })
+        break
       case 2:
         browserHistory.push({
           pathname: `/labcharge/item`
         })
         this.setState({ chargepage: '/labcharge/item' })
-         break;
+        break
       case 3:
         browserHistory.push({
           pathname: `/labcharge/honor`
         })
-        this.setState({ chargepage: '/labcharge/honor' }) 
-        break;
+        this.setState({ chargepage: '/labcharge/honor' })
+        break
       case 4:
         browserHistory.push({
           pathname: `/labcharge/goods`
         })
         this.setState({ chargepage: '/labcharge/goods' })
-         break;
+        break
       case 5:
         browserHistory.push({
           pathname: `/labcharge/teacher`
         })
-        this.setState({ chargepage: '/labcharge/teacher' }) 
-        break;
+        this.setState({ chargepage: '/labcharge/teacher' })
+        break
       case 6:
         browserHistory.push({
           pathname: `/labcharge/notice`
         })
-        this.setState({ chargepage: '/labcharge/notice' }) 
-        break;
+        this.setState({ chargepage: '/labcharge/notice' })
+        break
       case 7:
         browserHistory.push({
           pathname: `/labcharge/news`
         })
         this.setState({ chargepage: '/labcharge/news' })
-         break;
+        break
       case 8:
         browserHistory.push({
           pathname: `/setting`
@@ -94,7 +95,8 @@ class LabCharge extends Component {
                     ? <Honor /> : chargepage == '/labcharge/news'
                     ? <NewItem /> : chargepage == '/labcharge/goods'
                     ? <Goods /> : chargepage == '/labcharge/teacher'
-                    ? <Teacher /> : ''
+                          ? <Teacher /> : chargepage == '/labcharge/notice'
+                            ? <Notice /> : ''
             }
           </Col>
         </Row>
