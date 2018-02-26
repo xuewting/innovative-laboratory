@@ -1,0 +1,66 @@
+.newitem{
+   width: 100%;
+   min-height: 520px;
+  background: rgba(12, 81, 109, 0.8);
+  border-radius: 3px;
+  padding: 15px 10px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+  .newitem_head{
+     padding: 10px 10px;
+    width: 100%;
+    border-bottom: 2px dashed white;
+    margin-bottom: 20px;
+    h2 {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 2px;
+      font-size: 25;
+    }
+  }
+  .newitem_con{
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    .newitem_list{
+      width: 90%;
+      margin: 0 auto;
+    }
+    .newitem_box{
+      width: 100%;
+      padding: 7px 5px;
+      background: rgba(255,255,255,0.1);
+      transition: 200ms linear;
+      cursor: pointer;
+      &:hover{
+        background: rgba(255,255,255,0.3);
+      }
+      &:nth-child(2n+1){
+        background: rgba(255,255,255,0.2);
+        &:hover{
+        background: rgba(255,255,255,0.3);
+      }
+      }
+      span{
+        color: #fff;
+        font-size: 17px;
+        font-weight: bold;        
+      }
+      .newitem_from{
+        font-weight: 500;
+        font-size: 13px;
+        color: #ddd;
+      }
+      .newitem_time{
+        font-weight: 500;
+        font-size: 14px;
+      }
+    }
+  }
+  .changepage{
+    text-align: center;
+  }
+}
