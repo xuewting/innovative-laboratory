@@ -137,7 +137,7 @@ class Tedit extends Component {
       <div>
         <Row>
           <Col span={5} style={{ paddingRight: 5 }}>
-            <Side chargepage={this.chargepage()} />
+            <Side chargepage={this.chargepage.bind(this)} />
           </Col>
           <Col span={19} style={{ paddingLeft: 5, paddingTop: 20, paddingRight: 15 }}>
             <div className='ed_tea'>
