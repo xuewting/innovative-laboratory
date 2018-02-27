@@ -7,7 +7,7 @@ import up from '../img/升序 (1).png'
 import down from '../img/降序.png'
 import time from '../img/im-time.png'
 import { browserHistory } from 'React-router'
-
+import {POST,BASE_URL} from '../../../components/commonModules/POST'
 class Goods extends Component {
   constructor () {
     super()
@@ -33,7 +33,10 @@ class Goods extends Component {
       pathname: `/goodinfo`
     })
   }
-
+  componentDidMount() {
+   
+  }
+  
   render () {
     return (
       <div>

@@ -156,23 +156,31 @@ class ItemPage extends Component {
 
             </Row>
             : <div className='style_list' onClick={this.toDetail.bind(this)} style={{ cursor: 'pointer' }}>
-              <div className='task_list'>
-                <div className='task_con'>
-                  <div className='task_head'>Lorem ipsum dolor sit amet</div>
-                  <div className='task_date'>
-                    <Tooltip title='开始时间'>
-                      <img src={rili} alt='' />
-                      &nbsp;15 oct 2013 &nbsp;
-            </Tooltip>
-                    <Tooltip title='结束时间'>
-                      <img src={time} alt='' />
-                      &nbsp;oct 2014 &nbsp;
-            </Tooltip>
-                  </div>
-                </div>
-
-              </div>
-            </div>}
+              {this.state.p_list.map((item, i) => {
+                return (
+                  <div className='task_list'>
+                    <div className='task_con'>
+                      <div className='task_head'>{item.name}</div>
+                      <div >发起人：{item.user.name}</div>
+                      <div className='task_date'>
+                        <Tooltip title='开始时间'>
+                          <img src={rili} alt='' />
+                          {item.applyTime}
+                        </Tooltip>
+                        <Tooltip title='预期结束时间'>
+                          <img src={time} alt='' />
+                          {item.expectTime}
+                        </Tooltip>
+                        {item.actualTime ? <Tooltip title='实际结束时间'>
+                          <img src={time} alt='' />
+                          {item.actualTime}
+                        </Tooltip> : ''}
+                      </div>
+                    </div>
+                  </div>)
+              })}
+            </div>
+            }
         </div>
       </div>
     )
