@@ -1,0 +1,27 @@
+.lablist_root{
+  width: 100%;
+  padding: 15px 10px;
+  border-radius: 3px;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.5);
+  background: rgba(12, 81, 109, 0.8);
+  .lablist_root_nav{
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 2px dashed #fff;
+    .lablist_nav_item{
+      width: 100%;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      border-right: 1px solid #fff;
+      transition: 200ms;
+      &:hover{
+        background: rgba(255,255,255,0.3);
+      }
+      h2{
+        color: #fff;
+        font-weight: bold;
+      }
+    }
+  }
+}
