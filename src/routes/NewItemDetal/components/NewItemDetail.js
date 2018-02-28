@@ -176,13 +176,13 @@ class NewItemDetail extends Component {
                 </Col>
                 <Col span={8} style={{paddingLeft:5,paddingRight:5}}>
                   <div className="new_item_btu">
-                    修&nbsp;&nbsp;改&nbsp;&nbsp;意&nbsp;&nbsp;见
+                    拒&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;绝
                   </div>
                   
                 </Col>
                 <Col span={8} style={{paddingLeft:5}}>
-                  <div className="new_item_btu">
-                    拒&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;绝
+                  <div className="new_item_btu" onClick={this.goBack.bind(this)}>
+                    返&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回
                   </div>                  
                 </Col>
               </Row>

@@ -1,0 +1,16 @@
+.sign_in{
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #fff;
+  margin-top: 10px;
+  position: relative;
+  cursor: pointer;
+  span{
+    color: #fff;
+    font-size: 1.3em;
+    text-align: center;
+    width: 100%;
+    display: block;  
+  }
+}
