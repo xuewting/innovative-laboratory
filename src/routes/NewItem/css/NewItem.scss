@@ -21,15 +21,16 @@
   .new_con{
     width: 100%;
     padding: 10px;
-    span {
+    
+    .new_title{
+      width: 100%;
+      margin-bottom: 20px;  
+      span {
       color: #fff;
       font-size: 1.2em;
       letter-spacing: 1px;
     }
    
-    .new_title{
-      width: 100%;
-      margin-bottom: 20px;  
        input {
          width: 40%;
          padding: 10px;
@@ -48,6 +49,12 @@
     .new_origin{
       padding: 10px 0;
       margin-bottom: 20px;
+      span {
+      color: #fff;
+      font-size: 1.2em;
+      letter-spacing: 1px;
+    }
+   
          input {
            width: 70%;
            padding: 10px;
@@ -88,6 +95,12 @@
         padding: 10px;
         color: white;
       }
+      span {
+      color: #fff;
+      font-size: 1.2em;
+      letter-spacing: 1px;
+    }
+   
     }
     .new_intor{
       width: 50%;
@@ -98,7 +111,19 @@
         color: #fff;
         font-size: 1em;
       }
+      span {
+      color: #fff;
+      font-size: 1.2em;
+      letter-spacing: 1px;
     }
+   
+    }
+    .new_intor_f{
+     width: 50%;
+      margin-top: 10px;
+      margin-bottom: 20px;
+   }
+    
     .new_file{
       input {
         width: 35%;
@@ -113,7 +138,23 @@
           outline: none;
         }
       }
-
+      span {
+      color: #fff;
+      font-size: 1.2em;
+      letter-spacing: 1px;
+    }   
     }
   }
+}
+
+.rdw-editor-wrapper{
+  background: #fff;
+  // width: 50%;
+  color: #333;
+}
+
+.rdw-editor-main{
+  min-height: 200px;
+  max-height: 200px;
+  padding: 10px;
 }

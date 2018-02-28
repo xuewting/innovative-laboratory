@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../css/NewItem.scss'
 import { Row, Col, Button, Tooltip, Input, DatePicker, message } from 'antd'
+import Plan from './Plan'
 
 const { TextArea } = Input
 class NewItem extends Component {
@@ -38,20 +39,20 @@ class NewItem extends Component {
       message.error('成员姓名不能为空')
     } else if (!this.state.memXh) {
       message.error('成员学号不能为空')
-    }else {
+    } else {
       let value = { name: this.state.memName, xh: this.state.memXh }
       this.state.list.push(value)
-      this.setState({list:this.state.list,
+      this.setState({ list:this.state.list,
         memName:'',
-        memXh:''});      
+        memXh:'' })      
     }
   }
 
-  //删除成员
-  delete(value){
+  // 删除成员
+  delete (value) {
     var list = Array.prototype.slice.call(this.state.list)
-    list.splice(value,1);
-    this.setState({list});
+    list.splice(value, 1)
+    this.setState({ list })
   }
 
   render () {
@@ -110,7 +111,7 @@ class NewItem extends Component {
                   <Col span={8}><span>{item.xh}</span></Col>
                   <Col span={4} style={{ color: '#fff', fontSize: '1.1em', cursor: 'pointer' }}>
                     <Tooltip title='删除'>
-                      <i className='fa fa-trash' onClick={this.delete.bind(this,i)}/>
+                      <i className='fa fa-trash' onClick={this.delete.bind(this, i)} />
                     </Tooltip>
                   </Col>
                 </Row>
@@ -131,17 +132,19 @@ class NewItem extends Component {
             <TextArea autosize={{ minRows: 10, maxRows: 10 }} placeholder='请输入需要的设备' className='txt' />
             <span style={{ fontSize: '0.9em' }}>请输入需要的设备</span>
           </div>
-          <div className='new_intor'>
-            <span>项目计划：</span>
-            <TextArea autosize={{ minRows: 15, maxRows: 15 }} placeholder='请输入对项目的策划' className='txt' />
-            <span style={{ fontSize: '0.9em' }}>请输入对项目的策划</span>
+          <div className='new_intor_f'>
+            <span style={{ color:'#FFF', fontSize:1.2 + 'em' }}>项目计划：</span>
+            <Plan />
+            <span style={{ color: '#FFF', fontSize: '0.9em' }}>请输入对项目的策划</span>
           </div>
           <div className='new_file'>
             <span>项目详情文件长传：</span>
             <input type='text' placeholder='点击选择上传的文件（限word）' value={this.state.file} onClick={this.uploadfile.bind(this)} />
             <input type='file' style={{ display: 'none' }} accept='application/msword' onChange={(e) => this.changeFile(e.target.value)} ref='file' />
           </div>
+
         </div>
+
       </div>
     )
   }
