@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Table, Button, Row, Col, Modal, Icon, Input, Popconfirm } from 'antd'
+import { Table, Button, Row, Col, Modal, Icon, Input, Popconfirm, Radio } from 'antd'
 import '../css/lab.scss'
 import { browserHistory } from 'react-router'
+
+const RadioGroup = Radio.Group
 
 class Lab extends Component {
   constructor (props) {
@@ -21,8 +23,9 @@ class Lab extends Component {
       filterDropdownVisible: false,
       searchText: '',
       filtered: false,
-      visible:false
-
+      visible:false,
+      visible2:false,
+      isopen:''
     }
   }
 
@@ -55,6 +58,16 @@ class Lab extends Component {
     })
   }
 
+  // 进入实验室管理界面
+  toLabCharge=() => browserHistory.push({
+    pathname:'/labcharge/detail'
+  })
+
+  // 显示管理老师编辑模块
+  showModal=(value) => this.setState({
+    visible: !this.state.visible
+    // defaultValue:value
+  });
   handleOk = (e) => {
     console.log(e)
     this.setState({
@@ -68,16 +81,25 @@ class Lab extends Component {
     })
   }
 
-  // 进入实验室管理界面
-  toLabCharrge=() => browserHistory.push({
-    pathname:'/labcharge/detail'
-  })
-
-  // 显示管理老师编辑模块
-  showModal=(value) => this.setState({
-    visible: !this.state.visible
-    // defaultValue:value
+  // 显示添加实验室模块
+  showModal2 = () => this.setState({
+    visible2: !this.state.visible2
   });
+  handleOk2 = (e) => {
+  console.log(e)
+  this.setState({
+    visible2: false
+  })
+}
+  handleCancel2 = (e) => {
+  console.log(e)
+  this.setState({
+    visible2: false
+  })
+}
+
+// 开放状态
+  isOpen=(value) => this.setState({ isopen:value })
 
   // 删除实验室
   confirm (e) {
@@ -121,7 +143,7 @@ class Lab extends Component {
       render:(text, record, index) => {
         return (
           <div>
-            {text == true ? '是':'否'}
+            {text == true ? '是' : '否'}
           </div>
         )
       }
@@ -131,19 +153,19 @@ class Lab extends Component {
       key: 'position',
       width: '10%'
     }, {
-      title: '管理老师',
+      title: '负责老师',
       dataIndex: 'teacher',
       key: 'teacher',
       width: '40%',
       render:(text, record, index) => {
-          return (
+        return (
             <Row>
               <Col span={8}>{text}</Col>
               <Col span={5} style={{ paddingRight:5 }}>
-                <Button style={{ width: '100%' }} onClick={(e) => this.showModal(record)}>编辑管理老师</Button>
+                <Button style={{ width: '100%' }} onClick={(e) => this.showModal(record)}>编辑负责老师</Button>
               </Col>
               <Col span={4} style={{ paddingRight:5, paddingLeft:5 }}>
-                <Button style={{ width:'100%' }} onClick={(e) => this.toLabCharrge()}>进入编辑</Button>
+                <Button style={{ width:'100%' }} onClick={(e) => this.toLabCharge()}>进入编辑</Button>
               </Col>
               <Col span={4} style={{ paddingLeft:5 }}>
                 <Popconfirm title='确认删除？' onConfirm={this.confirm} onCancel={this.cancel} okText='Yes' cancelText='No'>
@@ -152,12 +174,12 @@ class Lab extends Component {
               </Col>
             </Row>
           )
-        }
+      }
     }]
     return (
       <div style={{ width:'90%', margin:'0 auto', marginTop:20 }}>
         <Table columns={columns} dataSource={this.state.list} />
-        <Button style={{ marginTop:20 }} type='primary' onClick={(e) => this.showModal('')}>
+        <Button style={{ marginTop:20 }} type='primary' onClick={(e) => this.showModal2()}>
           <i className='fa fa-plus' /> 添加实验室
         </Button>
         <Modal
@@ -175,6 +197,56 @@ class Lab extends Component {
             </Col>
           </Row>
           <Row>
+            <Col span={4}>
+              <span>教工号：</span>
+            </Col>
+            <Col span={15}>
+              <Input />
+            </Col>
+          </Row>
+        </Modal>
+        <Modal
+          title='添加实验室'
+          visible={this.state.visible2}
+          onOk={this.handleOk2.bind(this)}
+          onCancel={this.handleCancel2.bind(this)}
+          >
+          <Row style={{ marginBottom:15 }}>
+            <Col span={4}>
+              <span>实验室名称：</span>
+            </Col>
+            <Col span={15}>
+              <Input />
+            </Col>
+          </Row>
+          <Row style={{ marginBottom:15 }}>
+            <Col span={4}>
+              <span>所在位置：</span>
+            </Col>
+            <Col span={15}>
+              <Input />
+            </Col>
+          </Row>
+          <Row style={{ marginBottom:15 }}>
+            <Col span={4}>
+              <span>是否开放：</span>
+            </Col>
+            <Col span={15}>
+              <RadioGroup value={this.state.isopen} onChange={(e) => this.isOpen(e.target.value)}>
+                <Radio value>是</Radio>
+                <Radio value={false}>否</Radio>
+              </RadioGroup>
+            </Col>
+          </Row>
+          <Row style={{ marginBottom:15 }}>
+            <Col span={4}>
+              <span>管理老师：</span>
+            </Col>
+            <Col span={15}>
+              <Input />
+            </Col>
+          </Row>
+          <Row style={{ marginBottom:15 }}>
             <Col span={4}>
               <span>教工号：</span>
             </Col>
