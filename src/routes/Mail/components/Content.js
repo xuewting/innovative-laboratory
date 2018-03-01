@@ -2,13 +2,17 @@ import React, { Component } from 'react'
 import { Row, Col, Button } from 'antd'
 import pan from '../img/笔.png'
 import '../css/content.scss'
-import { browserHistory } from 'react-router';
+import { browserHistory } from 'react-router'
+import './Application'
+import Application from './Application'
 
 class Content extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      con:''
+      con:{
+        type:1
+      }
     }
   }
 
@@ -20,7 +24,7 @@ class Content extends Component {
     return true
   }
 
-  toCheck=()=>browserHistory.push({
+  toCheck=() => browserHistory.push({
     pathname:'/labcharge/news'
   })
 
@@ -28,7 +32,8 @@ class Content extends Component {
     const { con } = this.state
     return (
       <div>
-        {!con ? ''
+        {con ? con.type == 1 ?
+          <Application />
       : <div className='mail_content'>
         <div className='mail_con_head'>
           <Row>
@@ -46,14 +51,7 @@ class Content extends Component {
         <div className='mail_con_con'>
           {con.con}
         </div>
-        {con.type==1?
-          <div className="mail_but">
-            <Button type='primary' style={{fontWeight:'bold',fontSize:'1em',lineHeight:'1.7em',height:'2.5em'}} onClick={this.toCheck.bind(this)}>
-            前往查看详情
-            </Button>            
-          </div>
-        :''}
-      </div>
+      </div>:''
   }
       </div>
     )

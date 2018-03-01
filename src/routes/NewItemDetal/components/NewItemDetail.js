@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Side from '../../LabCharge/components/Side'
 import { browserHistory } from 'react-router'
-import { Row, Col } from 'antd'
+import { Row, Col, Modal, Button, Input } from 'antd'
 import '../css/newitemdetail.scss'
 import draftToHtml from 'draftjs-to-html'
 import { convertToRaw } from 'draft-js'
@@ -14,10 +14,28 @@ class NewItemDetail extends Component {
         name:'lorem',
         id:123445
       }],
-      value: '<p>Hey this <strong>editor</strong> rocks 😀</p>' 
+      value: '<p>Hey this <strong>editor</strong> rocks </p>' ,
+      visible: false
     }
   }
-
+//确认同意模块
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  }
+  handleOk = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  }
+  handleCancel = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  }
   
   componentDidMount() {
     var { value } = this.state
@@ -170,10 +188,29 @@ class NewItemDetail extends Component {
 
               <Row className="new_item_but">
                 <Col span={8} style={{paddingRight:5}}>
-                  <div className="new_item_btu">
+                  <div className="new_item_btu" onClick={(e)=>this.showModal()}>
                     通&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;过
                   </div>
                 </Col>
+                <Modal
+                  title='请确认指导老师信息'
+                  visible={this.state.visible}
+                  onOk={this.handleOk.bind(this)}
+                  onCancel={this.handleCancel.bind(this)}
+                >
+                 <Row style={{marginBottom:15}}>
+                  <Col span={4}>姓名：</Col>
+                  <Col span={15}>
+                    <Input></Input>
+                  </Col>
+                 </Row>
+                  <Row style={{ marginBottom: 15 }}>
+                    <Col span={4}>教工号：</Col>
+                    <Col span={15}>
+                      <Input></Input>
+                    </Col>
+                  </Row>
+                </Modal>
                 <Col span={8} style={{paddingLeft:5,paddingRight:5}}>
                   <div className="new_item_btu">
                     拒&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;绝
