@@ -17,6 +17,7 @@ class Scroll extends Component {
 
   active=(num, item, a) => {
     this.setState({ active:num })
+    console.log(num)
     this.props.changeContent(item, a)
   }
 
@@ -35,8 +36,8 @@ class Scroll extends Component {
     const mark2 = {
       display: 'none'
     }
-
-    return (
+    console.log(this.state.active)
+    return (     
       <div style={{ marginBottom:20 }}>
         <FreeScrollBar style={{ height:625, padding:10 }}>
           {/* 遍历基本信息 */}

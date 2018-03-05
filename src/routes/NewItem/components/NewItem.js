@@ -61,6 +61,13 @@ class NewItem extends Component {
         <div className='new_head'>
           <h2>新项目申请</h2>
         </div>
+        <div className="new_warn">
+          <div style={{ width: '100%', background:'rgba(195, 141, 15, 0.77)',padding:10}}>
+          <span className="warning">
+            *申请项目前请先确认已注册账号并登陆
+          </span>
+          </div>
+        </div>
         <div className='new_con'>
           <div className='new_title'>
             <span>项目名称：</span>
@@ -142,7 +149,11 @@ class NewItem extends Component {
             <input type='text' placeholder='点击选择上传的文件（限word）' value={this.state.file} onClick={this.uploadfile.bind(this)} />
             <input type='file' style={{ display: 'none' }} accept='application/msword' onChange={(e) => this.changeFile(e.target.value)} ref='file' />
           </div>
-
+          <div className="new_com">
+            <div className="new_com_btu">
+              提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交
+            </div>
+          </div>
         </div>
 
       </div>

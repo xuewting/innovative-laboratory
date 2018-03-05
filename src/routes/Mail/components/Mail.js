@@ -16,7 +16,7 @@ class Mail extends Component {
 
   changeContent(value,a){
     this.setState({ con:value })
-    console.log(a)
+    // console.log(a)
   } 
   componentDidMount () {
     let data = ``

@@ -37,6 +37,10 @@ class Content extends Component {
 }
   }
 
+  toItemDetail=()=>browserHistory.push({
+    pathname:'/iteminfo'
+  })
+
   render () {
     const introduce = this.props.introduce
     if (this.state.identity == 'root' || this.state.identity == 'teacher') {
@@ -61,8 +65,10 @@ class Content extends Component {
             : <div>
               {this.state.itemlist.map((item, i) => {
                 return (
-                  <div className='per_ii' key={i}>
+                  <div className='per_ii' key={i} onClick={(e)=>this.toItemDetail()}>
                     <span>{item.project.name}</span>
+                    <span className="per_ii_detail">hhhhh</span>
+                    <span className="per_ii_detail">hhhhh</span>
                     <div className='ii_con'>
                       {item.intor}
                     </div>

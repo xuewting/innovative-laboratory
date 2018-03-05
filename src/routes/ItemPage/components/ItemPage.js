@@ -9,21 +9,21 @@ import time from '../img/im-time.png'
 import { browserHistory } from 'React-router'
 import { POST, BASE_URL } from '../../../components/commonModules/POST'
 class ItemPage extends Component {
-  constructor () {
+  constructor() {
     super()
     this.state = {
       list: 0,
-      p_list:[],
-      count:0,
-      tname:''
+      p_list: [],
+      count: 0,
+      tname: ''
     }
   }
 
-  onChange (date, dateString) {
+  onChange(date, dateString) {
     console.log(date, dateString)
   }
 
-  changeStyle (value) {
+  changeStyle(value) {
     if (value.target.value == 'grid') {
       this.setState({ list: 0 })
     } else {
@@ -31,24 +31,24 @@ class ItemPage extends Component {
     }
   }
 
-  toDetail () {
+  toDetail() {
     browserHistory.push({
       pathname: `/iteminfo`
     })
   }
-  componentDidMount () {
+  componentDidMount() {
     this.getData(1)
   }
   /**
    * 获取项目的基本信息
    * @param {*} currentPage
    */
-  getData (currentPage) {
+  getData(currentPage) {
     let data = `pageCount=9&currentPage=${currentPage}`
     POST('/getProject', data, (re) => {
       if (re.state === 1) {
-        this.setState({ p_list:re.data.rows })
-        this.setState({ count:re.data.count })
+        this.setState({ p_list: re.data.rows })
+        this.setState({ count: re.data.count })
         console.log(re)
       }
     })
@@ -57,7 +57,7 @@ class ItemPage extends Component {
    * 通过项目的基本信息获取指导老师的id
    * 在通过老师id查询老师姓名
    */
-  async getteacher (id) {
+  async getteacher(id) {
     let data = `id=${id}`
     let tname = ''
     await POST('/user/queryUname', data, async (re) => {
@@ -68,7 +68,7 @@ class ItemPage extends Component {
     })
     return tname
   }
-  render () {
+  render() {
     console.log(this.getteacher(1))
     return (
       <div>
@@ -160,27 +160,35 @@ class ItemPage extends Component {
                 return (
                   <div className='task_list'>
                     <div className='task_con'>
-                      <div className='task_head'>{item.name}</div>
-                      <div >发起人：{item.user.name}</div>
-                      <div className='task_date'>
-                        <Tooltip title='开始时间'>
-                          <img src={rili} alt='' />
-                          {item.applyTime}
-                        </Tooltip>
-                        <Tooltip title='预期结束时间'>
-                          <img src={time} alt='' />
-                          {item.expectTime}
-                        </Tooltip>
-                        {item.actualTime ? <Tooltip title='实际结束时间'>
-                          <img src={time} alt='' />
-                          {item.actualTime}
-                        </Tooltip> : ''}
-                      </div>
+                      <Row>
+                        <Col span={4}>
+                          <div className='task_head'>{item.name}</div>
+                        </Col>
+                        <Col span={4}>
+                          <div className='task_head'>发起人：{item.user.name}</div>
+                        </Col>
+                        <Col span={8} offset={8} className='task_date'>
+                          
+                            <Tooltip title='开始时间'>
+                              <img src={rili} alt='' />
+                              {item.applyTime}
+                            </Tooltip>
+                            <Tooltip title='预期结束时间'>
+                              <img src={time} alt='' />
+                              {item.expectTime}
+                            </Tooltip>
+                            {item.actualTime ? <Tooltip title='实际结束时间'>
+                              <img src={time} alt='' />
+                              {item.actualTime}
+                            </Tooltip> : ''}
+                          
+                        </Col>
+                      </Row>
                     </div>
                   </div>)
               })}
             </div>
-            }
+          }
         </div>
       </div>
     )
