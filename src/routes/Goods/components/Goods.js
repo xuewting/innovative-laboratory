@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, DatePicker, Tooltip } from 'antd'
+import { Row, Col, DatePicker, Tooltip, Pagination } from 'antd'
 import './Goods.scss'
 import sea from '../img/search.png'
 import rili from '../img/日历.png'
@@ -7,12 +7,15 @@ import up from '../img/升序 (1).png'
 import down from '../img/降序.png'
 import time from '../img/im-time.png'
 import { browserHistory } from 'React-router'
-import {POST,BASE_URL} from '../../../components/commonModules/POST'
+import { POST, BASE_URL } from '../../../components/commonModules/POST'
+
 class Goods extends Component {
   constructor () {
     super()
     this.state = {
-      list: 0
+      list: 0,
+      GoodsList: [],
+      count:0
     }
   }
 
@@ -28,16 +31,33 @@ class Goods extends Component {
     }
   }
 
-  toDetail () {
+  toDetail (i) {
     browserHistory.push({
-      pathname: `/goodinfo`
+      pathname: `/goodinfo/${i+1}`
     })
   }
-  componentDidMount() {
-   
+  componentWillMount () {
+    this.getData(1)
   }
-  
+  /**
+   * 分页获取物品数据
+   */
+  getData (page) {
+    var data = `pageCount=9&currentPage=${page}`
+    POST('/lab/getLabGoods', data, re => {
+      if (re.state === 1) {
+        this.setState({ GoodsList: re.data.rows })
+        console.log(re)
+        this.setState({ count:re.data.count })
+      }
+    })
+  }
+  changeSize (page, pageSize) {
+    console.log(page)
+    this.getData(page)
+  }
   render () {
+    var GoodsList = this.state.GoodsList
     return (
       <div>
         {/* search_group */}
@@ -82,23 +102,28 @@ class Goods extends Component {
         {/* list_content */}
         <div className='list_con'>
           {this.state.list == 0
-            ? <div className='list_item_box' onClick={this.toDetail.bind(this)} style={{ cursor: 'pointer' }}>
-              <div className='list_item_con'>
-                <Row>
-                  <Col span={6}>
-                    <img src='' alt='' style={{ width:'90%' }} />
-                  </Col>
-                  <Col span={17} offset={1}>
-                    <div className='list_item_head'>Lorem ipsum dolor sit amet</div>
-                    <div className='list_item_subhead'>编号：</div>
-                    <div className='list_item_subhead'>型号：</div>
-                    <div className='list_item_subhead'>状态：</div>
-                    <div className='list_item_subhead'>实验室：</div>
-                  </Col>
-                </Row>
-                <div className='list_item_date' />
-              </div>
-            </div>
+            ? <div>
+              {GoodsList.map((item, i) => {
+                return (
+                  <div className='list_item_box' key={i} onClick={this.toDetail.bind(this, i)} style={{ cursor: 'pointer' }}>
+                    <div className='list_item_con'>
+                      <Row>
+                        <Col span={7}>
+                          <img src={BASE_URL + item.photo} alt='' style={{ width: '90%', padding:8 }} />
+                        </Col>
+                        <Col span={15} >
+                          <div className='list_item_head'>{item.name}</div>
+                          <div className='list_item_subhead'>型号：{item.models}</div>
+                          <div className='list_item_subhead'>价格：{item.price}</div>
+                          <div className='list_item_subhead'>状态：{item.stateId === 1 ? '外借' : '未借'}</div>
+                          <div className='list_item_subhead'>实验室：{item.lab.name}</div>
+                        </Col>
+                      </Row>
+                      <div className='list_item_date' />
+                    </div>
+                  </div>
+                )
+              })}</div>
             : <div className='style_list' onClick={this.toDetail.bind(this)} style={{ cursor: 'pointer' }}>
               <div className='goos_list'>
                 <div className='goos_con'>
@@ -110,6 +135,8 @@ class Goods extends Component {
 
               </div>
             </div>}
+          <Pagination defaultCurrent={1} total={this.state.count}
+            style={{ float:'right' }} pageSize={9} onChange={(page, pageSize) => this.changeSize(page, pageSize)} />
         </div>
       </div>
     )

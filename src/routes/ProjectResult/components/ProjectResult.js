@@ -1,17 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import './ProjectResult.scss'
 import Competition from './Competition'
 import Paper from './Paper'
 
 class ProjectResult extends Component {
-  render() {
+  componentDidMount () {
+    
+  }
+  render () {
     return (
       <div>
-        <Competition></Competition>
-        <Paper></Paper>
+        <Competition />
+        <Paper />
       </div>
-    );
+    )
   }
 }
 
-export default ProjectResult;
+export default ProjectResult
