@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Tooltip } from 'antd'
 import '../Side.scss'
-import head from '../../../routes/Login/components/0824ab18972bd40790e0d4b571899e510fb30956.jpg'
+import head from '../img/message.png'
 import message from '../img/message.png'
 import setting from '../img/setting.png'
 import out from '../img/退出.png'

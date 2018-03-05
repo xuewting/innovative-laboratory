@@ -4,13 +4,15 @@ import { Row, Col } from 'antd'
 import Head from '../module/Head'
 import Content from '../module/Content'
 import Calendar from '../module/Calendar'
+import { browserHistory } from 'react-router'
 import { POST, BASE_URL } from '../../../components/commonModules/POST'
 class Personal extends Component {
   constructor (props) {
     super(props)
     this.state = {
       userInfo:[],
-      lab:{}
+      lab:{},
+      labId:0
     }
   }
   componentDidMount () {
@@ -19,9 +21,17 @@ class Personal extends Component {
       if (re.state === 1) {
         this.setState({ userInfo:re.data })
         this.setState({ lab:re.data.lab })
+        this.setState({ labId:re.data.own_lab })
       }
     })
   }
+  goBack=() => history.back()
+  goSet=() => browserHistory.push({
+    pathname:'/setting'
+  })
+  goCharge=() => browserHistory.push({
+    pathname:'/labcharge/detail/'
+  })
   render () {
     return (
       <div className='personal'>
@@ -31,7 +41,20 @@ class Personal extends Component {
             <Calendar />
           </Col>
           <Col span={20} style={{ paddingLeft:5 }}>
-            <Content introduce={this.state.userInfo.introduce}/>
+            <Content introduce={this.state.userInfo.introduce} />
+            <div className='per_but'>
+              <Row>
+                <Col span={8} style={{ paddingRight:5 }}>
+                  <div className='per_but_i' onClick={this.goBack.bind(this)}>返回</div>
+                </Col>
+                <Col span={8} style={{ paddingRight: 5, paddingLeft:5 }}>
+                  <div className='per_but_i' onClick={this.goSet.bind(this)}>修改基本信息</div>
+                </Col>
+                <Col span={8} style={{ paddingLeft: 5 }}>
+                  <div className='per_but_i' onClick={this.goCharge.bind(this)}>实验室管理</div>
+                </Col>
+              </Row>
+            </div>
           </Col>
         </Row>
       </div>

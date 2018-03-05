@@ -1,0 +1,20 @@
+.per_but{
+  width: 100%;
+  padding: 10px 0;
+  .per_but_i{
+    border-radius: 3px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 1.4em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 200ms linear;
+    &:hover{
+      background: rgba(0,0,0,0.5);
+    }
+  }
+}

@@ -18,16 +18,7 @@ class Content extends Component {
       }
     })
   }
-  goBack=() => history.back()
-
-  goSet=() => browserHistory.push({
-    pathname:'/setting'
-  })
-
-  goCharge=() => browserHistory.push({
-    pathname:'/labcharge/detail'
-  })
-
+ 
   render () {
     const introduce = this.props.introduce
     return (
@@ -57,19 +48,6 @@ class Content extends Component {
               })
               }
             </div>}
-        </div>
-        <div className='per_but'>
-          <Row>
-            <Col span={8} style={{ paddingRight:5 }}>
-              <div className='per_but_i' onClick={this.goBack.bind(this)}>返回</div>
-            </Col>
-            <Col span={8} style={{ paddingRight: 5, paddingLeft:5 }}>
-              <div className='per_but_i' onClick={this.goSet.bind(this)}>修改基本信息</div>
-            </Col>
-            <Col span={8} style={{ paddingLeft: 5 }}>
-              <div className='per_but_i' onClick={this.goCharge.bind(this)}>实验室管理</div>
-            </Col>
-          </Row>
         </div>
       </div>
     )
