@@ -39,10 +39,8 @@ class Calendar extends Component {
           onOk={this.handleCOk}
           onCancel={this.handleCCancel}
           >
-          <span style={{fontSize:1+'em'}}>工作内容：</span>
+          <span style={{fontSize:1+'em'}}>备注：</span>
           <TextArea ></TextArea>
-          <span style={{ fontSize:1 +'em',marginTop:10 }}>参与项目名称：</span>
-          <Input></Input>
         </Modal>
       </div>
     )
