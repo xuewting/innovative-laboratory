@@ -10,6 +10,7 @@ import Goods from '../module/Goods'
 import Teacher from '../module/Teacher'
 import Side from './Side'
 import Notice from '../module/Notice'
+import Sgin from '../module/Sgin'
 
 import { browserHistory } from 'react-router'
 
@@ -73,6 +74,12 @@ class LabCharge extends Component {
         this.setState({ chargepage: '/labcharge/news' })
         break
       case 8:
+        browserHistory.push({ 
+          pathname: '/labcharge/sgin' 
+        })
+        this.setState({ chargepage: '/labcharge/sgin' })
+        break
+      case 9:
         browserHistory.push({
           pathname: `/setting`
         }); break
@@ -80,7 +87,7 @@ class LabCharge extends Component {
   }
 
   render () {
-    const { chargepage, choise } = this.state
+    const { chargepage } = this.state
     return (
       <div>
         <Row>
@@ -93,10 +100,11 @@ class LabCharge extends Component {
                 ? <Member /> : chargepage == '/labcharge/item'
                   ? <Item /> : chargepage == '/labcharge/honor'
                     ? <Honor /> : chargepage == '/labcharge/news'
-                    ? <NewItem /> : chargepage == '/labcharge/goods'
-                    ? <Goods /> : chargepage == '/labcharge/teacher'
+                      ? <NewItem /> : chargepage == '/labcharge/goods'
+                        ? <Goods /> : chargepage == '/labcharge/teacher'
                           ? <Teacher /> : chargepage == '/labcharge/notice'
-                            ? <Notice /> : ''
+                            ? <Notice /> : chargepage == '/labcharge/sgin'
+                              ? <Sgin /> : ''
             }
           </Col>
         </Row>

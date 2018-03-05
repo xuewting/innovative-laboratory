@@ -46,7 +46,7 @@
     }
     .per_ii{
       padding: 10px 0px 10px 5px ;
-      border-bottom: 1px dashed #fff;
+      // border-bottom: 1px dashed #fff;
       cursor: pointer;
       transition: 200ms linear;
       background: rgba(255,255,255,0.1);
@@ -70,12 +70,13 @@
       span{
         color: #ddd;
         font-size: 1.2em;
-        margin-right: 5px;
+        margin-right: 7px;
       }
       .per_ii_detail{
-        color: gray;
+        color: #0e2c4e;
         font-size: 0.9em;
         margin-right: 3px;
+        letter-spacing: 1px;
       }
       .ii_con{
         color: #fff;
