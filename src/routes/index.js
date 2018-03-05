@@ -26,6 +26,7 @@ import Mail from './Mail'
 import TEdit from './LabChargeTEdit'
 import IEdit from "./LabChargeIEdit"
 import NewItemDetail from './NewItemDetal'
+import LabList from './LabList'
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
@@ -39,6 +40,7 @@ export const createRoutes = (store) => ({
     Message(store),
     Mail(store),
     LabPage(store),
+    LabList(store),
     Forget(store),
     Information(store),
     NewItemDetail(store),

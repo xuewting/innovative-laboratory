@@ -37,8 +37,7 @@ class Personal extends Component {
       <div className='personal'>
         <Row>
           <Col span={4} style={{ paddingRight:5 }}>
-            <Head userInfo={this.state.userInfo}lab={this.state.lab} />
-            <Calendar />
+            <Head userInfo={this.state.userInfo}lab={this.state.lab} />           
           </Col>
           <Col span={20} style={{ paddingLeft:5 }}>
             <Content introduce={this.state.userInfo.introduce} />

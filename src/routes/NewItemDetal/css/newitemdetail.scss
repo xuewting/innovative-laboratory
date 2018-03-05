@@ -1,0 +1,106 @@
+.new_item_detail{
+  width: 100%;
+  background: rgba(12, 81, 109, 0.8);
+  border-radius: 3px;
+  padding: 15px 10px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+  .new_item_title{
+    padding: 10px 10px;
+    width: 100%;
+    h2{
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 2px;
+      font-size: 1.6em;
+    }
+  }
+  .new_item_info{
+    padding: 0 10px;
+    width: 80%;
+    margin-bottom: 20px;
+    .item_info_item{
+      padding: 10px 0;
+      color: #fff;
+      font-size: 1em;
+    }
+    .item_info_mun{
+      padding: 10px 0;
+      color: #fff;
+      font-size: 1em;
+    }
+  }
+  .new_item_details{
+    padding: 0 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    h3{
+      width: 100%;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      font-size: 1.4em;
+    }
+    .item_details_con{
+      width: 70%;
+      color: #ddd;
+      font-size: 1em;
+      padding: 5px 4px;
+    }
+    .doc_con{
+      width: 100%;
+      padding: 10px 0;
+      a{
+        font-size: 1em;
+        color: #fff;
+        transition: 200ms;
+        &:hover{
+          color: blue;
+        }
+      }
+    }
+   
+  }
+   .new_item_plan{
+      margin-left: 10px;
+      background: #fff;
+      padding: 10px;
+      border-radius: 2px;
+      margin-bottom: 20px; 
+    }
+    .plan_title{
+      padding: 0 10px;
+    width: 100%;
+    margin-bottom: 10px;    
+    h3{
+      width: 100%;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      font-size: 1.4em;
+    }
+    
+  }
+  .new_item_but{
+    padding: 10px 10px 0 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    .new_item_btu{
+      padding: 10px;
+      width: 100%;
+      color: #fff;
+      font-size: 1.3em;
+      border-radius: 3px;
+      border: 1px solid #fff;
+      text-align: center;
+      cursor: pointer;
+      transition: 200ms linear;
+      &:hover{
+        background: rgba(255, 255, 255, 0.2)
+      }
+    }
+  }
+}

@@ -18,18 +18,31 @@
       border-bottom: 2px dashed #fff;
     }        
   }
+  .new_warn{
+    width:100%;
+    padding: 10px;
+    margin: 5px 0px 5px 0px;
+    
+    span{
+      width: 100%;      
+      color: #e9fa02;
+      letter-spacing: 1px;
+      font-weight: bold;
+    }
+  }
   .new_con{
     width: 100%;
     padding: 10px;
-    span {
+    
+    .new_title{
+      width: 100%;
+      margin-bottom: 20px;  
+      span {
       color: #fff;
       font-size: 1.2em;
       letter-spacing: 1px;
     }
    
-    .new_title{
-      width: 100%;
-      margin-bottom: 20px;  
        input {
          width: 40%;
          padding: 10px;
@@ -48,6 +61,12 @@
     .new_origin{
       padding: 10px 0;
       margin-bottom: 20px;
+      span {
+      color: #fff;
+      font-size: 1.2em;
+      letter-spacing: 1px;
+    }
+   
          input {
            width: 70%;
            padding: 10px;
@@ -79,7 +98,10 @@
     }
     .mem_list{
       width: 100%;
-      margin-bottom: 10px;      
+      margin-bottom: 10px;
+      span{
+        color: #ddd;
+      }      
     }
     .end_time{
       margin-bottom: 20px;
@@ -88,6 +110,12 @@
         padding: 10px;
         color: white;
       }
+      span {
+      color: #fff;
+      font-size: 1.2em;
+      letter-spacing: 1px;
+    }
+   
     }
     .new_intor{
       width: 50%;
@@ -98,7 +126,19 @@
         color: #fff;
         font-size: 1em;
       }
+      span {
+      color: #fff;
+      font-size: 1.2em;
+      letter-spacing: 1px;
     }
+   
+    }
+    .new_intor_f{
+     width: 50%;
+      margin-top: 10px;
+      margin-bottom: 20px;
+   }
+    
     .new_file{
       input {
         width: 35%;
@@ -109,11 +149,48 @@
         background: rgba(0, 0, 0, 0.3);
         color: #fff;
         font-size: 1.1em;
+        margin-bottom: 40px;
         &:focus {
           outline: none;
         }
       }
-
+      span {
+      color: #fff;
+      font-size: 1.2em;
+      letter-spacing: 1px;
+    }   
+    }
+    .new_com{
+      width: 30%;
+      margin: 0 auto;
+      text-align: center;      
+      .new_com_btu{
+        width: 100%;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.4em;
+        margin-bottom: 20px;
+        padding: 10px;
+        // border: 1px solid #fff;
+        border-radius: 3px;
+        background: #108ee9;
+        transition: 200ms linear;
+        &:hover{
+          background: #49a9ee;
+        }
+      }
     }
   }
+}
+
+.rdw-editor-wrapper{
+  background: #fff;
+  // width: 50%;
+  color: #333;
+}
+
+.rdw-editor-main{
+  min-height: 200px;
+  max-height: 200px;
+  padding: 10px;
 }
