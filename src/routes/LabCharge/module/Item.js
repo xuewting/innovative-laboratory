@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, Pagination, Popconfirm, message, Modal, Input, DatePicker } from 'antd'
+import { Icon, Row, Col, Button, Pagination, Popconfirm, message, Modal, Input, DatePicker, Upload } from 'antd'
 import '../css/Item.scss'
 import { browserHistory } from 'react-router';
 
@@ -36,7 +36,8 @@ class Item extends Component {
       originXh: '',
       teacher: '',
       endTime: '',
-      date: ''
+      date: '',
+      evisible: false
     }
   }
 
@@ -111,12 +112,45 @@ class Item extends Component {
     browserHistory.push({
       pathname: '/labcharge/item/edit',
       qurey: {
-        id:num
+        id: num
       }
     })
   }
 
+  showEnd = () => this.setState({ evisible: !this.state.evisible })
+
+  ehandleOk = (e) => {
+    console.log(e);
+    this.setState({
+      evisible: false,
+    });
+  }
+
+  ehandleCancel = (e) => {
+    console.log(e);
+    this.setState({
+      evisible: false,
+    });
+  }
+
   render() {
+    const props = {
+      name: 'file',
+      action: '',
+      headers: {
+        authorization: 'authorization-text',
+      },
+      onChange(info) {
+        if (info.file.status !== 'uploading') {
+          console.log(info.file, info.fileList);
+        }
+        if (info.file.status === 'done') {
+          message.success(`${info.file.name} file uploaded successfully`);
+        } else if (info.file.status === 'error') {
+          message.error(`${info.file.name} file upload failed.`);
+        }
+      },
+    };
     return (
       <div style={{ paddingTop: 20, paddingRight: 15 }}>
         <div className="itemcharge">
@@ -155,16 +189,26 @@ class Item extends Component {
                         <Row>
                           <Col span={12}></Col>
                           <Col span={4}>
-                            <Button onClick={this.toEdit.bind(this,item.id)}>修改</Button>
+                            <Button onClick={this.toEdit.bind(this, item.id)} style={{ width: '100%' }}>修改</Button>
                           </Col>
                           <Col span={4}>
-                            <Popconfirm title="确定此项目结束吗?结束后成员将不能再提交或修改项目进度" onConfirm={this.confirmEnd.bind(this)} onCancel={this.cancel.bind(this)} okText="Yes" cancelText="No">
-                              <Button>结束项目</Button>
-                            </Popconfirm>
+                            <Button style={{ width: '100%' }} onClick={this.showEnd.bind(this)}>结束项目</Button>
+                            <Modal
+                              title="提交结项文档"
+                              visible={this.state.evisible}
+                              onOk={this.ehandleOk.bind(this)}
+                              onCancel={this.ehandleCancel.bind(this)}>
+                              <Upload {...props} accept='application/msword'>
+                                <Button style={{ marginBottom: 20 }}>
+                                  <Icon type="upload" /> 点击上传文件（word）
+                                </Button>
+                              </Upload>
+                              <Button type='primary'>直接结项</Button>
+                            </Modal>
                           </Col>
                           <Col span={4}>
                             <Popconfirm title="确定删除此项目结束吗?删除后将无法找回" onConfirm={this.confirmDelete.bind(this)} onCancel={this.cancel.bind(this)} okText="Yes" cancelText="No">
-                              <Button type="danger">删除</Button>
+                              <Button type="danger" style={{ width: '100%' }}>删除</Button>
                             </Popconfirm>
                           </Col>
                         </Row>

@@ -81,7 +81,7 @@ class LabCharge extends Component {
         break
       case 9:
         browserHistory.push({
-          pathname: `/setting`
+          pathname: `/personal`
         }); break
     }
   }

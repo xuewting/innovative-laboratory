@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import '../css/goods.scss'
 import { Row, Col, Button, Input, Pagination, Modal, Upload, Icon, Select } from 'antd'
+import { convertFromRaw, EditorState, convertToRaw, ContentState } from 'draft-js'
+import { Editor } from 'react-draft-wysiwyg'
+import draftToHtml from 'draftjs-to-html'
+import htmlToDraft from 'html-to-draftjs'
+import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+
 
 const Option = Select.Option
 
@@ -42,7 +48,8 @@ class Goods extends Component {
       bh:'',
       xh:'',
       zt:'',
-      contact:''
+      contact:'',
+      editorState: EditorState.createEmpty()
     }
   }
 
@@ -82,8 +89,7 @@ class Goods extends Component {
     switch (type) {
       case 1:this.setState({ name:value }); break
       case 2:this.setState({ bh:value }); break
-      case 3:this.setState({ xh:value }); break
-      case 4:this.setState({ contact:value }); break
+      case 3:this.setState({ xh:value }); break      
     }
   }
 // 确认修改
@@ -107,6 +113,23 @@ class Goods extends Component {
 // 删除物品
   delete () {
 
+  }
+
+  onEditorStateChange = (editorState) => {
+    this.setState({
+      editorState,
+    })
+    this.refs.html.innerHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+  }
+
+  componentWillMount() {
+    const { editorState, contact } = this.state
+    const contentBlock = htmlToDraft(contact)
+    if (contentBlock) {
+      const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks)
+      const editorState = EditorState.createWithContent(contentState)
+      this.setState({ editorState })
+    }
   }
   render () {
     const uploadButton = (
@@ -137,11 +160,10 @@ class Goods extends Component {
                           <div className='go_item_con'>物品编号：{item.bh}</div>
                           <div className='go_item_con'>型号：{item.xh}</div>
                           <div className='go_item_con'>状态：{item.zt}</div>
-                          <div className='go_item_con'>联系方式：{item.contact}</div>
                           <Row>
                             <Col span={12} />
-                            <Col span={6}><Button onClick={this.showModal.bind(this, item.name, item.bh, item.xh, item.zt, item.contact)}>修改</Button></Col>
-                            <Col span={6}><Button type='danger' onClick={this.delete.bind(this)}>删除</Button></Col>
+                            <Col span={6}><Button onClick={this.showModal.bind(this, item.name, item.bh, item.xh, item.zt, item.contact)} style={{width:'100%'}}>修改</Button></Col>
+                            <Col span={6}><Button type='danger' onClick={this.delete.bind(this)} style={{ width: '100%' }}>删除</Button></Col>
                           </Row>
                         </Col>
                       </Row>
@@ -176,7 +198,7 @@ class Goods extends Component {
         >
                 {fileList.length >= 1 ? null : uploadButton}
               </Upload>
-              <Modal visible={previewVisible} footer={null} onCancel={this.handleMCancel.bind(this)}>
+              <Modal visible={previewVisible} footer={null} onCancel={this.handleMCancel.bind(this)} style={{width:800}}>
                 <img alt='example' style={{ width: '100%' }} src={previewImage} />
               </Modal>
             </div>
@@ -205,8 +227,19 @@ class Goods extends Component {
             </Col>
           </Row>
           <Row style={{ fontSize:16, marginBottom:10 }}>
-            <Col span={6}>联系方式：</Col>
-            <Col span={18}><Input placeholder='请输入联系方式' value={contact} onChange={(e) => this.changeValue(4, e.target.value)} /></Col>
+            <Col span={6}>物品详情：</Col>
+            <Col span={18}>
+              <Editor
+                editorState={this.state.editorState}
+                wrapperClassName="demo-wrapper"
+                editorClassName="demo-editor"
+                onEditorStateChange={this.onEditorStateChange}
+                toolbarClassName="toolbar-class"
+                toolbar={{
+                  options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'textAlign', 'list', 'history']
+                }}
+              />
+            </Col>
           </Row>
         </Modal>
 

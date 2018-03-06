@@ -95,8 +95,13 @@ class Tedit extends Component {
         break
       case 8:
         browserHistory.push({
-          pathname: `/setting`
-        }); break
+          pathname: '/labcharge/sgin'
+        })
+        this.setState({ chargepage: '/labcharge/sgin' })
+        break
+      case 9:
+        history.back()
+        break
     }
   }
 

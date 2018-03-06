@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../css/info.scss'
-import { Tooltip, message } from 'antd'
+import { Tooltip, message, Upload, Button, Icon } from 'antd'
 import Edit from './Edit'
 
 class EditInfo extends Component {
@@ -9,6 +9,7 @@ class EditInfo extends Component {
     this.state = {
       photo: [],
       img: [],
+      state:true
     }
   }
 
@@ -16,40 +17,44 @@ class EditInfo extends Component {
     this.refs.file.click();
   }
 
-  //add photo
-  addPhoto(e) {
-    if (this.state.img.length == 4) {
-      message.error('最多插入四张图片！')
-    } else {
-      console.log(this.state.img)
-      var file = e.target.files[0]
-      var reader = new FileReader()
-      var imgFile
-      this.state.img = [...this.state.img, file]
-      console.log(this.state.img)
-      this.setState({ img: this.state.img })
-      reader.onload = (e) => {
-        imgFile = e.target.result
-        this.state.photo = [...this.state.photo, imgFile]
-        this.setState({ src: this.state.photo })
-        console.log(this.state.photo)
-      }
-      reader.readAsDataURL(file);
-    }
-  }
-
- 
+  changeState=()=>this.setState({state:!this.state.state});
 
   render() {
+    const {state}=this.state
+    const props = {
+      name: 'file',
+      action: '',
+      headers: {
+        authorization: 'authorization-text',
+      },
+      onChange(info) {
+        if (info.file.status !== 'uploading') {
+          console.log(info.file, info.fileList);
+        }
+        if (info.file.status === 'done') {
+          message.success(`${info.file.name} file uploaded successfully`);
+        } else if (info.file.status === 'error') {
+          message.error(`${info.file.name} file upload failed.`);
+        }
+      },
+    };
     return (
       <div className='edit'>
         {/*head*/}
         <div className="edithead">
-          <h2>项目新进度</h2>
+          <h2>{state ? '项目新进度':'申请项目结束'}</h2>
+          <span style={{ color: '#26b2d4', fontSize: 16, cursor: 'pointer' }} onClick={this.changeState.bind(this)}>
+            {state ? '申请项目结束' : '项目新进度'}</span>
         </div>
         {/*add content*/}
         <div className="editcontent">
-          <Edit></Edit>
+        {state?
+            <Edit></Edit>:
+            <Upload {...props} accept='application/msword'>
+              <Button style={{ marginBottom: 20 }}>
+                <Icon type="upload" /> 点击上传文件（word）
+              </Button>
+            </Upload>}
           <div className="confoot">            
             <div className="footright">
               <button>Submit</button>

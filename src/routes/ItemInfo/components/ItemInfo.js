@@ -22,6 +22,8 @@ class ItemInfo extends Component {
   render() {
     return (
       <div style={{ width: 1250, margin: '0 auto' }}>
+      <h2 style={{color:'#fff',fontWeight:600}}>简 介：</h2>
+        <p style={{color:'#fff',marginBottom:20}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque omnis architecto obcaecati animi mollitia, praesentium odit sapiente dignissimos unde quis dolore laudantium ratione sed repellat quia ipsa deserunt! Eum, dignissimos.</p>
         <EditInfo ></EditInfo>
         <div style={{ float: 'left', width: '100%' }}>
           <Timeline>

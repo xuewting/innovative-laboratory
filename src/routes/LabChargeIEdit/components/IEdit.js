@@ -106,8 +106,13 @@ class IEdit extends Component {
         break
       case 8:
         browserHistory.push({
-          pathname: `/setting`
-        }); break
+          pathname: '/labcharge/sgin'
+        })
+        this.setState({ chargepage: '/labcharge/sgin' })
+        break
+      case 9:
+        history.back()
+        break
     }
   }
 
@@ -128,31 +133,31 @@ class IEdit extends Component {
               </div>
 
               <div className='ed_i_con'>
-                <Row style={{ width:'70%', fontSize:16, marginBottom:15 }}>
+                <Row style={{ width:'40%', fontSize:16, marginBottom:15 }}>
                   <Col span={4} style={{ color:'#fff' }}>项目名称:</Col>
                   <Col span={20}>
                     <Input placeholder='请输入项目的名称' className='in' onChange={(e) => this.changevalue(1, e.target.value)} />
                   </Col>
                 </Row>
-                <Row style={{ width: '70%', fontSize: 16, marginBottom: 15 }}>
+                <Row style={{ width: '40%', fontSize: 16, marginBottom: 15 }}>
                   <Col span={4} style={{ color: '#fff' }}>发起人:</Col>
                   <Col span={20}>
                     <Input placeholder='请输入发起人姓名' className='in' onChange={(e) => this.changevalue(2, e.target.value)} />
                   </Col>
                 </Row>
-                <Row style={{ width: '70%', fontSize: 16, marginBottom: 15 }}>
+                <Row style={{ width: '40%', fontSize: 16, marginBottom: 15 }}>
                   <Col span={4} style={{ color: '#fff' }}>发起人学号:</Col>
                   <Col span={20}>
                     <Input placeholder='请输入发起人学号' className='in' onChange={(e) => this.changevalue(3, e.target.value)} />
                   </Col>
                 </Row>
-                <Row style={{ width: '70%', fontSize: 16, marginBottom: 15 }}>
+                <Row style={{ width: '40%', fontSize: 16, marginBottom: 15 }}>
                   <Col span={4} style={{ color: '#fff' }}>指导老师:</Col>
                   <Col span={20}>
                     <Input placeholder='请输入指导老师姓名' className='in' onChange={(e) => this.changevalue(4, e.target.value)} />
                   </Col>
                 </Row>
-                <Row style={{ width: '70%', fontSize: 16, marginBottom: 35 }}>
+                <Row style={{ width: '40%', fontSize: 16, marginBottom: 35 }}>
                   <Col span={4} style={{ color: '#fff' }}>预计结束时间:</Col>
                   <Col span={20}>
                     <DatePicker onChange={this.changeTime.bind(this)} />
