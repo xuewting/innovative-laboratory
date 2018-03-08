@@ -3,6 +3,11 @@ import Side from '../../LabCharge/components/Side'
 import { Row, Col, Button, Upload, Icon, Modal, Input } from 'antd'
 import './Tedit.scss'
 import { browserHistory } from 'react-router'
+import { convertFromRaw,EditorState, convertToRaw, ContentState } from 'draft-js'
+import { Editor } from 'react-draft-wysiwyg'
+import draftToHtml from 'draftjs-to-html'
+import htmlToDraft from 'html-to-draftjs'
+import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 const { TextArea } = Input
 
@@ -25,7 +30,8 @@ class Tedit extends Component {
       honor:'',
       shortintor:'',
       intor:'',
-      tid:''
+      tid:'',
+      editorState: EditorState.createEmpty(),
     }
     console.log(this.state.id)
   }
@@ -130,8 +136,24 @@ class Tedit extends Component {
     }
   }
 
+  // componentWillMount() {
+  //   const { editorState, value } = this.state
+  //   const contentBlock = htmlToDraft(value)
+  //   if (contentBlock) {
+  //     const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks)
+  //     const editorState = EditorState.createWithContent(contentState)
+  //     this.setState({ editorState })
+  //   }
+  // }
+
+  onEditorStateChange = (editorState) => {
+    this.setState({
+      editorState,
+    })
+    // this.refs.html.innerHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+  }
   render () {
-    const { previewVisible, previewImage, fileList, name, zc, shortintor, intor, mail, honor } = this.state
+    const { previewVisible, previewImage, fileList, name, zc, shortintor, intor, mail, honor, editorState } = this.state
     const uploadButton = (
       <div>
         <Icon type='plus' />
@@ -210,12 +232,22 @@ class Tedit extends Component {
 
                 <div style={{ paddingTop:20, marginBottom:20 }}>
                   <h3 style={{ fontWeight:600, color:'#fff', padding:10, margin:0 }}>详细介绍:</h3>
-                  <TextArea
+                  {/*<TextArea
                     value={intor}
                     onChange={(e) => this.changeValue(6, e.target.value)}
                     style={{ padding:10, fontSize:15 }}
                     autosize={{ minRows: 10, maxRows: 10 }}
-                    placeholder='请输入教师的详细' />
+                    placeholder='请输入教师的详细' />*/}
+                    <Editor
+                      editorState={editorState}
+                      wrapperClassName="demo-wrapper"
+                      editorClassName="demo-editor"
+                      onEditorStateChange={this.onEditorStateChange}
+                      toolbarClassName="toolbar-class"
+                      toolbar={{
+                        options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'colorPicker', 'textAlign', 'list', 'history']
+                      }}
+                      />
                 </div>
               </div>
 

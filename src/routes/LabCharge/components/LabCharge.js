@@ -18,8 +18,8 @@ class LabCharge extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      chargepage: this.props.location.pathname // detail
-
+      chargepage: this.props.location.pathname ,// detail
+      labid:this.props.location.query.labid
     }
   }
 
@@ -87,7 +87,7 @@ class LabCharge extends Component {
   }
 
   render () {
-    const { chargepage } = this.state
+    const { chargepage, labid } = this.state
     return (
       <div>
         <Row>
@@ -96,15 +96,15 @@ class LabCharge extends Component {
           </Col>
           <Col span={19} style={{ paddingLeft: 5 }}>
             {chargepage == '/labcharge/detail'
-              ? <Detail /> : chargepage == '/labcharge/staff'
-                ? <Member /> : chargepage == '/labcharge/item'
-                  ? <Item /> : chargepage == '/labcharge/honor'
-                    ? <Honor /> : chargepage == '/labcharge/news'
-                      ? <NewItem /> : chargepage == '/labcharge/goods'
-                        ? <Goods /> : chargepage == '/labcharge/teacher'
-                          ? <Teacher /> : chargepage == '/labcharge/notice'
-                            ? <Notice /> : chargepage == '/labcharge/sgin'
-                              ? <Sgin /> : ''
+              ? <Detail labid={labid}/> : chargepage == '/labcharge/staff'
+                ? <Member labid={labid}/> : chargepage == '/labcharge/item'
+                  ? <Item labid={labid}/> : chargepage == '/labcharge/honor'
+                    ? <Honor labid={labid}/> : chargepage == '/labcharge/news'
+                      ? <NewItem labid={labid}/> : chargepage == '/labcharge/goods'
+                        ? <Goods labid={labid}/> : chargepage == '/labcharge/teacher'
+                          ? <Teacher labid={labid}/> : chargepage == '/labcharge/notice'
+                            ? <Notice labid={labid}/> : chargepage == '/labcharge/sgin'
+                              ? <Sgin labid={labid}/> : ''
             }
           </Col>
         </Row>

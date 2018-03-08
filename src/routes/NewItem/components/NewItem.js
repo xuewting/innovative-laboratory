@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import '../css/NewItem.scss'
 import { Row, Col, Button, Tooltip, Input, DatePicker, message } from 'antd'
 import Plan from './Plan'
+import { POST } from '../../../components/commonModules/POST'
 
 const { TextArea } = Input
 class NewItem extends Component {
@@ -11,9 +12,14 @@ class NewItem extends Component {
       list: [],
       file:'',
       memName:'',
-      memXh:''
+      memXh:'',
+      
     }
   }
+
+  
+
+  
 
   // 打开目录
   uploadfile=() => {

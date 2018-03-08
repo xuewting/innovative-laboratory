@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../css/lab.scss'
 import { Upload, Popconfirm, Row, Radio, Col, Button, Input, Icon, Table, Modal, Select } from 'antd'
+import { POST, BASE_URL } from '../../../components/commonModules/POST'
 
 const RadioGroup = Radio.Group
 const Option = Select.Option
@@ -64,6 +65,12 @@ class Mumber extends Component {
       }]
     }
   }
+
+  
+  componentWillMount() {
+    
+  }
+  
 
   onInputChange = (e) => {
     this.setState({ searchText: e.target.value })

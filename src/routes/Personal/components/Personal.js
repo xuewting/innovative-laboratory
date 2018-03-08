@@ -23,17 +23,26 @@ class Personal extends Component {
         this.setState({ userInfo: re.data })
         this.setState({ lab: re.data.lab })
         this.setState({ labId: re.data.own_lab })
+        
       }
     })
   }
   goBack = () => history.back()
   goSet = () => browserHistory.push({
-    pathname: '/setting'
+    pathname: '/setting',
+    query:{
+      labid: this.state.labId
+    }
+    
   })
   goCharge = () => {
     if (this.state.identity == 'teacher') {
+      // console.log(this.state.labId)
       browserHistory.push({
-        pathname: '/labcharge/detail'
+        pathname: '/labcharge/detail',
+        query:{
+          labid:this.state.labId
+        }
       })
     } else if (this.state.identity == 'root') {
       browserHistory.push({

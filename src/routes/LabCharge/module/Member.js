@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import '../css/member.scss'
-import { Table, Input, Button, Icon, Modal, Row, Col, Select } from 'antd'
-const Option = Select.Option;
+import { message,Table, Input, Button, Icon, Modal, Row, Col, Select } from 'antd'
+const Option = Select.Option
+import { POST } from '../../../components/commonModules/POST'
 
 class Member extends Component {
   constructor(props) {
@@ -10,22 +11,22 @@ class Member extends Component {
       data: [{
         id: '1',
         name: 'John Brown',
-        xh: 32,
+        sid: 32,
         position: '普通成员',
       }, {
         id: '2',
         name: 'Joe Black',
-        xh: 42,
+        sid: 42,
         position: '管理员',
       }, {
         id: '3',
         name: 'Jim Green',
-        xh: 32,
+        sid: 32,
         position: '普通成员',
       }, {
         id: '4',
         name: 'Jim Red',
-        xh: 32,
+        sid: 32,
         position: '管理员',
       }],
       filterDropdownVisible: false,
@@ -33,28 +34,67 @@ class Member extends Component {
       filtered: false,
       visible: false,
       name: '',
-      xh: '',
+      sid: '',
       position: '',
-      id: ''
+      id: '',
+      labid: this.props.labid,
+      type:0
     }
   }
 
+  //获取成员列表
+  componentWillMount() {
+    let labid = this.state.labid
+    POST('/labt/getLabUser', `labId=${labid}`, re => {
+      if (re.state == 1) {
+        this.setState({data:re.data.rows})
+      } else {
+        message.error('服务器错误')
+      }
+    })
+  }
+
   //打开弹窗
-  showModal = (name, xh, position) => {
+  showModal = (name, sid, position,type) => {
     this.setState({
       visible: true,
       name: name,
-      xh: xh,
-      position: position
+      sid: sid,
+      position: position,
+      type:type
     });
   }
 
   //确认提交
-  handleOk = (e) => {
-    console.log(e.target.value);
+  handleOk = (e) => {    
+    let name = this.state.name
+    let sid = this.state.sid
+    let labid = this.state.labid
+    let data = `name=${name}&sid=${sid}&labId=${labid}`
+    if(this.state.type==1){
+      POST('/labt/addLabStu',data, re=>{
+        if(re.state==1){
+          message.success('添加成功')
+          let labid = this.state.labid
+          POST('/labt/getLabUser', `labId=${labid}`, re => {
+            if (re.state == 1) {
+              this.setState({ data: re.data.rows })
+            } else {
+              message.error('服务器错误')
+            }
+          })
+        }else if(re.state==-2){
+          message.success('该用户不存在，请确认信息')
+        }else{
+          message.success('服务器错误')
+        }
+      })
+    }else if(re.state==0){
+
+    }
     this.setState({
       visible: false,
-    });
+    })    
   }
 
   //取消修改
@@ -71,21 +111,30 @@ class Member extends Component {
       case 1:
         this.setState({ name: value }); break;
       case 2:
-        this.setState({ xh: value }); break;
+        this.setState({ sid: value }); break;
       case 3:
         this.setState({ position: value }); break;
     }
   }
 
   //删除单挑信息
-  deletPosen = () => {
-
-  }
-
-  //添加新成员
-  addNews = () => {
-    let id = ''
-    this.showModal('', '', '', id)
+  deletPosen = (id) => {
+    let data=`id=${id}`
+    POST('/labt/deleteUser',data,re=>{
+      if(re.state==1){
+        message.success('删除成功')
+        let labid = this.state.labid
+        POST('/labt/getLabUser', `labId=${labid}`, re => {
+          if (re.state == 1) {
+            this.setState({ data: re.data.rows })
+          } else {
+            message.error('服务器错误')
+          }
+        })
+      }else{
+        message.error('服务器错误')
+      }
+    })
   }
 
   //搜索姓名
@@ -141,69 +190,18 @@ class Member extends Component {
       },
     }, {
       title: '学号',
-      dataIndex: 'xh',
-      key: 'xh',
+      dataIndex: 'sid',
+      key: 'sid',
       width: '33%',
     }, {
-      title: '职位',
-      dataIndex: 'position',
-      key: 'position',
-      width: '33%',
-      filters: [{
-        text: '普通成员',
-        value: '普通成员',
-      }, {
-        text: '管理员',
-        value: '管理员',
-      }],
-      onFilter: (value, record) => record.position.indexOf(value) === 0,
+      title: '邮箱',
+      dataIndex: 'email',
+        key: 'email',
+      width: '33%',      
       render: (text, record, index) => {
         return (<div>
           <Row>
             <Col span={14}>{text}</Col>
-            <Col span={5}>
-
-              {/*编辑弹框*/}
-
-              <Button onClick={this.showModal.bind(this, record.name, record.xh, record.position, record.id)}>编辑</Button>
-              <Modal
-                title="修改基本信息"
-                visible={this.state.visible}
-                onOk={this.handleOk}
-                onCancel={this.handleCancel}
-              >
-                <Row><Col span={4}>
-                  <h4>姓名：</h4>
-                </Col>
-                  <Col span={20}>
-                    <Input
-                      value={this.state.name}
-                      style={{ padding: 10, marginBottom: 10 }}
-                      onChange={(e) => this.changeValue(1, e.target.value)}
-                      placeholder='请输入成员姓名' />
-                  </Col></Row>
-                <Row><Col span={4}>
-                  <h4>学号：</h4>
-                </Col>
-                  <Col span={20}>
-                    <Input
-                      value={this.state.xh}
-                      style={{ padding: 10, marginBottom: 10 }}
-                      onChange={(e) => this.changeValue(2, e.target.value)}
-                      placeholder='请输入成员学号' />
-                  </Col></Row>
-                <Row><Col span={4}>
-                  <h4>职位：</h4>
-                </Col>
-                  <Col span={20}>
-                    <Select value={this.state.position} style={{ width: 120 }} onChange={(e) => this.changeValue(3,e)}>
-                      <Option value="普通成员">普通成员</Option>
-                      <Option value="管理员">管理员</Option>
-                    </Select>
-                    
-                  </Col></Row>
-              </Modal>
-            </Col>
             <Col span={5}>
               <Button onClick={this.deletPosen.bind(this, record.id)} type='danger'>删除</Button>
             </Col>
@@ -224,9 +222,36 @@ class Member extends Component {
             <Table columns={columns} dataSource={this.state.data} />
           </div>
           <div style={{ paddingLeft: 10 }}>
-            <Button type='primary' onClick={this.showModal.bind(this, '', '', '')}>添加新成员</Button>
+            <Button type='primary' onClick={this.showModal.bind(this, '', '', '',1)}>添加新成员</Button>
           </div>
         </div>
+        <Modal
+          title="编辑基本信息"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <Row><Col span={4}>
+            <h4>姓名：</h4>
+          </Col>
+            <Col span={20}>
+              <Input
+                value={this.state.name}
+                style={{ padding: 10, marginBottom: 10 }}
+                onChange={(e) => this.changeValue(1, e.target.value)}
+                placeholder='请输入成员姓名' />
+            </Col></Row>
+          <Row><Col span={4}>
+            <h4>学号：</h4>
+          </Col>
+            <Col span={20}>
+              <Input
+                value={this.state.sid}
+                style={{ padding: 10, marginBottom: 10 }}
+                onChange={(e) => this.changeValue(2, e.target.value)}
+                placeholder='请输入成员学号' />
+            </Col></Row>         
+        </Modal>
       </div>
     );
   }

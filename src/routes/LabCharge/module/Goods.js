@@ -6,7 +6,7 @@ import { Editor } from 'react-draft-wysiwyg'
 import draftToHtml from 'draftjs-to-html'
 import htmlToDraft from 'html-to-draftjs'
 import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
-
+import { POST, BASE_URL } from '../../../components/commonModules/POST'
 
 const Option = Select.Option
 
@@ -111,8 +111,8 @@ class Goods extends Component {
     this.setState({ status })
   }
 // 删除物品
-  delete () {
-
+  delete (id) {
+     
   }
 
   onEditorStateChange = (editorState) => {

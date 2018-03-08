@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Table, Button, Row, Col, Modal, Icon, Input, Popconfirm, Radio } from 'antd'
+import { message,Table, Button, Row, Col, Modal, Icon, Input, Popconfirm, Radio } from 'antd'
 import '../css/lab.scss'
 import { browserHistory } from 'react-router'
+import { POST } from '../../../components/commonModules/POST'
 
 const RadioGroup = Radio.Group
 
@@ -11,23 +12,36 @@ class Lab extends Component {
     this.state = {
       list:[{
         name:'好banana',
-        isopen:true,
+        isOpen:true,
         position:'d506',
-        teacher:'lorem'
+        user:'lorem'
       }, {
         name: 'banana',
-        isopen: false,
+        isOpen: false,
         position: 'd506',
-        teacher: 'lorem'
+        user: 'lorem'
       } ],
       filterDropdownVisible: false,
       searchText: '',
       filtered: false,
       visible:false,
       visible2:false,
-      isopen:''
+      isOpen:''
     }
   }
+
+  //获取所有实验室
+  componentWillMount() {
+    POST('/getAllLab','',re=>{
+      if(re.state==1){
+        // console.log(re)
+        this.setState({list:re.data})
+      }else{
+        message.error('服务器错误')
+      }
+    })
+  }
+  
 
   onInputChange = (e) => {
     this.setState({ searchText: e.target.value })
@@ -59,8 +73,11 @@ class Lab extends Component {
   }
 
   // 进入实验室管理界面
-  toLabCharge=() => browserHistory.push({
-    pathname:'/labcharge/detail'
+  toLabCharge=(value) => browserHistory.push({
+    pathname:'/labcharge/detail',
+    query:{
+      labid:value
+    }
   })
 
   // 显示管理老师编辑模块
@@ -99,7 +116,7 @@ class Lab extends Component {
 }
 
 // 开放状态
-  isOpen=(value) => this.setState({ isopen:value })
+  isOpen=(value) => this.setState({ isOpen:value })
 
   // 删除实验室
   confirm (e) {
@@ -137,13 +154,13 @@ class Lab extends Component {
       }
     }, {
       title: '是否开放',
-      dataIndex: 'isopen',
-      key: 'isopen',
+      dataIndex: 'isOpen',
+      key: 'isOpen',
       width: '10%',
       render:(text, record, index) => {
         return (
           <div>
-            {text == true ? '是' : '否'}
+            {text == 1 ? '是' : '否'}
           </div>
         )
       }
@@ -154,18 +171,19 @@ class Lab extends Component {
       width: '10%'
     }, {
       title: '负责老师',
-      dataIndex: 'teacher',
-      key: 'teacher',
+      dataIndex: 'user',
+      key: 'user',
       width: '40%',
       render:(text, record, index) => {
+        // console.log(record)
         return (
             <Row>
-              <Col span={8}>{text}</Col>
+              <Col span={8}>{text.name}</Col>
               <Col span={5} style={{ paddingRight:5 }}>
                 <Button style={{ width: '100%' }} onClick={(e) => this.showModal(record)}>编辑负责老师</Button>
               </Col>
               <Col span={4} style={{ paddingRight:5, paddingLeft:5 }}>
-                <Button style={{ width:'100%' }} onClick={(e) => this.toLabCharge()}>进入编辑</Button>
+                <Button style={{ width:'100%' }} onClick={(e) => this.toLabCharge(record.id)}>进入编辑</Button>
               </Col>
               <Col span={4} style={{ paddingLeft:5 }}>
                 <Popconfirm title='确认删除？' onConfirm={this.confirm} onCancel={this.cancel} okText='Yes' cancelText='No'>
@@ -232,7 +250,7 @@ class Lab extends Component {
               <span>是否开放：</span>
             </Col>
             <Col span={15}>
-              <RadioGroup value={this.state.isopen} onChange={(e) => this.isOpen(e.target.value)}>
+              <RadioGroup value={this.state.isOpen} onChange={(e) => this.isOpen(e.target.value)}>
                 <Radio value>是</Radio>
                 <Radio value={false}>否</Radio>
               </RadioGroup>
