@@ -10,7 +10,7 @@ class Plan extends Component {
     super(props)
     this.state={
       editorState: EditorState.createEmpty(),
-      value:'<p>Hey this <strong>editor</strong> rocks </p>'      
+      value:'<p>请输入内容 </p>'      
     }
   }
   

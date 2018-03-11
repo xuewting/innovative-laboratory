@@ -49,65 +49,93 @@ class Tedit extends Component {
   handleChange = ({ fileList }) => this.setState({ fileList })
 
   // 边框页面跳转
-  chargepage (value) {
+  chargepage(value) {
     switch (value) {
       case 0:
         browserHistory.push({
-          pathname: `/labcharge/detail`
+          pathname: `/labcharge/detail`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/detail' })
         break
       case 1:
         browserHistory.push({
-          pathname: `/labcharge/staff`
+          pathname: `/labcharge/staff`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/staff' })
         break
       case 2:
         browserHistory.push({
-          pathname: `/labcharge/item`
+          pathname: `/labcharge/item`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/item' })
         break
       case 3:
         browserHistory.push({
-          pathname: `/labcharge/honor`
+          pathname: `/labcharge/honor`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/honor' })
         break
       case 4:
         browserHistory.push({
-          pathname: `/labcharge/goods`
+          pathname: `/labcharge/goods`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/goods' })
         break
       case 5:
         browserHistory.push({
-          pathname: `/labcharge/teacher`
+          pathname: `/labcharge/teacher`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/teacher' })
         break
       case 6:
         browserHistory.push({
-          pathname: `/labcharge/notice`
+          pathname: `/labcharge/notice`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/notice' })
         break
       case 7:
         browserHistory.push({
-          pathname: `/labcharge/news`
+          pathname: `/labcharge/news`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/news' })
         break
       case 8:
         browserHistory.push({
-          pathname: '/labcharge/sgin'
+          pathname: '/labcharge/sgin',
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/sgin' })
         break
       case 9:
-        history.back()
-        break
+        browserHistory.push({
+          pathname: `/personal`
+        }); break
     }
   }
 

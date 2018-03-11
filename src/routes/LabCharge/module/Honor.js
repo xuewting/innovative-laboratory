@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Row, Col, Table, Button, Modal, Input, Select, DatePicker  } from 'antd'
+import { Row, Col, Table, Button, Modal, Input, Select, DatePicker, message  } from 'antd'
 import '../css/honor.scss'
-import moment from 'moment';
+import moment from 'moment'
+import {POST} from '../../../components/commonModules/POST'
 
 const Option = Select.Option;
 const dateFormat = 'YYYY-MM-DD';
@@ -38,6 +39,24 @@ class Honor extends Component {
       author:'',
       magazine:''
     }
+  }
+
+  //获取成果
+  componentWillMount(){
+    POST('/labt/getLabGlory',`labId=${this.props.labid}&type=0`,re=>{
+     if(re.state==1) {
+      this.setState({comList:re.data.rows})
+     }else{
+       message.error('服务器错误')
+     }
+    })
+    POST('/labt/getLabGlory',`labId=${this.props.labid}&type=1`,re=>{
+     if(re.state==1) {
+      this.setState({paList:re.data.rows})
+     }else{
+       message.error('服务器错误')
+     }
+    })
   }
 
 //打开论文模块
@@ -132,28 +151,28 @@ class Honor extends Component {
       // render: text => <a href="#">{text}</a>,
     }, {
       title: '级别',
-      dataIndex: 'class',
-      key: 'class',
+      dataIndex: 'level',
+      key: 'level',
       width: '10%'
     }, {
       title: '获得成果',
-      dataIndex: 'reward',
-      key: 'reward',
+      dataIndex: 'result',
+      key: 'result',
       width: '10%'
     }, {
       title: '参与学生',
-      dataIndex: 'students',
-      key: 'students',
+      dataIndex: 'winUser',
+      key: 'winUser',
       width: '15%'
     }, {
       title: '指导老师',
-      dataIndex: 'teacher',
-      key: 'teacher',
+      dataIndex: 'guideTea',
+      key: 'guideTea',
       width: '15%'
     }, {
       title: '时间',
-      dataIndex: 'time',
-      key: 'time',
+      dataIndex: 'winTime',
+      key: 'winTime',
       width: '25%',
       render:(text, record, index)=>{
         return(
@@ -170,8 +189,8 @@ class Honor extends Component {
 
     const columns2 = [{
       title: '论文标题',
-      dataIndex: 'title',
-      key: 'title',
+      dataIndex: 'name',
+      key: 'name',
       width: '25%',
       // render: text => <a href="#">{text}</a>,
     }, {
@@ -186,8 +205,8 @@ class Honor extends Component {
       width: '25%'
     }, {
       title: '时间',
-      dataIndex: 'time',
-      key: 'time',
+      dataIndex: 'winTime',
+      key: 'winTime',
       width: '25%',
        render:(text, record, index)=>{
         return(

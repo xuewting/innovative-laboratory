@@ -3,6 +3,7 @@ import Side from '../../LabCharge/components/Side'
 import { browserHistory } from 'react-router'
 import { Row, Col, Button, Input, DatePicker } from 'antd'
 import './IEdit.scss'
+import Plan from '../../NewItem/components/Plan'
 
 const { TextArea } = Input
 
@@ -16,7 +17,9 @@ class IEdit extends Component {
       origonxh:'',
       teacher:'',
       mumber:'',
-      intor:''
+      intor:'',
+      need:'',
+      tid:''
     }
   }
 
@@ -41,7 +44,12 @@ class IEdit extends Component {
       case 6:
         this.setState({ intor:value })
         break
-
+      case 7:
+        this.setState({ need: value })
+        break
+      case 8:
+        this.setState({ need: value })
+        break
       default:
         break
     }
@@ -54,65 +62,93 @@ class IEdit extends Component {
   }
 
   // 边框页面跳转
-  chargepage (value) {
+  chargepage(value) {
     switch (value) {
       case 0:
         browserHistory.push({
-          pathname: `/labcharge/detail`
+          pathname: `/labcharge/detail`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/detail' })
         break
       case 1:
         browserHistory.push({
-          pathname: `/labcharge/staff`
+          pathname: `/labcharge/staff`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/staff' })
         break
       case 2:
         browserHistory.push({
-          pathname: `/labcharge/item`
+          pathname: `/labcharge/item`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/item' })
         break
       case 3:
         browserHistory.push({
-          pathname: `/labcharge/honor`
+          pathname: `/labcharge/honor`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/honor' })
         break
       case 4:
         browserHistory.push({
-          pathname: `/labcharge/goods`
+          pathname: `/labcharge/goods`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/goods' })
         break
       case 5:
         browserHistory.push({
-          pathname: `/labcharge/teacher`
+          pathname: `/labcharge/teacher`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/teacher' })
         break
       case 6:
         browserHistory.push({
-          pathname: `/labcharge/notice`
+          pathname: `/labcharge/notice`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/notice' })
         break
       case 7:
         browserHistory.push({
-          pathname: `/labcharge/news`
+          pathname: `/labcharge/news`,
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/news' })
         break
       case 8:
         browserHistory.push({
-          pathname: '/labcharge/sgin'
+          pathname: '/labcharge/sgin',
+          query: {
+            labid: this.props.location.query.labid
+          }
         })
         this.setState({ chargepage: '/labcharge/sgin' })
         break
       case 9:
-        history.back()
-        break
+        browserHistory.push({
+          pathname: `/personal`
+        }); break
     }
   }
 
@@ -157,6 +193,12 @@ class IEdit extends Component {
                     <Input placeholder='请输入指导老师姓名' className='in' onChange={(e) => this.changevalue(4, e.target.value)} />
                   </Col>
                 </Row>
+                <Row style={{ width: '40%', fontSize: 16, marginBottom: 15 }}>
+                  <Col span={4} style={{ color: '#fff' }}>教工号:</Col>
+                  <Col span={20}>
+                    <Input placeholder='请输入指导老师教工号' className='in' onChange={(e) => this.changevalue(8, e.target.value)} />
+                  </Col>
+                </Row>
                 <Row style={{ width: '40%', fontSize: 16, marginBottom: 35 }}>
                   <Col span={4} style={{ color: '#fff' }}>预计结束时间:</Col>
                   <Col span={20}>
@@ -177,14 +219,25 @@ class IEdit extends Component {
                   </div>
                 </div>
                 <div style={{ width:'50%', fontSize:16, marginBottom: 35 }}>
-                  <div style={{ color: '#fff', marginBottom: 10 }}>项目简介:</div>
+                  <div style={{ color: '#fff', marginBottom: 10 }}>项目介绍:</div>
                   <TextArea
                     autosize={{ minRows:10, maxRows:10 }}
                     style={{ fontSize:16, padding:10 }}
-                    placeholder='请输入项目的简介'
+                    placeholder='请输入项目简略介绍'
                     onChange={(e) => this.changevalue(6, e.target.value)} />
                 </div>
-
+                <div style={{ width: '50%', fontSize: 16, marginBottom: 35 }}>
+                  <div style={{ color: '#fff', marginBottom: 10 }}>设备需求:</div>
+                  <TextArea
+                    autosize={{ minRows: 10, maxRows: 10 }}
+                    style={{ fontSize: 16, padding: 10 }}
+                    placeholder='请输入设备需求'
+                    onChange={(e) => this.changevalue(7, e.target.value)} />
+                </div>
+                <div style={{ width: '50%', fontSize: 16, marginBottom: 35 }}>
+                  <div style={{ color: '#fff', marginBottom: 10 }}>项目计划:</div>
+                  <Plan></Plan>
+                </div>
               </div>
 
               <div className='ed_i_foot'>
