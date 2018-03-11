@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './HomeView.scss'
 import shuaxin from '../assets/刷新.png'
 import {browserHistory} from 'react-router'
+import { message } from 'antd'
+import { POST } from '../../../components/commonModules/POST'
+const moment = require('moment')
 
 class Public extends Component {
   constructor(props) {
@@ -37,6 +40,17 @@ class Public extends Component {
       pathname:`/message`
     })
   }
+  
+  componentWillMount() {
+    POST('/QueryNotice',`len=5`,re=>{
+      if(re.state==1){
+        this.setState({list:re.data});
+      }else{
+        message.error('服务器错误')
+      }
+    })
+  }
+  
 
   render() {
     return (
@@ -50,14 +64,14 @@ class Public extends Component {
 
         {this.state.list.map((item, i) => {
           return (
-            <div className="pub_item" key={i}>
-              <div className="time">{item.time}</div>
-              <a href="">{item.tit}</a>
-              <p>{item.con}</p>
+            <div className="pub_item" key={i} style={{cursor:'pointer'}} >
+              <div className="time">{moment(item.time).format('YYYY/MM/DD')}</div>
+              <a href="">{item.title}</a>
+              <p>{item.content}</p>
             </div>
           )
         })}
-
+        
         <div className="foot">
         <a href="" onClick={this.toMessage.bind(this)}>More...</a>
         </div>

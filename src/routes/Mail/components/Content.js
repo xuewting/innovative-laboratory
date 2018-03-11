@@ -5,19 +5,21 @@ import '../css/content.scss'
 import { browserHistory } from 'react-router'
 import './Application'
 import Application from './Application'
+const moment = require('moment')
 
 class Content extends Component {
   constructor (props) {
     super(props)
     this.state = {
       con:{
-        type:1
-      }
+      },
+      type:''
     }
   }
 
   componentWillReceiveProps (nextProps, nextState) {
-    this.setState({ con:nextProps.content })
+    this.setState({ con:nextProps.content,
+    type:nextProps.type })
   }
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -29,18 +31,18 @@ class Content extends Component {
   })
 
   render () {
-    const { con } = this.state
+    const { con, type } = this.state
     return (
       <div>
-        {con ? con.type == 1 ?
-          <Application />
+        {con ? type == 1 ?
+          <Application content={this.state.con}/>
       : <div className='mail_content'>
         <div className='mail_con_head'>
           <Row>
             <Col span={19}><h2>{con.title}</h2></Col>
             <Col span={5}><div className='mail_hea_time'>
               <img src={pan} />
-              <span> {con.time}</span>
+              <span> {moment(con.time).format('YYYY/MM/DD')}</span>
             </div>
             </Col>
           </Row>

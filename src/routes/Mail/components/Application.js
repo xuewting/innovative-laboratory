@@ -7,15 +7,7 @@ class Application extends Component {
   constructor(props) {
     super(props);
     this.state={
-      data:{
-        title: 'Lorem ipsum dolor sit',
-        origin:'banaan',
-        phone:'1234567',
-        teacher:'apple',
-        endtime:'2019-1-1',
-        need:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident laudantium officia at laboriosam minus ipsam consequatur illum modi hic expedita consectetur a fugit velit, ad, magnam totam qui, dignissimos error.',
-        intor:'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat ab, inventore magnam commodi ipsam vero quibusdam aliquid laudantium facilis. Delectus ipsa necessitatibus odit modi. Perspiciatis illum adipisci tenetur ipsam odit!'
-      }
+      data:this.props.content
     }
   }
 
@@ -31,7 +23,7 @@ class Application extends Component {
     return (
       <div className='application'>
         <div className="app_title">
-          <h2>{data.title}</h2>
+          <h2>{data.pname}</h2>
         </div>
         <div className="app_info">
           <span>发起人：{data.origin}</span>
@@ -40,10 +32,10 @@ class Application extends Component {
           <span>联系方式：{data.phone}</span>
         </div>
         <div className="app_info">
-          <span>指导老师：{data.teacher}</span>
+          <span>申请类型：{data.applyType==0?'申请立项':'结束项目'}</span>
         </div>
         <div className="app_info">
-          <span>预计结束时间：{data.endtime}</span>
+          <span>申请时间：{data.applyTime}</span>
         </div>
         <div className="app_info">
           <span>设备需求：{data.need}</span>

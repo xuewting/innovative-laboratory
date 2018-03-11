@@ -124,7 +124,7 @@ class ItemPage extends Component {
         {/* list_content */}
         <div className='list_con'>
           {this.state.list == 0
-            ? <Row gutter={16}>
+            ? <Row >
               {this.state.p_list.map((item, i) => {
                 return (
                   <Col span={8} key={i} ><div className='list_item_box' onClick={this.toDetail.bind(this)} style={{ cursor: 'pointer' }}>

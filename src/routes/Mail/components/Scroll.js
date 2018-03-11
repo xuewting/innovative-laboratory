@@ -11,13 +11,14 @@ class Scroll extends Component {
     this.state = {
       baseMess:[], // 基本消息
       message:[], // 申请消息
-      active:-1
+      active:-1,
+      type:''
     }
   }
 
   active=(num, item, a) => {
-    this.setState({ active:num })
-    console.log(num)
+    this.setState({ active:num,
+      type:a })
     this.props.changeContent(item, a)
   }
 
@@ -36,8 +37,8 @@ class Scroll extends Component {
     const mark2 = {
       display: 'none'
     }
-    console.log(this.state.active)
-    return (     
+
+    return (
       <div style={{ marginBottom:20 }}>
         <FreeScrollBar style={{ height:625, padding:10 }}>
           {/* 遍历基本信息 */}
@@ -47,7 +48,7 @@ class Scroll extends Component {
               <div className='mail_scroll_item' key={i} style={this.state.active == i ? style1 : style2} onClick={this.active.bind(this, i, item, 0)}>
                 <Row style={{ marginBottom:15 }}>
                   <Col span={1}>
-                    <img src={mark} alt='' style={this.state.active == i ? mark1 : mark2} />
+                    <img src={mark} alt='' style={this.state.active == i && this.state.type == 0 ? mark1 : mark2} />
                   </Col>
                   <Col span={19}><div className='mail_item_from'>{item.title}</div></Col>
                   <Col span={4}><div className='mail_item_time'>{time}</div></Col>
@@ -69,7 +70,7 @@ class Scroll extends Component {
               <div className='mail_scroll_item' key={i} style={this.state.active == i ? style1 : style2} onClick={this.active.bind(this, i, item, 1)}>
                 <Row style={{ marginBottom:15 }}>
                   <Col span={1}>
-                    <img src={mark} alt='' style={this.state.active == i ? mark1 : mark2} />
+                    <img src={mark} alt='' style={this.state.active == i && this.state.type == 1 ? mark1 : mark2} />
                   </Col>
                   <Col span={19}><div className='mail_item_from'>{item.uid}</div></Col>
                   <Col span={4}><div className='mail_item_time'>{item.applyTime}</div></Col>

@@ -9,13 +9,15 @@ class Mail extends Component {
     super(props)
     this.state = {
       con:'',
+      type:'',
       baseMess:[], // 基本消息
       message:[] // 申请消息
     }
   }
 
   changeContent(value,a){
-    this.setState({ con:value })
+    this.setState({ con:value,
+    type:a })
     // console.log(a)
   } 
   componentDidMount () {
@@ -41,7 +43,7 @@ class Mail extends Component {
               baseMess={this.state.baseMess} message={this.state.message} />
           </Col>
           <Col span={14} style={{ paddingLeft:5 }}>
-            <Content content={this.state.con} />
+            <Content content={this.state.con} type={this.state.type} />
           </Col>
         </Row>
       </div>
