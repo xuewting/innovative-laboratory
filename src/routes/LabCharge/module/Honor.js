@@ -124,7 +124,7 @@ class Honor extends Component {
   }
 
   // 打开竞赛模块
-  showCompetitionModal = (ctitle, cclass, reward, students, teacher, ctime) => {
+  showCompetitionModal = (ctitle, cclass, reward, students, teacher, ctime,ctype) => {
     this.setState({
       visible: true,
       ctitle: ctitle,
@@ -132,12 +132,39 @@ class Honor extends Component {
       reward: reward,
       students: students,
       teacher: teacher,
-      ctime: ctime
+      ctime: ctime,
+      typeC:ctype
     })
   }
   // 确认修改（竞赛）
   handleCOk = (e) => {
-    console.log(e)
+    let type=this.state.typeC
+    if(type==1){
+      let type = 0
+      let name = this.state.ctitle
+      let level = this.state.cclass
+      let winUser = this.state.students
+      let guideTea = this.state.teacher
+      let labId = this.props.labid
+      let winTime = this.state.ctime
+      let result = this.state.reward
+      let data = `type=${type}&name=${name}&level=${level}&winUser=${winUser}&
+      guideTea=${guideTea}&labId=${labId}&winTime=${winTime}&result=${result}`
+      POST('/labt/addLabGlory',data,re=>{
+        if(re.state==1){
+          message.success('添加成功')
+          POST('/labt/getLabGlory', `labId=${this.props.labid}&type=0`, re => {
+            if (re.state == 1) {
+              this.setState({ comList: re.data.rows })
+            } else {
+              message.error('服务器错误')
+            }
+          })
+        }else{
+          message.error('服务器错误')
+        }
+      })
+    }    
     this.setState({
       visible: false
     })

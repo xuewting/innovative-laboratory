@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Modal, Button, Input } from 'antd'
+import { Modal, Button, Input,message } from 'antd'
 import '../css/signin.scss'
+import { POST } from '../../../components/commonModules/POST';
 
 const {TextArea}=Input
 
@@ -8,16 +9,30 @@ class Calendar extends Component {
   constructor(props) {
     super(props)
     this.state={
-      disable:false
+      disable:false,
+      con:''
     }
   }
 
   showModal(){
     this.setState({disable:true})
   }
+  //修改备注
+  changeValue=(value)=>this.setState({con:value})
   //确认
-  handleCOk = (e) => {
-    console.log(e);
+  handleCOk = (e) => {    
+    let labid=this.props.labid
+    let content=this.state.con  
+    let data=`labId=${labid}&content=${content}&rec=0`
+    POST('/lab/StaffRecord',data,re=>{
+      if(re.state==1){
+        message.success('提交成功')
+      }else if(re.state==-5){
+        message.error('输入参数错误')
+      }else{
+        message.error('服务器错误')
+      }
+    })
     this.setState({
       disable: false,
     });
@@ -40,7 +55,7 @@ class Calendar extends Component {
           onCancel={this.handleCCancel}
           >
           <span style={{fontSize:1+'em'}}>备注：</span>
-          <TextArea ></TextArea>
+          <TextArea onChange={(e)=>this.changeValue(e.target.value)}></TextArea>
         </Modal>
       </div>
     )

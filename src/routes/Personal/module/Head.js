@@ -15,7 +15,7 @@ class PerHead extends Component {
   }
 
   render () {
-    const { email, headImg, phone, sid, name, sex,  } = this.props.userInfo
+    const { email, headImg, phone, sid, name, sex,  } = this.props.userInfo    
     return (
       <div>
         <div className='per_head'>
@@ -28,7 +28,7 @@ class PerHead extends Component {
           <div className='per_detail'>联系电话：{phone}</div>
           <div className='per_detail'>邮箱：{email}</div>
           <div className='per_detail'>实验室：{this.props.lab.name}</div>
-          <Signin></Signin>
+          <Signin labid={this.props.lab.id}></Signin>
         </div>        
       </div>
     )

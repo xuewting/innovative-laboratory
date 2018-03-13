@@ -247,8 +247,8 @@ class Item extends Component {
                             </Modal>
                           </Col>
                           <Col span={4}>
-                            <Popconfirm title='确定删除此项目结束吗?删除后将无法找回' onConfirm={this.confirmDelete.bind(this, item.id)} onCancel={this.cancel.bind(this)} okText='Yes' cancelText='No'>
-                              <Button type='danger' style={{ width: '100%' }}>删除</Button>
+                            <Popconfirm title='确定删除此项目吗?删除后将无法找回' onConfirm={this.confirmDelete.bind(this, item.id)} onCancel={this.cancel.bind(this)} okText='Yes' cancelText='No'>
+                              <Button type='danger' style={{ width: '100%' }} >删除</Button>
                             </Popconfirm>
                           </Col>
                         </Row>
