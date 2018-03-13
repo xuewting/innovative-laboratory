@@ -26,7 +26,10 @@ class Lab extends Component {
       filtered: false,
       visible:false,
       visible2:false,
-      isOpen:''
+      isOpen:'',
+      name:'',
+      sid:'',
+      labid:''
     }
   }
 
@@ -82,11 +85,32 @@ class Lab extends Component {
 
   // 显示管理老师编辑模块
   showModal=(value) => this.setState({
-    visible: !this.state.visible
-    // defaultValue:value
+    visible: !this.state.visible,
+    labid:value
   });
-  handleOk = (e) => {
-    console.log(e)
+
+  //内容修改（负责老师）
+  changeTeacher=(value,type)=>{
+    if(type==1){
+      this.setState({name:value})
+    }else{
+      this.setState({sid:value})
+    }
+  }
+
+  handleOk = () => {
+    let name=this.state.name
+    let sid=this.state.sid
+    let data=`name=${name}&sid=${sid}&labId=${this.state.labid}`
+    POST('/root/editLabTea',data,re=>{
+      if(re.state==1){
+        message.success('修改成功')
+      }else if(re.state==-2){
+        message.error('输入用户不存在，请重新输入')
+      }else{
+        message.error('服务器错误')
+      }
+    })
     this.setState({
       visible: false
     })
@@ -180,7 +204,7 @@ class Lab extends Component {
             <Row>
               <Col span={8}>{text.name}</Col>
               <Col span={5} style={{ paddingRight:5 }}>
-                <Button style={{ width: '100%' }} onClick={(e) => this.showModal(record)}>编辑负责老师</Button>
+                <Button style={{ width: '100%' }} onClick={(e) => this.showModal(record.id)}>编辑负责老师</Button>
               </Col>
               <Col span={4} style={{ paddingRight:5, paddingLeft:5 }}>
                 <Button style={{ width:'100%' }} onClick={(e) => this.toLabCharge(record.id)}>进入编辑</Button>

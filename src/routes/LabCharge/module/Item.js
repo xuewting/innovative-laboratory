@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom'
 import { POST, BASE_URL } from '../../../components/commonModules/POST'
 
 class Item extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       list: [{
@@ -30,7 +30,7 @@ class Item extends Component {
         origin: '麦兜',
         teacher: '可达鸭',
         endTime: '18-12-12'
-      } ],
+      }],
       current: 1,
       visible: false,
       title: '',
@@ -38,12 +38,12 @@ class Item extends Component {
       originXh: '',
       teacher: '',
       endTime: '',
-      date: '',
-      evisible: false
+      evisible: false,
+      sid:''
     }
   }
 
-  componentWillMount () {
+  componentWillMount() {
     let newDate = new Date()
     this.setState({ date: newDate.toLocaleDateString() })
     console.log(newDate.toLocaleDateString())
@@ -57,7 +57,21 @@ class Item extends Component {
   }
   // 确认添加
   handleOk = (e) => {
-    console.log(e)
+    let labid=this.props.labid
+    let pname=this.state.title
+    let teacherId=this.state.sid
+    let userId=this.state.originXh
+    let expectTime=this.state.endTime
+    let data = `labid=${labid}&pname=${pname}&teacherId=${teacherId}&userId=${userId}&expectTime=${expectTime}`
+    POST('/labt/addNewPro',data,re=>{
+      if(re.state==1){
+        message.success('添加成功')
+      }else if(re.state==-2){
+        message.error('输入的用户不存在，请重新输入')
+      }else{
+        message.error('服务器错误')
+      }
+    })
     this.setState({
       visible: false
     })
@@ -77,11 +91,11 @@ class Item extends Component {
     })
   }
 
-  componentWillMount () {
+  componentWillMount() {
     let data = `pageCount=${4}&currentPage=${1}&labId=${this.props.labid}`
     POST('/labt/getLabPro', data, re => {
       if (re.state == 1) {
-        this.setState({list:re.data.rows})
+        this.setState({ list: re.data.rows })
       } else {
         message.error('服务器错误')
       }
@@ -96,8 +110,8 @@ class Item extends Component {
   // 确认删除项目
   confirmDelete = (i) => {
     let data = `id=${i}`
-    POST('/labt/deletePro',data,re=>{
-      if(re.state==1){
+    POST('/labt/deletePro', data, re => {
+      if (re.state == 1) {
         let data = `pageCount=${4}&currentPage=${this.state.current}&labId=${this.props.labid}`
         POST('/labt/getLabPro', data, re => {
           if (re.state == 1) {
@@ -106,7 +120,7 @@ class Item extends Component {
             message.error('服务器错误')
           }
         })
-      }else{
+      } else {
 
       }
     })
@@ -123,6 +137,7 @@ class Item extends Component {
       case 2: this.setState({ origin: value }); break
       case 3: this.setState({ originXh: value }); break
       case 4: this.setState({ teacher: value }); break
+      case 5: this.setState({ sid: value }); break
 
     }
   }
@@ -133,7 +148,7 @@ class Item extends Component {
   }
 
   // 编辑页面
-  toEdit (num) {
+  toEdit(num) {
     browserHistory.push({
       pathname: '/labcharge/item/edit',
       qurey: {
@@ -158,14 +173,14 @@ class Item extends Component {
     })
   }
 
-  render () {
+  render() {
     const props = {
       name: 'file',
       action: '',
       headers: {
         authorization: 'authorization-text'
       },
-      onChange (info) {
+      onChange(info) {
         if (info.file.status !== 'uploading') {
           console.log(info.file, info.fileList)
         }
@@ -232,7 +247,7 @@ class Item extends Component {
                             </Modal>
                           </Col>
                           <Col span={4}>
-                            <Popconfirm title='确定删除此项目结束吗?删除后将无法找回' onConfirm={this.confirmDelete.bind(this,item.id)} onCancel={this.cancel.bind(this)} okText='Yes' cancelText='No'>
+                            <Popconfirm title='确定删除此项目结束吗?删除后将无法找回' onConfirm={this.confirmDelete.bind(this, item.id)} onCancel={this.cancel.bind(this)} okText='Yes' cancelText='No'>
                               <Button type='danger' style={{ width: '100%' }}>删除</Button>
                             </Popconfirm>
                           </Col>
@@ -275,8 +290,8 @@ class Item extends Component {
                     <Col span={18}><Input placeholder='请输入项目的指导老师' onChange={(e) => this.changeValue(4, e.target.value)} /></Col>
                   </Row>
                   <Row style={{ marginBottom: 10 }}>
-                    <Col span={7} style={{ verticalAlign: 'middle', fontSize: 14 }}>项目启动时间：</Col>
-                    <Col span={16}>{this.state.date}</Col>
+                    <Col span={5} style={{ verticalAlign: 'middle', fontSize: 14 }}>教工号：</Col>
+                    <Col span={18}><Input placeholder='请输入项目的指导老师的教工号' onChange={(e) => this.changeValue(5, e.target.value)} /></Col>
                   </Row>
                   <Row style={{ marginBottom: 10 }}>
                     <Col span={7} style={{ verticalAlign: 'middle', fontSize: 14 }}>项目预计结束时间：</Col>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Select, Button, message } from 'antd'
+import {  Input, Row, Col, Select, Button, message } from 'antd'
 import '../css/notice.scss'
 
 const Option = Select.Option
@@ -11,7 +11,9 @@ class Notice extends Component {
       state:'',
       name:'',
       id:'',
-      person:[]
+      person:[],
+      title:'',
+      con:''
     }
   }
 
@@ -48,6 +50,17 @@ class Notice extends Component {
    console.log(`selected ${value}`)
 }
 
+//修改标题
+  changeTitle=(value)=>this.setState({title:value});
+
+//修改内容
+  changeCon=(value)=>this.setState({con:value})
+
+  //提交
+  commit=()=>{
+     
+  }
+
   render () {
     return (
       <div style={{ paddingTop: 20, paddingRight: 15 }}>
@@ -61,13 +74,19 @@ class Notice extends Component {
                 <Col span={2}><span>发送对象：</span></Col>
                 <Col span={18}>
                   <Select style={{ width: 120 }} onChange={(e)=>this.handleChange(e)}>
-                    <Option value='公开'>公开</Option>
-                    <Option value='实验室内部'>实验室内部</Option>
-                    <Option value='自定义' >自定义</Option>
+                    <Option value={0}>公开</Option>
+                    <Option value={1}>实验室内部</Option>
+                    <Option value={2} >自定义</Option>
                   </Select>
                 </Col>
               </Row>
-              {this.state.state=='自定义'?
+              <Row style={{ marginBottom: 20 }}>
+                <Col span={2}><span>标题：</span></Col>
+                <Col span={14}>
+                  <Input placeholder='请输入标题'onChange={(e)=>this.changeTitle(e.target.value)}></Input>
+                </Col>
+              </Row>
+              {this.state.state==2?
               <div className="notice_to_person">
                 <Row style={{marginBottom:10}}>
                   <Col span={5}>
@@ -92,11 +111,11 @@ class Notice extends Component {
               </div>:''}
             </div>
             <div className='notice_contain'>
-              <textarea cols='30' rows='10' className='cantain_inp' />
+              <textarea cols='30' rows='10' className='cantain_inp' onChange={(e)=>this.changeCon(e.target.value)}/>
             </div>
           </div>
           <div className="notice_commit">
-            <div className="commit_btu">
+            <div className="commit_btu" onClick={(e)=>this.commit()}>
               提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交
             </div>
           </div>
