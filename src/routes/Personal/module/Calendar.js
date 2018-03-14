@@ -39,7 +39,6 @@ class Calendar extends Component {
   }
   //取消
   handleCCancel = (e) => {
-    console.log(e);
     this.setState({
       disable: false,
     });

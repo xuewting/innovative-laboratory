@@ -16,10 +16,10 @@ class Personal extends Component {
       identity: 'root'
     }
   }
-  componentDidMount() {
+  componentWillMount() {
     let data = ``
     POST('/user/getUserInfo', data, re => {
-      if (re.state === 1) {
+      if (re.state == 1) {
         this.setState({ userInfo: re.data })
         this.setState({ lab: re.data.lab })
         this.setState({ labId: re.data.own_lab })

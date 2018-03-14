@@ -48,6 +48,7 @@ class Competition extends Component {
       filtered: false
     }
   }
+  
 
   onInputChange = (e) => {
     this.setState({ searchText: e.target.value })

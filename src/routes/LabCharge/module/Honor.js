@@ -83,7 +83,7 @@ class Honor extends Component {
       let winTime = this.state.ptime
       let magazine = this.state.magazine
       console.log(winTime)
-      let data = `name=${name}&author=${author}&labId=${labid}&winTime=${winTime}&magazine=${magazine}`
+      let data = `name=${name}&author=${author}&labId=${labid}&winTime=${winTime}&magazine=${magazine}&type=1`
       POST('/labt/addLabGlory', data, re => {
         if (re.state == 1) {
           message.success('上传成功')
@@ -124,7 +124,7 @@ class Honor extends Component {
   }
 
   // 打开竞赛模块
-  showCompetitionModal = (ctitle, cclass, reward, students, teacher, ctime,ctype) => {
+  showCompetitionModal = (ctitle, cclass, reward, students, teacher, ctime, ctype) => {
     this.setState({
       visible: true,
       ctitle: ctitle,
@@ -198,15 +198,20 @@ class Honor extends Component {
   render () {
     const columns1 = [{
       title: '名称',
-      dataIndex: 'title',
-      key: 'title',
+      dataIndex: 'name',
+      key: 'name',
       width: '20%'
       // render: text => <a href="#">{text}</a>,
     }, {
       title: '级别',
       dataIndex: 'level',
       key: 'level',
-      width: '10%'
+      width: '10%',
+      render:text=>{
+        return(
+          <div>{text==0?'院级':text==1?'校级':text==2?'省级':'国家级'}</div>
+        )
+      }
     }, {
       title: '获得成果',
       dataIndex: 'result',
@@ -232,7 +237,7 @@ class Honor extends Component {
           <Row>
             <Col span={12}>{record.time}</Col>
             <Col span={6}>
-              <Button onClick={this.showCompetitionModal.bind(this, record.title, record.class, record.reward, record.students, record.teacher, record.time)}>修改</Button>
+              <Button onClick={this.showCompetitionModal.bind(this, record.title, record.class, record.reward, record.students, record.teacher, record.time, 0)}>修改</Button>
             </Col>
             <Col span={6}><Button type='danger'>删除</Button></Col>
           </Row>
@@ -292,7 +297,7 @@ class Honor extends Component {
                 <Table columns={columns1} dataSource={this.state.comList} />
               </div>
               <div className='com_foot'>
-                <Button type='primary' onClick={this.showCompetitionModal.bind(this, '', '', '', '', '', '', 0)}><i className='fa fa-plus' /> 添加</Button>
+                <Button type='primary' onClick={this.showCompetitionModal.bind(this, '', '', '', '', '', dateNow.toLocaleDateString(), 1)}><i className='fa fa-plus' /> 添加</Button>
                 <Modal
                   title='竞赛成果'
                   visible={this.state.visible}
@@ -306,10 +311,10 @@ class Honor extends Component {
                   <Row style={{ marginBottom: 10 }}>
                     <Col span={6}><h3>级别：</h3></Col>
                     <Col span={18}><Select defaultValue={this.state.cclass} style={{ width: 120 }} onChange={this.changeClass.bind(this)}>
-                      <Option value='院级'>院级</Option>
-                      <Option value='校级'>校级</Option>
-                      <Option value='省级'>省级</Option>
-                      <Option value='国家级'>国家级</Option>
+                      <Option value='0'>院级</Option>
+                      <Option value='1'>校级</Option>
+                      <Option value='2'>省级</Option>
+                      <Option value='3'>国家级</Option>
                     </Select></Col>
                   </Row>
                   <Row style={{ marginBottom: 10 }}>
