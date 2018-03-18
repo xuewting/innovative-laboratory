@@ -18,7 +18,8 @@ class Plan extends Component {
     this.setState({
       editorState,
     })
-    this.refs.html.innerHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    this.props.changePlan(draftToHtml(convertToRaw(editorState.getCurrentContent())))
+    // this.refs.html.innerHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()))
   }
 
   
@@ -47,10 +48,10 @@ class Plan extends Component {
             options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'colorPicker', 'textAlign', 'list', 'history']
           }}
         />
-        <div ref='html'>
+        <div ref='html'></div>        
         </div>
         
-      </div>                 
+                       
     );
   }
 }

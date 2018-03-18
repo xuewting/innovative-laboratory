@@ -182,6 +182,7 @@
     width:100%;
     float: left;
     padding: 0 10px;
+    min-height: 100%;
     margin-bottom: 10px;
     .list_item_con {
       float: left;
@@ -199,6 +200,7 @@
         font-size: 15px;
         color: white;
         margin-bottom: 10px;
+        min-height: 35px;
       }
       .list_item_subhead {
         float: left;

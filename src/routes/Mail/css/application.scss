@@ -25,5 +25,11 @@
       color: #333;
       font-size: 1em;
     }
+    .download{
+      cursor: pointer;
+      &:hover{
+        color: #23a8a9
+      }
+    }
   }
 }

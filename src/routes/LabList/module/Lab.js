@@ -29,7 +29,11 @@ class Lab extends Component {
       isOpen:'',
       name:'',
       sid:'',
-      labid:''
+      labid:'',
+      labname:'',
+      position:'',
+      teacher:'',
+      sid:''
     }
   }
 
@@ -127,7 +131,25 @@ class Lab extends Component {
     visible2: !this.state.visible2
   });
   handleOk2 = (e) => {
-  console.log(e)
+    let {labname,teacher,sid,isOpen,position} = this.state
+    let data=`name=${labname}&position=${position}&isopen=${isOpen}&tid=${sid}&tname=${teacher}`
+  POST('/root/addLab',data,re=>{
+    if(re.state==1){
+      message.success('添加成功')
+      POST('/getAllLab', '', re => {
+        if (re.state == 1) {
+          // console.log(re)
+          this.setState({ list: re.data })
+        } else {
+          message.error('服务器错误')
+        }
+      })
+    }else if(re.state==-2){
+      message.error('输入的用户不存在，请重新输入')
+    }else{
+      message.error('服务器错误')
+    }
+  })
   this.setState({
     visible2: false
   })
@@ -149,6 +171,20 @@ class Lab extends Component {
 
   cancel (e) {
     console.log(e)
+  }
+
+  //更改值（添加实验室）
+  changeValue(type,value){
+    switch(type){
+      case 1:
+      this.setState({labname:value});break
+      case 2:
+      this.setState({position:value});break
+      case 3:
+      this.setState({teacher:value});break
+      case 4:
+      this.setState({sid:value});break
+    }
   }
 
   render () {
@@ -258,7 +294,7 @@ class Lab extends Component {
               <span>实验室名称：</span>
             </Col>
             <Col span={15}>
-              <Input />
+              <Input onChange={(e)=>this.changeValue(1,e.target.value)}/>
             </Col>
           </Row>
           <Row style={{ marginBottom:15 }}>
@@ -266,7 +302,7 @@ class Lab extends Component {
               <span>所在位置：</span>
             </Col>
             <Col span={15}>
-              <Input />
+              <Input onChange={(e) => this.changeValue(2, e.target.value)}/>
             </Col>
           </Row>
           <Row style={{ marginBottom:15 }}>
@@ -274,9 +310,9 @@ class Lab extends Component {
               <span>是否开放：</span>
             </Col>
             <Col span={15}>
-              <RadioGroup value={this.state.isOpen} onChange={(e) => this.isOpen(e.target.value)}>
-                <Radio value>是</Radio>
-                <Radio value={false}>否</Radio>
+              <RadioGroup onChange={(e) => this.isOpen(e.target.value)}>
+                <Radio value={1}>是</Radio>
+                <Radio value={0}>否</Radio>
               </RadioGroup>
             </Col>
           </Row>
@@ -285,7 +321,7 @@ class Lab extends Component {
               <span>管理老师：</span>
             </Col>
             <Col span={15}>
-              <Input />
+              <Input onChange={(e) => this.changeValue(3, e.target.value)}/>
             </Col>
           </Row>
           <Row style={{ marginBottom:15 }}>
@@ -293,7 +329,7 @@ class Lab extends Component {
               <span>教工号：</span>
             </Col>
             <Col span={15}>
-              <Input />
+              <Input onChange={(e) => this.changeValue(4, e.target.value)}/>
             </Col>
           </Row>
         </Modal>

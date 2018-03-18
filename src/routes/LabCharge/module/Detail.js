@@ -25,12 +25,12 @@ class Detail extends Component {
     this.refs.file.click()
   }
 
-  onChange = (e) => {
-    console.log('radio checked', e.target.value)
-    this.setState({
-      isopen: e.target.value
-    })
-  }
+  // onChange = (e) => {
+
+  //   this.setState({
+  //     isopen: e.target.value
+  //   })
+  // }
 
   // change img
   changeSrc (e) {
@@ -40,7 +40,6 @@ class Detail extends Component {
     this.setState({ img: file,
       photoChanged:1 })
     this.setState({ srcname: e.target.value })
-
     reader.onload = (e) => {
       imgFile = e.target.result
       this.setState({ src: imgFile })
@@ -132,6 +131,10 @@ class Detail extends Component {
       }
     })
   }
+
+  //back
+  back=()=>history.back()
+
   render () {
     const { photo, name, introduction, isOpen, position, institute, establishTime } = this.state.labInfo
     const chargeUser = this.state.chargeUser
@@ -191,7 +194,7 @@ class Detail extends Component {
                         <Row><Col span={6}>
                           <span>成立时间：</span>
                         </Col><Col span={18}>
-                            <span><input type='text' value={establishTime} onChange={e => this.changeValue(e, 6)} /></span>
+                          <span><input type='text' value={establishTime} onChange={e => this.changeValue(e, 6)} /></span>
                         </Col></Row>
                       </div>
                     </div>
@@ -219,7 +222,7 @@ class Detail extends Component {
                         <Row><Col span={6}>
                           <span>是否开放：</span>
                         </Col><Col span={18}>
-                          <span> <RadioGroup onChange={this.onChange.bind(this)}
+                          <span> <RadioGroup
                             onChange={e => { this.changeValue(e, 4) }}
                             value={isOpen}>
                             <Radio value={1}>是</Radio>
@@ -257,8 +260,8 @@ class Detail extends Component {
             <div className='detail_foot'>
               <Row>
                 <Col span={12} style={{ paddingRight: 10 }}>
-                  <div className='foot_but'>
-                    清&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;空
+                  <div className='foot_but' onClick={() => this.back()}>
+                    返&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回
               </div>
                 </Col>
                 <Col span={12} style={{ paddingLeft: 10 }}>

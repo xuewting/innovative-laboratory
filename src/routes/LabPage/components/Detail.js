@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
-import { Row, Col, Tooltip} from 'antd'
+import { message,Row, Col, Tooltip} from 'antd'
 import img1 from '../img/人数.png'
 import img2 from '../img/定位.png'
 import img3 from '../img/领导.png'
 import img4 from '../img/学院_selected.png'
 import img5 from '../img/锁 1.png'
+import { POST } from '../../../components/commonModules/POST';
 
 class Detail extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      // id:this.props.location.query.id
+    }
+  }
+  //获得内容
+  componentWillMount() {
+    let data = `labId=${this.state.id}`
+    POST('/getLabById',data,re=>{
+      if(re.state==1){
+        
+      }else{
+        message.error('服务器错误')
+      }
+    }) 
+  }  
+  
   render() {
     return (
       <div style={{marginBottom:70}}>

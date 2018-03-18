@@ -156,29 +156,14 @@ class NewItemDetail extends Component {
                     </Row>
                   </Col>
                 </Row>
-              </div>
-
-              <div className="new_item_details">
-                <h3>项目介绍：</h3>
-                <div className="item_details_con">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam ullam, doloremque suscipit unde eligendi nobis sed consequuntur! Error, dolor a consequatur necessitatibus nobis dignissimos dolores deserunt doloremque ex explicabo saepe.
-                </div>
-              </div>
+              </div>           
 
               <div className="new_item_details">
                 <h3>设备需求：</h3>
                 <div className="item_details_con">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam ullam, doloremque suscipit unde eligendi nobis sed consequuntur! Error, dolor a consequatur necessitatibus nobis dignissimos dolores deserunt doloremque ex explicabo saepe.
                 </div>
-              </div>
-              
-              <div className="plan_title">
-                <h3>项目计划：</h3>
-              </div>
-              <div className="new_item_plan" ref='html'>
-                
-              </div>
-              
+              </div>                        
               <div className="new_item_details">
                 <h3>项目详情文件下载：</h3>
                 <div className="doc_con">

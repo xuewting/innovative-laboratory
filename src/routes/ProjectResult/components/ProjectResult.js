@@ -9,24 +9,32 @@ class ProjectResult extends Component {
   constructor(props) {
     super(props);
     this.state={
-
+      paper:[],
+      competition:[],
     }
   }
   
   componentDidMount () {
     POST('/user/queryGlory','type=1',re=>{
       if(re.state==1){
-
+        this.setState({paper:re.data.rows});
       }else{
+        message.error('服务器错误')
+      }
+    })
+    POST('/user/queryGlory', 'type=0', re => {
+      if (re.state == 1) {
+        this.setState({competition:re.data.rows})
+      } else {
         message.error('服务器错误')
       }
     })    
   }
-  render () {
+  render () {    
     return (
       <div>
-        <Competition />
-        <Paper />
+        <Competition competition={this.state.competition}/>
+        <Paper paper={this.state.paper}/>
       </div>
     )
   }

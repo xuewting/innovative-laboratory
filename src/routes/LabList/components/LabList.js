@@ -33,7 +33,7 @@ class LabList extends Component {
               </Col>
               <Col span={4}>
                 <div className="lablist_nav_item" onClick={(e) => this.changePage(2)}>
-                  <h2>成员列表</h2>
+                  <h2>用户列表</h2>
                 </div>
               </Col>
             </Row>

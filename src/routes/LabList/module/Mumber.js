@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../css/lab.scss'
-import { Upload, Popconfirm, Row, Radio, Col, Button, Input, Icon, Table, Modal, Select } from 'antd'
+import { Upload, Popconfirm, Row, Radio, Col, Button, Input, Icon, Table, Modal, Select, message } from 'antd'
 import { POST, BASE_URL } from '../../../components/commonModules/POST'
 
 const RadioGroup = Radio.Group
@@ -66,11 +66,16 @@ class Mumber extends Component {
     }
   }
 
-  
-  componentWillMount() {
-    
+  componentWillMount () {
+    POST('/root/getRoot', '', re => {
+      if (re.state == 1) {
+        this.setState({ list:re.data })
+      } else{
+        message.error('服务器错误')
+      }
+    })
   }
-  
+
 
   onInputChange = (e) => {
     this.setState({ searchText: e.target.value })
@@ -183,32 +188,19 @@ class Mumber extends Component {
       render: (text, record, index) => {
         return (
           <div>
-            {text == 0 ? '女' : text == 1 ? '男' : '保密'}
+            {text == 0 ? '女' : '男' }
           </div>
         )
       }
     }, {
       title: '学号（教工号）',
-      dataIndex: 'idnum',
-      key: 'idnum',
+      dataIndex: 'sid',
+      key: 'sid',
       width: '10%'
     }, {
-      title: '所属实验室',
-      dataIndex: 'lab',
-      key: 'lab',
-      width: '10%',
-      render:text => {
-        return (
-          <div>
-            {text == '' ? '无' : text}
-          </div>
-        )
-      }
-
-    }, {
       title: '联系方式',
-      dataIndex: 'num',
-      key: 'num',
+      dataIndex: 'phone',
+      key: 'phone',
       width: '10%'
     }, {
       title: '邮箱',
@@ -217,29 +209,29 @@ class Mumber extends Component {
       width: '10%'
     }, {
       title: '身份',
-      dataIndex: 'identity',
-      key: 'identity',
+      dataIndex: 'power',
+      key: 'power',
       width: '10%',
       render:text => {
         return (
           <div>
-            {text == 's' ? '学生' : text == 't' ? '老师' : '游客'}
+            {text == 1 ? '普通用户' : text == '2' ? '实验室成员' : text == 3 ? '老师':text == 4 ? 'root':'游客'}
           </div>
         )
       }
     }, {
-      title: '管理权限',
-      dataIndex: 'power',
-      key: 'power',
+      title: '',
+      dataIndex: '',
+      key: '',
       width: '30%',
       render: (text, record, index) => {
         return (
           <Row>
-            <Col span={8}>{text}</Col>
-            <Col span={6} style={{ paddingRight: 5, paddingLeft: 5 }} offset={3}>
+
+            {/*<Col span={6} style={{ paddingRight: 5, paddingLeft: 5 }} offset={3}>
               <Button style={{ width: '100%' }} onClick={(e) => this.toCharge(record)}>编辑详情</Button>
-            </Col>
-            <Col span={6} style={{ paddingLeft: 5 }}>
+              </Col> */}
+            <Col span={6} offset={14} style={{ paddingLeft: 5 }}>
               <Popconfirm title='确认删除？' onConfirm={this.confirm} onCancel={this.cancel} okText='Yes' cancelText='No'>
                 <Button type='danger' style={{ width: '100%' }}>删除</Button>
               </Popconfirm>
@@ -257,7 +249,7 @@ class Mumber extends Component {
     return (
       <div style={{ width: '90%', margin: '0 auto', marginTop: 20 }}>
         <Table columns={columns} dataSource={this.state.list} />
-        <Button type='primary' onClick={(e) => this.toCharge('')}><i className='fa fa-plus' /> 添加</Button>
+        {/*<Button type='primary' onClick={(e) => this.toCharge('')}><i className='fa fa-plus' /> 添加</Button> */}
         <Modal
           visible={this.state.chargevisible}
           title='添加新用户'
@@ -269,8 +261,8 @@ class Mumber extends Component {
             </Col>
             <Col span={15}>
               <Upload
-                action=""
-                listType="picture-card"
+                action=''
+                listType='picture-card'
                 fileList={this.state.fileList}
                 onPreview={this.handlePreview.bind(this)}
                 onChange={this.handleChangeHead.bind(this)}
@@ -278,7 +270,7 @@ class Mumber extends Component {
                 {this.state.fileList.length >= 1 ? null : uploadButton}
               </Upload>
               <Modal visible={this.state.previewVisible} footer={null} onCancel={this.handleCancelHead.bind(this)}>
-                <img alt="example" style={{ width: '100%' }} src={this.state.previewImage} />
+                <img alt='example' style={{ width: '100%' }} src={this.state.previewImage} />
               </Modal>
             </Col>
           </Row>
@@ -342,8 +334,8 @@ class Mumber extends Component {
               <Select style={{ width:200 }} onChange={(e) => this.changeLab(e)}>
                 {this.state.lablist.map((item, i) => {
                   return (
-                  <Option key={i} value={item.labid}>{item.labname}</Option>
-                )
+                    <Option key={i} value={item.labid}>{item.labname}</Option>
+                  )
                 })}
                 <Option value={-1}>无</Option>
               </Select>

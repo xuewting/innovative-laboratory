@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import '../css/NewItem.scss'
-import { Row, Col, Button, Tooltip, Input, DatePicker, message } from 'antd'
+import { Row, Col, Button, Tooltip, Input, DatePicker, message, Select } from 'antd'
 import Plan from './Plan'
-import { POST } from '../../../components/commonModules/POST'
+import { POST, POSTFile } from '../../../components/commonModules/POST'
 
 const { TextArea } = Input
+const Option = Select.Option
 class NewItem extends Component {
   constructor (props) {
     super(props)
@@ -13,22 +14,37 @@ class NewItem extends Component {
       file:'',
       memName:'',
       memXh:'',
-      
+      pname:'',
+      phone:'',
+      labId:'',
+      teacher:'',
+      intr:'',
+      need:'',
+      plan:'',
+      endTime:'',
+      labList:[],
+      fileName:''
     }
   }
-
   
-
+  componentWillMount() {
+    POST('/getAllLab','',re=>{
+      if(re.state==1){
+        this.setState({labList:re.data})
+      }else{
+        message.error('获取实验室失败')
+      }
+    })    
+  }
   
-
   // 打开目录
   uploadfile=() => {
     this.refs.file.click()
   }
 // 更改目录
-  changeFile=(e) => {
-    console.log(e)
-    this.setState({ file:e })
+  changeFile=(file,name) => {    
+    this.setState({ file:file,
+    fileName:name })
   }
 
   // 添加成员信息
@@ -50,7 +66,7 @@ class NewItem extends Component {
       this.state.list.push(value)
       this.setState({ list:this.state.list,
         memName:'',
-        memXh:'' })      
+        memXh:'' })
     }
   }
 
@@ -61,15 +77,53 @@ class NewItem extends Component {
     this.setState({ list })
   }
 
+  // commit
+  commit=() => {
+    let {pname,labId,teacher,phone,need,endTime} = this.state
+    let data = `pname=${pname}&applyLab=${labId}&guideName=${teacher}&contactWay=${phone}&devDemand=${need}&expertTime=${endTime}`
+    POST('/user/applyProject', data, re => {
+      if (re.state == 1) {
+        let dataform = new FormData()
+        dataform.append('pid',re.data.id)
+        dataform.append('file',this.state.file)
+        POSTFile('/user/applyProPlan',dataform,re=>{
+          if(re.state==1){
+            message.success('提交成功')
+          }else{
+            message.error('服务器错误')
+          }
+        })       
+      }else {
+        message.error('服务器错误')
+      }
+    })
+  }
+
+  // change plan
+  changePlan=(value) => this.setState({ plan:value })
+
+  // change value
+  changeValue=(value, type) => {
+    switch (type) {
+      case 1: this.setState({ pname:value }); break
+      case 4: this.setState({ phone:value }); break
+      case 5: this.setState({ labId:value }); break
+      case 6: this.setState({ teacher:value }); break
+      case 7: this.setState({ endTime:value }); break
+      case 8: this.setState({ intr:value }); break
+      case 9: this.setState({ need:value }); break
+    }
+  }
+
   render () {
     return (
       <div className='newitem'>
         <div className='new_head'>
           <h2>新项目申请</h2>
         </div>
-        <div className="new_warn">
-          <div style={{ width: '100%', background:'rgba(195, 141, 15, 0.77)',padding:10}}>
-          <span className="warning">
+        <div className='new_warn'>
+          <div style={{ width: '100%', background:'rgba(195, 141, 15, 0.77)', padding:10 }}>
+            <span className='warning'>
             *申请项目前请先确认已注册账号并登陆
           </span>
           </div>
@@ -77,30 +131,26 @@ class NewItem extends Component {
         <div className='new_con'>
           <div className='new_title'>
             <span>项目名称：</span>
-            <input type='text' placeholder='请输入项目的名称' />
-          </div>
+            <input type='text' placeholder='请输入项目的名称' onChange={(e) => this.changeValue(e.target.value,1)}/>
+          </div>     
           <Row>
-            <Col span={8} className='new_origin'>
-              <span>发起人：</span>
-              <input type='text' placeholder='请输入项目发起人的姓名' />
-            </Col>
-            <Col span={8} className='new_origin'>
-              <span>发起人学号：</span>
-              <input type='text' placeholder='请输入发起人学号' />
-            </Col>
             <Col span={8} className='new_origin'>
               <span>联系方式：</span>
-              <input type='text' placeholder='请输入发起人的手机号码' />
+              <input type='text' placeholder='请输入发起人的手机号码' onChange={(e) => this.changeValue(e.target.value, 4)} />
             </Col>
-          </Row>
-          <Row>
             <Col span={8} className='new_detail'>
               <span>选择实验室：</span>
-              <input type='text' placeholder='请输入你选择的实验室的名称' />
+              <Select style={{ width: '65%' }} onChange={(e) => this.changeValue(e, 5)} >
+              {this.state.labList.map((item,i)=>{
+                return(
+                  <Option value={item.id} key={i}>{item.name}</Option>
+                )
+              })}
+              </Select>
             </Col>
             <Col span={8} className='new_detail'>
               <span>指导老师：</span>
-              <input type='text' placeholder='请输入联系好的指导老师（可不填）' />
+              <input type='text' placeholder='请输入联系好的指导老师（可不填）' onChange={(e) => this.changeValue(e.target.value, 6)}/>
             </Col>
           </Row>
           <Row>
@@ -133,30 +183,22 @@ class NewItem extends Component {
           </div>}
           <div className='end_time'>
             <span>预计结束时间：</span>
-            <DatePicker />
+            <DatePicker onChange={(data,dataString) => this.changeValue(dataString, 7)}/>
           </div>
-          <div className='new_intor'>
-            <span>项目介绍：</span>
-            <TextArea autosize={{ minRows: 10, maxRows: 10 }} placeholder='请输入项目的简介' className='txt' />
-            <span style={{ fontSize: '0.9em' }}>请输入项目的简介</span>
-          </div>
+          
           <div className='new_intor'>
             <span>设备需求：</span>
-            <TextArea autosize={{ minRows: 10, maxRows: 10 }} placeholder='请输入需要的设备' className='txt' />
+            <TextArea autosize={{ minRows: 10, maxRows: 10 }} placeholder='请输入需要的设备' className='txt' onChange={(e) => this.changeValue(e.target.value, 9)}/>
             <span style={{ fontSize: '0.9em' }}>请输入需要的设备</span>
           </div>
-          <div className='new_intor_f'>
-            <span style={{ color:'#FFF', fontSize:1.2 + 'em' }}>项目计划：</span>
-            <Plan />
-            <span style={{ color: '#FFF', fontSize: '0.9em' }}>请输入对项目的策划</span>
-          </div>
+          
           <div className='new_file'>
             <span>项目详情文件长传：</span>
-            <input type='text' placeholder='点击选择上传的文件（限word）' value={this.state.file} onClick={this.uploadfile.bind(this)} />
-            <input type='file' style={{ display: 'none' }} accept='application/msword' onChange={(e) => this.changeFile(e.target.value)} ref='file' />
+            <input type='text' placeholder='点击选择上传的文件（限word）' value={this.state.fileName} onClick={this.uploadfile.bind(this)} />
+            <input type='file' style={{ display: 'none' }} accept='application/msword' onChange={(e) => this.changeFile(e.target.files[0],e.target.value)} ref='file' />
           </div>
-          <div className="new_com">
-            <div className="new_com_btu">
+          <div className='new_com'>
+            <div className='new_com_btu' onClick={(e) => this.commit()}>
               提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交
             </div>
           </div>

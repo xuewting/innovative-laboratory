@@ -13,9 +13,12 @@ class Lab extends Component {
       offset:1
     }
   }
-  toDetail () {
+  toDetail (id) {
     browserHistory.push({
-      pathname: `/labpage`
+      pathname: `/labpage`,
+      query:{
+        id:id
+      }
     })
   }
   componentDidMount () {
@@ -50,7 +53,7 @@ class Lab extends Component {
       <div className='Lab'>
         {this.state.p_list.map((item, i) => {
           return (
-            <div className='list_box' onClick={() => this.toDetail} key={i}>
+            <div className='list_box' onClick={() => this.toDetail(item.id)} key={i}>
               <Row>
                 <Col span={4} >
                   <div className='img'>

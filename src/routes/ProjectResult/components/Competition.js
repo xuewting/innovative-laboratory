@@ -85,8 +85,8 @@ class Competition extends Component {
   render () {
     const columns = [{
       title: '名称',
-      dataIndex: 'Iname',
-      key: 'Iname',
+      dataIndex: 'name',
+      key: 'name',
       width:'30%',
       render:(text, record, index) => {
         return (
@@ -116,9 +116,12 @@ class Competition extends Component {
       }
     }, {
       title: '级别',
-      dataIndex: 'class',
-      key: 'class',
+        dataIndex: 'level',
+        key: 'level',
       width:' 10%',
+      render:text=>{
+        text==0?'院级':text==1?'校级':text==2?'省级':'国家级'
+      },
       filters: [{
          text: '院级',
          value: '院级'
@@ -140,28 +143,28 @@ class Competition extends Component {
       width:'10%'
     }, {
       title: '参与学生',
-      dataIndex: 'student',
-      key: 'student',
+        dataIndex: 'winUser',
+        key: 'winUser',
       width:'10%'
     }, {
       title: '指导老师',
-      dataIndex: 'tea',
-      key: 'tea',
+        dataIndex: 'guideTea',
+        key: 'guideTea',
       width:'10%'
     }, {
       title: '实验室',
-      dataIndex: 'lab',
-      key: 'lab',
+      dataIndex: 'lab.name',
+      key: 'lab.name',
       width:'10%'
     }, {
       title: '时间',
-      dataIndex: 'time',
-      key: 'time',
+        dataIndex: 'winTime',
+        key: 'winTime',
       width:'10%'
     }]
     return (
       <div>
-        <Table columns={columns} dataSource={this.state.data}
+        <Table columns={columns} dataSource={this.props.competition}
           title={() => <div>
           <div className='com_head'>
               <span>竞赛成果 :</span>

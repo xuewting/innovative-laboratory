@@ -12,6 +12,9 @@ class Content extends Component {
     super(props)
     this.state = {
       con:{
+        user:{
+          name:''
+        }
       },
       type:''
     }
@@ -47,11 +50,11 @@ class Content extends Component {
             </Col>
           </Row>
           <div className='mail_con_from'>
-            {con.From}
+            {con.user.name}
           </div>
         </div>
         <div className='mail_con_con'>
-          {con.con}
+              {con.content}
         </div>
       </div>:''
   }

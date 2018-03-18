@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Tooltip } from 'antd'
+import { Tooltip,message } from 'antd'
 import '../Side.scss'
 import head from '../img/message.png'
-import message from '../img/message.png'
+import Message from '../img/message.png'
 import setting from '../img/setting.png'
 import out from '../img/退出.png'
 import arrow from '../img/htb－Arrow right02.png'
@@ -50,6 +50,14 @@ class Info extends Component {
       pathname:'/mail'
     })
   }
+  //退出
+  loginOut = () => POST('/exitLogin','',re=>{
+    if(re.state==1){
+      message.success('退出成功')
+    }else{
+      message.error('服务器错误')
+    }
+  })
 
   toPersonal=() => browserHistory.push({ pathname:'/Personal' })
 
@@ -63,7 +71,7 @@ class Info extends Component {
         </div>
         <div className='con_list'>
           <a href='' className='list_item' onClick={this.toMail.bind(this)}>
-            <img src={message} alt='' className='icon' />
+            <img src={Message} alt='' className='icon' />
             <span className='txt'>消息</span>
             <img src={arrow} alt='' className='arrow' />
           </a>
@@ -79,7 +87,7 @@ class Info extends Component {
           </a>*/}
           <a href='' className='list_item'>
             {this.state.state == 1
-              ? <div>
+              ? <div onClick={(e)=>this.loginOut()}>
                 <img src={out} alt='' className='icon' />
                 <span className='txt'>Logout</span>
                 <img src={arrow} alt='' className='arrow' />
@@ -87,7 +95,7 @@ class Info extends Component {
               : <div onClick={(e) => this.login()} style={{ display:'block', width:'100%', height:40 }}>
                 <img src={login} alt='' className='icon' />
                 <span className='txt'>Login</span>
-                <img src={arrow} alt='' className='arrow' />
+                <img src={arrow} alt='' className='arrow'/>
               </div>}
           </a>
         </div>
