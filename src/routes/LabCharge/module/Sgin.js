@@ -1,87 +1,105 @@
 import React, { Component } from 'react'
 import '../css/Sgin.scss'
-import { Table, Icon, Button, Input } from 'antd'
+import { Table, Icon, Button, Input, message } from 'antd'
+import { POST } from '../../../components/commonModules/POST'
+import moment from 'moment'
 
 class Sgin extends Component {
-  constructor(props) {
-    super(props);
-    this.state={
+  constructor (props) {
+    super(props)
+    this.state = {
       data:[{
         name:'banana',
         time:'2018-3-3',
         content:'Tempora sed id accusamus quas deleniti doloremque officiis ad dolorem voluptatum quod! Quis voluptatibus incidunt, accusamus alias deleniti ipsam.',
         item:'科技实验室'
       }],
-      filterDropdownVisible: false,      
+      filterDropdownVisible: false,
       searchText: '',
       filtered: false
     }
   }
 
   onInputChange = (e) => {
-    this.setState({ searchText: e.target.value });
+    this.setState({ searchText: e.target.value })
   }
+
+  componentWillMount () {
+    POST('/labt/getRecord', `labId=${this.props.labid}`, re => {
+      if (re.state == 1) {
+        this.setState({ data:re.data })
+      }else {
+        message.error('服务器错误')
+      }
+    })
+  }
+
   onSearch = () => {
-    const { searchText } = this.state;
+    const { searchText } = this.state
     const reg = new RegExp(searchText, 'gi')
     this.setState({
       filterDropdownVisible: false,
       filtered: !!searchText,
       data: this.state.data.map((record) => {
-        const match = record.name.match(reg);
+        const match = record.name.match(reg)
         if (!match) {
-          return null;
+          return null
         }
         return {
           ...record,
           name: (
             <span>
               {record.name.split(reg).map((text, i) => (
-                i > 0 ? [<span className="highlight">{match[0]}</span>, text] : text
+                i > 0 ? [<span className='highlight'>{match[0]}</span>, text] : text
               ))}
             </span>
-          ),
-        };
-      }).filter(record => !!record),
-    });
+          )
+        }
+      }).filter(record => !!record)
+    })
   }
-  
-  render() {
+
+  render () {
     const columns = [{
       title: '姓 名',
-      dataIndex: 'name',
-      key: 'name',
-      width:'10%',
+      dataIndex: 'user.name',
+      key: 'user.name',
+      width:'15%',
       filterDropdown: (
-        <div className="custom-filter-dropdown">
+        <div className='custom-filter-dropdown'>
           <Input
             ref={ele => this.searchInput = ele}
-            placeholder="Search name"
+            placeholder='Search name'
             value={this.state.searchText}
             onChange={this.onInputChange}
             onPressEnter={this.onSearch}
           />
-          <Button type="primary" onClick={this.onSearch}>Search</Button>
+          <Button type='primary' onClick={this.onSearch}>Search</Button>
         </div>
       ),
-      filterIcon: <Icon type="smile-o" style={{ color: this.state.filtered ? '#108ee9' : '#aaa' }} />,
+      filterIcon: <Icon type='smile-o' style={{ color: this.state.filtered ? '#108ee9' : '#aaa' }} />,
       filterDropdownVisible: this.state.filterDropdownVisible,
       onFilterDropdownVisibleChange: (visible) => {
         this.setState({
-          filterDropdownVisible: visible,
-        }, () => this.searchInput && this.searchInput.focus());
-      },
+          filterDropdownVisible: visible
+        }, () => this.searchInput && this.searchInput.focus())
+      }
     }, {
       title: '时间',
       dataIndex: 'time',
       key: 'time',
-      width: '10%'
+      width: '15%',
+      render:text => {
+        return (
+          <div>{moment( text ).format('YYYY-MM-DD')}</div>
+        ) 
+}
     }, {
       title: '内容',
       dataIndex: 'content',
       key: 'content',
-      width: '50%'  
-      }, {
+      width: '50%'
+    }, {
         title: '参与项目',
         dataIndex: 'item',
         key: 'item',
@@ -89,17 +107,17 @@ class Sgin extends Component {
       }]
     return (
       <div style={{ paddingTop: 20, paddingRight: 15 }}>
-        <div className="lab_sgin">
-          <div className="lab_sgin_head">
+        <div className='lab_sgin'>
+          <div className='lab_sgin_head'>
             <h2>人员出勤情况表</h2>
           </div>
-          <div className="lab_sgin_table">
+          <div className='lab_sgin_table'>
             <Table columns={columns} dataSource={this.state.data} />
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Sgin;
+export default Sgin

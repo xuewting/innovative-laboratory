@@ -61,7 +61,7 @@ class Paper extends Component {
       title: '名称',
       dataIndex: 'name',
       key: 'name',
-      width: '30%',
+      width: '20%',
       render:(text, record, index) => {
         return (
           <div className='i_name' onClick={this.toDetail.bind(this, record, index)}>
@@ -97,7 +97,7 @@ class Paper extends Component {
       title: '作者',
       dataIndex: 'author',
       key: 'author',
-      width: '25%'
+      width: '15%'
     }, {
       title: '实验室',
       dataIndex: 'lab.name',

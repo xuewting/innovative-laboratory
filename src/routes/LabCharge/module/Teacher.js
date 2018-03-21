@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import '../css/teacher.scss'
 import {browserHistory} from 'react-router'
-import { Row, Col, Table, Button, Input, } from 'antd'
+import { Row, Col, Table, Button, Input, message} from 'antd'
+import { POST } from '../../../components/commonModules/POST';
 
 class Teacher extends Component {
   constructor(props) {
@@ -26,7 +27,17 @@ class Teacher extends Component {
     })
   }
 
-
+  
+  componentWillMount() {
+    POST('/labt/getLabTeacher',`labId=${this.props.labid}`,re=>{
+      if(re.state==1){
+        this.setState({list:re.data})
+      }else{
+        message.error('服务器错误')
+      }
+    })
+  }
+  
   render() {
     const columns = [{
       title: '姓名',
@@ -35,13 +46,13 @@ class Teacher extends Component {
       width:'33%',
     }, {
       title: '职称',
-      dataIndex: 'zc',
-      key: 'zc',
+      dataIndex: 'rank',
+      key: 'rank',
       width:'33%',
     }, {
       title: '邮箱',
-      dataIndex: 'mail',
-      key: 'mail',
+      dataIndex: 'email',
+      key: 'email',
       width:'33%',
       render:(text,record)=>{
         return(

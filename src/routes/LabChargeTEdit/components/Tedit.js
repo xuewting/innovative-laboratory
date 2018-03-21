@@ -113,17 +113,8 @@ class Tedit extends Component {
           }
         })
         this.setState({ chargepage: '/labcharge/notice' })
-        break
+        break     
       case 7:
-        browserHistory.push({
-          pathname: `/labcharge/news`,
-          query: {
-            labid: this.props.location.query.labid
-          }
-        })
-        this.setState({ chargepage: '/labcharge/news' })
-        break
-      case 8:
         browserHistory.push({
           pathname: '/labcharge/sgin',
           query: {
@@ -132,7 +123,7 @@ class Tedit extends Component {
         })
         this.setState({ chargepage: '/labcharge/sgin' })
         break
-      case 9:
+      case 8:
         browserHistory.push({
           pathname: `/personal`
         }); break

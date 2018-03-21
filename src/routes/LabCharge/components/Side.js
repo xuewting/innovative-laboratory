@@ -39,9 +39,6 @@ class Side extends Component {
         name: '通知公告',
         icon: gonggao
       }, {
-        name: '最新待审核项目',
-        icon: news
-      }, {
         name: '人员出勤情况',
         icon: sgin
       }, {

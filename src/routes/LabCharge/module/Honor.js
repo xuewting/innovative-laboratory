@@ -138,8 +138,8 @@ class Honor extends Component {
   }
   // 确认修改（竞赛）
   handleCOk = (e) => {
-    let type=this.state.typeC
-    if(type==1){
+    let type = this.state.typeC
+    if (type == 1) {
       let type = 0
       let name = this.state.ctitle
       let level = this.state.cclass
@@ -148,10 +148,9 @@ class Honor extends Component {
       let labId = this.props.labid
       let winTime = this.state.ctime
       let result = this.state.reward
-      let data = `type=${type}&name=${name}&level=${level}&winUser=${winUser}&
-      guideTea=${guideTea}&labId=${labId}&winTime=${winTime}&result=${result}`
-      POST('/labt/addLabGlory',data,re=>{
-        if(re.state==1){
+      let data = `type=${type}&name=${name}&level=${level}&winUser=${winUser}&guideTea=${guideTea}&labId=${labId}&winTime=${winTime}&result=${result}`
+      POST('/labt/addLabGlory', data, re => {
+        if (re.state == 1) {
           message.success('添加成功')
           POST('/labt/getLabGlory', `labId=${this.props.labid}&type=0`, re => {
             if (re.state == 1) {
@@ -160,11 +159,11 @@ class Honor extends Component {
               message.error('服务器错误')
             }
           })
-        }else{
+        } else {
           message.error('服务器错误')
         }
       })
-    }    
+    }
     this.setState({
       visible: false
     })
@@ -194,6 +193,36 @@ class Honor extends Component {
       case 5: this.setState({ teacher: value }); break
     }
   }
+// 删除竞赛成果
+  deleteC = (id) => POST('/labt/deleteGlory', `id=${id}`, re => {
+    if (re.state == 1) {
+      message.success('删除成功')
+      POST('/labt/getLabGlory', `labId=${this.props.labid}&type=0`, re => {
+        if (re.state == 1) {
+          this.setState({ comList: re.data.rows })
+        } else {
+          message.error('服务器错误')
+        }
+      })
+    } else {
+      message.error('服务器错误')
+    }
+  })
+// 删除论文成果
+  deleteP = (id) => POST('/labt/deleteGlory', `id=${id}`, re => {
+    if (re.state == 1) {
+      message.success('删除成功')
+      POST('/labt/getLabGlory', `labId=${this.props.labid}&type=1`, re => {
+        if (re.state == 1) {
+          this.setState({ paList: re.data.rows })
+        } else {
+          message.error('服务器错误')
+        }
+      })
+    } else {
+      message.error('服务器错误')
+    }
+  })
 
   render () {
     const columns1 = [{
@@ -207,9 +236,9 @@ class Honor extends Component {
       dataIndex: 'level',
       key: 'level',
       width: '10%',
-      render:text=>{
-        return(
-          <div>{text==0?'院级':text==1?'校级':text==2?'省级':'国家级'}</div>
+      render:text => {
+        return (
+          <div>{text == 0 ? '院级':text == 1 ? '校级':text == 2 ? '省级':'国家级'}</div>
         )
       }
     }, {
@@ -235,11 +264,11 @@ class Honor extends Component {
       render: (text, record, index) => {
         return (
           <Row>
-            <Col span={12}>{record.time}</Col>
+            <Col span={12}>{text}</Col>
             <Col span={6}>
-              <Button onClick={this.showCompetitionModal.bind(this, record.title, record.class, record.reward, record.students, record.teacher, record.time, 0)}>修改</Button>
+              <Button onClick={this.showCompetitionModal.bind(this, record.title, record.level, record.result, record.winUser, record.guideTea, record.winTime, 0)}>修改</Button>
             </Col>
-            <Col span={6}><Button type='danger'>删除</Button></Col>
+            <Col span={6}><Button type='danger' onClick={this.deleteC.bind(this, record.id)}>删除</Button></Col>
           </Row>
         )
       }
@@ -269,11 +298,11 @@ class Honor extends Component {
       render: (text, record, index) => {
         return (
           <Row>
-            <Col span={12}>{record.time}</Col>
+            <Col span={12}>{text}</Col>
             <Col span={6}>
-              <Button onClick={this.showPaperModal.bind(this, record.title, record.magazine, record.author, record.time, 1)}>修改</Button>
+              <Button onClick={this.showPaperModal.bind(this, record.title, record.magazine, record.author, record.winTime, 1)}>修改</Button>
             </Col>
-            <Col span={6}><Button type='danger'>删除</Button></Col>
+            <Col span={6}><Button type='danger' onClick={this.deleteP.bind(this, record.id)}>删除</Button></Col>
           </Row>
         )
       }
@@ -287,7 +316,7 @@ class Honor extends Component {
           </div>
           <div className='ho_con'>
 
-            {/*competition */}
+            {/* competition */}
 
             <div className='competition' style={{ marginBottom: 20 }}>
               <div className='com_hea'>
@@ -337,7 +366,7 @@ class Honor extends Component {
               </div>
             </div>
 
-            {/* paper*/}
+            {/* paper */}
 
             <div className='paper'>
               <div className='pa_hea'>

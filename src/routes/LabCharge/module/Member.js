@@ -44,7 +44,7 @@ class Member extends Component {
 
   //获取成员列表
   componentWillMount() {
-    let labid = this.state.labid
+    let labid = this.props.labid
     POST('/labt/getLabUser', `labId=${labid}`, re => {
       if (re.state == 1) {
         this.setState({data:re.data.rows})
@@ -117,7 +117,7 @@ class Member extends Component {
     }
   }
 
-  //删除单挑信息
+  //删除信息
   deletPosen = (id) => {
     let data=`id=${id}`
     POST('/labt/deleteUser',data,re=>{

@@ -55,7 +55,7 @@ class Item extends Component {
       visible: true
     })
   }
-  // 确认添加
+  // 确认添加新项目
   handleOk = (e) => {
     let labid=this.props.labid
     let pname=this.state.title
@@ -142,8 +142,7 @@ class Item extends Component {
     }
   }
   // 新项目预期结束时间
-  changeTime = (date, dateString) => {
-    console.log(date, dateString)
+  changeTime = (date, dateString) => {    
     this.setState({ endTime: dateString })
   }
 
@@ -159,15 +158,13 @@ class Item extends Component {
 
   showEnd = () => this.setState({ evisible: !this.state.evisible })
 
-  ehandleOk = (e) => {
-    console.log(e)
+  ehandleOk = (e) => {    
     this.setState({
       evisible: false
     })
   }
 
-  ehandleCancel = (e) => {
-    console.log(e)
+  ehandleCancel = (e) => {    
     this.setState({
       evisible: false
     })

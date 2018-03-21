@@ -137,8 +137,7 @@ class Lab extends Component {
     if(re.state==1){
       message.success('添加成功')
       POST('/getAllLab', '', re => {
-        if (re.state == 1) {
-          // console.log(re)
+        if (re.state == 1) {          
           this.setState({ list: re.data })
         } else {
           message.error('服务器错误')

@@ -1,5 +1,5 @@
 import Fetch from './Fetch.js'
-export const BASE_URL = 'http://192.168.1.101:3001'
+export const BASE_URL = 'http://192.168.1.102:3001'
 // const BASE_URL1 = 'http://119.29.150.141'
 const BASE_URL1 = BASE_URL
 const BASE_URL2 = BASE_URL

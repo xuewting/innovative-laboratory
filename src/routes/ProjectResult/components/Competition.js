@@ -48,7 +48,7 @@ class Competition extends Component {
       filtered: false
     }
   }
-  
+
 
   onInputChange = (e) => {
     this.setState({ searchText: e.target.value })
@@ -65,15 +65,15 @@ class Competition extends Component {
           return null
         }
         return {
-           ...record,
-           name: (
-            <span>
+          ...record,
+          name: (
+             <span>
               {record.Iname.split(reg).map((text, i) => (
                 i > 0 ? [<span className='highlight'>{match[0]}</span>, text] : text
               ))}
             </span>
           )
-         }
+        }
       }).filter(record => !!record)
     })
   }
@@ -87,7 +87,7 @@ class Competition extends Component {
       title: '名称',
       dataIndex: 'name',
       key: 'name',
-      width:'30%',
+      width:'20%',
       render:(text, record, index) => {
         return (
           <div className='i_name' onClick={this.toDetail.bind(this, record, index)}>
@@ -116,26 +116,16 @@ class Competition extends Component {
       }
     }, {
       title: '级别',
-        dataIndex: 'level',
-        key: 'level',
+      dataIndex: 'level',
+      key: 'level',
       width:' 10%',
-      render:text=>{
-        text==0?'院级':text==1?'校级':text==2?'省级':'国家级'
-      },
-      filters: [{
-         text: '院级',
-         value: '院级'
-       }, {
-        text: '校级',
-        value: '校级'
-      }, {
-        text: '省级',
-        value: '省级'
-      }, {
-        text: '国家级',
-        value: '国家级'
-      }],
-      onFilter: (value, record) => record.class.indexOf(value) == 0
+      render:text => {
+        return(
+          <div>
+            {text == 0 ? '院级':text == 1 ? '校级':text == 2 ? '省级':'国家级'}
+          </div>
+        )        
+      }
     }, {
       title: '获得成果',
       dataIndex: 'result',
@@ -143,13 +133,13 @@ class Competition extends Component {
       width:'10%'
     }, {
       title: '参与学生',
-        dataIndex: 'winUser',
-        key: 'winUser',
+      dataIndex: 'winUser',
+      key: 'winUser',
       width:'10%'
     }, {
       title: '指导老师',
-        dataIndex: 'guideTea',
-        key: 'guideTea',
+      dataIndex: 'guideTea',
+      key: 'guideTea',
       width:'10%'
     }, {
       title: '实验室',
@@ -158,18 +148,18 @@ class Competition extends Component {
       width:'10%'
     }, {
       title: '时间',
-        dataIndex: 'winTime',
-        key: 'winTime',
+      dataIndex: 'winTime',
+      key: 'winTime',
       width:'10%'
     }]
     return (
       <div>
         <Table columns={columns} dataSource={this.props.competition}
           title={() => <div>
-          <div className='com_head'>
-              <span>竞赛成果 :</span>
-            </div>
-        </div>} />
+            <div className='com_head'>
+            <span>竞赛成果 :</span>
+          </div>
+          </div>} />
       </div>
     )
   }
