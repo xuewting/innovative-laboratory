@@ -74,7 +74,7 @@ class ItemPage extends Component {
     return tname
   }
 
-  //根据项目名搜索项目
+  // 根据项目名搜索项目
   search (value) {
     this.setState({ svalue: value })
     var list = []
@@ -92,7 +92,6 @@ class ItemPage extends Component {
   }
 
   render () {
-    console.log(this.getteacher(1))
     return (
       <div>
         {/* search_group */}
@@ -132,7 +131,7 @@ class ItemPage extends Component {
                       <div className='list_item_head'>{item.name}</div>
                       <div className='list_item_subhead'>发起人：{item.user.name}</div>
                       <div className='list_item_subhead'>实验室：{item.lab.name}</div>
-                      <div className='list_item_subhead'>是否结束：{item.actualTime ? '是' : '否'}</div>
+                      <div className='list_item_subhead'>是否结束：{/* item.actualTime ? '是' : '否' */}</div>
                       <div className='list_item_date'>
                         <Tooltip title='开始时间'>
                           <img src={rili} alt='' />
@@ -140,12 +139,12 @@ class ItemPage extends Component {
                         </Tooltip>
                         <Tooltip title='预期结束时间'>
                           <img src={time} alt='' />
-                          {item.expectTime}
+                          {/* item.expectTime */}
                         </Tooltip>
-                        {item.actualTime ? <Tooltip title='实际结束时间'>
+                        {/* item.actualTime ? <Tooltip title='实际结束时间'>
                           <img src={time} alt='' />
                           {item.actualTime}
-                        </Tooltip> : ''}
+                        </Tooltip> : '' */}
                       </div>
                     </div>
                   </div>
@@ -174,12 +173,12 @@ class ItemPage extends Component {
                           </Tooltip>
                           <Tooltip title='预期结束时间'>
                             <img src={time} alt='' />
-                            {item.expectTime}
+                            {/* item.expectTime */}
                           </Tooltip>
-                          {item.actualTime ? <Tooltip title='实际结束时间'>
+                          {/* item.actualTime ? <Tooltip title='实际结束时间'>
                             <img src={time} alt='' />
                             {item.actualTime}
-                          </Tooltip> : ''}
+                          </Tooltip> : '' */}
 
                         </Col>
                       </Row>

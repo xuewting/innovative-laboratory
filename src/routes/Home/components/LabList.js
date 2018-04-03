@@ -53,7 +53,15 @@ class LabList extends Component {
     var data = `pageCount=5&currentPage=1`
     POST('/getLab', data, (re) => {
       if (re.state == 1) {
-        this.setState({ lablist: re.data.rows })
+        this.setState({ lablist: re.data.rows,
+          Img: re.data.rows[0].photo,
+          Pos: re.data.rows[0].position,
+        })
+          if(re.data.rows[0].isOpen==0){
+            this.setState({Per:'否'})
+          }else{
+            this.setState({Per:'是'})
+          }
       } else {
         message.error('服务器错误')
       }
@@ -140,12 +148,12 @@ class LabList extends Component {
         </div>
 
         <div className="search">
-          <div className="search_in">
+          {/* <div className="search_in">
             <input type="text" placeholder='查找实验室' />
             <div className="sea_icon">
               <img src={sea} alt="" className="icon" />
             </div>
-          </div>
+          </div> */}
           <div className="more" onClick={this.more.bind(this)}>
             More
           </div>

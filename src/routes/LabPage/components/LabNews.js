@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import '../css/LabNews.scss'
 import shuaxin from '../../Home/assets/刷新.png'
-import { Row, Col, Tooltip } from 'antd'
+import {message, Row, Col, Tooltip } from 'antd'
+import { POST } from '../../../components/commonModules/POST';
 
 class LabNews extends Component {
   constructor(props) {
@@ -31,6 +32,17 @@ class LabNews extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    POST('/getLabNews', `labId=${nextProps.id}&len=5`, re => {
+      if (re.state == 1) {
+        this.setState({ list: re.data })
+      } else {
+        message.error('服务器错误')
+      }
+    })
+  }
+  
+  
   render() {
     return (
       <div className='labnews'>

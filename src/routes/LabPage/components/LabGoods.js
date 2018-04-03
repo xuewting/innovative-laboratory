@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'antd'
+import {message, Row, Col } from 'antd'
 import '../css/LabGoods.scss'
 import img1 from '../img/wallhaven-553316.jpg'
 import img2 from '../img/wallhaven-582013.jpg'
 import img3 from '../img/wallhaven-582025.jpg'
 import img4 from '../img/wallhaven-590711.jpg'
+import { POST, BASE_URL } from '../../../components/commonModules/POST';
 
 class LabGoods extends Component {
   constructor(props) {
@@ -40,32 +41,44 @@ class LabGoods extends Component {
     
   }
 
-  
+  componentWillReceiveProps(nextProps) {
+    POST('/lab/getLabGoods', `id=${nextProps.id}&pageCount=4&currentPage=1`,re=>{
+      if(re.state==1){
+        this.setState({list:re.data.rows})
+      }else{
+        message.error('服务器错误')
+      }
+    })
+  }
   
   render() {    
-    
+    const {list}= this.state
     return (
+      <div>
+      { list.length == 0 ?<div></div>:
       <div className='goods'>
         <div className='go_head'>
           <h2>实验室物品资源</h2>
         </div>
         <div className="go_con">
-          <Row>
-            {this.state.list.map((item, i) => {
+          <Row>          
+            {list.map((item, i) => {
               return (
                 <Col span={8} className='con_item hovereffect' key={i} >
-                  <img src={item.src} alt="" className='img-responsive' />
+                  <img src={ BASE_URL+item.photo } alt="" className='img-responsive' />
                   <div className='overlay' ref={i} >
-                    <h2>{item.gname}</h2>
-                    <div className="info" style={{border:'1px solid #fff',borderBottom:'none'}}>{item.xh}</div>
-                    <div className="info" style={{border:'1px solid #fff',borderBottom:'none',borderTop:'none'}}>{item.bh}</div>
-                    <div className="info"  style={{border:'1px solid #fff',borderTop:'none'}}>{item.zt}</div>
+                    <h2>{item.name}</h2>
+                    <div className="info" style={{ border: '1px solid #fff', borderBottom: 'none' }}>{item.models}</div>
+                    <div className="info" style={{ border: '1px solid #fff', borderBottom: 'none', borderTop: 'none' }}>{item.validTime}</div>
+                    <div className="info" style={{ border: '1px solid #fff', borderTop: 'none' }}>{item.stateId==2?'占用':item.stateId==0?'外借':'空闲'}</div>
                   </div>
                 </Col>
               )
             })}
           </Row>
         </div>
+        </div>
+      }
       </div>
     );
   }

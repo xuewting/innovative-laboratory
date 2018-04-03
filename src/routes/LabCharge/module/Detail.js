@@ -111,8 +111,7 @@ class Detail extends Component {
     let isOpen = this.state.labInfo.isOpen
     let introduction = this.state.labInfo.introduction
     let position = this.state.labInfo.position
-    let alldata = `labId=${labId}&name=${name}&establishTime=${establishTime1}&institute=${institute}&isOpen
-    =${isOpen}&introduction=${introduction}&position=${position}`
+    let alldata = `labId=${labId}&name=${name}&establishTime=${establishTime1}&institute=${institute}&isOpen=${isOpen}&introduction=${introduction}&position=${position}`
     if (this.state.photoChanged == 1) {
       formdata2.append('labId', this.state.labid)
       formdata2.append('file', this.state.img)

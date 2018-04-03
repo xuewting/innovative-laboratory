@@ -51,34 +51,30 @@ class Lab extends Component {
   render () {
     return (
       <div className='Lab'>
+      <Row>      
         {this.state.p_list.map((item, i) => {
           return (
-            <div className='list_box' onClick={() => this.toDetail(item.id)} key={i}>
+            <Col key={i} span={12}>
+            <div className='list_box' onClick={() => this.toDetail(item.id)}>
               <Row>
-                <Col span={4} >
+                <Col span={8} >
                   <div className='img'>
                     <img src={BASE_URL + item.photo} alt='' />
                   </div>
                 </Col>
                 <Col span={6} offset={1}>
                   <div className='contain'>
-                    <span>名称：</span>
-                    <span>位置：</span>
-                    <span>介绍：
-             </span>
+                    <span>名称：{item.name}</span>
+                    <span>位置：{item.position}</span>
+                    <span>介绍：{item.introduction}</span>
                   </div>
-                </Col>
-                <Col span={8}>
-                  <div className='contain'>
-                    <span>{item.name}</span>
-                    <span>{item.position}</span>
-                    <span>{item.introduction}</span>
-                  </div>
-                </Col>
+                </Col>                
               </Row>
             </div>
+            </Col>
           )
         })}
+        </Row>
         <div className='load_page'><span onClick={() => { this.getmore() }}>加载更多</span></div>
       </div>
     )

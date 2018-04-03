@@ -12,7 +12,7 @@ import moment from 'moment'
 const Option = Select.Option
 
 class Goods extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       list: [{
@@ -62,13 +62,23 @@ class Goods extends Component {
     })
   }
 
-  handleChange = ({ fileList }) => { this.setState({ fileList }); this.setState({ status: 0 }); }
+  handleChange = ({ fileList }) => { this.setState({ fileList }); this.setState({ status: 0 }) }
 
   // 翻页
   changePage = (page) => {
-    console.log(page)
     this.setState({
       current: page
+    })
+    let data = `id=${this.state.labId}&pageCount=4&currentPage=${page}`
+    POST('/lab/getLabGoods', data, re => {
+      if (re.state == 1) {
+        this.setState({
+          list: re.data.rows,
+          total: re.data.count
+        })
+      } else {
+        message.error('服务器错误')
+      }
     })
   }
 
@@ -99,7 +109,7 @@ class Goods extends Component {
     console.log(this.state.previewImage)
   }
   // 修改值
-  changeValue(type, value) {
+  changeValue (type, value) {
     switch (type) {
       case 1: this.setState({ name: value }); break
       case 2: this.setState({ price: value }); break
@@ -111,51 +121,47 @@ class Goods extends Component {
   // 确认修改（添加）
   handleOk = (e) => {
     let { type } = this.state
-    //添加
+    // 添加
     if (type == 1) {
       let { name, price, models, buyTime, stateId, validTime, content, labId } = this.state
       let data = `name=${name}&price=${price}&models=${models}&buyTime=${buyTime}&stateId=${stateId}&validTime=${validTime}&detailInfo=${content}&labId=${labId}`
       POST('/lab/addLabGoods', data, re => {
         if (re.state == 1) {
           message.success('添加成功')
-          let data = `id=${this.state.labId}&pageCount=10&currentPage=${this.state.current}`
-          POST('/lab/getLabGoods', data, re => {
+          let data2 = new FormData()
+          data2.append('id', id)
+          data2.append('file', this.state.fileList[0].originFileObj)
+          data2.append('type', 'application/octet-stream')
+          POSTFile('/lab/addGoodsImage', data2, re => {
             if (re.state == 1) {
-              this.setState({
-                list: re.data.rows,
-                total: re.data.count
-              })
+              let data = `id=${this.state.labId}&pageCount=4&currentPage=${this.state.current}`
+              POST('/lab/getLabGoods', data, re => {
+                if (re.state == 1) {
+                  this.setState({
+                    list: re.data.rows,
+                    total: re.data.count
+                  })
+            } else {
+              message.error('图片上传失败')
+            }
+          })                    
             } else {
               message.error('服务器错误')
             }
           })
-          if (this.state.status == 0) {
-            let data2 = new FormData()
-            data2.append('id', id)
-            data2.append('file', this.state.fileList[0].originFileObj)
-            data2.append('type', 'application/octet-stream')
-            POSTFile('/lab/addGoodsImage', data2, re => {
-              if (re.state == 1) {
-
-              } else {
-                message.error('图片上传失败')
-              }
-            })
-          } else {
-
-          }
+          
         } else {
           message.error('服务器错误')
         }
       })
     } else {
-      //修改
+      // 修改
       let { name, price, models, buyTime, stateId, validTime, content, labId, id } = this.state
       let data = `name=${name}&price=${price}&models=${models}&buyTime=${buyTime}&id=${id}&stateId=${stateId}&validTime=${validTime}&detailInfo=${content}&labId=${labId}`
       POST('/lab/AlterGoods', data, re => {
         if (re.state == 1) {
           message.success('修改成功')
-          let data = `id=${this.state.labId}&pageCount=10&currentPage=${this.state.current}`
+          let data = `id=${this.state.labId}&pageCount=4&currentPage=${this.state.current}`
           POST('/lab/getLabGoods', data, re => {
             if (re.state == 1) {
               this.setState({
@@ -198,21 +204,22 @@ class Goods extends Component {
     })
   }
   // 修改物品状态
-  changeStatus(value) {
+  changeStatus (value) {
     this.setState({ stateId:value })
   }
   // 删除物品
-  delete(id) {
+  delete (id) {
     POST('/lab/DeleteGoods', `id=${id}`, re => {
       if (re.state == 1) {
         message.success('删除成功')
-        let data = `id=${this.state.labId}&pageCount=10&currentPage=${this.state.current}`
+        let data = `id=${this.state.labId}&pageCount=4&currentPage=${this.state.current}`
         POST('/lab/getLabGoods', data, re => {
           if (re.state == 1) {
             this.setState({
               list: re.data.rows,
               total: re.data.count
             })
+            
           } else {
             message.error('服务器错误')
           }
@@ -222,16 +229,16 @@ class Goods extends Component {
       }
     })
   }
-//修改物品详情
+// 修改物品详情
   onEditorStateChange = (editorState) => {
     this.setState({
-      editorState,
-    })    
+      editorState
+    })
     this.state.content = draftToHtml(convertToRaw(editorState.getCurrentContent()))
-    this.setState({content:this.state.content})
+    this.setState({ content:this.state.content })
   }
 
-  componentWillMount() {
+  componentWillMount () {
     const { editorState, detailInfo } = this.state
     const contentBlock = htmlToDraft(detailInfo)
     if (contentBlock) {
@@ -239,26 +246,47 @@ class Goods extends Component {
       const editorState = EditorState.createWithContent(contentState)
       this.setState({ editorState })
     }
-    let data = `id=${this.state.labId}&pageCount=10&currentPage=1`
+    let data = `id=${this.state.labId}&pageCount=4&currentPage=1`
     POST('/lab/getLabGoods', data, re => {
       if (re.state == 1) {
         this.setState({
           list: re.data.rows,
           total: re.data.count
         })
+        console.log(re.data.rows[0].photo)
       } else {
         message.error('服务器错误')
       }
     })
   }
-  render() {
+
+  // 导出物品表格
+  export () {
+    POST('/lab/exportGoods',`labId=${this.props.labid}`,re=>{
+      if(re.state==1){
+        let data = re.data
+        let url = data.split("/")
+        window.open(BASE_URL + '/'+url[2]+"/"+url[3])
+        POST('/lab/deleteSheet', `fileName=${url[2] + "/" + url[3]}`,re=>{
+          if(re.state==1){
+
+          }else{
+            message.error('服务器错误')
+          }
+        })        
+      }else{
+        message.error('服务器错误')
+      }
+    })
+  }
+  render () {
     const uploadButton = (
       <div>
         <Icon type='plus' />
         <div className='ant-upload-text'>Upload</div>
       </div>
     )
-    const { previewVisible, previewImage, fileList, name, price, models, stateId, detailInfo, validTime, buyTime } = this.state
+    const { previewVisible, previewImage, fileList, name, price, models, stateId, detailInfo, validTime, buyTime } = this.state    
     return (
       <div style={{ paddingTop: 20, paddingRight: 15 }}>
         <div className='goodscharge'>
@@ -279,7 +307,7 @@ class Goods extends Component {
                           <div className='go_item_con'>物品名称：{item.name}</div>
                           <div className='go_item_con'>物品价格：{item.price}</div>
                           <div className='go_item_con'>型号：{item.models}</div>
-                          <div className='go_item_con'>状态：{item.stateId==1?'空闲':item.stateId==2?'占用':'外借'}</div>
+                          <div className='go_item_con'>状态：{item.stateId == 1 ? '空闲':item.stateId == 2 ? '占用':'外借'}</div>
                           <Row>
                             <Col span={12} />
                             <Col span={6}><Button onClick={this.showModal.bind(this, item.name, item.price, item.models, item.stateId, item.detailInfo, item.buyTime, item.validTime, item.id, item.photo, 0)} style={{ width: '100%' }}>修改</Button></Col>
@@ -295,9 +323,15 @@ class Goods extends Component {
           </div>
           <div className='go_foot'>
             <Row>
-              <Col span={6}><Button type='primary' onClick={this.showModal.bind(this, '', '', '', '', '', '', '', '', '', 1)}>添加新物品</Button></Col>
+              <Col span={3} style={{paddingRight:5}}><Button style={{width:'100%'}} type='primary' onClick={this.showModal.bind(this, '', '', '', '', '', '', '', '', '', 1)}>添加新物品</Button></Col>
+              <Col span={3} style={{paddingLeft:5}}><Button style={{ width: '100%' }} type='primary' onClick={this.export.bind(this)}>导出表格</Button></Col>
               <Col span={12} />
-              <Col span={6}><Pagination current={this.state.current} onChange={this.changePage.bind(this)} total={this.state.total} /></Col>
+              <Col span={6}><Pagination 
+              current={this.state.current} 
+              onChange={this.changePage.bind(this)} 
+              total={this.state.total}
+              pageSize={4}
+              hideOnSinglePage={true} /></Col>
             </Row>
           </div>
         </div>
@@ -334,7 +368,7 @@ class Goods extends Component {
           <Row style={{ fontSize: 16, marginBottom: 10 }}>
             <Col span={6}>购入时间：</Col>
             <Col span={18}>
-              <DatePicker defaultValue={moment(buyTime, 'YYYY-MM-DD')} onChange={(data, dataString) => this.changeValue(4, dataString)}></DatePicker>
+              <DatePicker defaultValue={moment(buyTime, 'YYYY-MM-DD')} onChange={(data, dataString) => this.changeValue(4, dataString)} />
             </Col>
           </Row>
           <Row style={{ fontSize: 16, marginBottom: 10 }}>
@@ -343,7 +377,7 @@ class Goods extends Component {
           </Row>
           <Row style={{ fontSize: 16, marginBottom: 10 }}>
             <Col span={6}>有效时间：</Col>
-            <Col span={18}><DatePicker defaultValue={moment(validTime, 'YYYY-MM-DD')} onChange={(data, dataString) => this.changeValue(5, dataString)}></DatePicker></Col>
+            <Col span={18}><DatePicker defaultValue={moment(validTime, 'YYYY-MM-DD')} onChange={(data, dataString) => this.changeValue(5, dataString)} /></Col>
           </Row>
           <Row style={{ fontSize: 16, marginBottom: 10 }}>
             <Col span={6}>物品状态：</Col>
@@ -360,10 +394,10 @@ class Goods extends Component {
             <Col span={18}>
               <Editor
                 editorState={this.state.editorState}
-                wrapperClassName="demo-wrapper"
-                editorClassName="demo-editor"
+                wrapperClassName='demo-wrapper'
+                editorClassName='demo-editor'
                 onEditorStateChange={this.onEditorStateChange}
-                toolbarClassName="toolbar-class"
+                toolbarClassName='toolbar-class'
                 toolbar={{
                   options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'textAlign', 'list', 'history']
                 }}

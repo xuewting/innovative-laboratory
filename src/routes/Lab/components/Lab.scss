@@ -2,7 +2,8 @@
   width: 100%;
   padding: 10px 0;
   .list_box{
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
     height: 225px;
     border-radius: 3px;
     box-shadow: 1px 2px 3px rgba(0,0,0,0.5);
@@ -23,10 +24,11 @@
       width: 100%;
       padding: 10px;
       vertical-align: middle;
-      width: 220px;
+      width: 250px;
       height: 220px;
       img{
         width: 100%;
+        min-height: 180px;
         border-radius: 4px;
       }
     }
@@ -53,7 +55,7 @@
   height: 40px;
   background-color: rgb(121, 141, 141);
   text-align: center;
-  
+  cursor: pointer;
   margin: -8px auto 60px;
   border-radius: 3px;
   padding: 10px 15px;

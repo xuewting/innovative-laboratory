@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import FreeScrollBar from 'react-free-scrollbar';
 import '../css/LabItem.scss'
+import { POST } from '../../../components/commonModules/POST';
+import { message } from 'antd'
 
 class LabItem extends Component {
    constructor(props) {
@@ -55,6 +57,16 @@ class LabItem extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    POST('/getLabPro', `id=${nexrProps.id}`, re => {
+      if (re.state == 1) {
+        this.setState({ list: re.data });
+      } else {
+        message.error('服务器错误')
+      }
+    })
+  }  
+
   render() {
     return (
       <div className='labitem'>
@@ -65,7 +77,7 @@ class LabItem extends Component {
         <FreeScrollBar className='scroll' style={{height:250}} >
           {this.state.list.map((item,i)=>{
             return(
-              <div key={i} style={{textDecoration:'none',}}>
+              <div key={i} style={{textDecoration:'none'}}>
               <div className="list_box">
                 <p>{item.name}</p>
               </div>

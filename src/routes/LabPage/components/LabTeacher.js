@@ -4,6 +4,8 @@ import img2 from '../../Home/assets/wallhaven-590356.jpg'
 import img3 from '../../Home/assets/wallhaven-590711.jpg'
 import FreeScrollBar from 'react-free-scrollbar';
 import '../css/LabTeacher.scss'
+import { POST } from '../../../components/commonModules/POST';
+import {message} from 'antd'
 
 class LabTeacher extends Component {
   constructor(props) {
@@ -40,6 +42,17 @@ class LabTeacher extends Component {
       }]
     }
   }
+
+  componentWillReceiveProps(nextProps) {
+    POST('/getTeacherBylabId', `labId=${nextProps.id}&pageCount=20&currentPage=1`,re=>{
+      if(re.state==1){
+        this.setState({list:re.data.rows});
+      }else{
+        message.error('服务器错误')
+      }
+    })  
+  }
+  
 
   render() {
     return (

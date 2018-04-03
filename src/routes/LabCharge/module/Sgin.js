@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../css/Sgin.scss'
 import { Table, Icon, Button, Input, message } from 'antd'
-import { POST } from '../../../components/commonModules/POST'
+import { POST, BASE_URL } from '../../../components/commonModules/POST'
 import moment from 'moment'
 
 class Sgin extends Component {
@@ -59,6 +59,30 @@ class Sgin extends Component {
     })
   }
 
+  //导出表格
+  export(){
+    POST('/lab/exportRecord',`labId=${this.props.labid}`,re=>{
+      if(re.state==1){
+        if (re.state == 1) {
+          let data = re.data
+          let url = data.split("/")
+          window.open(BASE_URL + '/' + url[2] + "/" + url[3])
+          POST('/lab/deleteSheet', `fileName=${url[2] + "/" + url[3]}`, re => {
+            if (re.state == 1) {
+
+            } else {
+              message.error('服务器错误')
+            }
+          })
+        } else {
+          message.error('服务器错误')
+        }
+      }else{
+        message.error('服务器错误')
+      }
+    })
+  }
+
   render () {
     const columns = [{
       title: '姓 名',
@@ -113,6 +137,9 @@ class Sgin extends Component {
           </div>
           <div className='lab_sgin_table'>
             <Table columns={columns} dataSource={this.state.data} />
+          </div>
+          <div className="lab_sgin_foot">
+            <Button type='primary' style={{paddingLeft:15,paddingRight:15}} onClick={this.export.bind(this)}>导出表格</Button>
           </div>
         </div>
       </div>

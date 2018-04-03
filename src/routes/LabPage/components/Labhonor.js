@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../css/Honor.scss'
-import { Row, Col, Tooltip } from 'antd'
+import {message, Row, Col, Tooltip } from 'antd'
 import img1 from '../img/奖杯.png'
 import img2 from '../img/论文题目.png'
 import FreeScrollBar from 'react-free-scrollbar';
@@ -36,7 +36,24 @@ class LabHonor extends Component {
     }
   }
 
-  
+
+  componentWillReceiveProps(nextProps) {
+    //项目 0
+    POST('/getLabGlory', `labId=${nextProps.id}&type=0`, re => {
+      if(re.state==1){
+        this.setState({hj:re.data})
+      }else{
+        message.error('服务器错误')
+      }
+    })
+    POST('/getLabGlory', `labId=${nextProps.id}&type=1`, re => {
+      if (re.state == 1) {
+        this.setState({ lw: re.data })
+      } else {
+        message.error('服务器错误')
+      }
+    })
+  }
   componentWillMount() {
     this.setState({list:this.state.hj})
   }

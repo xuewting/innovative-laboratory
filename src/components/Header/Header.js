@@ -114,12 +114,12 @@ class Header extends React.Component {
           </div>
 
           {/*search*/}
-          <div className="search">
+         {/*  <div className="search">
             <input type="text" placeholder='search...' />
             <div className="sea_icon" onClick={this.toSearch.bind(this)}>
               <img src={search} alt="" />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     );

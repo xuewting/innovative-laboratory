@@ -39,16 +39,10 @@ class Item extends Component {
       teacher: '',
       endTime: '',
       evisible: false,
-      sid:''
+      sid:'',
+      total:''
     }
   }
-
-  componentWillMount() {
-    let newDate = new Date()
-    this.setState({ date: newDate.toLocaleDateString() })
-    console.log(newDate.toLocaleDateString())
-  }
-
   // 添加新项目
   showModal = () => {
     this.setState({
@@ -58,14 +52,24 @@ class Item extends Component {
   // 确认添加新项目
   handleOk = (e) => {
     let labid=this.props.labid
+    console.log(labid)
     let pname=this.state.title
     let teacherId=this.state.sid
     let userId=this.state.originXh
     let expectTime=this.state.endTime
-    let data = `labid=${labid}&pname=${pname}&teacherId=${teacherId}&userId=${userId}&expectTime=${expectTime}`
+    let data = `labId=${labid}&pname=${pname}&teacherId=${teacherId}&userId=${userId}&expectTime=${expectTime}`
     POST('/labt/addNewPro',data,re=>{
       if(re.state==1){
         message.success('添加成功')
+        let data = `pageCount=${4}&currentPage=${this.state.current}&labId=${this.props.labid}`
+        POST('/labt/getLabPro', data, re => {
+          if (re.state == 1) {
+            this.setState({ list: re.data.rows,
+            total:re.data.count })
+          } else {
+            message.error('服务器错误')
+          }
+        })
       }else if(re.state==-2){
         message.error('输入的用户不存在，请重新输入')
       }else{
@@ -84,18 +88,29 @@ class Item extends Component {
     })
   }
   // 翻页
-  changePage = (page) => {
-    console.log(page)
+  changePage = (page) => {    
     this.setState({
       current: page
+    })
+    let data = `pageCount=${4}&currentPage=${page}&labId=${this.props.labid}`
+    POST('/labt/getLabPro', data, re => {
+      if (re.state == 1) {
+        this.setState({ list: re.data.rows })
+      } else {
+        message.error('服务器错误')
+      }
     })
   }
 
   componentWillMount() {
+    let newDate = new Date()
+    this.setState({ date: newDate.toLocaleDateString() })
+    console.log(newDate.toLocaleDateString())
     let data = `pageCount=${4}&currentPage=${1}&labId=${this.props.labid}`
     POST('/labt/getLabPro', data, re => {
       if (re.state == 1) {
-        this.setState({ list: re.data.rows })
+        this.setState({ list: re.data.rows,
+          total: re.data.count })
       } else {
         message.error('服务器错误')
       }
@@ -115,7 +130,8 @@ class Item extends Component {
         let data = `pageCount=${4}&currentPage=${this.state.current}&labId=${this.props.labid}`
         POST('/labt/getLabPro', data, re => {
           if (re.state == 1) {
-            this.setState({ list: re.data.rows })
+            this.setState({ list: re.data.rows,
+              total: re.data.count })
           } else {
             message.error('服务器错误')
           }
@@ -187,7 +203,7 @@ class Item extends Component {
           message.error(`${info.file.name} file upload failed.`)
         }
       }
-    }
+    }    
     return (
       <div style={{ paddingTop: 20, paddingRight: 15 }}>
         <div className='itemcharge'>
@@ -297,7 +313,12 @@ class Item extends Component {
                 </Modal>
               </Col>
               <Col span={14} />
-              <Col span={6}><Pagination current={this.state.current} onChange={this.changePage.bind(this)} total={50} /></Col>
+              <Col span={6}><Pagination               
+              current={this.state.current} 
+              onChange={this.changePage.bind(this)} 
+              total={this.state.total}
+              hideOnSinglePage={true}
+              pageSize={4} /></Col>
             </Row>
           </div>
         </div>

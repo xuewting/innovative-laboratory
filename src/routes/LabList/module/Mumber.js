@@ -206,7 +206,7 @@ class Mumber extends Component {
       title: '邮箱',
       dataIndex: 'email',
       key: 'email',
-      width: '10%'
+      width: '15%'
     }, {
       title: '身份',
       dataIndex: 'power',
@@ -233,7 +233,7 @@ class Mumber extends Component {
               </Col> */}
             <Col span={6} offset={14} style={{ paddingLeft: 5 }}>
               <Popconfirm title='确认删除？' onConfirm={this.confirm} onCancel={this.cancel} okText='Yes' cancelText='No'>
-                <Button type='danger' style={{ width: '100%' }}>删除</Button>
+               {/*  <Button type='danger' style={{ width: '100%' }}>删除</Button> */}
               </Popconfirm>
             </Col>
           </Row>

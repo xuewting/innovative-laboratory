@@ -5,9 +5,23 @@ import img2 from '../img/wallhaven-582013.jpg'
 import img3 from '../img/wallhaven-582025.jpg'
 import img4 from '../img/wallhaven-590711.jpg'
 import '../css/LabShow.scss'
+import { BASE_URL } from '../../../components/commonModules/POST';
+
 
 class LabShow extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      data:''
+    }
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    this.setState({data:nextProps.data.photo})
+  }
+  
   render() {
+    const {data}=this.state
     return (
       <div className='labshow'>
       <div className="labhead">
@@ -15,12 +29,9 @@ class LabShow extends Component {
       </div>
             <div className="showright">
               <div className="carousel">
-                <Carousel autoplay>
-                  <div className="carimg"><img src={img3} alt="img1"/></div>
-                  <div className="carimg"><img src={img2} alt="img2"/></div>
-                  <div className="carimg"><img src={img3} alt="img3"/></div>
-                  <div className="carimg"><img src={img4} alt="img4"/></div>
-                </Carousel>
+                {/* <Carousel autoplay> */}
+                  <div className="carimg"><img src={BASE_URL+data} alt="img1"/></div>            
+                {/* </Carousel> */}
               </div>
            </div> 
       </div>

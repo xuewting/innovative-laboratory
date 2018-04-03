@@ -74,8 +74,28 @@ class Honor extends Component {
   // 确认修改/提交（论文）
   handlePOk = (e) => {
     let { typeP } = this.state
-    if (typeP == 1) {
+    if (typeP == 1) {      
       // 修改
+      let name = this.state.ptitle
+      let author = this.state.author
+      let labid = this.props.labid
+      let winTime = this.state.ptime
+      let magazine = this.state.magazine      
+      let data = `name=${name}&author=${author}&labId=${labid}&winTime=${winTime}&magazine=${magazine}&type=1`
+      POST('/labt/updateLabGlory', data, re => {
+        if (re.state == 1) {
+          message.success('修改成功')
+          POST('/labt/getLabGlory', `labId=${this.props.labid}&type=1`, re => {
+            if (re.state == 1) {
+              this.setState({ paList: re.data.rows })
+            } else {
+              message.error('服务器错误')
+            }
+          })
+        } else {
+          message.error('服务器错误')
+        }
+      })
     } else {
       let name = this.state.ptitle
       let author = this.state.author
@@ -140,6 +160,7 @@ class Honor extends Component {
   handleCOk = (e) => {
     let type = this.state.typeC
     if (type == 1) {
+      //添加
       let type = 0
       let name = this.state.ctitle
       let level = this.state.cclass
@@ -152,6 +173,31 @@ class Honor extends Component {
       POST('/labt/addLabGlory', data, re => {
         if (re.state == 1) {
           message.success('添加成功')
+          POST('/labt/getLabGlory', `labId=${this.props.labid}&type=0`, re => {
+            if (re.state == 1) {
+              this.setState({ comList: re.data.rows })
+            } else {
+              message.error('服务器错误')
+            }
+          })
+        } else {
+          message.error('服务器错误')
+        }
+      })
+    }else{
+      //修改
+      let type = 0
+      let name = this.state.ctitle
+      let level = this.state.cclass
+      let winUser = this.state.students
+      let guideTea = this.state.teacher
+      let labId = this.props.labid
+      let winTime = this.state.ctime
+      let result = this.state.reward
+      let data = `type=${type}&name=${name}&level=${level}&winUser=${winUser}&guideTea=${guideTea}&labId=${labId}&winTime=${winTime}&result=${result}`
+      POST('/labt/updateLabGlory', data, re => {
+        if (re.state == 1) {
+          message.success('修改成功')
           POST('/labt/getLabGlory', `labId=${this.props.labid}&type=0`, re => {
             if (re.state == 1) {
               this.setState({ comList: re.data.rows })
