@@ -6,6 +6,7 @@ import img2 from '../img/wallhaven-582013.jpg'
 import img3 from '../img/wallhaven-582025.jpg'
 import img4 from '../img/wallhaven-590711.jpg'
 import { POST, BASE_URL } from '../../../components/commonModules/POST';
+import { browserHistory} from 'react-router'
 
 class LabGoods extends Component {
   constructor(props) {
@@ -50,6 +51,12 @@ class LabGoods extends Component {
       }
     })
   }
+
+  toDetail(id){
+    browserHistory.push({
+      pathname: `/goodinfo/${id}`
+    })
+  }
   
   render() {    
     const {list}= this.state
@@ -64,7 +71,7 @@ class LabGoods extends Component {
           <Row>          
             {list.map((item, i) => {
               return (
-                <Col span={8} className='con_item hovereffect' key={i} >
+                <Col span={8} className='con_item hovereffect' key={i} style={{cursor:'pointer'}} onClick={()=>this.toDetail(item.id)} >
                   <img src={ BASE_URL+item.photo } alt="" className='img-responsive' />
                   <div className='overlay' ref={i} >
                     <h2>{item.name}</h2>

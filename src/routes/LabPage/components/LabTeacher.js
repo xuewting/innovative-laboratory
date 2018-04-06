@@ -4,8 +4,9 @@ import img2 from '../../Home/assets/wallhaven-590356.jpg'
 import img3 from '../../Home/assets/wallhaven-590711.jpg'
 import FreeScrollBar from 'react-free-scrollbar';
 import '../css/LabTeacher.scss'
-import { POST } from '../../../components/commonModules/POST';
+import { POST, BASE_URL } from '../../../components/commonModules/POST';
 import {message} from 'antd'
+import {browserHistory} from 'react-router'
 
 class LabTeacher extends Component {
   constructor(props) {
@@ -52,7 +53,14 @@ class LabTeacher extends Component {
       }
     })  
   }
-  
+  toDetail(id){
+    browserHistory.push({
+      pathname: `/teacherinfo`,
+      query:{
+        id:id
+      }
+    })
+  }
 
   render() {
     return (
@@ -64,11 +72,11 @@ class LabTeacher extends Component {
         <FreeScrollBar className='scroll' style={{height:450}}>
           {this.state.list.map((item, i) => {
             return (
-              <div className="tea_list" key={i}>
-                <img src={item.url} alt="" />
+              <div className="tea_list" key={i} style={{cursor:'pointer'}} onClick={()=>this.toDetail(item.id)}>
+                <img src={BASE_URL + item.headImg} alt="" />
                 <div className="txt">
                   <h3>{item.name}</h3>
-                  <p>{item.intr}</p>
+                  <p>{item.introduce}</p>
                 </div>
               </div>
             )

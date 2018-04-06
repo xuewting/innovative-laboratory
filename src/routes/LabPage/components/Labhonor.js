@@ -4,6 +4,7 @@ import {message, Row, Col, Tooltip } from 'antd'
 import img1 from '../img/奖杯.png'
 import img2 from '../img/论文题目.png'
 import FreeScrollBar from 'react-free-scrollbar';
+import { POST } from '../../../components/commonModules/POST';
 
 class LabHonor extends Component {
   constructor(props) {
@@ -36,24 +37,25 @@ class LabHonor extends Component {
     }
   }
 
-
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
     //项目 0
     POST('/getLabGlory', `labId=${nextProps.id}&type=0`, re => {
-      if(re.state==1){
-        this.setState({hj:re.data})
-      }else{
+      if (re.state == 1) {
+        this.setState({ hj: re.data.rows, list: re.data.rows})
+      } else {
         message.error('服务器错误')
       }
     })
     POST('/getLabGlory', `labId=${nextProps.id}&type=1`, re => {
       if (re.state == 1) {
-        this.setState({ lw: re.data })
+        this.setState({ lw: re.data.rows })
       } else {
         message.error('服务器错误')
       }
-    })
+    })    
   }
+
   componentWillMount() {
     this.setState({list:this.state.hj})
   }
@@ -68,6 +70,7 @@ class LabHonor extends Component {
   
   
   render() {
+    const {list} = this.state
     return (
       <div className='labhonor'>
         <div className="change">
@@ -86,13 +89,14 @@ class LabHonor extends Component {
         </div>
         <div className="honor_con">
         <FreeScrollBar className='scroll' style={{height:200}}>
-        {this.state.list.map((item,i)=>{
+        {list.length==0? <div>暂无数据</div>:list.map((item,i)=>{
           return(
-            <div className="honor_item" key={i}>            
+            <div className="honor_item" key={i} > 
               <Row>              
-                <Col span={16}>{item.name}</Col>
-                <Col span={4}>{item.gain}</Col>
-                <Col span={4}>{item.time}</Col>                
+                <Col span={15}>{item.name}</Col>
+                <Col span={3}>{item.result}</Col>
+                <Col span={3}>{item.magazine}</Col>
+                <Col span={3}>{item.winTime}</Col>                
               </Row>             
             </div>
           )

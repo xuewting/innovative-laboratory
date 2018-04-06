@@ -64,7 +64,7 @@ class Teacher extends Component {
   toDetail=(id)=>browserHistory.push({
     pathname:'/teacherinfo',
     query:{
-      teacher:id
+      id:id
     }
   })
 
@@ -91,7 +91,7 @@ class Teacher extends Component {
         </FreeScrollBar>
         </div>
         <div className='tea_foot'>
-          <div className='more' onClick={(e)=>toTeacher()}>
+          <div className='more' onClick={(e)=>this.toTeacher()}>
             More...
           </div>
         </div>

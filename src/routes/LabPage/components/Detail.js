@@ -28,6 +28,7 @@ class Detail extends Component {
     })
   }
 
+
   render () {
     const { data, teacher } = this.state
     return (
