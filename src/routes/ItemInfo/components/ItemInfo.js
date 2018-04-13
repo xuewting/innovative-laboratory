@@ -3,45 +3,83 @@ import { Timeline, TimelineEvent } from 'react-event-timeline'
 import img1 from '../../Home/assets/wallhaven-113384.png'
 import '../css/info.scss'
 import EditInfo from './EditInfo'
-
+import { POST } from '../../../components/commonModules/POST';
+import {message} from 'antd'
 
 class ItemInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
       start: 'lorem',
-      isEnd: false
+      isEnd: false,
+      pdata:'',
+      con:'',
+      
     }
   }
-
+  //返回
   goBack() {
     history.back()
   }
 
+  //页面初始化
+  componentWillMount() {
+    this.getRate()
+    POST('/getProjectById',`id=${this.props.location.query.id}`,re=>{
+      if(re.state==1){
+        this.setState({pdata:re.data})
+        this.getOrigin(re.data.chargeUser)
+      }else{
+        message.error('服务器错误')
+      }
+    })    
+  }
+//获取发起人信息
+  getOrigin(id){
+    POST('/user/getUserInfo',`id=${id}`,re=>{
+      if(re.state==1){
+        this.setState({start:re.data.name})
+      }else{
+        message.error('获取启动人失败')        
+      }
+    })
+  }
+//获得项目进度
+  getRate(){
+    POST('/user/getProRate', `id=${this.props.location.query.id}`, re => {
+      if (re.state == 1) {
 
+      } else {
+        message.error('服务器错误')
+      }
+    })
+  }
+
+
+  
   render() {
+    const {pdata,start} = this.state
     return (
       <div style={{ width: 1250, margin: '0 auto' }}>
-      <h2 style={{color:'#fff',fontWeight:600}}>简 介：</h2>
-        <p style={{color:'#fff',marginBottom:20}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque omnis architecto obcaecati animi mollitia, praesentium odit sapiente dignissimos unde quis dolore laudantium ratione sed repellat quia ipsa deserunt! Eum, dignissimos.</p>
-        <EditInfo ></EditInfo>
+      <h2 style={{color:'#fff',fontWeight:600}}>{pdata.name}</h2>
+        <EditInfo id={this.props.location.query.id} getRate={this.getRate.bind(this)}></EditInfo>
         <div style={{ float: 'left', width: '100%' }}>
           <Timeline>
-            <TimelineEvent title="John Doe sent a SMS"
-              createdAt="2016-09-12 10:06 PM"
+            <TimelineEvent title="项目启动"
+              createdAt={pdata.startTime}
               icon={<i className='fa fa-hourglass-start' />}
               className='event'
               contentStyle={{ backgroundColor: "transparent", color: "#fff", fontSize: 14 }}
               iconColor="#fff"
               bubbleStyle={{ backgroundColor: "#333" }}
               titleStyle={{ fontWeight: "bold", color: '#fff' }}
-              subtitle={`由${this.state.start}启动`}
+              subtitle={`由${start}启动`}
               subtitleStyle={{ color: "#69b7ef", fontWeight: '500' }}
               cardHeaderStyle={{ color: '#fff', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: 4 }}
               container="card"
               style={{ backgroundColor: 'transparent', marginBottom: 30 }}
             >
-            </TimelineEvent>
+            </TimelineEvent>            
             <TimelineEvent title="John Doe sent a SMS"
               createdAt="2016-09-12 10:06 PM"
               icon={<i className='fa fa-calendar' />}

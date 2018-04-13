@@ -38,7 +38,7 @@ class Content extends Component {
     return (
       <div>
         {con ? type == 1 ?
-          <Application content={this.state.con}/>
+          <Application content={this.state.con} getMessage={this.props.getMessage}/>
       : <div className='mail_content'>
         <div className='mail_con_head'>
           <Row>

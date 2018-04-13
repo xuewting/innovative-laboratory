@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import Side from '../../LabCharge/components/Side'
 import { browserHistory } from 'react-router'
-import { Row, Col, Button, Input, DatePicker } from 'antd'
+import { message, Row, Col, Button, Input, DatePicker } from 'antd'
 import './IEdit.scss'
 import Plan from '../../NewItem/components/Plan'
+import { POST } from '../../../components/commonModules/POST'
+import moment from 'moment'
 
 const { TextArea } = Input
 
@@ -21,6 +23,19 @@ class IEdit extends Component {
       need:'',
       tid:''
     }
+  }
+
+  // 获取项目信息
+
+  componentWillMount () {
+    POST('/getProjectById', `id=${this.props.location.query.id}`, re => {
+      if (re.state == 1) {
+        this.setState({ name:re.data.name })
+        this.setState({ endTime: re.data.expectTime })
+      } else {
+        message.error('服务器错误')
+      }
+    })
   }
 
   // 修改相应值
@@ -62,7 +77,7 @@ class IEdit extends Component {
   }
 
   // 边框页面跳转
-  chargepage(value) {
+  chargepage (value) {
     switch (value) {
       case 0:
         browserHistory.push({
@@ -126,7 +141,7 @@ class IEdit extends Component {
           }
         })
         this.setState({ chargepage: '/labcharge/notice' })
-        break      
+        break
       case 7:
         browserHistory.push({
           pathname: '/labcharge/sgin',
@@ -147,6 +162,8 @@ class IEdit extends Component {
   goBack = () => history.go(-1)
 
   render () {
+    const { name, endTime } = this.state
+    console.log(endTime)
     return (
       <div>
         <Row>
@@ -163,59 +180,30 @@ class IEdit extends Component {
                 <Row style={{ width:'40%', fontSize:16, marginBottom:15 }}>
                   <Col span={4} style={{ color:'#fff' }}>项目名称:</Col>
                   <Col span={20}>
-                    <Input placeholder='请输入项目的名称' className='in' onChange={(e) => this.changevalue(1, e.target.value)} />
+                    <Input placeholder='请输入项目的名称' className='in' value={name} onChange={(e) => this.changevalue(1, e.target.value)} />
                   </Col>
                 </Row>
                 <Row style={{ width: '40%', fontSize: 16, marginBottom: 15 }}>
                   <Col span={4} style={{ color: '#fff' }}>发起人:</Col>
-                  <Col span={20}>
-                    <Input placeholder='请输入发起人姓名' className='in' onChange={(e) => this.changevalue(2, e.target.value)} />
-                  </Col>
                 </Row>
                 <Row style={{ width: '40%', fontSize: 16, marginBottom: 15 }}>
                   <Col span={4} style={{ color: '#fff' }}>发起人学号:</Col>
-                  <Col span={20}>
-                    <Input placeholder='请输入发起人学号' className='in' onChange={(e) => this.changevalue(3, e.target.value)} />
-                  </Col>
                 </Row>
                 <Row style={{ width: '40%', fontSize: 16, marginBottom: 15 }}>
                   <Col span={4} style={{ color: '#fff' }}>指导老师:</Col>
-                  <Col span={20}>
-                    <Input placeholder='请输入指导老师姓名' className='in' onChange={(e) => this.changevalue(4, e.target.value)} />
-                  </Col>
                 </Row>
                 <Row style={{ width: '40%', fontSize: 16, marginBottom: 15 }}>
                   <Col span={4} style={{ color: '#fff' }}>教工号:</Col>
-                  <Col span={20}>
-                    <Input placeholder='请输入指导老师教工号' className='in' onChange={(e) => this.changevalue(8, e.target.value)} />
-                  </Col>
                 </Row>
                 <Row style={{ width: '40%', fontSize: 16, marginBottom: 35 }}>
                   <Col span={4} style={{ color: '#fff' }}>预计结束时间:</Col>
                   <Col span={20}>
-                    <DatePicker onChange={this.changeTime.bind(this)} />
+                    <DatePicker onChange={this.changeTime.bind(this)} defaultValue={moment(endTime, 'YYYY-MM-DD')} />
                   </Col>
                 </Row>
                 <div style={{ width: '50%', fontSize: 16, marginBottom: 35 }}>
                   <div style={{ color: '#fff', marginBottom:10 }}>参与学生:</div>
-                  <div>
-                    <TextArea
-                      autosize={{ minRows:3, maxRows:3 }}
-                      style={{ fontSize: 16, padding:10 }}
-                      placeholder='输入项目参与成员学号，用逗号隔开'
-                      onChange={(e) => this.changevalue(5, e.target.value)} />
-                  </div>
-                  <div style={{ fontSize:13, color:'#fff' }}>
-                    输入项目参与成员学号，用逗号隔开
-                  </div>
-                </div>
-                <div style={{ width:'50%', fontSize:16, marginBottom: 35 }}>
-                  <div style={{ color: '#fff', marginBottom: 10 }}>项目介绍:</div>
-                  <TextArea
-                    autosize={{ minRows:10, maxRows:10 }}
-                    style={{ fontSize:16, padding:10 }}
-                    placeholder='请输入项目简略介绍'
-                    onChange={(e) => this.changevalue(6, e.target.value)} />
+
                 </div>
                 <div style={{ width: '50%', fontSize: 16, marginBottom: 35 }}>
                   <div style={{ color: '#fff', marginBottom: 10 }}>设备需求:</div>
@@ -227,7 +215,7 @@ class IEdit extends Component {
                 </div>
                 <div style={{ width: '50%', fontSize: 16, marginBottom: 35 }}>
                   <div style={{ color: '#fff', marginBottom: 10 }}>项目计划:</div>
-                  <Plan></Plan>
+                  <Plan />
                 </div>
               </div>
 

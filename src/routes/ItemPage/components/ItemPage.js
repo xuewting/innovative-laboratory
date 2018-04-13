@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, DatePicker, Tooltip, message } from 'antd'
+import { Row, Col, DatePicker, Tooltip, message, Pagination } from 'antd'
 import '../css/ItemPage.scss'
 import sea from '../img/search.png'
 import rili from '../img/日历.png'
@@ -17,7 +17,9 @@ class ItemPage extends Component {
       count: 0,
       tname: '',
       svalue: '',
-      n_list: []
+      n_list: [],
+      total:'',
+      currentPage:1
     }
   }
 
@@ -32,10 +34,15 @@ class ItemPage extends Component {
       this.setState({ list: 1 })
     }
   }
-
-  toDetail () {
+changePage(page){
+  this.getData(page)
+}
+  toDetail (id) {
     browserHistory.push({
-      pathname: `/iteminfo`
+      pathname: `/iteminfo`,
+      query:{
+        id:id
+      }
     })
   }
   componentDidMount () {
@@ -46,12 +53,14 @@ class ItemPage extends Component {
    * @param {*} currentPage
    */
   getData (currentPage) {
+    this.setState({currentPage:currentPage});
     let data = `pageCount=9&currentPage=${currentPage}`
     POST('/getProject', data, (re) => {
       if (re.state === 1) {
         this.setState({
           p_list: re.data.rows,
-          n_list: re.data.rows
+          n_list: re.data.rows,
+          total:re.data.count
         })
         this.setState({ count: re.data.count })
         console.log(re)
@@ -126,16 +135,16 @@ class ItemPage extends Component {
             ? <Row >
               {this.state.p_list.map((item, i) => {
                 return (
-                  <Col span={8} key={i} ><div className='list_item_box' onClick={this.toDetail.bind(this)} style={{ cursor: 'pointer' }}>
+                  <Col span={8} key={i} ><div className='list_item_box' onClick={this.toDetail.bind(this,item.id)} style={{ cursor: 'pointer' }} >
                     <div className='list_item_con'>
                       <div className='list_item_head'>{item.name}</div>
-                      <div className='list_item_subhead'>发起人：{item.user.name}</div>
-                      <div className='list_item_subhead'>实验室：{item.lab.name}</div>
+                      <div className='list_item_subhead'>发起人：{/* item.user.name */}</div>
+                      <div className='list_item_subhead'>实验室：{/* item.lab.name */}</div>
                       <div className='list_item_subhead'>是否结束：{/* item.actualTime ? '是' : '否' */}</div>
                       <div className='list_item_date'>
                         <Tooltip title='开始时间'>
                           <img src={rili} alt='' />
-                          {item.applyTime}
+                          {/* item.applyTime */}
                         </Tooltip>
                         <Tooltip title='预期结束时间'>
                           <img src={time} alt='' />
@@ -160,16 +169,16 @@ class ItemPage extends Component {
                     <div className='task_con'>
                       <Row>
                         <Col span={4}>
-                          <div className='task_head'>{item.name}</div>
+                          <div className='task_head'>{/* item.name */}</div>
                         </Col>
                         <Col span={4}>
-                          <div className='task_head'>发起人：{item.user.name}</div>
+                          <div className='task_head'>发起人：{/* item.user.name */}</div>
                         </Col>
                         <Col span={8} offset={8} className='task_date'>
 
                           <Tooltip title='开始时间'>
                             <img src={rili} alt='' />
-                            {item.applyTime}
+                            {/* item.applyTime */}
                           </Tooltip>
                           <Tooltip title='预期结束时间'>
                             <img src={time} alt='' />
@@ -187,7 +196,14 @@ class ItemPage extends Component {
               })}
             </div>
           }
-        </div>
+        </div>        
+        <Pagination
+          current={this.state.currentPage}
+          onChange={this.changePage.bind(this)}
+          total={this.state.total}
+          pageSize={9}
+          hideOnSinglePage={true}
+          style={{float:'right',marginRight:20}} />
       </div>
     )
   }

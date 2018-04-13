@@ -163,11 +163,12 @@ class Item extends Component {
   }
 
   // 编辑页面
-  toEdit(num) {
+  toEdit(num) {    
     browserHistory.push({
       pathname: '/labcharge/item/edit',
-      qurey: {
-        id: num
+      query: {
+        id: num,
+        labid:this.props.labid
       }
     })
   }

@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import '../css/member.scss'
-import { message,Table, Input, Button, Icon, Modal, Row, Col, Select } from 'antd'
+import { message, Table, Input, Button, Icon, Modal, Row, Col, Select } from 'antd'
 const Option = Select.Option
 import { POST } from '../../../components/commonModules/POST'
 
 class Member extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       data: [{
         id: '1',
         name: 'John Brown',
         sid: 32,
-        position: '普通成员',
+        position: '普通成员'
       }, {
         id: '2',
         name: 'Joe Black',
         sid: 42,
-        position: '管理员',
+        position: '管理员'
       }, {
         id: '3',
         name: 'Jim Green',
         sid: 32,
-        position: '普通成员',
+        position: '普通成员'
       }, {
         id: '4',
         name: 'Jim Red',
         sid: 32,
-        position: '管理员',
+        position: '管理员'
       }],
       filterDropdownVisible: false,
       searchText: '',
@@ -42,38 +42,38 @@ class Member extends Component {
     }
   }
 
-  //获取成员列表
-  componentWillMount() {
+  // 获取成员列表
+  componentWillMount () {
     let labid = this.props.labid
     POST('/labt/getLabUser', `labId=${labid}`, re => {
       if (re.state == 1) {
-        this.setState({data:re.data.rows})
+        this.setState({ data:re.data.rows })
       } else {
         message.error('服务器错误')
       }
     })
   }
 
-  //打开弹窗
-  showModal = (name, sid, position,type) => {
+  // 打开弹窗
+  showModal = (name, sid, position, type) => {
     this.setState({
       visible: true,
       name: name,
       sid: sid,
       position: position,
       type:type
-    });
+    })
   }
 
-  //确认提交
-  handleOk = (e) => {    
+  // 确认提交
+  handleOk = (e) => {
     let name = this.state.name
     let sid = this.state.sid
     let labid = this.state.labid
     let data = `name=${name}&sid=${sid}&labId=${labid}`
-    if(this.state.type==1){
-      POST('/labt/addLabStu',data, re=>{
-        if(re.state==1){
+    if (this.state.type == 1) {
+      POST('/labt/addLabStu', data, re => {
+        if (re.state == 1) {
           message.success('添加成功')
           let labid = this.state.labid
           POST('/labt/getLabUser', `labId=${labid}`, re => {
@@ -83,45 +83,45 @@ class Member extends Component {
               message.error('服务器错误')
             }
           })
-        }else if(re.state==-2){
+        } else if (re.state == -2) {
           message.success('该用户不存在，请确认信息')
-        }else{
+        }else {
           message.success('服务器错误')
         }
       })
-    }else if(re.state==0){
+    } else if (re.state == 0) {
 
     }
     this.setState({
-      visible: false,
-    })    
+      visible: false
+    })
   }
 
-  //取消修改
+  // 取消修改
   handleCancel = (e) => {
-    console.log(e);
+    console.log(e)
     this.setState({
-      visible: false,
-    });
+      visible: false
+    })
   }
 
-  //修改信息
+  // 修改信息
   changeValue = (type, value) => {
     switch (type) {
       case 1:
-        this.setState({ name: value }); break;
+        this.setState({ name: value }); break
       case 2:
-        this.setState({ sid: value }); break;
+        this.setState({ sid: value }); break
       case 3:
-        this.setState({ position: value }); break;
+        this.setState({ position: value }); break
     }
   }
 
-  //删除信息
+  // 删除信息
   deletPosen = (id) => {
-    let data=`id=${id}`
-    POST('/labt/deleteUser',data,re=>{
-      if(re.state==1){
+    let data = `id=${id}`
+    POST('/labt/deleteUser', data, re => {
+      if (re.state == 1) {
         message.success('删除成功')
         let labid = this.state.labid
         POST('/labt/getLabUser', `labId=${labid}`, re => {
@@ -131,73 +131,73 @@ class Member extends Component {
             message.error('服务器错误')
           }
         })
-      }else{
+      } else{
         message.error('服务器错误')
       }
     })
   }
 
-  //搜索姓名
+  // 搜索姓名
   onSearch = () => {
-    const { searchText } = this.state;
-    const reg = new RegExp(searchText, 'gi');
+    const { searchText } = this.state
+    const reg = new RegExp(searchText, 'gi')
     this.setState({
       filterDropdownVisible: false,
       filtered: !!searchText,
       data: data.map((record) => {
-        const match = record.name.match(reg);
+        const match = record.name.match(reg)
         if (!match) {
-          return null;
+          return null
         }
         return {
           ...record,
           name: (
             <span>
               {record.name.split(reg).map((text, i) => (
-                i > 0 ? [<span className="highlight">{match[0]}</span>, text] : text
+                i > 0 ? [<span className='highlight'>{match[0]}</span>, text] : text
               ))}
             </span>
-          ),
-        };
-      }).filter(record => !!record),
-    });
+          )
+        }
+      }).filter(record => !!record)
+    })
   }
 
-  render() {
+  render () {
     const columns = [{
       title: '姓名',
       dataIndex: 'name',
       key: 'name',
       width: '33%',
       filterDropdown: (
-        <div className="custom-filter-dropdown">
+        <div className='custom-filter-dropdown'>
           <Input
             ref={ele => this.searchInput = ele}
-            placeholder="Search name"
+            placeholder='Search name'
             value={this.state.searchText}
             onChange={this.onInputChange}
             onPressEnter={this.onSearch}
           />
-          <Button type="primary" onClick={this.onSearch}>Search</Button>
+          <Button type='primary' onClick={this.onSearch}>Search</Button>
         </div>
       ),
-      filterIcon: <Icon type="smile-o" style={{ color: this.state.filtered ? '#108ee9' : '#aaa' }} />,
+      filterIcon: <Icon type='smile-o' style={{ color: this.state.filtered ? '#108ee9' : '#aaa' }} />,
       filterDropdownVisible: this.state.filterDropdownVisible,
       onFilterDropdownVisibleChange: (visible) => {
         this.setState({
-          filterDropdownVisible: visible,
-        }, () => this.searchInput && this.searchInput.focus());
-      },
+          filterDropdownVisible: visible
+        }, () => this.searchInput && this.searchInput.focus())
+      }
     }, {
       title: '学号',
       dataIndex: 'sid',
       key: 'sid',
-      width: '33%',
+      width: '33%'
     }, {
       title: '邮箱',
       dataIndex: 'email',
-        key: 'email',
-      width: '33%',      
+      key: 'email',
+      width: '33%',
       render: (text, record, index) => {
         return (<div>
           <Row>
@@ -209,24 +209,24 @@ class Member extends Component {
         </div>
         )
       }
-    }];
+    }]
 
 
     return (
       <div style={{ paddingTop: 20, paddingRight: 15 }}>
-        <div className="membercharge" >
-          <div className="mem_head">
+        <div className='membercharge' >
+          <div className='mem_head'>
             <h2>实验室成员管理</h2>
           </div>
-          <div className="mem_list">
+          <div className='mem_list'>
             <Table columns={columns} dataSource={this.state.data} />
           </div>
           <div style={{ paddingLeft: 10 }}>
-            <Button type='primary' onClick={this.showModal.bind(this, '', '', '',1)}>添加新成员</Button>
+            <Button type='primary' onClick={this.showModal.bind(this, '', '', '', 1)}>添加新成员</Button>
           </div>
         </div>
         <Modal
-          title="编辑基本信息"
+          title='编辑基本信息'
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
@@ -250,11 +250,11 @@ class Member extends Component {
                 style={{ padding: 10, marginBottom: 10 }}
                 onChange={(e) => this.changeValue(2, e.target.value)}
                 placeholder='请输入成员学号' />
-            </Col></Row>         
+            </Col></Row>
         </Modal>
       </div>
-    );
+    )
   }
 }
 
-export default Member;
+export default Member

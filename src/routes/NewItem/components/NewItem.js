@@ -79,24 +79,46 @@ class NewItem extends Component {
 
   // commit
   commit=() => {
-    let {pname,labId,teacher,phone,need,endTime} = this.state
-    let data = `pname=${pname}&applyLab=${labId}&guideName=${teacher}&contactWay=${phone}&devDemand=${need}&expertTime=${endTime}`
-    POST('/user/applyProject', data, re => {
-      if (re.state == 1) {
-        let dataform = new FormData()
-        dataform.append('pid',re.data.id)
-        dataform.append('file',this.state.file)
-        POSTFile('/user/applyProPlan',dataform,re=>{
-          if(re.state==1){
-            message.success('提交成功')
-          }else{
-            message.error('服务器错误')
+    if(!this.state.endTime){
+      message.error('请填写预计结束日期')
+    }else if(!this.state.pname){
+      message.error('请填写项目名称')
+    } else if (!this.state.need){
+      message.error('请填写项目所需设备（没有填“无”）')
+    }else if(!this.state.file){
+      message.error('请提交项目计划书')
+    }else{
+      let { pname, labId, teacher, phone, need, endTime } = this.state
+      let data = `pname=${pname}&applyLab=${labId}&guideName=${teacher}&contactWay=${phone}&devDemand=${need}&expertTime=${endTime}`
+      POST('/user/applyProject', data, re => {
+        if (re.state == 1) {
+          let pid = re.data.id
+          {
+            this.state.list.map((item, i) => {
+              console.log(item.xh)
+              let dataMum = `pid=${pid}&sid=${item.xh}`
+              POST('/user/addProMember', dataMum, re => {
+                if (re.state == 0) {
+                  message.error(`第${i + 1}个成员添加失败`)
+                }
+              })
+            })
           }
-        })       
-      }else {
-        message.error('服务器错误')
-      }
-    })
+          let dataform = new FormData()
+          dataform.append('pid', re.data.id)
+          dataform.append('file', this.state.file)
+          POSTFile('/user/applyProPlan', dataform, re => {
+            if (re.state == 1) {
+              message.success('提交成功')
+            } else {
+              message.error('服务器错误')
+            }
+          })
+        } else {
+          message.error('服务器错误')
+        }
+      })
+    }    
   }
 
   // change plan

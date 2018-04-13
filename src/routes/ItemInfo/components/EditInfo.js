@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import '../css/info.scss'
 import { Tooltip, message, Upload, Button, Icon } from 'antd'
 import Edit from './Edit'
+import { POST } from '../../../components/commonModules/POST';
 
 class EditInfo extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class EditInfo extends Component {
     this.state = {
       photo: [],
       img: [],
-      state:true
+      state:true,
+      con:''
     }
   }
 
@@ -18,6 +20,27 @@ class EditInfo extends Component {
   }
 
   changeState=()=>this.setState({state:!this.state.state});
+  //提交进度
+  submitRate=()=>{
+    if(this.state.state){
+      let id = this.props.id
+      POST('/lab/addProRate', `content=${this.state.con}&id=${id}`, re => {
+        if (re.state == 1) {
+          message.success('提交成功')
+          this.props.getRate()
+        } else {
+          message.error('提交失败')
+        }
+      })
+    }else{
+
+    }
+  }
+
+  //项目进度内容
+  changeCon(value) {
+    this.setState({ con: value })
+  }
 
   render() {
     const {state}=this.state
@@ -49,7 +72,7 @@ class EditInfo extends Component {
         {/*add content*/}
         <div className="editcontent">
         {state?
-            <Edit></Edit>:
+            <Edit change={this.changeCon.bind(this)}></Edit>:
             <Upload {...props} accept='application/msword'>
               <Button style={{ marginBottom: 20 }}>
                 <Icon type="upload" /> 点击上传文件（word）
@@ -57,7 +80,7 @@ class EditInfo extends Component {
             </Upload>}
           <div className="confoot">            
             <div className="footright">
-              <button>Submit</button>
+              <button onClick={this.submitRate.bind(this)}>Submit</button>
             </div>           
           </div>
         </div>

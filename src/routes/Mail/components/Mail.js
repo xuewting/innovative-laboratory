@@ -20,17 +20,21 @@ class Mail extends Component {
     type:a })
     // console.log(a)
   } 
-  componentDidMount () {
+  componentDidMount () {    
+    this.getMessage()
+  }
+
+  getMessage=()=>{
     let data = ``
     POST('/user/getBaseMessgae', data, (re) => {
       if (re.state === 1) {
-        this.setState({ baseMess:re.data })
+        this.setState({ baseMess: re.data })
       }
     })
     POST('/user/getMessgae', data, re => {
       if (re.state === 1) {
         console.log(re)
-        this.setState({ message:re.data })
+        this.setState({ message: re.data })
       }
     })
   }
@@ -43,7 +47,7 @@ class Mail extends Component {
               baseMess={this.state.baseMess} message={this.state.message} />
           </Col>
           <Col span={14} style={{ paddingLeft:5 }}>
-            <Content content={this.state.con} type={this.state.type} />
+            <Content content={this.state.con} type={this.state.type} getMessage={this.getMessage.bind(this)}/>
           </Col>
         </Row>
       </div>

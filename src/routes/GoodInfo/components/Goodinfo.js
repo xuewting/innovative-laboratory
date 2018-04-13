@@ -2,40 +2,36 @@ import React, { Component } from 'react'
 import './Goodinfo.scss'
 import { POST, BASE_URL } from '../../../components/commonModules/POST'
 import { Row, Col } from 'antd'
-import draftToHtml from 'draftjs-to-html'
-import htmlToDraft from 'html-to-draftjs'
-import { convertFromRaw, EditorState, convertToRaw, ContentState } from 'draft-js'
+
+import Detail from './Detail'
 class Goodinfo extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)    
     this.state = {
       goodinfo:'',
       labname:'',
-      editorState: EditorState.createEmpty()
-    }
+      editorState: ''
+    }     
   }
   goBack () {
     history.back()
   }
-  componentDidMount () {
+
+  componentWillMount () {
     let id = this.props.params.id
     console.log(id)
     var data = `id=${id}`
     POST('/getGoodsById', data, re => {
-      if (re.state === 1) {
-        console.log(re)
-        this.setState({ goodinfo: re.data })
-        this.setState({ editorState: re.data.detailInfo })
-        console.log(this.state.editorState)
-        this.setState({ labname:re.data.lab.name })
-        let editor = this.state.editorState
-        console.log(editor)
-        this.refs.box.innerHTML = draftToHtml(convertToRaw(editor.getCurrentContent()))
-        console.log(draftToHtml(convertToRaw(editor.getCurrentContent())))
-      }
+      if (re.state == 1) {
+        console.log(re.data.detailInfo)
+        this.setState({ goodinfo: re.data,
+          editorState: re.data.detailInfo })       
+        // this.setState({ labname:re.data.lab.name })        
+      }      
     })
+    
   }
-
+  
   render () {
     const { buyTime, detailInfo, models, name, photo, price, stateId, validTime } = this.state.goodinfo
 
@@ -62,14 +58,7 @@ class Goodinfo extends Component {
             </Row>
           </div>
         </div>
-        <div className='good_active'>
-          <div className='good_borrow'>
-            <div className='contanct'>
-              <h2>详细说明</h2>
-              <div className='contanct_con' ref='box' />
-            </div>
-          </div>
-        </div>
+        <Detail editorState={this.state.editorState}></Detail>
         <div className='good_foot'>
           <div className='set' onClick={this.goBack.bind(this)}>
             <i className='fa fa-sign-out' /> 返回
