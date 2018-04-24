@@ -10,7 +10,11 @@ class Teacher extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      t_list: [],
+      t_list: [{
+        lab:{
+          name:''
+        }
+      }],
       count: 0
     }
   }
@@ -79,13 +83,13 @@ class Teacher extends Component {
                           <span>姓名：{item.name}</span>
                           <span>职称：{item.rank}</span>
                           <span>邮箱：{item.email}</span>
-                          <span>所在实验室：{/*item.lab.name*/}</span>
+                          <span>所在实验室：{item.lab.name == null ? '' : item.lab.name}</span>
                         </Col>                        
                       </Row>
                     </div>} key='1' style={style}>
                     <div style={{ cursor: 'pointer' }} onClick={this.toInfo.bind(this,item.id)}>
                       <h2 className='title'>简介：</h2>
-                      <p className='intr'>{/*item.introduce*/}</p>                      
+                      <p className='intr'>{item.introduce == null ? '' : item.introduce}</p>                      
                     </div>
                   </Panel>
                 </Collapse>

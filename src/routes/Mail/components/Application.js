@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import '../css/application.scss'
 import {message, Input, Button, Row, Col, Modal } from 'antd'
 import {browserHistory} from 'react-router'
-import { BASE_URL, POST } from '../../../components/commonModules/POST';
+import { BASE_URL, POST } from '../../../components/commonModules/POST'
+import moment from 'moment'
 
 class Application extends Component {
   constructor(props) {
@@ -107,7 +108,7 @@ class Application extends Component {
           <span>申请类型：{data.applyType==0?'申请立项':'结束项目'}</span>
         </div>
         <div className="app_info">
-          <span>申请时间：{data.applyTime}</span>
+          <span>申请时间：{moment().format(data.applyTime,"YYYY-MM-DD")}</span>
         </div>
         <div className="app_info">
           <span>预期结束时间：{data.expertTime}</span>

@@ -15,31 +15,34 @@ class Paper extends Component {
     }
   }
 
-  onInputChange = (e) => {
-    this.setState({ searchText: e.target.value })
+  onInputChange = (value) => {
+    this.setState({ searchText: value })
   }
-  onSearch = () => {
+  onSearch = () => {    
     const { searchText } = this.state
+    console.log(searchText)
     const reg = new RegExp(searchText, 'gi')
     this.setState({
       filterDropdownVisible: false,
       filtered: !!searchText,
-      data: this.state.data.map((record) => {
-        const match = record.journal.match(reg)
-        if (!match) {
-          return null
-        }
-        return {
-          ...record,
-          name: (
-            <span>
-              {record.journal.split(reg).map((text, i) => (
-                i > 0 ? [<span className='highlight'>{match[0]}</span>, text] : text
-              ))}
-            </span>
-          )
-        }
-      }).filter(record => !!record)
+      // data:       
+      // this.state.data.map((record) => {
+      //   const match = record.journal.match(reg)
+      //   if (!match) {
+      //     return null
+      //   }
+      //   return {
+      //     ...record,
+      //     // name: (
+      //     //   <span>
+      //     //     {record.journal.split(reg).map((text, i) => (
+      //     //       i > 0 ? [<span className='highlight'>{match[0]}</span>, text] : text
+      //     //     ))}
+      //     //   </span>
+      //     // )
+      //   }
+      // }
+    // ).filter(record => !!record)
     })
   }
 
@@ -80,10 +83,10 @@ class Paper extends Component {
             ref={ele => this.searchInput = ele}
             placeholder='Search name'
             value={this.state.searchText}
-            onChange={this.onInputChange}
-            onPressEnter={this.onSearch}
+            onChange={(e)=>this.onInputChange(e.target.value)}
+            onPressEnter={this.onSearch.bind(this)}
           />
-           <Button type='primary' onClick={this.onSearch}>Search</Button>
+           <Button type='primary' onClick={this.onSearch.bind(this)}>Search</Button>
          </div>
       ),
       filterIcon: <Icon type='search' style={{ color: this.state.filtered ? '#108ee9' : '#aaa' }} />,
@@ -109,7 +112,7 @@ class Paper extends Component {
       key: 'winTime',
       width: '15%'
     }]
-    console.log(this.props.paper)
+
     return (
       <div>
         <Table columns={columns} dataSource={this.props.paper}

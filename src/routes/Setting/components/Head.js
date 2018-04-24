@@ -35,7 +35,7 @@ class Head extends Component {
     var reader = new FileReader()
     var imgFile
     this.setState({img:file})
-
+    // console.log(file)
     reader.onload = (e) => {
       imgFile = e.target.result
       this.setState({ src: imgFile })

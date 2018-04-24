@@ -66,7 +66,7 @@ class Lab extends Component {
                   <div className='contain'>
                     <span>名称：{item.name}</span>
                     <span>位置：{item.position}</span>
-                    <span>介绍：{item.introduction}</span>
+                    <span style={{maxHeight:100,overflow:'hidden'}}>介绍：{item.introduction}</span>
                   </div>
                 </Col>                
               </Row>

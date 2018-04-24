@@ -8,7 +8,11 @@ class TeacherInfo extends Component {
     super(props);
     this.state={
       id:this.props.location.query.id,
-      data:''
+      data:{
+        lab:{
+          name: ''
+        }        
+      }
     }
   }
 
@@ -39,7 +43,7 @@ class TeacherInfo extends Component {
               <h2>{data.name}</h2>
               <span className="info_con">职称：{data.rank}</span>
               <span className="info_con">邮箱：{data.email}</span>
-              <span className="info_con">所属实验室：{/* data.lab.name */}</span>
+              <span className="info_con">所属实验室：{data.lab.name == null?'': data.lab.name}</span>
             </div>
           </div>
         </div>
@@ -48,7 +52,7 @@ class TeacherInfo extends Component {
             <div className="contanct">
             <h2>详细介绍</h2>
             <div className="contanct_con">
-                {/* data.introduce */}
+                {data.introduce == null ? '' : data.introduce}
             </div>
             </div>
           </div>

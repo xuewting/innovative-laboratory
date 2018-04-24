@@ -24,7 +24,7 @@ class PerHead extends Component {
           </div>
           <div className='per_detail'>姓名：{name}</div>
           <div className='per_detail'>学号(教工号)：{sid}</div>
-          <div className='per_detail'>性别：{sex}</div>
+          <div className='per_detail'>性别：{sex==0?'男':'女'}</div>
           <div className='per_detail'>联系电话：{phone}</div>
           <div className='per_detail'>邮箱：{email}</div>
           <div className='per_detail'>实验室：{this.props.lab.name}</div>

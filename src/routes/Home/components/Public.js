@@ -37,7 +37,7 @@ class Public extends Component {
   toMessage(e){
     e.preventDefault()
     browserHistory.push({
-      pathname:`/message`
+      pathname:`/mail`
     })
   }
   

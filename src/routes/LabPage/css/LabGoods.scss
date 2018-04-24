@@ -30,7 +30,15 @@
   .go_con {
     width: 100%;
     padding: 10px;
-
+    .more_txt{
+      width: 100%;
+      padding: 10px;
+      text-align: center;
+      font-size: 17px;
+      color: #fff;
+      margin-top: 20px;
+      cursor: pointer;
+    }
     .con_item {
       background: rgba(0, 0, 0, 0.3);
       margin-top: 15px;

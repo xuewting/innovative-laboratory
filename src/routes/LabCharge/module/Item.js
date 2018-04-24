@@ -3,7 +3,7 @@ import { Icon, Row, Col, Button, Pagination, Popconfirm, message, Modal, Input, 
 import '../css/Item.scss'
 import { browserHistory } from 'react-router'
 import ReactDOM from 'react-dom'
-import { POST, BASE_URL } from '../../../components/commonModules/POST'
+import { POST, POSTFile, BASE_URL } from '../../../components/commonModules/POST'
 
 class Item extends Component {
   constructor(props) {
@@ -40,7 +40,9 @@ class Item extends Component {
       endTime: '',
       evisible: false,
       sid:'',
-      total:''
+      total:'',
+      file:'',
+      id:''
     }
   }
   // 添加新项目
@@ -106,7 +108,11 @@ class Item extends Component {
     let newDate = new Date()
     this.setState({ date: newDate.toLocaleDateString() })
     console.log(newDate.toLocaleDateString())
-    let data = `pageCount=${4}&currentPage=${1}&labId=${this.props.labid}`
+    this.initial()
+  }
+
+  initial(){   
+    let data = `pageCount=${4}&currentPage=${this.state.current}&labId=${this.props.labid}`
     POST('/labt/getLabPro', data, re => {
       if (re.state == 1) {
         this.setState({ list: re.data.rows,
@@ -165,17 +171,28 @@ class Item extends Component {
   // 编辑页面
   toEdit(num) {    
     browserHistory.push({
-      pathname: '/labcharge/item/edit',
+      pathname: `/iteminfo`,
       query: {
-        id: num,
-        labid:this.props.labid
+        id: num
       }
     })
   }
 
-  showEnd = () => this.setState({ evisible: !this.state.evisible })
+  showEnd = (id) => this.setState({ evisible: !this.state.evisible,id:id })
 
-  ehandleOk = (e) => {    
+  ehandleOk = (id) => {    
+    var formdata = new FormData()
+    formdata.append('file', this.state.file[0].originFileObj)
+    formdata.append('projectResults', 'end Project')
+    formdata.append('id', this.state.id)
+    POSTFile('/lab/endProject', formdata, re => {
+      if (re.state == 1) {
+        message.success('恭喜完成一个完整的项目(๑•̀ㅂ•́)و✧')
+        this.initial()
+      } else {
+        message.error('服务器错误')
+      }
+    })
     this.setState({
       evisible: false
     })
@@ -186,25 +203,24 @@ class Item extends Component {
       evisible: false
     })
   }
-
+  //上传成果文件
+  onChange(info) {
+    this.setState({ file: info.fileList })    
+  }
+  //下载成果文件
+  downDoc(text){
+    window.open(BASE_URL + text)
+    
+  }
   render() {
     const props = {
       name: 'file',
       action: '',
       headers: {
         authorization: 'authorization-text'
-      },
-      onChange(info) {
-        if (info.file.status !== 'uploading') {
-          console.log(info.file, info.fileList)
-        }
-        if (info.file.status === 'done') {
-          message.success(`${info.file.name} file uploaded successfully`)
-        } else if (info.file.status === 'error') {
-          message.error(`${info.file.name} file upload failed.`)
-        }
       }
-    }    
+    }  
+    const {file} = this.state
     return (
       <div style={{ paddingTop: 20, paddingRight: 15 }}>
         <div className='itemcharge'>
@@ -240,24 +256,42 @@ class Item extends Component {
                             <Col span={18}>{item.expectTime}</Col>
                           </Row>
                         </div>
+                        {item.actualTime==null?'':
+                          <div className='con_item'>
+                            <Row>
+                              <Col span={6}>结束时间:</Col>
+                              <Col span={18}>{item.actualTime}</Col>
+                            </Row>
+                          </div>
+                        }
                         <Row>
                           <Col span={12} />
                           <Col span={4}>
-                            <Button onClick={this.toEdit.bind(this, item.id)} style={{ width: '100%' }}>修改</Button>
+                            <Button onClick={this.toEdit.bind(this, item.id)} style={{ width: '100%' }}>查看项目进度</Button>
                           </Col>
                           <Col span={4}>
-                            <Button style={{ width: '100%' }} onClick={this.showEnd.bind(this)}>结束项目</Button>
+                            {item.actualTime == null ? 
+                              <Button
+                                style={{ width: '100%' }}
+                                onClick={this.showEnd.bind(this, item.id)}
+                              >结束项目</Button>
+                               : 
+                              <Button
+                                style={{ width: '100%' }}
+                                onClick={this.downDoc.bind(this, item.resultsText)}
+                              >查看成果报告</Button>}
+                            
                             <Modal
                               title='提交结项文档'
                               visible={this.state.evisible}
                               onOk={this.ehandleOk.bind(this)}
                               onCancel={this.ehandleCancel.bind(this)}>
-                              <Upload {...props} accept='application/msword'>
-                                <Button style={{ marginBottom: 20 }}>
-                                  <Icon type='upload' /> 点击上传文件（word）
-                                </Button>
-                              </Upload>
-                              <Button type='primary'>直接结项</Button>
+                              <Upload {...props} accept='application/msword' onChange={this.onChange.bind(this)} fileList={file}>
+                                {file.length >= 1 ? null :
+                                  <Button style={{ marginBottom: 20 }} >
+                                    <Icon type="upload" /> 点击上传文件（word）
+                                  </Button>}
+                              </Upload>                              
                             </Modal>
                           </Col>
                           <Col span={4}>

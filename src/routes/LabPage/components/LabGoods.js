@@ -37,19 +37,45 @@ class LabGoods extends Component {
         bh: '123',
         zt: '闲置'
       }],
-     
+     current:1,
+      id:'',
+      total:''
     }
     
   }
 
   componentWillReceiveProps(nextProps) {
-    POST('/lab/getLabGoods', `id=${nextProps.id}&pageCount=4&currentPage=1`,re=>{
-      if(re.state==1){
-        this.setState({list:re.data.rows})
-      }else{
+    this.setState({ id: nextProps.id});
+    POST('/lab/getLabGoods', `id=${nextProps.id}&pageCount=4&currentPage=${this.state.current}`, re => {
+      if (re.state == 1) {
+        this.setState({ list: re.data.rows,
+        total:re.data.count })
+      } else {
+        message.error('服务器错误')
+      }
+    })    
+  }
+
+  getData(){
+    POST('/lab/getLabGoods', `id=${this.state.id}&pageCount=4&currentPage=${this.state.current}`, re => {
+      if (re.state == 1) {
+        this.setState({ list: re.data.rows })
+      } else {
         message.error('服务器错误')
       }
     })
+  }
+
+  //查看更多
+  More(){
+    if(this.state.total<=4){
+      message.warn('已是全部物品')
+    }else{
+      this.setState({
+        current: this.state.current + 1
+      });
+      this.getData()
+    }    
   }
 
   toDetail(id){
@@ -83,6 +109,7 @@ class LabGoods extends Component {
               )
             })}
           </Row>
+          <div className='more_txt' onClick={this.More.bind(this)}>More</div>
         </div>
         </div>
       }

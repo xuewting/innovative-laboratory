@@ -9,6 +9,7 @@ import arrow from '../assets/arrow drop down.png'
 import sea from '../assets/search.png'
 import { POST, BASE_URL } from '../../../components/commonModules/POST'
 import { message } from 'antd'
+import { browserHistory } from 'react-router'
 
 class LabList extends Component {
   constructor(props) {
@@ -103,6 +104,15 @@ class LabList extends Component {
     this.setState({ Pos: this.state.lablist[i].position })
     this.setState({ name: this.state.lablist[i].name })
   }
+  //跳转实验室页面
+  toLab(id){
+    browserHistory.push({
+      pathname: `/labpage`,
+      query: {
+        id: id
+      }
+    })
+  }
   render() {
     console.log(this.state.lablist)
     return (
@@ -137,7 +147,7 @@ class LabList extends Component {
           </div>
           {this.state.lablist.map((item, i) => {
             return (
-              <div className='list_item' key={i} onMouseOver={this.changeImg.bind(this, i)}>
+              <div className='list_item' key={i} onMouseOver={this.changeImg.bind(this, i)} onClick={(e)=>this.toLab(item.id)}>
                 <div className="list_text">
                   <strong>{item.name}</strong>
                   <img src={arrow} alt="" style={{ float: 'right', height: 20, display: 'inline-block' }} />
