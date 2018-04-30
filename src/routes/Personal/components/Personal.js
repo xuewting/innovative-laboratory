@@ -13,16 +13,17 @@ class Personal extends Component {
       userInfo: [],
       lab: {},
       labId: 0,
-      identity: 'root'
+      identity: ''
     }
   }
   componentWillMount() {
     let data = ``
     POST('/user/getUserInfo', data, re => {
       if (re.state == 1) {
-        this.setState({ userInfo: re.data })
-        this.setState({ lab: re.data.lab })
-        this.setState({ labId: re.data.own_lab })
+        this.setState({ userInfo: re.data})
+        this.setState({ lab: re.data.lab})
+        this.setState({ labId: re.data.own_lab})
+        this.setState({ identity: re.data.power })
         
       }
     })

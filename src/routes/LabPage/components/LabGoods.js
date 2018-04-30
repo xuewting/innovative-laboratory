@@ -46,7 +46,7 @@ class LabGoods extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({ id: nextProps.id});
-    POST('/lab/getLabGoods', `id=${nextProps.id}&pageCount=4&currentPage=${this.state.current}`, re => {
+    POST('/getLabGoods', `id=${nextProps.id}&pageCount=4&currentPage=${this.state.current}`, re => {
       if (re.state == 1) {
         this.setState({ list: re.data.rows,
         total:re.data.count })
@@ -57,7 +57,7 @@ class LabGoods extends Component {
   }
 
   getData(){
-    POST('/lab/getLabGoods', `id=${this.state.id}&pageCount=4&currentPage=${this.state.current}`, re => {
+    POST('/getLabGoods', `id=${this.state.id}&pageCount=4&currentPage=${this.state.current}`, re => {
       if (re.state == 1) {
         this.setState({ list: re.data.rows })
       } else {

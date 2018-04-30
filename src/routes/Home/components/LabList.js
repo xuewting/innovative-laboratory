@@ -114,7 +114,6 @@ class LabList extends Component {
     })
   }
   render() {
-    console.log(this.state.lablist)
     return (
       <div className='lablist'>
 

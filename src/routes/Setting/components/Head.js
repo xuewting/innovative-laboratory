@@ -47,19 +47,23 @@ class Head extends Component {
   save() {
     var file = this.state.src
     var formdata = new FormData()
-    formdata.append('file',this.state.img)
-    formdata.append('type','application/octet-stream')
-    POSTFile('/user/uploadHeadImg', formdata, (re) => {
-      if (re.state == 1) {
-        message.success('上传成功')
-      } else if (re.state == -2) {
-        message.error('图片格式不正确，请确认')
-      } else if (re.state == -1) {
-        message.error('请先登录')
-      } else {
-        message.error('服务器错误')
-      }
-    })
+    if(!this.state.img){
+      message.error('请重新上传照片')
+    }else{
+      formdata.append('file', this.state.img)
+      formdata.append('type', 'application/octet-stream')
+      POSTFile('/user/uploadHeadImg', formdata, (re) => {
+        if (re.state == 1) {
+          message.success('上传成功')
+        } else if (re.state == -2) {
+          message.error('图片格式不正确，请确认')
+        } else if (re.state == -1) {
+          message.error('请先登录')
+        } else {
+          message.error('服务器错误')
+        }
+      })
+    }    
   }
 
   render() {

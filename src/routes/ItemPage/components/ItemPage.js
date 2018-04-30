@@ -34,7 +34,7 @@ class ItemPage extends Component {
       this.setState({ list: 1 })
     }
   }
-changePage(page){
+  changePage (page) {
   this.getData(page)
 }
   toDetail (id) {
@@ -53,7 +53,7 @@ changePage(page){
    * @param {*} currentPage
    */
   getData (currentPage) {
-    this.setState({currentPage:currentPage});
+    this.setState({ currentPage:currentPage })
     let data = `pageCount=9&currentPage=${currentPage}`
     POST('/getProject', data, (re) => {
       if (re.state === 1) {
@@ -84,20 +84,16 @@ changePage(page){
   }
 
   // 根据项目名搜索项目
-  search (value) {
-    this.setState({ svalue: value })
-    var list = []
-    for (let i = 0; i < this.state.n_list.length; i++) {
-      let data = this.state.n_list[i]
-      if (value == data.name) {
-        list.push(data)
+  search (value) {    
+    POST('/searchAll', `name=${value}&type=1`, re => {
+      if (re.state == 1) {
+        this.setState({ p_list:re.data })
+      } else if(!re.data){
+        this.setState({ p_list: this.state.n_list })
+      }else{
+        message.error('服务器错误')
       }
-    }
-    if (list.length > 0) {
-      this.setState({ p_list: list })
-    } else {
-      this.setState({ p_list:this.state.n_list })
-    }
+    }) 
   }
 
   render () {
@@ -115,7 +111,7 @@ changePage(page){
               </Col>
               <Col span={12} style={{ paddingLeft: 10, paddingRight: 10 }}>
                 <div className='sea_group'>
-                  <div className='sea_icon'>
+                  <div className='sea_icon' >
                     <img src={sea} alt='' />
                   </div>
                   <input className='sea_input' placeholder='输入项目名称' onChange={(e) => this.search(e.target.value)} />
@@ -135,25 +131,25 @@ changePage(page){
             ? <Row >
               {this.state.p_list.map((item, i) => {
                 return (
-                  <Col span={8} key={i} ><div className='list_item_box' onClick={this.toDetail.bind(this,item.id)} style={{ cursor: 'pointer' }} >
+                  <Col span={8} key={i} ><div className='list_item_box' onClick={this.toDetail.bind(this, item.id)} style={{ cursor: 'pointer' }} >
                     <div className='list_item_con'>
-                      <div className='list_item_head'>{item.name}</div>
-                      <div className='list_item_subhead'>发起人：{/* item.user.name */}</div>
-                      <div className='list_item_subhead'>实验室：{/* item.lab.name */}</div>
-                      <div className='list_item_subhead'>是否结束：{/* item.actualTime ? '是' : '否' */}</div>
+                      <div className='list_item_head'>{item.name ? item.name : null}</div>
+                      <div className='list_item_subhead'>发起人：{item.user ? item.user.name : null} </div>
+                      <div className='list_item_subhead'>实验室：{item.lab ? item.lab.name : null}</div>
+                      <div className='list_item_subhead'>是否结束：{item.actualTime ? '是' : '否' }</div>
                       <div className='list_item_date'>
                         <Tooltip title='开始时间'>
                           <img src={rili} alt='' />
-                          {/* item.applyTime */}
+                          {item.startTime ? item.startTime : null }
                         </Tooltip>
                         <Tooltip title='预期结束时间'>
                           <img src={time} alt='' />
-                          {/* item.expectTime */}
+                          {item.expertTime ? item.expertTime : null }
                         </Tooltip>
-                        {/* item.actualTime ? <Tooltip title='实际结束时间'>
+                        {item.actualTime ? <Tooltip title='实际结束时间'>
                           <img src={time} alt='' />
                           {item.actualTime}
-                        </Tooltip> : '' */}
+                        </Tooltip> : '' }
                       </div>
                     </div>
                   </div>
@@ -168,26 +164,26 @@ changePage(page){
                   <div className='task_list'>
                     <div className='task_con'>
                       <Row>
-                        <Col span={4}>
-                          <div className='task_head'>{/* item.name */}</div>
+                        <Col span={3}>
+                          <div className='task_head'>{item.name ? item.name : null}</div>
                         </Col>
                         <Col span={4}>
-                          <div className='task_head'>发起人：{/* item.user.name */}</div>
+                          <div className='task_head'>发起人：{item.user ? item.user.name : null}</div>
                         </Col>
-                        <Col span={8} offset={8} className='task_date'>
+                        <Col span={8} offset={9} className='task_date' >
 
                           <Tooltip title='开始时间'>
                             <img src={rili} alt='' />
-                            {/* item.applyTime */}
+                            {item.startTime ? item.startTime : null}
                           </Tooltip>
                           <Tooltip title='预期结束时间'>
-                            <img src={time} alt='' />
-                            {/* item.expectTime */}
+                            <img src={time} alt='' style={{ paddingLeft: 10 }} />
+                            {item.expertTime ? item.expertTime : null}
                           </Tooltip>
-                          {/* item.actualTime ? <Tooltip title='实际结束时间'>
-                            <img src={time} alt='' />
+                          { item.actualTime ? <Tooltip title='实际结束时间'>
+                            <img src={time} alt='' style={{ paddingLeft: 10 }} />
                             {item.actualTime}
-                          </Tooltip> : '' */}
+                          </Tooltip> : '' }
 
                         </Col>
                       </Row>
@@ -196,14 +192,14 @@ changePage(page){
               })}
             </div>
           }
-        </div>        
+        </div>
         <Pagination
           current={this.state.currentPage}
           onChange={this.changePage.bind(this)}
           total={this.state.total}
           pageSize={9}
-          hideOnSinglePage={true}
-          style={{float:'right',marginRight:20}} />
+          hideOnSinglePage
+          style={{ float:'right', marginRight:20 }} />
       </div>
     )
   }

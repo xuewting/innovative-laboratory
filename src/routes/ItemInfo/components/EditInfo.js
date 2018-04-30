@@ -32,7 +32,7 @@ class EditInfo extends Component {
   //提交进度
   submitRate=()=>{    
       let id = this.props.id
-      POST('/lab/addProRate', `content=${this.state.con}&id=${id}`, re => {
+      POST('/addProRate', `content=${this.state.con}&id=${id}`, re => {
         if (re.state == 1) {
           message.success('提交成功')
           this.props.getRate()
@@ -53,7 +53,7 @@ class EditInfo extends Component {
     formdata.append('file', this.state.file[0].originFileObj) 
     formdata.append('projectResults', 'end Project')
     formdata.append('id',this.props.id)  
-    POSTFile('/lab/endProject',formdata,re=>{
+    POSTFile('/endProject',formdata,re=>{
       if(re.state==1){
         message.success('恭喜完成一个完整的项目(๑•̀ㅂ•́)و✧')
         this.props.initrial()
@@ -78,6 +78,7 @@ class EditInfo extends Component {
       },
       
     };
+    console.log(this.props.end)
     return (
       <div className='edit'>
         {/*head*/}

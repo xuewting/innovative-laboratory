@@ -34,6 +34,7 @@ class Info extends Component {
         alert('服务器错误')
       }
     })
+   
   }
 
 

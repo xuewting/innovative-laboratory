@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { message } from 'antd'
 import { POST } from '../../../components/commonModules/POST'
+import { browserHistory } from 'react-router'
 
 class Passwd extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       old: '',
       new: '',
@@ -12,20 +13,20 @@ class Passwd extends Component {
     }
   }
 
-  changeValue(e, type) {
+  changeValue (e, type) {
     switch (type) {
       case 1:
         this.setState({ old: e.target.value })
-        break;
+        break
       case 2:
         this.setState({ new: e.target.value })
-        break;
+        break
       case 3:
         this.setState({ re: e.target.value })
     }
   }
 
-  confirm() {
+  confirm () {
     return new Promise((reslove, reject) => {
       if (!this.state.old) {
         message.error('请输入原密码')
@@ -42,14 +43,16 @@ class Passwd extends Component {
     })
   }
 
-  changePass() {
+  changePass () {
     this.confirm().then((re) => {
       if (re) {
         var data = `oldPass=${this.state.old}&newPass=${this.state.new}`
         POST('/user/alterPasswd', data, (re) => {
           if (re.state == 1) {
             message.success('修改成功')
-            location.reload()
+            browserHistory.push({
+              pathname:'/login'
+            })
           } else if (re.state == -1) {
             message.error('原密码错误')
           } else if (re.state == -2) {
@@ -62,23 +65,23 @@ class Passwd extends Component {
     })
   }
 
-  render() {
+  render () {
     return (
       <div className='passwd'>
-        <div className="pas_hh">
+        <div className='pas_hh'>
           <h2>修&nbsp;&nbsp;改&nbsp;&nbsp;密&nbsp;&nbsp;码</h2>
         </div>
-        <div className="pas_con">
-          <input type="password" placeholder='Old password' onChange={(e) => this.changeValue(e, 1)} />
-          <input type="password" placeholder='New password' onChange={(e) => this.changeValue(e, 2)} />
-          <input type="password" placeholder='Re-password' onChange={(e) => this.changeValue(e, 3)} />
+        <div className='pas_con'>
+          <input type='password' placeholder='Old password' onChange={(e) => this.changeValue(e, 1)} />
+          <input type='password' placeholder='New password' onChange={(e) => this.changeValue(e, 2)} />
+          <input type='password' placeholder='Re-password' onChange={(e) => this.changeValue(e, 3)} />
         </div>
-        <div className="confirm" onClick={this.changePass.bind(this)}>
+        <div className='confirm' onClick={this.changePass.bind(this)}>
           <button onClick={this.confirm.bind(this)}>确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定</button>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Passwd;
+export default Passwd

@@ -27,8 +27,11 @@ class Content extends Component {
 
   
 
-  toItemDetail=() => browserHistory.push({
-    pathname:'/iteminfo'
+  toItemDetail=(id) => browserHistory.push({
+    pathname:'/iteminfo',
+    query:{
+      id:id
+    }
   })
 
   render () {
@@ -51,10 +54,10 @@ class Content extends Component {
             : <div>
               {this.state.itemlist.map((item, i) => {
                 return (
-                  <div className='per_ii' key={i} onClick={(e) => this.toItemDetail()}>
+                  <div className='per_ii' key={i} onClick={(e) => this.toItemDetail(item.project.id)}>
                     <span>{item.project.name}</span>
-                    <span className='per_ii_detail'>hhhhh</span>
-                    <span className='per_ii_detail'>hhhhh</span>
+                    <span className='per_ii_detail'>{item.project.startTime} to </span>
+                    <span className='per_ii_detail'>{item.project.actualTime ? item.project.actualTime:item.project.expertTime}</span>
                     <div className='ii_con'>
                       {item.intor}
                     </div>

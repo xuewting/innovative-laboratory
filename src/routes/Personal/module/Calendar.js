@@ -15,7 +15,11 @@ class Calendar extends Component {
   }
 
   showModal(){
-    this.setState({disable:true})
+    if(this.props.labid==null){
+      message.error('您还不是任何实验室的成员，不需要签到')
+    }else{
+      this.setState({ disable: true })
+    }    
   }
   //修改备注
   changeValue=(value)=>this.setState({con:value})

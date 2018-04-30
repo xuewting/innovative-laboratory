@@ -185,7 +185,7 @@ class Item extends Component {
     formdata.append('file', this.state.file[0].originFileObj)
     formdata.append('projectResults', 'end Project')
     formdata.append('id', this.state.id)
-    POSTFile('/lab/endProject', formdata, re => {
+    POSTFile('/endProject', formdata, re => {
       if (re.state == 1) {
         message.success('恭喜完成一个完整的项目(๑•̀ㅂ•́)و✧')
         this.initial()

@@ -47,7 +47,7 @@ class Goods extends Component {
    */
   getData (page) {
     var data = `pageCount=9&currentPage=${page}`
-    POST('/lab/getLabGoods', data, re => {
+    POST('/getLabGoods', data, re => {
       if (re.state == 1) {
         this.setState({ GoodsList: re.data.rows, p_list:re.data.rows })        
         this.setState({ count:re.data.count })
@@ -60,20 +60,15 @@ class Goods extends Component {
   }
 
   search(value) {    
-    let data1 = value.target.value
-    this.setState({ svalue: data1 })
-    var list = []
-    for (let i = 0; i < this.state.GoodsList.length; i++) {
-      let data = this.state.GoodsList[i]
-      if (data1 == data.name) {
-        list.push(data)
+    POST('/searchAll', `name=${value}&type=2`, re => {
+      if (re.state == 1) {
+        this.setState({ p_list: re.data })
+      } else if (!re.data){
+        this.setState({ p_list: this.state.GoodsList })
+      }else {
+        message.error('服务器错误')
       }
-    }
-    if (list.length > 0) {
-      this.setState({ p_list: list })
-    } else {
-      this.setState({ p_list: this.state.GoodsList })
-    }
+    })     
   }
 
   render () {
@@ -95,7 +90,7 @@ class Goods extends Component {
                   <div className='sea_icon' >
                     <img src={sea} alt='' />
                   </div>
-                  <input className='sea_input' onChange={this.search.bind(this)}/>
+                  <input className='sea_input' onChange={(e)=>this.search(e.target.value)}/>
                 </div>
               </Col>
             </Row>
@@ -122,7 +117,7 @@ class Goods extends Component {
                           <div className='list_item_subhead'>型号：{item.models}</div>
                           <div className='list_item_subhead'>价格：{item.price}</div>
                           <div className='list_item_subhead'>状态：{item.stateId == 2 ? '占用' : item.stateId == 0 ? '外借' : '空闲'}</div>
-                          <div className='list_item_subhead'>实验室：{/*item.lab.name*/}</div>
+                          <div className='list_item_subhead'>实验室：{item.lab ? item.lab.name:null}</div>
                         </Col>
                       </Row>
                       <div className='list_item_date' />

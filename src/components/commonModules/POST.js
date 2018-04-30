@@ -1,5 +1,5 @@
 import Fetch from './Fetch.js'
-export const BASE_URL = 'http://192.168.1.104:3001'
+export const BASE_URL = 'http://192.168.1.110:3001'
 // const BASE_URL1 = 'http://119.29.150.141'
 const BASE_URL1 = BASE_URL
 const BASE_URL2 = BASE_URL
@@ -9,8 +9,9 @@ export var POST = (Url, data = {}, trueF, errorF = e => { }, timeout = 5000) => 
     fetch(BASE_URL1 + Url, {
       mode: 'cors',
       method: 'POST',
+      credentials: 'include',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',        
       },
       body: data
     })
