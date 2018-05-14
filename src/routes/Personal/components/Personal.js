@@ -37,7 +37,7 @@ class Personal extends Component {
     
   })
   goCharge = () => {
-    if (this.state.identity == 'teacher') {
+    if (this.state.identity == 3) {
       // console.log(this.state.labId)
       browserHistory.push({
         pathname: '/labcharge/detail',
@@ -45,14 +45,14 @@ class Personal extends Component {
           labid:this.state.labId
         }
       })
-    } else if (this.state.identity == 'root') {
+    } else if (this.state.identity == 4) {
       browserHistory.push({
         pathname: '/lablist'
       })
     }
   }
   render() {
-    if (this.state.identity == 'root' || this.state.identity == 'teacher') {
+    if (this.state.identity == 4 || this.state.identity == 3) {
       var span = 8
     } else {
       var span = 12
@@ -73,10 +73,10 @@ class Personal extends Component {
                 <Col span={span} style={{ paddingRight: 5, paddingLeft: 5 }}>
                   <div className='per_but_i' onClick={this.goSet.bind(this)}>修改基本信息</div>
                 </Col>
-                {this.state.identity == 'teacher' ?
+                {this.state.identity == 3 ?
                   <Col span={span} style={{ paddingLeft: 5 }}>
                     <div className='per_but_i' onClick={this.goCharge.bind(this)}>实验室管理</div>
-                  </Col> : this.state.identity == 'root' ?
+                  </Col> : this.state.identity == 4 ?
                     <Col span={span} style={{ paddingLeft: 5 }}>
                       <div className='per_but_i' onClick={this.goCharge.bind(this)}>系统管理</div>
                     </Col> : ''}

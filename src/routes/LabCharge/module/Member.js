@@ -71,7 +71,10 @@ class Member extends Component {
     let sid = this.state.sid
     let labid = this.state.labid
     let data = `name=${name}&sid=${sid}&labId=${labid}`
-    if (this.state.type == 1) {
+    if(name==''||sid==''){
+      message.error('请确认信息都已填入并无误')
+    }else if (this.state.type == 1) {
+      //添加成员
       POST('/labt/addLabStu', data, re => {
         if (re.state == 1) {
           message.success('添加成功')
@@ -84,12 +87,12 @@ class Member extends Component {
             }
           })
         } else if (re.state == -2) {
-          message.success('该用户不存在，请确认信息')
+          message.success('请输入正确的信息')
         }else {
           message.success('服务器错误')
         }
       })
-    } else if (re.state == 0) {
+    } else{
 
     }
     this.setState({

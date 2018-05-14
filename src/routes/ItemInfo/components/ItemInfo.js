@@ -7,6 +7,7 @@ import { message } from 'antd'
 import draftToHtml from 'draftjs-to-html'
 import htmlToDraft from 'html-to-draftjs'
 import { convertFromRaw, EditorState, convertToRaw, ContentState } from 'draft-js'
+import moment from 'moment'
 
 class ItemInfo extends Component {
   constructor (props) {
@@ -32,27 +33,25 @@ class ItemInfo extends Component {
   componentWillMount () {
     this.getRate()
     this.initrial()
-    POST('/user/getUserInfo', ``, re => {
-      if (re.state == 1) {
-        this.setState({
-          id: re.data.sid
-        })
-        console.log(this.state.id)
-      } else {
-
-      }
-    })
     POST('/getMember', `pid=${this.props.location.query.id}`, re => {
       if (re.state == 1) {
-        this.setState({ mem:re.data })
-        for (let i in re.data) {
-          if (re.data[i].uid == this.state.id) {
-            this.setState({ isIn: 1 })
-            break
+        // this.setState({ mem:re.data })
+        POST('/user/getUserInfo', ``, res => {
+          if (res.state == 1) {
+            // this.setState({ id: res.data.sid })
+            for (let i in re.data) {
+              if (re.data[i].uid == res.data.sid) {              
+                this.setState({ isIn: 1 })
+                break
+              } else {
+                continue
+              }
+            }
           } else {
-            continue
+            message.error('服务器错误')
           }
-        }
+        })
+        
       } else {
         message.error('服务器错误')
       }
@@ -63,8 +62,8 @@ class ItemInfo extends Component {
   initrial () {
     POST('/getProjectById', `id=${this.props.location.query.id}`, re => {
       if (re.state == 1) {
-        this.setState({ pdata: re.data })
-        this.getOrigin(re.data.chargeUser)
+        this.getOrigin(re.data.chargeUser);
+        this.setState({ pdata: re.data })        
       } else {
         message.error('服务器错误')
       }
@@ -72,10 +71,10 @@ class ItemInfo extends Component {
   }
   // 获取发起人信息
   getOrigin (id) {
+    console.log(id)
     POST('/user/getUserInfo', `id=${id}`, re => {
       if (re.state == 1) {
-        this.setState({ start: re.data.name,
-          id:re.data.id })
+        this.setState({ start: re.data.name })
       } else {
         message.error('获取启动人失败')
       }
@@ -88,7 +87,7 @@ class ItemInfo extends Component {
         this.setState({ rate: re.data })
         let len = re.data.length
         let i = 0
-        while (i <= len) {
+        while (i <= len && re.data[i].content) {
           let box = 'html' + i
           this.refs[box].innerHTML = re.data[i].content
           i = i + 1
@@ -100,7 +99,8 @@ class ItemInfo extends Component {
   }
 
   render () {
-    const { id, mem, pdata, start, rate, isIn } = this.state
+    const { pdata, start, rate, isIn } = this.state
+    console.log(isIn)
     return (
       <div style={{ width: 1250, margin: '0 auto' }}>
         <h2 style={{ color: '#fff', fontWeight: 600, paddingBottom:20 }}>{pdata.name}</h2>
@@ -114,7 +114,7 @@ class ItemInfo extends Component {
         <div style={{ float: 'left', width: '100%' }}>
           <Timeline>
             <TimelineEvent title='项目启动'
-              createdAt={pdata.startTime}
+              createdAt={moment(pdata.startTime).format('YYYY-MM-DD')}
               icon={<i className='fa fa-hourglass-start' />}
               className='event'
               contentStyle={{ backgroundColor: 'transparent', color: '#fff', fontSize: 14 }}
@@ -127,13 +127,11 @@ class ItemInfo extends Component {
               container='card'
               style={{ backgroundColor: 'transparent', marginBottom: 30 }}
              />
-            {rate.map((item, i) => {
-              let box = 'html' + i
-
+            {rate.map((item, i) => {            
               return (
 
-                <TimelineEvent title={item.user.name + '提交了进度'}
-                  createdAt={item.subTime}
+                <TimelineEvent title={item.user ? item.user.name + '提交了进度': '' }
+                  createdAt={moment(item.subTime).format('YYYY-MM-DD')}
                   icon={<i className='fa fa-calendar' />}
                   className='event'
                   contentStyle={{ backgroundColor: '#fff' }}
@@ -155,7 +153,7 @@ class ItemInfo extends Component {
 
             {pdata.actualTime
               ? <TimelineEvent title='项目结束'
-                createdAt={pdata.actualTime}
+                createdAt={moment(pdata.actualTime).format('YYYY-MM-DD')}
                 icon={<i className='fa fa-hourglass-end' />}
                 className='event'
                 contentStyle={{ backgroundColor: 'transparent', color: '#fff', fontSize: 14 }}

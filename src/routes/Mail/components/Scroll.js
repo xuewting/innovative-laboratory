@@ -15,12 +15,18 @@ class Scroll extends Component {
       type:''
     }
   }
+  
 
   active=(num, item, a) => {
     this.setState({ active:num,
       type:a })
     this.props.changeContent(item, a)
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   this.props.changeContent(nextProps.message[this.state.active], this.state.type)
+  // }
+  
 
   render () {
     const style1 = {
@@ -43,7 +49,7 @@ class Scroll extends Component {
         <FreeScrollBar style={{ height:625, padding:10 }}>
           {/* 遍历基本信息 */}
           {this.props.baseMess.map((item, i) => {
-            var time = moment(item.time).format('YYYY-DD-MM HH:mm:SS')
+            var time = moment(item.time).format('YYYY-MM-DD')
             return (
               <div className='mail_scroll_item' key={i} style={this.state.active == i ? style1 : style2} onClick={this.active.bind(this, i, item, 0)}>
                 <Row style={{ marginBottom:15 }}>
@@ -59,7 +65,7 @@ class Scroll extends Component {
                 </Row>
                 <Row style={{ marginBottom:15 }}>
                   <Col span={1} />
-                  <Col span={22}><div className='mail_item_intor'>{item.content}</div></Col>
+                  <Col span={22}><div className='mail_item_intor'>{item.user.name}</div></Col>
                 </Row>
               </div>
             )
@@ -72,16 +78,16 @@ class Scroll extends Component {
                   <Col span={1}>
                     <img src={mark} alt='' style={this.state.active == i && this.state.type == 1 ? mark1 : mark2} />
                   </Col>
-                  <Col span={19}><div className='mail_item_from'>{item.uid}</div></Col>
+                  <Col span={19}><div className='mail_item_from'>{item.pname}</div></Col>
                   <Col span={4}><div className='mail_item_time'>{item.applyTime}</div></Col>
                 </Row>
                 <Row style={{ marginBottom:15 }}>
                   <Col span={1} />
-                  <Col span={19}><div className='mail_item_to'>To: {}</div></Col>
+                  <Col span={19}><div className='mail_item_to'>From: {}</div></Col>
                 </Row>
                 <Row style={{ marginBottom:15 }}>
                   <Col span={1} />
-                  <Col span={22}><div className='mail_item_intor'>{item.pname}</div></Col>
+                  <Col span={22}><div className='mail_item_intor'>{item.user.name}</div></Col>
                 </Row>
               </div>
             )

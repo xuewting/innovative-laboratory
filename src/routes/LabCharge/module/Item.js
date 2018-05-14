@@ -14,22 +14,31 @@ class Item extends Component {
         id: '1',
         time: '18-1-1',
         origin: '麦兜',
-        teacher: '可达鸭',
-        endTime: '18-12-12'
+        chargeTeacher: '可达鸭',
+        expertTime: '18-12-12',
+        user:{
+          name:''
+        }
       }, {
         title: 'Lorem ipsum dolor sit amet',
         id: '1',
         time: '18-1-1',
         origin: '麦兜',
-        teacher: '可达鸭',
-        endTime: '18-12-12'
+          chargeTeacher: '可达鸭',
+          expertTime: '18-12-12',
+          user: {
+            name: ''
+          }
       }, {
         title: 'Lorem ipsum dolor sit amet',
         id: '1',
         time: '18-1-1',
         origin: '麦兜',
-        teacher: '可达鸭',
-        endTime: '18-12-12'
+          chargeTeacher: '可达鸭',
+          expertTime: '18-12-12',
+          user: {
+            name: ''
+          }
       }],
       current: 1,
       visible: false,
@@ -107,10 +116,9 @@ class Item extends Component {
   componentWillMount() {
     let newDate = new Date()
     this.setState({ date: newDate.toLocaleDateString() })
-    console.log(newDate.toLocaleDateString())
     this.initial()
   }
-
+//初始化页面
   initial(){   
     let data = `pageCount=${4}&currentPage=${this.state.current}&labId=${this.props.labid}`
     POST('/labt/getLabPro', data, re => {
@@ -177,9 +185,9 @@ class Item extends Component {
       }
     })
   }
-
+//打开结束项目对话框
   showEnd = (id) => this.setState({ evisible: !this.state.evisible,id:id })
-
+//结束项目
   ehandleOk = (id) => {    
     var formdata = new FormData()
     formdata.append('file', this.state.file[0].originFileObj)
@@ -221,6 +229,7 @@ class Item extends Component {
       }
     }  
     const {file} = this.state
+    var teacher = []
     return (
       <div style={{ paddingTop: 20, paddingRight: 15 }}>
         <div className='itemcharge'>
@@ -231,6 +240,17 @@ class Item extends Component {
           <div className='item_con'>
             <Row>
               {this.state.list.map((item, i) => {
+                //获取指导老师信息
+                POST('/getTeacherById', `id=${item.chargeTeacher}`,re=>{
+                  if(re.state==1){
+                    console.log(re.data.name)
+                    if(re.data!=null){
+                      this.refs[i].innerHTML=re.data.name
+                    }                    
+                  }else{
+
+                  }
+                })
                 return (
                   <Col span={12} key={i} style={{ padding: 5 }}>
                     <div className='item_box'>
@@ -241,19 +261,19 @@ class Item extends Component {
                         <div className='con_item'>
                           <Row>
                             <Col span={6}>发起人：</Col>
-                            <Col span={18}>{item.chargeUser}</Col>
+                            <Col span={18}>{item.user.name}</Col>
                           </Row>
                         </div>
                         <div className='con_item'>
                           <Row>
                             <Col span={6}>指导老师：</Col>
-                            <Col span={18}>{item.chargeTeacher}</Col>
+                            <Col span={18}><div ref={i}></div></Col>
                           </Row>
                         </div>
                         <div className='con_item'>
                           <Row>
                             <Col span={6}>预计结束时间:</Col>
-                            <Col span={18}>{item.expectTime}</Col>
+                            <Col span={18}>{item.expertTime}</Col>
                           </Row>
                         </div>
                         {item.actualTime==null?'':

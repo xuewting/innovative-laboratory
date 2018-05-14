@@ -47,21 +47,24 @@ class Content extends Component {
           <div className='per_ii_hea'>
             <h2>参与的项目列表</h2>
           </div>
-          {this.state.itemlist.length === 0
+          {this.state.itemlist.length == 0
             ? <div className='per_noitem'>
               没有参与任何项目
         </div>
             : <div>
               {this.state.itemlist.map((item, i) => {
                 return (
-                  <div className='per_ii' key={i} onClick={(e) => this.toItemDetail(item.project.id)}>
-                    <span>{item.project.name}</span>
-                    <span className='per_ii_detail'>{item.project.startTime} to </span>
-                    <span className='per_ii_detail'>{item.project.actualTime ? item.project.actualTime:item.project.expertTime}</span>
-                    <div className='ii_con'>
-                      {item.intor}
-                    </div>
-                  </div>
+                  <div key={i}>
+                  {item.project?
+                    <div className='per_ii' onClick={(e) => this.toItemDetail(item.project.id)}>
+                      <span>{item.project.name}</span>
+                      <span className='per_ii_detail'>{item.project.startTime} to </span>
+                      <span className='per_ii_detail'>{item.project.actualTime ? item.project.actualTime : item.project.expertTime}</span>
+                      <div className='ii_con'>
+                        {item.intor}
+                      </div>
+                      </div> :''}
+                  </div>                  
                 )
               })
               }

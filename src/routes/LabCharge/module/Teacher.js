@@ -48,17 +48,21 @@ class Teacher extends Component {
     let sid = this.state.sid
     let labid = this.props.labid
     let data = `name=${name}&sid=${sid}&labId=${labid}`
-    POST('/labt/addLabTeacher', data, re => {
-      if (re.state == 1) {
-        message.success('添加成功')
-        this.getTeacher()
-      } else if (re.state == -2) {
-        message.success('该用户不存在，请确认信息')
-      } else {
-        message.success('服务器错误')
-      }
-    })
+    if (name==''||sid==''){
+      message.error('请确认信息都已填入并无误')
+    }else{
+      POST('/labt/addLabTeacher', data, re => {
+        if (re.state == 1) {
+          message.success('添加成功')
+          this.getTeacher()
+        } else if (re.state == -2) {
+          message.success('该用户不存在，请确认信息')
+        } else {
+          message.success('服务器错误')
+        }
+      })
 
+    }    
     this.setState({
       visible: false
     })
@@ -99,9 +103,9 @@ class Teacher extends Component {
       key: 'name',
       width: '33%',
     }, {
-      title: '职称',
-      dataIndex: 'rank',
-      key: 'rank',
+      title: '教工号',
+      dataIndex: 'sid',
+      key: 'sid',
       width: '33%',
     }, {
       title: '邮箱',

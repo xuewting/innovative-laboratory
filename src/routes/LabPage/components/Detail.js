@@ -6,6 +6,7 @@ import img3 from '../img/领导.png'
 import img4 from '../img/学院_selected.png'
 import img5 from '../img/锁 1.png'
 import { POST } from '../../../components/commonModules/POST'
+import moment from 'moment'
 
 class Detail extends Component {
   constructor (props) {
@@ -53,7 +54,7 @@ class Detail extends Component {
             </Col>
             <Col span={8} style={{ marginBottom:20 }}>
               <span><img src={img1} alt='人数' className='icon' /></span>
-              <span className='font'>成立时间: {data.establishTime}</span>
+              <span className='font'>成立时间: {moment(data.establishTime).format('YYYY-MM-DD')}</span>
             </Col>
             <Col span={8} style={{ marginBottom:20 }}>
               <span><img src={img4} alt='学院' className='icon' /></span>

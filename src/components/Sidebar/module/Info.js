@@ -15,7 +15,7 @@ class Info extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      state: this.props.state,
+      state: 0,
       img:''
     }
   }
@@ -26,15 +26,23 @@ class Info extends Component {
     })
   }
 
-  componentWillMount () {
+  getHeadImg(){
     POST('/QueryIMG', `param=''`, (re) => {
       if (re.state == 1) {
-        this.setState({ img:re.data.headImg })
-      }else {
+        if(re.data==null){
+          this.setState({img:''})
+        }else{
+          this.setState({ img: re.data.headImg })
+          this.setState({ state: 1 });
+        }                
+      } else {
         alert('服务器错误')
       }
     })
-   
+  }
+
+  componentDidMount() {
+    this.getHeadImg()
   }
 
 
@@ -52,9 +60,11 @@ class Info extends Component {
     })
   }
   //退出
-  loginOut = () => POST('/exitLogin','',re=>{
+  loginOut = () => POST('/user/exitLogin','',re=>{
     if(re.state==1){
       message.success('退出成功')
+      this.getHeadImg()
+      this.setState({state:0})
     }else{
       message.error('服务器错误')
     }
@@ -86,19 +96,19 @@ class Info extends Component {
             <span className='txt'>Item</span>
             <img src={arrow} alt="" className='arrow' />
           </a>*/}
-          <a href='' className='list_item'>
+          <span href='' className='list_item'>
             {this.state.state == 1
-              ? <div onClick={(e)=>this.loginOut()}>
+              ? <div onClick={(e) => this.loginOut()} style={{ display: 'block', width: '100%', height: 40, cursor: 'pointer' }}>
                 <img src={out} alt='' className='icon' />
                 <span className='txt'>Logout</span>
                 <img src={arrow} alt='' className='arrow' />
               </div>
-              : <div onClick={(e) => this.login()} style={{ display:'block', width:'100%', height:40 }}>
+              : <div onClick={(e) => this.login()} style={{ display:'block', width:'100%', height:40,cursor:'pointer' }}>
                 <img src={login} alt='' className='icon' />
                 <span className='txt'>Login</span>
                 <img src={arrow} alt='' className='arrow'/>
               </div>}
-          </a>
+          </span>
         </div>
       </div>
     )

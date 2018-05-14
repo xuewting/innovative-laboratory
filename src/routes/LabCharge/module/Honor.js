@@ -145,6 +145,7 @@ class Honor extends Component {
 
   // 打开竞赛模块
   showCompetitionModal = (ctitle, cclass, reward, students, teacher, ctime, ctype) => {
+    console.log(ctitle)
     this.setState({
       visible: true,
       ctitle: ctitle,
@@ -310,9 +311,9 @@ class Honor extends Component {
       render: (text, record, index) => {
         return (
           <Row>
-            <Col span={12}>{text}</Col>
+            <Col span={12}>{moment(text).format('YYYY-MM-DD')}</Col>
             <Col span={6}>
-              <Button onClick={this.showCompetitionModal.bind(this, record.title, record.level, record.result, record.winUser, record.guideTea, record.winTime, 0)}>修改</Button>
+              <Button onClick={this.showCompetitionModal.bind(this, record.name, record.level, record.result, record.winUser, record.guideTea, record.winTime, 0)}>修改</Button>
             </Col>
             <Col span={6}><Button type='danger' onClick={this.deleteC.bind(this, record.id)}>删除</Button></Col>
           </Row>
@@ -344,9 +345,9 @@ class Honor extends Component {
       render: (text, record, index) => {
         return (
           <Row>
-            <Col span={12}>{text}</Col>
+            <Col span={12}>{moment(text).format('YYYY-MM-DD')}</Col>
             <Col span={6}>
-              <Button onClick={this.showPaperModal.bind(this, record.title, record.magazine, record.author, record.winTime, 1)}>修改</Button>
+              <Button onClick={this.showPaperModal.bind(this, record.name, record.magazine, record.author, record.winTime, 1)}>修改</Button>
             </Col>
             <Col span={6}><Button type='danger' onClick={this.deleteP.bind(this, record.id)}>删除</Button></Col>
           </Row>
@@ -385,7 +386,8 @@ class Honor extends Component {
                   </Row>
                   <Row style={{ marginBottom: 10 }}>
                     <Col span={6}><h3>级别：</h3></Col>
-                    <Col span={18}><Select defaultValue={this.state.cclass} style={{ width: 120 }} onChange={this.changeClass.bind(this)}>
+                    <Col span={18}><Select value={this.state.cclass == 0 ? '院级' : this.state.cclass == 1 ? '校级' : this.state.cclass == 2 ?'省级':'国家级'} 
+                    style={{ width: 120 }} onChange={this.changeClass.bind(this)}>
                       <Option value='0'>院级</Option>
                       <Option value='1'>校级</Option>
                       <Option value='2'>省级</Option>

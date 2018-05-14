@@ -28,16 +28,12 @@ class Application extends Component {
   }
   //下载申请文件
   Download(){
-    window.open(BASE_URL + this.state.data.scheme)
-    let url = this.state.data.scheme.split("/")
-    console.log(url)
-    POST('/lab/deleteSheet', `fileName=${url[2]}`, re => {
-      if (re.state == 1) {
-
-      } else {
-        message.error('服务器错误')
-      }
-    })
+    if(this.state.data.scheme==null){
+      message.warn('该项目没有上传文件')
+    }else{
+      window.open(BASE_URL + this.state.data.scheme)  
+    }
+    
   }
 
   //修改指导老师信息
@@ -70,7 +66,7 @@ class Application extends Component {
     POST('/labt/rejectProApply', data, re => {
       if (re.state == 1) {
         this.props.getMessage()
-        this.forceUpdate();
+        location.reload()
       } else {
         message.error('服务器错误')
       }
@@ -82,8 +78,8 @@ class Application extends Component {
     let data = `id=${pid}&sid=${sid}`
     POST('/labt/agreeProApply',data, re=>{
       if(re.state==1){
-        this.props.getMessage()
-        this.forceUpdate();
+        this.props.getMessage()        
+        location.reload()
       }else if(re.state==-2){
         message.error('指导老师信息错误')
       }else{
@@ -108,7 +104,7 @@ class Application extends Component {
           <span>申请类型：{data.applyType==0?'申请立项':'结束项目'}</span>
         </div>
         <div className="app_info">
-          <span>申请时间：{moment().format(data.applyTime,"YYYY-MM-DD")}</span>
+          <span>申请时间：{moment(data.applyTime).format("YYYY-MM-DD")}</span>
         </div>
         <div className="app_info">
           <span>预期结束时间：{data.expertTime}</span>

@@ -20,7 +20,7 @@ class HomeView extends React.Component {
       <div >
       <Row>
       <Col span={4} style={{paddingRight:10}}>
-          <Side state={this.state.state}></Side>
+          <Side ></Side>
         </Col>
         <Col span={10} style={{paddingLeft:10,paddingRight:10}}>
           <LabList></LabList>

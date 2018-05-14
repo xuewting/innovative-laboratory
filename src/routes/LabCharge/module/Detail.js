@@ -3,6 +3,7 @@ import '../components/LabCharge.scss'
 import { Row, Col, Radio, message } from 'antd'
 import ReactDOM from 'react-dom'
 import { POST, BASE_URL, POSTFile } from '../../../components/commonModules/POST'
+import moment from 'moment'
 const RadioGroup = Radio.Group
 
 class Detail extends Component {
@@ -101,7 +102,7 @@ class Detail extends Component {
    */
   save () {
     let formdata2 = new FormData()
-    let establishTime = this.state.labInfo.establishTime
+    let establishTime = moment(this.state.labInfo.establishTime).format('YYYY-MM-DD')
     establishTime = establishTime.replace(/-/g, '/')
     let data = new Date(establishTime)
     let labId = this.state.labid
@@ -111,7 +112,7 @@ class Detail extends Component {
     let isOpen = this.state.labInfo.isOpen
     let introduction = this.state.labInfo.introduction
     let position = this.state.labInfo.position
-    let alldata = `labId=${labId}&name=${name}&establishTime=${establishTime1}&institute=${institute}&isOpen=${isOpen}&introduction=${introduction}&position=${position}`
+    let alldata = `labId=${labId}&name=${name}&establishTime=${establishTime}&institute=${institute}&isOpen=${isOpen}&introduction=${introduction}&position=${position}`
     if (this.state.photoChanged == 1) {
       formdata2.append('labId', this.state.labid)
       formdata2.append('file', this.state.img)
@@ -193,7 +194,8 @@ class Detail extends Component {
                         <Row><Col span={6}>
                           <span>成立时间：</span>
                         </Col><Col span={18}>
-                          <span><input type='text' value={establishTime} onChange={e => this.changeValue(e, 6)} /></span>
+                            <span><input type='text' value={moment(establishTime).format('YYYY-MM-DD')} onChange={e => this.changeValue(e, 6)} /></span>
+                            <span style={{fontSize:12}}>*请以YYYY-MM-DD的格式输入</span>
                         </Col></Row>
                       </div>
                     </div>
