@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../css/Sgin.scss'
-import { Table, Icon, Button, Input, message } from 'antd'
+import { Table, Icon, Button, Input, message, Modal, DatePicker, Row, Col } from 'antd'
 import { POST, BASE_URL } from '../../../components/commonModules/POST'
 import moment from 'moment'
 
@@ -16,7 +16,10 @@ class Sgin extends Component {
       }],
       filterDropdownVisible: false,
       searchText: '',
-      filtered: false
+      filtered: false,
+      visible: false,
+      start:'',
+      end:''
     }
   }
 
@@ -59,9 +62,31 @@ class Sgin extends Component {
     })
   }
 
+//选择时间模块
+  showTimeChoiceModel(){
+    this.setState({visible:true})
+  }
+
+  handleCancel = (e) => {   
+    this.setState({visible: false})
+  }
+
+  handleOk=(e)=>{
+    this.export()
+    this.setState({visible:false})
+  }
+//改变时间
+  changeTime(type,value){
+    if(type==1){
+      this.setState({start:value})
+    }else{
+      this.setState({end:value})
+    }
+  }
   //导出表格
   export(){
-    POST('/lab/exportRecord',`labId=${this.props.labid}`,re=>{
+    let data = `labId=${this.props.labid}&startDate=${this.state.start}&endDate=${this.state.end}`
+    POST('/lab/exportRecord',data,re=>{
       if(re.state==1){
         if (re.state == 1) {
           let data = re.data
@@ -81,7 +106,7 @@ class Sgin extends Component {
         message.error('服务器错误')
       }
     })
-  }
+  }  
 
   render () {
     const columns = [{
@@ -123,12 +148,7 @@ class Sgin extends Component {
       dataIndex: 'content',
       key: 'content',
       width: '50%'
-    }, {
-        title: '参与项目',
-        dataIndex: 'item',
-        key: 'item',
-        width: '20%'
-      }]
+    }]
     return (
       <div style={{ paddingTop: 20, paddingRight: 15 }}>
         <div className='lab_sgin'>
@@ -139,9 +159,27 @@ class Sgin extends Component {
             <Table columns={columns} dataSource={this.state.data} />
           </div>
           <div className="lab_sgin_foot">
-            <Button type='primary' style={{paddingLeft:15,paddingRight:15}} onClick={this.export.bind(this)}>导出表格</Button>
+            <Button type='primary' style={{paddingLeft:15,paddingRight:15}} onClick={this.showTimeChoiceModel.bind(this)}>导出表格</Button>
           </div>
         </div>
+        <Modal
+          title='选择导出时间段'
+          visible={this.state.visible}
+          onOk={this.handleOk.bind(this)}
+          onCancel={this.handleCancel.bind(this)}>
+          <Row style={{ fontSize: 16, marginBottom: 10 }}>
+            <Col span={6}>开始时间：</Col>
+            <Col span={18}>
+              <DatePicker  onChange={(data, dataString) => this.changeTime(1, dataString)} />
+            </Col>
+          </Row>
+          <Row style={{ fontSize: 16, marginBottom: 10 }}>
+            <Col span={6}>结束时间：</Col>
+            <Col span={18}>
+              <DatePicker onChange={(data, dataString) => this.changeTime(2, dataString)} />
+            </Col>
+          </Row>
+        </Modal>
       </div>
     )
   }

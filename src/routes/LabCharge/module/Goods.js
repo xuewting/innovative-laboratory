@@ -51,6 +51,7 @@ class Goods extends Component {
       content:''
     }
   }
+  
 
   // 获得物品
   getGoods (page) {
@@ -85,32 +86,39 @@ class Goods extends Component {
     })
     this.getGoods(page)
   }
+  
 
   // 打开编辑模块
   showModal = (name, price, models, stateId, detailInfo, buyTime, validTime, id, photo, type) => {
-    console.log(buyTime, validTime, stateId)
+    console.log(buyTime, validTime)
+    var date = new Date()
     this.state.fileList[0].url = BASE_URL + photo
-    // const { editorState } = this.state
     const contentBlock = htmlToDraft(detailInfo)
     if (contentBlock) {
       const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks)
       const editorState = EditorState.createWithContent(contentState)
       this.setState({ editorState:editorState })
     }
-    this.setState({
-      visible: true
-    })
+    var buy = buyTime
+    if (!buyTime) {
+      buy = date.toLocaleDateString()
+    }
+    var valid = validTime
+    if (!validTime) {
+      valid = date.toLocaleDateString()
+    }
+    this.setState({ visible: true })
     this.setState({ name: name })
     this.setState({ price: price })
     this.setState({ models: models })
     this.setState({ stateId: stateId })
     this.setState({ detailInfo: detailInfo })
     this.setState({ type: type })
-    this.setState({ validTime: validTime })
+    this.setState({ validTime: valid })
     this.setState({ fileList: this.state.fileList })
     this.setState({ previewImage: photo })
     this.setState({ id: id })
-    this.setState({ buyTime: buyTime })
+    this.setState({ buyTime: buy })
   }
   // 修改值
   changeValue (type, value) {
@@ -133,11 +141,11 @@ class Goods extends Component {
         if (re.state == 1) {
           message.success('添加成功')
           let data2 = new FormData()
-          data2.append('id', id)
+          data2.append('id', re.data.id)
           data2.append('file', this.state.fileList[0].originFileObj)
           data2.append('type', 'application/octet-stream')
-          POSTFile('/lab/addGoodsImage', data2, re => {
-            if (re.state == 1) {
+          POSTFile('/lab/addGoodsImage', data2, res => {
+            if (res.state == 1) {
               this.getGoods(this.state.current)
             } else {
               message.error('服务器错误')
@@ -233,11 +241,11 @@ class Goods extends Component {
         POST('/lab/deleteSheet', `fileName=${url[2] + '/' + url[3]}`, re => {
           if (re.state == 1) {
 
-          }else {
+          } else {
             message.error('服务器错误')
           }
         })
-      }else {
+      } else {
         message.error('服务器错误')
       }
     })
@@ -286,7 +294,7 @@ class Goods extends Component {
           </div>
           <div className='go_foot'>
             <Row>
-              <Col span={3} style={{ paddingRight:5 }}><Button style={{ width:'100%' }} type='primary' onClick={this.showModal.bind(this, '', '', '', '', '', '', '', '', '', 1)}>添加新物品</Button></Col>
+              <Col span={3} style={{ paddingRight:5 }}><Button style={{ width:'100%' }} type='primary' onClick={this.showModal.bind(this, '', '', '', 1, '', '', '', '', '', 1)}>添加新物品</Button></Col>
               <Col span={3} style={{ paddingLeft:5 }}><Button style={{ width: '100%' }} type='primary' onClick={this.export.bind(this)}>导出表格</Button></Col>
               <Col span={12} />
               <Col span={6}><Pagination

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './ProjectResult.scss'
 import { Table, Input, Button, Icon } from 'antd'
+import moment from 'moment'
 
 class Competition extends Component {
   constructor (props) {
@@ -49,7 +50,6 @@ class Competition extends Component {
     }
   }
 
-
   onInputChange = (e) => {
     this.setState({ searchText: e.target.value })
   }
@@ -67,11 +67,11 @@ class Competition extends Component {
         return {
           ...record,
           name: (
-             <span>
-              {record.Iname.split(reg).map((text, i) => (
+            <span>
+               {record.Iname.split(reg).map((text, i) => (
                 i > 0 ? [<span className='highlight'>{match[0]}</span>, text] : text
               ))}
-            </span>
+             </span>
           )
         }
       }).filter(record => !!record)
@@ -120,11 +120,11 @@ class Competition extends Component {
       key: 'level',
       width:' 10%',
       render:text => {
-        return(
+        return (
           <div>
-            {text == 0 ? '院级':text == 1 ? '校级':text == 2 ? '省级':'国家级'}
+            {text == 0 ? '院级' : text == 1 ? '校级' : text == 2 ? '省级' : '国家级'}
           </div>
-        )        
+        )
       }
     }, {
       title: '获得成果',
@@ -150,15 +150,20 @@ class Competition extends Component {
       title: '时间',
       dataIndex: 'winTime',
       key: 'winTime',
-      width:'10%'
+      width:'10%',
+      render:(text) => {
+        return (
+          <div>{moment(text).format('YYYY-MM-DD')}</div>
+        )
+      }
     }]
     return (
       <div>
         <Table columns={columns} dataSource={this.props.competition}
           title={() => <div>
             <div className='com_head'>
-            <span>竞赛成果 :</span>
-          </div>
+              <span>竞赛成果 :</span>
+            </div>
           </div>} />
       </div>
     )

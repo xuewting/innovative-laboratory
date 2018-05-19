@@ -91,7 +91,7 @@ class EditInfo extends Component {
         </div>
         {/*add content*/}
         <div className="editcontent">
-        {state?
+        {state?//提交进度或结项
           <div>
             <Edit change={this.changeCon.bind(this)}></Edit>
             <div className='alarm'>请用一段文字说明进度进展情况</div>

@@ -373,7 +373,7 @@ class Honor extends Component {
                 <Table columns={columns1} dataSource={this.state.comList} />
               </div>
               <div className='com_foot'>
-                <Button type='primary' onClick={this.showCompetitionModal.bind(this, '', '', '', '', '', dateNow.toLocaleDateString(), 1)}><i className='fa fa-plus' /> 添加</Button>
+                <Button type='primary' onClick={this.showCompetitionModal.bind(this, '', 0, '', '', '', dateNow.toLocaleDateString(), 1)}><i className='fa fa-plus' /> 添加</Button>
                 <Modal
                   title='竞赛成果'
                   visible={this.state.visible}

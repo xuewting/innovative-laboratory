@@ -104,7 +104,7 @@ class ItemInfo extends Component {
     return (
       <div style={{ width: 1250, margin: '0 auto' }}>
         <h2 style={{ color: '#fff', fontWeight: 600, paddingBottom:20 }}>{pdata.name}</h2>
-        {isIn == 1
+        {isIn == 1//是项目成员显示编辑栏
           ? <EditInfo
             id={this.props.location.query.id}
             getRate={this.getRate.bind(this)}

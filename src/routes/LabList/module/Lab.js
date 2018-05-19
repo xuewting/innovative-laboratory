@@ -32,8 +32,7 @@ class Lab extends Component {
       labid:'',
       labname:'',
       position:'',
-      teacher:'',
-      sid:''
+      teacher:''
     }
   }
 
@@ -87,13 +86,15 @@ class Lab extends Component {
   })
 
   // 显示管理老师编辑模块
-  showModal=(value) => this.setState({
+  showModal=(value, name, sid) => this.setState({
     visible: !this.state.visible,
-    labid:value
+    labid:value,
+    name:name,
+    sid:sid
   });
 
   // 内容修改（负责老师）
-  changeTeacher=(value, type) => {    
+  changeTeacher=(value, type) => {
     if (type == 1) {
       this.setState({ name:value })
     } else {
@@ -143,15 +144,15 @@ class Lab extends Component {
     let data = `name=${labname}&position=${position}&isOpen=${isOpen}&tid=${sid}&tname=${teacher}`
     POST('/root/addLab', data, re => {
       if (re.state == 1) {
-      message.success('添加成功')
-      POST('/getAllLab', '', re => {
+        message.success('添加成功')
+        POST('/getAllLab', '', re => {
         if (re.state == 1) {
           this.setState({ list: re.data })
         } else {
           message.error('服务器错误')
         }
       })
-    } else if (re.state == -2) {
+      } else if (re.state == -2) {
       message.error('输入的用户不存在，请重新输入')
     } else {
       message.error('服务器错误')
@@ -260,14 +261,14 @@ class Lab extends Component {
           <Row>
             <Col span={8}>{text.name}</Col>
             <Col span={5} style={{ paddingRight:5 }}>
-                <Button style={{ width: '100%' }} onClick={(e) => this.showModal(record.id)}>编辑负责老师</Button>
-              </Col>
+              <Button style={{ width: '100%' }} onClick={(e) => this.showModal(record.id, record.user.name, record.user.sid)}>编辑负责老师</Button>
+            </Col>
             <Col span={4} style={{ paddingRight:5, paddingLeft:5 }}>
-                <Button style={{ width:'100%' }} onClick={(e) => this.toLabCharge(record.id)}>进入编辑</Button>
-              </Col>
+              <Button style={{ width:'100%' }} onClick={(e) => this.toLabCharge(record.id)}>进入编辑</Button>
+            </Col>
             <Col span={4} style={{ paddingLeft:5 }}>
-                <Button type='danger' style={{ width: '100%' }} onClick={this.confirm.bind(this,record.id)}>删除</Button>
-              </Col>
+              <Button type='danger' style={{ width: '100%' }} onClick={this.confirm.bind(this, record.id)}>删除</Button>
+            </Col>
           </Row>
         )
       }
@@ -289,7 +290,7 @@ class Lab extends Component {
               <span>姓名：</span>
             </Col>
             <Col span={15}>
-              <Input onChange={(e)=>this.changeTeacher(e.target.value,1)}/>
+              <Input value={this.state.name} onChange={(e) => this.changeTeacher(e.target.value, 1)} />
             </Col>
           </Row>
           <Row>
@@ -297,7 +298,7 @@ class Lab extends Component {
               <span>教工号：</span>
             </Col>
             <Col span={15}>
-              <Input onChange={(e) => this.changeTeacher(e.target.value, 0)}/>
+              <Input value={this.state.sid} onChange={(e) => this.changeTeacher(e.target.value, 0)} />
             </Col>
           </Row>
         </Modal>

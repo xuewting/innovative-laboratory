@@ -7,15 +7,7 @@
     .mes_box{
       width: 100%;
       padding: 10px 15px;
-      margin-bottom: 15px;
-      background: transparent;
-      transition: background 250ms linear;
-      border-radius: 3px;
-      cursor: pointer;
-      &:hover{
-        background: rgba(255,255,255,0.3);
-        box-shadow: 1px 2px 3px rgba(0,0,0,0.5);
-      }
+      margin-bottom: 15px;                        
       .img{
         width: 100%;
         height: 240px;
@@ -28,6 +20,19 @@
       .mes_con{
         padding: 0 15px;
         width: 100%;
+        background: transparent;
+        transition: background 250ms linear;
+        border-radius: 3px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        &:nth-child(2n+1){
+          background: rgba(255, 255, 255, 0.2);          
+        }
+        &:hover {
+          background: rgba(255, 255, 255, 0.3);
+          box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+        }
+
         h2{
           margin: 0;
           padding: 0;
@@ -43,7 +48,7 @@
           font-size: 16px;
           line-height: 22px;
           font-weight: 500;
-          height: 200px;
+          height: 150px;
         }
 
       }

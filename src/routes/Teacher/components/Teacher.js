@@ -81,13 +81,13 @@ class Teacher extends Component {
                         </Col>
                         <Col span={15} offset={1}>
                           <span>姓名：{item.name}</span>
-                          <span>职称：{item.rank}</span>
+                          <span>性别：{item.sex==0?'男':'女'}</span>
                           <span>邮箱：{item.email}</span>
                           <span>所在实验室：{item.lab.name == null ? '' : item.lab.name}</span>
                         </Col>                        
                       </Row>
                     </div>} key='1' style={style}>
-                    <div style={{ cursor: 'pointer' }} onClick={this.toInfo.bind(this,item.id)}>
+                    <div style={{ cursor: 'pointer' }} >
                       <h2 className='title'>简介：</h2>
                       <p className='intr'>{item.introduce == null ? '' : item.introduce}</p>                      
                     </div>

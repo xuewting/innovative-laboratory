@@ -40,10 +40,10 @@ class TeacherInfo extends Component {
               <img src={BASE_URL+data.headImg} alt="" style={{width:300,height:300}}/>
             </div>
             <div className="good_info_con">
-              <h2>{data.name}</h2>
-              <span className="info_con">职称：{data.rank}</span>
+              <h2>{data.name}</h2>              
               <span className="info_con">邮箱：{data.email}</span>
               <span className="info_con">所属实验室：{data.lab.name == null?'': data.lab.name}</span>
+              <span className="info_con">性别：{data.sex == 0 ? '男' : '女'}</span>
             </div>
           </div>
         </div>

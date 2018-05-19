@@ -19,8 +19,7 @@ class Edit extends Component {
     this.setState({
       editorState,
     })
-    this.props.change(draftToHtml(convertToRaw(editorState.getCurrentContent())))
-    // this.refs.html.innerHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    this.props.change(draftToHtml(convertToRaw(editorState.getCurrentContent())))    
   }
 
 

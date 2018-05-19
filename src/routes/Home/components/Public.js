@@ -37,7 +37,7 @@ class Public extends Component {
   toMessage(e){
     e.preventDefault()
     browserHistory.push({
-      pathname:`/mail`
+      pathname:`/message`
     })
   }
   
@@ -66,7 +66,7 @@ class Public extends Component {
           return (
             <div className="pub_item" key={i} style={{cursor:'pointer'}} >
               <div className="time">{moment(item.time).format('YYYY/MM/DD')}</div>
-              <a href="">{item.title}</a>
+              <span href="">{item.title}</span>
               <p>{item.content}</p>
             </div>
           )

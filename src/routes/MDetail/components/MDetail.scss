@@ -1,0 +1,32 @@
+.conbox{
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(255,255,255,0.4);
+  min-height: 550px;
+  border-radius: 3px;
+  h2{
+    letter-spacing: 3px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px;
+    border-bottom: 2px dashed #fff;
+    color: aliceblue;
+  }
+  .time{
+    width: 100%;
+    text-align: right;
+    color: azure;    
+  }
+  .md_con{
+    margin-top: 30px;
+    padding-top: 20px;
+    width: 85%;
+    min-height: 400px;
+    margin: 0 auto;
+    color: #e4f5f3;
+    font-size: 14px;
+  }
+}

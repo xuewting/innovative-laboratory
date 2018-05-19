@@ -45,6 +45,7 @@ class Item extends Component {
   }
 
   componentWillMount () {
+    //获得数据
     POST('/getAllProject', '', re => {
       if (re.state == 1) {
         this.setState({ list:re.data })
@@ -53,11 +54,11 @@ class Item extends Component {
       }
     })
   }
-
+//项目列表页面跳转
   toItem=()=>browserHistory.push({
     pathname:'/itemPage'
   })
-
+//项目详情
   toDetail=(id)=>browserHistory.push({
     pathname:'/iteminfo',
     query:{
@@ -66,6 +67,7 @@ class Item extends Component {
   })
 
   render () {
+    
     return (
       <div className='item'>
         <div className='item_head'>
@@ -74,13 +76,14 @@ class Item extends Component {
         <div className='item_list'>
           <FreeScrollBar className='scroll' style={{ height:250 }} >
           {this.state.list.map((item, i) => {
+            // console.log(item)
             return (
               <div key={i} style={{ textDecoration: 'none', cursor:'pointer' }} onClick={(e) => this.toDetail(item.id)}>
                 <div className='list_box'>
-                <p>{item.name}</p>
+                  <p>{item.name ? item.name:''}</p>
               </div>
                 <div className='list_time'>
-                <span>{item.applyTime}&nbsp;&nbsp;&nbsp;&nbsp;{item.user.name}&nbsp;&nbsp;&nbsp;&nbsp;{item.lab.name}</span>
+                  <span>{item.applyTime ? item.applyTime : ''}&nbsp;&nbsp;&nbsp;&nbsp;{item.user? item.user.name : ''}&nbsp;&nbsp;&nbsp;&nbsp;{item.lab ? item.lab.name:''}</span>
               </div>
               </div>
             )

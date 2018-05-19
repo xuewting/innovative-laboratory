@@ -26,7 +26,7 @@ class Register extends Component {
         type: 'text'
       }, {
         img: pass,
-        placeholder: '密码（大于6个字符且小于15个字符）',
+        placeholder: '密码（大于5个字符且小于15个字符）',
         type: 'password'
       }, {
         img: check,
@@ -63,7 +63,7 @@ class Register extends Component {
       message.error('用户名应大于或等于三个字符')
     } else if (!mail.match(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)) {
       message.error('请输入正确的邮箱地址')
-    } else if (pass.length <= 6) {
+    } else if (pass.length <= 5) {
       message.error('请输入大于六位数的密码')
     } else if (pass != repass) {
       message.error('两次密码输入不一致，请重新确认密码')
