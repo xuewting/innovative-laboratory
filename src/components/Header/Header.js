@@ -46,7 +46,7 @@ const menuitem2 = (
 const menuitem3 = (
   <Menu>
     <Menu.Item style={{ background: '#333', fontSize: 14 }}>
-      <Link to='/Lab' style={{ color: '#fff', fontWeight: 500, textAlign: 'center' }}>学科资讯</Link>
+      <Link to='/news' style={{ color: '#fff', fontWeight: 500, textAlign: 'center' }}>学科资讯</Link>
     </Menu.Item>
   </Menu>
 );
@@ -89,7 +89,7 @@ class Header extends React.Component {
             </span>
               {/*</Link>*/}
             </Dropdown>
-             <Dropdown overlay={menuitem} placement="bottomCenter">
+            <Dropdown overlay={menuitem3} placement="bottomCenter">
               {/*<Link activeClassName='active' to='/ItemPage'>*/}
               <span className="nav_item">
                 <img src={information} alt="" />

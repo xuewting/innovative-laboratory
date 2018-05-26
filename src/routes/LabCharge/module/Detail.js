@@ -231,20 +231,7 @@ class Detail extends Component {
                           </RadioGroup></span>
                         </Col></Row>
                       </div>
-                    </div>
-
-                    {/* <div className='detail_box'>
-                      <div className='det_box_in'>
-                        <Row><Col span={6}>
-                          <span>展示页面：</span>
-                        </Col><Col span={18}>
-                          <span>上传属于本实验室的展示页面html文件</span>
-                          <div className='show_but' onClick={this.showFile.bind(this)}>选择要上传的文件
-                            <input type='file' style={{ display: 'none' }} ref='showfile' onChange={(e) => this.changShowFile(e)} /></div>
-                          <span>{this.state.showfile}</span>
-                        </Col></Row>
-                      </div>
-                    </div> */}
+                    </div>                 
                   </div>
                 </Col>
               </Row>

@@ -28,6 +28,7 @@ import IEdit from "./LabChargeIEdit"
 import NewItemDetail from './NewItemDetal'
 import LabList from './LabList' 
 import MDetail from './MDetail'
+import News from './News'
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
@@ -48,6 +49,7 @@ export const createRoutes = (store) => ({
     TEdit(store),
     IEdit(store),
     Search(store),
+    News(store),
     LabCharge(store),
     Personal(store),
     MDetail(store),

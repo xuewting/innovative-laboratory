@@ -18,6 +18,9 @@ class Teacher extends Component {
       count: 0
     }
   }
+  /* 
+  跳转详情
+   */
   toInfo (id) {
     browserHistory.push({
       pathname: `/teacherinfo`,
@@ -71,10 +74,10 @@ class Teacher extends Component {
           {this.state.t_list.map((item, i) => {
             console.log(item)
             return (
-              <Col span={8} style={{ paddingRight: 5, maxHeight:180,minHeight:180 }} key={i}>
+              <Col span={8} style={{ paddingRight: 5, minHeight:180 }} key={i}>
                 <Collapse bordered={false} style={{ background: 'transparent' }} >
                   <Panel header={
-                    <div className='tea_head'>
+                    <div className='tea_head' onClick={(e)=>this.toInfo(item.id)}>
                       <Row>
                         <Col span={3}>
                           <img src={BASE_URL + item.headImg} className='tea_pic' height='50px' />
@@ -83,14 +86,14 @@ class Teacher extends Component {
                           <span>姓名：{item.name}</span>
                           <span>性别：{item.sex==0?'男':'女'}</span>
                           <span>邮箱：{item.email}</span>
-                          <span>所在实验室：{item.lab.name == null ? '' : item.lab.name}</span>
+                          <span>所在实验室：{item.lab == null ? '' : item.lab.name}</span>
                         </Col>                        
                       </Row>
                     </div>} key='1' style={style}>
-                    <div style={{ cursor: 'pointer' }} >
+                   {/*  <div style={{ cursor: 'pointer', minHeight:150, maxHeight:150 }} >
                       <h2 className='title'>简介：</h2>
                       <p className='intr'>{item.introduce == null ? '' : item.introduce}</p>                      
-                    </div>
+                    </div> */}
                   </Panel>
                 </Collapse>
               </Col>

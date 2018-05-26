@@ -87,9 +87,9 @@ class Member extends Component {
             }
           })
         } else if (re.state == -2) {
-          message.success('请输入正确的信息')
+          message.error('请输入正确的信息(老师不能添加为实验室成员)')
         }else {
-          message.success('服务器错误')
+          message.error('服务器错误')
         }
       })
     } else{

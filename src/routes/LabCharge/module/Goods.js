@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../css/goods.scss'
 import { message, Row, Col, Button, Input, Pagination, Modal, Upload, Icon, Select, DatePicker } from 'antd'
-import { convertFromRaw, EditorState, convertToRaw, ContentState } from 'draft-js'
+import { EditorState, convertToRaw, ContentState } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import draftToHtml from 'draftjs-to-html'
 import htmlToDraft from 'html-to-draftjs'
@@ -51,7 +51,6 @@ class Goods extends Component {
       content:''
     }
   }
-  
 
   // 获得物品
   getGoods (page) {
@@ -86,7 +85,6 @@ class Goods extends Component {
     })
     this.getGoods(page)
   }
-  
 
   // 打开编辑模块
   showModal = (name, price, models, stateId, detailInfo, buyTime, validTime, id, photo, type) => {
@@ -370,7 +368,7 @@ class Goods extends Component {
                 onEditorStateChange={this.onEditorStateChange}
                 toolbarClassName='toolbar-class'
                 toolbar={{
-                  options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'textAlign', 'list', 'history']
+                  options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'textAlign', 'list', 'colorPicker', 'history']
                 }}
               />
             </Col>

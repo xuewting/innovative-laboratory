@@ -57,7 +57,7 @@ class Lab extends Component {
             <Col key={i} span={12}>
             <div className='list_box' onClick={() => this.toDetail(item.id)}>
               <Row>
-                <Col span={8} >
+                <Col span={9} >
                   <div className='img'>
                     <img src={BASE_URL + item.photo} alt='' />
                   </div>

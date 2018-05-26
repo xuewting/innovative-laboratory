@@ -3,22 +3,22 @@
   margin: 0 auto;
   margin-bottom: 20px;
   padding: 15px;
-  background: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.7);
   min-height: 550px;
   border-radius: 3px;
-  h2{
+  .h2{
     letter-spacing: 3px;
     text-align: center;
     font-size: 25px;
     font-weight: bold;
     padding: 10px;
     border-bottom: 2px dashed #fff;
-    color: aliceblue;
+    color: rgb(33, 47, 59);
   }
   .time{
     width: 100%;
     text-align: right;
-    color: azure;    
+    color: rgb(48, 54, 54);    
   }
   .md_con{
     margin-top: 30px;
@@ -26,7 +26,7 @@
     width: 85%;
     min-height: 400px;
     margin: 0 auto;
-    color: #e4f5f3;
+    color: #121a19;
     font-size: 14px;
   }
 }
